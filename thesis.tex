@@ -1,8 +1,9 @@
-\documentclass[a4paper]{report}
+\documentclass[12pt, a4paper]{report}
 \pagestyle{headings}
 \usepackage{lipsum}
-\usepackage[german]{babel}
+\usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{caption}
@@ -11,34 +12,69 @@
 \usepackage{float}
 
 \usepackage{csquotes}
+\usepackage[backend=biber, style=authoryear]{biblatex}
+\addbibresource{sources.bib}
+\setlength{\bibitemsep}{1em}
 
+\DefineBibliographyStrings{german}{%
+    nodate = {{}o\adddot\addnbthinspace J\adddot}
+    }%
 
-\title{
-    \includegraphics[width=0.3\linewidth]{images/hdm_logo.png}
-    \bigbreak
-    \bigbreak
-    \textbf{\huge Entwicklung eines Peer-to-Peer Instant Messaging Protokolls mit 
-    Fokus auf Sicherheit durch Einbeziehung von Blockchain-Technologie}\\
-    \bigbreak
-    \bigbreak
-    \bigbreak
-    \bigbreak
-    \textbf{\huge Bachelorarbeit}\\
-    \bigbreak
-    im Studiengang \\
-    Wirtschaftsinformatik und digitale Medien\\
-    \bigbreak
-    \bigbreak
-    vorgelegt von\\
-    \bigbreak
-    Nicole Sauer\\
-    \date{07.02.2024}
-    \author{Nicole Sauer}
+\DeclareLabeldate{%
+    \field{date}
+    \field{eventdate}
+    \field{origdate}
+    \literal{nodate}
 }
 
+
 \begin{document}
-    \maketitle
-    \input{./chapters/abstract}
+    % titlepage
+    \begin{titlepage}
+        \begin{center}
+            \includegraphics[width=0.3\linewidth]{images/hdm_logo.png} \\
+            \vspace*{2cm}
+            \Huge
+            \textbf{Ein sicheres Peer-to-Peer-Instant-Messaging-Protokoll unter
+            Berücksichtigung von Blockchain-Technologie}\\
+
+            \vspace*{1cm}
+            \Large 
+            \textbf{Bachelorarbeit}\\
+            \bigbreak
+            im Studiengang \\
+            Wirtschaftsinformatik und digitale Medien\\
+            \vspace*{1cm}
+            \large 
+            vorgelegt von \\
+            \vspace*{0.5cm}
+            \textbf{Nicole Sauer} \\
+            \vspace*{0.2cm}
+            am \\
+            \vspace*{0.2cm}
+            \textbf{30.01.2024} \\
+            \vspace*{1.3cm}
+            \large 
+            \begin{tabular}{ll}
+                Erstprüfer & Prof. Dr. Peter Thies \\
+                Zweitprüfer & Prof. Dr. Stephan Wilczek \\
+            \end{tabular} \\
+        \end{center}
+    \end{titlepage}
+
+    \tableofcontents
+    %\listoffigures
+    
+    \input{chapters/ehrenwoertliche_erklaerung.tex}
+    %\input{chapters/kurzfassung.tex}
+    %\input{chapters/abstract}
     \input{chapters/einleitung.tex}
+    \input{chapters/grundlagen.tex}
+
+
+
+    %%%%%%%%%%%%%%%% Literatur %%%%%%%%%%%%%%%%
+    \printbibliography[type=online,title={Webseiten}]
+    \printbibliography[nottype=online, title={Bücher und Dokumente}]
 
 \end{document}
