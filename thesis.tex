@@ -19,7 +19,7 @@
 
 \DefineBibliographyStrings{german}{%
     nodate = {{}o\adddot\addnbthinspace J\adddot}
-    }%
+}
 
 \DeclareLabeldate{%
     \field{date}
@@ -33,28 +33,35 @@
     % titlepage
     \begin{titlepage}
         \begin{center}
-            \includegraphics[width=0.3\linewidth]{images/hdm_logo.png} \\
-            \vspace*{2cm}
-            \Huge
-            \textbf{Ein sicheres Peer-to-Peer-Instant-Messaging-Protokoll unter
-            Berücksichtigung von Blockchain-Technologie}\\
-
+            %\includegraphics[width=0.3\linewidth]{images/hdm_logo.png} \\
+            
             \vspace*{1cm}
-            \Large 
+            \LARGE
             \textbf{Bachelorarbeit}\\
+
+            \Large
             \bigbreak
             im Studiengang \\
             Wirtschaftsinformatik und digitale Medien\\
+
             \vspace*{1cm}
-            \large 
+            \LARGE
+            \textbf{Ein sicheres Peer-to-Peer-Instant-Messaging-Protokoll unter
+            Berücksichtigung von Blockchain-Technologie}\\
+            
+            \large
+            \vspace*{1cm}
             vorgelegt von \\
             \vspace*{0.5cm}
             \textbf{Nicole Sauer} \\
-            \vspace*{0.2cm}
-            am \\
-            \vspace*{0.2cm}
-            \textbf{30.01.2024} \\
-            \vspace*{1.3cm}
+            \vspace*{1cm}
+
+            \includegraphics[width=0.2\linewidth]{images/hdm_logo.png} \\
+
+            \vspace*{0.5cm}
+            an der Hochschule der Medien Stuttgart am 30.01.2024 \\
+            zur Erlangung des akademischen Grades eines Bachelor of Science \\
+            \vspace*{2cm}
             \large 
             \begin{tabular}{ll}
                 Erstprüfer & Prof. Dr. Peter Thies \\
@@ -65,10 +72,11 @@
     
     % change vertical spacing to 1.5
     \onehalfspacing
+    \input{chapters/ehrenwoertliche_erklaerung.tex}
 
     \tableofcontents
     %\listoffigures
-    \input{chapters/ehrenwoertliche_erklaerung.tex}
+    
     %\input{chapters/kurzfassung.tex}
     %\input{chapters/abstract}
     \input{chapters/einleitung.tex}
