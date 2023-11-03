@@ -74,20 +74,23 @@
     
     % change vertical spacing to 1.5
     \onehalfspacing
-    \input{chapters/ehrenwoertliche_erklaerung.tex}
+    \input{no_chapter/ehrenwoertliche_erklaerung.tex}
 
     \tableofcontents
     %\listoffigures
     
     %\input{chapters/kurzfassung.tex}
     %\input{chapters/abstract}
-    \input{chapters/einleitung.tex}
-    \input{chapters/grundlagen.tex}
+    \input{chapter_1/einleitung.tex}
+    \input{chapter_2/grundlagen.tex}
+    \input{chapter_3/anforderungen.tex}
+    \input{chapter_4/entwurf_und_architektur.tex}
+
 
 
 
     %%%%%%%%%%%%%%%% Literatur %%%%%%%%%%%%%%%%
     \printbibliography[type=online,title={Webseiten}]
-    \printbibliography[nottype=online, title={Bücher und Dokumente}]
+    %\printbibliography[nottype=online, title={Bücher und Dokumente}]
 
 \end{document}
