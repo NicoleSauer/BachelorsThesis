@@ -1,5 +1,18 @@
 \subsection{Registrierung}
 
-Die Registrierung ist der erste Schritt, um das Protokoll nutzen zu können.
-Dabei wird ein Benutzername und ein Passwort festgelegt. Der Benutzername muss eindeutig sein,
-d.h. es darf keinen anderen Benutzer mit dem gleichen Benutzernamen geben.
+% In meiner Bachelorarbeit entwickle ich ein Peer-to-Peer-Instant-Messaging-Protokoll. 
+% Um für eine gewisse Sicherheit zu sorgen, möchte ich neuen Usern eine ID und einen Public Key zuordnen 
+% und diese mittels Smart Contract auf die Ethereum-Blockchain schreiben.
+
+Der erste Schritt ist die Registrierung eines neuen Benutzers. Hierfür muss der Benutzer einen Benutzernamen
+und ein Passwort angeben. Der Benutzername muss nicht eindeutig sein, da von der Anwendung eine ID generiert wird, 
+mit deren Hilfe der Nutzer identifiziert werden kann.
+Das Passwort muss mindestens zehn Zeichen lang sein und mindestens einen Großbuchstaben, einen Kleinbuchstaben,
+eine Zahl und ein Sonderzeichen enthalten. Diese Anforderungen sollen sicherstellen, dass das Passwort
+nicht leicht zu erraten ist und somit die Sicherheit des Benutzers gewährleistet ist.
+Nachdem der Benutzername und das Passwort eingegeben wurden, wird ein Schlüsselpaar auf 
+Basis des Passworts erzeugt.
+% #TODO: mit welchem Algorithmus? -> Argon2 https://cryptobook.nakov.com/mac-and-key-derivation/argon2
+
+
+% #TODO: könnte man auch einen Passkey verwenden? Wie funktionieren die?

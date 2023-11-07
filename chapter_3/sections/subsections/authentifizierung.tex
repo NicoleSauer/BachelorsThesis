@@ -1,12 +1,23 @@
 \subsection{Authentifizierung}
 
-Die Authentifizierung ist der zweite Schritt, um das Protokoll nutzen zu können. 
+Die Authentifizierung ist der zweite Schritt nach der Registrierung eines neuen Benutzers. 
 Dabei wird der Benutzername und das Passwort, die bei der Registrierung festgelegt wurden,
-benötigt. Das Protokoll überprüft, ob der Benutzername und das Passwort korrekt sind.
-Wenn die Authentifizierung erfolgreich ist, wird ein Token generiert, der für die
-Kommunikation mit dem Server benötigt wird. Dieser Token wird an den Client zurückgegeben.
-\\
-\\
-\noindent Die Authentifizierung ist notwendig, um sicherzustellen, dass nur registrierte Benutzer
-das Protokoll nutzen können. Außerdem wird durch die Authentifizierung sichergestellt, dass
-die Nachrichten, die ein Benutzer sendet, auch wirklich von diesem Benutzer stammen.
+benötigt. Das Protokoll überprüft, ob der Benutzername und das Passwort korrekt sind. %#TODO: wie?
+Wenn die Registrierung erfolgreich war, wurde anschließend ein Schlüsselpaar auf Basis des Passworts erzeugt.
+%#TODO: was macht die Registrierung erfolgreich? -> Smart Contract auf Blockchain geschrieben?
+
+%#TODO: muss Public und Private Key nicht auch noch erklärt und gegebenenfalls übersetzt werden?
+Das Schlüsselpaar besteht aus einem öffentlichen Schlüssel (engl. Public Key) und einem privaten Schlüssel 
+(engl. Private Key). Der Public Key wird zusammen mit
+der generierten ID auf die Blockchain geschrieben. Der Private Key wird lokal auf dem
+Gerät des Benutzers gespeichert. Der Private Key wird benötigt, um Nachrichten zu verschlüsseln und
+zu entschlüsseln. Der Public Key wird benötigt, um Nachrichten zu verschlüsseln. Der Public Key wird
+zusammen mit dem Benutzernamen und dem Passwort auf die Blockchain geschrieben, damit andere Benutzer
+den Public Key finden können, um Nachrichten an den Benutzer zu verschlüsseln. Der Public Key wird
+auch benötigt, um die Identität des Benutzers zu verifizieren. Wenn ein Benutzer eine Nachricht an
+einen anderen Benutzer sendet, wird der Public Key des Empfängers verwendet, um die Nachricht zu
+verschlüsseln. Wenn der Empfänger die Nachricht empfängt, verwendet er seinen Private Key, um die
+Nachricht zu entschlüsseln. Wenn der Private Key des Empfängers mit dem Public Key des Absenders
+übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht vom Absender stammt und nicht
+manipuliert wurde.
+Die Authentifizierung ist ein wichtiger Schritt, um die Sicherheit des Protokolls zu gewährleisten.

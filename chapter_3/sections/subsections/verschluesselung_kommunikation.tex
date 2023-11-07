@@ -1,0 +1,24 @@
+\subsection{Verschlüsselung der Kommunikation}
+
+% Wenn Public Key des anderen bekannt ist, gilt das als authentifizierter Schlüsselaustausch. Bietet Schutz 
+% vor Man in the Middle Attacken, da bekannt ist, wem der Public Key gehört. Da in meinem Fall beide
+% authentifiziert sind, ist es ein wechselseitiger authentifizierter Schlüsselaustausch.
+
+Für die Verschlüsselung der Kommunikation wird das Public-Key-Verfahren verwendet.
+Das Public-Key-Verfahren ist ein asymmetrisches Verschlüsselungsverfahren, das zwei Schlüssel verwendet,
+einen öffentlichen und einen privaten Schlüssel. Der öffentliche Schlüssel wird verwendet, um Nachrichten
+zu verschlüsseln, und der private Schlüssel wird verwendet, um Nachrichten zu entschlüsseln. Der öffentliche
+Schlüssel wird an alle Benutzer verteilt, während der private Schlüssel nur dem Benutzer bekannt ist.
+
+%#TODO: DH bzw ECDH muss in den Grundlagen erklärt werden
+
+% Für die Verschlüsselung wird der Elliptic Curve Diffie-Hellman-Schlüsselaustausch verwendet.
+% Der Elliptic Curve Diffie-Hellman-Schlüsselaustausch ist ein Schlüsselaustauschprotokoll, das auf dem
+% Diffie-Hellman-Schlüsselaustausch basiert. Der Diffie-Hellman-Schlüsselaustausch ist ein Schlüsselaustauschprotokoll,
+% das verwendet wird, um einen gemeinsamen geheimen Schlüssel zwischen zwei Parteien zu erzeugen. Der
+% gemeinsame geheime Schlüssel wird verwendet, um die Nachrichten zu verschlüsseln und zu entschlüsseln.
+% Der Elliptic Curve Diffie-Hellman-Schlüsselaustausch verwendet elliptische Kurven, um die Sicherheit des
+% Schlüsselaustauschs zu erhöhen. Die elliptische Kurve ist eine mathematische Funktion, die verwendet wird,
+% um die Punkte zu berechnen, die für die Verschlüsselung und Entschlüsselung der Nachrichten verwendet werden.
+% Der Elliptic Curve Diffie-Hellman-Schlüsselaustausch ist sicher, da es praktisch unmöglich ist, den
+% gemeinsamen geheimen Schlüssel aus den öffentlichen Schlüsseln zu berechnen.
