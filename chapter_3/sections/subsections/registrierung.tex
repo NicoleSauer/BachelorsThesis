@@ -4,9 +4,10 @@
 % Um für eine gewisse Sicherheit zu sorgen, möchte ich neuen Usern eine ID und einen Public Key zuordnen 
 % und diese mittels Smart Contract auf die Ethereum-Blockchain schreiben.
 
+% Benutzername muss eindeutig sein, denn sonst kann der Benutzer von anderen nicht gefunden werden.
+
 Der erste Schritt ist die Registrierung eines neuen Benutzers. Hierfür muss der Benutzer einen Benutzernamen
-und ein Passwort angeben. Der Benutzername muss nicht eindeutig sein, da von der Anwendung eine ID generiert wird, 
-mit deren Hilfe der Nutzer identifiziert werden kann.
+und ein Passwort angeben. Der Benutzername muss eindeutig sein, da er als ID des Benutzers verwendet wird.
 Das Passwort muss mindestens zehn Zeichen lang sein und mindestens einen Großbuchstaben, einen Kleinbuchstaben,
 eine Zahl und ein Sonderzeichen enthalten. Diese Anforderungen sollen sicherstellen, dass das Passwort
 nicht leicht zu erraten ist und somit die Sicherheit des Benutzers gewährleistet ist.
