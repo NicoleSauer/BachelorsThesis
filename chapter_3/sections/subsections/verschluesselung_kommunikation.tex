@@ -4,11 +4,17 @@
 % vor Man in the Middle Attacken, da bekannt ist, wem der Public Key gehört. Da in meinem Fall beide
 % authentifiziert sind, ist es ein wechselseitiger authentifizierter Schlüsselaustausch.
 
-Für die Verschlüsselung der Kommunikation wird das Public-Key-Verfahren verwendet.
+Für die Verschlüsselung der Kommunikation soll das Public-Key-Verfahren verwendet werden.
 Das Public-Key-Verfahren ist ein asymmetrisches Verschlüsselungsverfahren, das zwei Schlüssel verwendet,
-einen öffentlichen und einen privaten Schlüssel. Der öffentliche Schlüssel wird verwendet, um Nachrichten
-zu verschlüsseln, und der private Schlüssel wird verwendet, um Nachrichten zu entschlüsseln. Der öffentliche
-Schlüssel wird an alle Benutzer verteilt, während der private Schlüssel nur dem Benutzer bekannt ist.
+einen öffentlichen und einen privaten Schlüssel. Das soll gewährleisten, dass die Nachrichten nur von
+dem Benutzer gelesen werden können, für den sie bestimmt sind und erkannt werden kann, ob die Nachricht
+manipuliert wurde. Zudem erhöht es die Sicherheit des Schlüsselaustauschs, da es praktisch unmöglich ist,
+den privaten Schlüssel aus dem öffentlichen Schlüssel zu berechnen.
+
+
+% Der öffentliche Schlüssel wird verwendet, um Nachrichten
+% zu verschlüsseln, und der private Schlüssel wird verwendet, um Nachrichten zu entschlüsseln. Der öffentliche
+% Schlüssel wird an alle Benutzer verteilt, während der private Schlüssel nur dem Benutzer bekannt ist.
 
 %#TODO: DH bzw ECDH muss in den Grundlagen erklärt werden
 

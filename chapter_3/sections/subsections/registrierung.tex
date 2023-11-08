@@ -4,15 +4,18 @@
 % Um für eine gewisse Sicherheit zu sorgen, möchte ich neuen Usern eine ID und einen Public Key zuordnen 
 % und diese mittels Smart Contract auf die Ethereum-Blockchain schreiben.
 
-% Benutzername muss eindeutig sein, denn sonst kann der Benutzer von anderen nicht gefunden werden.
+% Benutzername MUSS eindeutig sein, denn sonst kann der Benutzer von anderen nicht gefunden werden und die
+% User Experience beim Suchen von Teilnehmern leidet massiv.
 
 Der erste Schritt ist die Registrierung eines neuen Benutzers. Hierfür muss der Benutzer einen Benutzernamen
-und ein Passwort angeben. Der Benutzername muss eindeutig sein, da er als ID des Benutzers verwendet wird.
+und ein Passwort angeben. Der Benutzername muss eindeutig sein, da er das Identifikationsmerkmal 
+des Benutzers gegenüber sich selbst und anderen Teilnehmern darstellt.
 Das Passwort muss mindestens zehn Zeichen lang sein und mindestens einen Großbuchstaben, einen Kleinbuchstaben,
 eine Zahl und ein Sonderzeichen enthalten. Diese Anforderungen sollen sicherstellen, dass das Passwort
 nicht leicht zu erraten ist und somit die Sicherheit des Benutzers gewährleistet ist.
 Nachdem der Benutzername und das Passwort eingegeben wurden, wird ein Schlüsselpaar auf 
-Basis des Passworts erzeugt.
+Basis des Passworts erzeugt und der öffentliche Schlüssel wird zusammen mit dem
+Benutzernamen auf die Blockchain geschrieben.
 % #TODO: mit welchem Algorithmus? -> Argon2 https://cryptobook.nakov.com/mac-and-key-derivation/argon2
 
 
