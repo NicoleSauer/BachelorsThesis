@@ -1,7 +1,17 @@
 \subsection{Verbindung und Identität}
 
-Benutzer können andere Peers in einem verteilten Netzwerk entdecken und sich mit ihnen 
-verbinden. Dies kann verteilte Hash-Tabellen (DHTs) oder andere Mechanismen zur 
-Peer-Erkennung umfassen.
-Benutzer werden durch eindeutige öffentliche Schlüssel identifiziert, und Benutzerprofile 
-können zusätzliche Informationen wie Benutzernamen, Avatare und Status enthalten.
+Um eine Verbindung zwischen zwei Teilnehmern herzustellen, muss ein Teilnehmer den öffentlichen
+Schlüssel des anderen Teilnehmers kennen. Dieser wurde bei der Registrierung in die Blockchain
+geschrieben. Da in der Hashtabelle Schlüssel-Wert-Paare gespeichert werden, wird
+der öffentliche Schlüssel als Schlüssel und die IP-Adresse und der Port des Teilnehmers als
+Wert gespeichert. Der Teilnehmer, der eine Verbindung herstellen möchte, muss den öffentlichen
+Schlüssel des anderen Teilnehmers kennen. Dazu muss er den öffentlichen Schlüssel in der
+verteilten Hashtabelle suchen. Dazu berechnet er aus dem öffentlichen Schlüssel einen Hashwert.
+Der Hashwert wird in einem Zahlenbereich abgebildet. Der Teilnehmer sucht in der verteilten
+Hashtabelle nach dem nächsten Hashwert. Der Teilnehmer, der den Hashwert in der verteilten
+Hashtabelle gespeichert hat, ist der Nachbar des Teilnehmers, der die Verbindung herstellen
+möchte. Der Teilnehmer, der die Verbindung herstellen möchte, sendet eine Anfrage an den
+Nachbarn. Die Anfrage enthält den öffentlichen Schlüssel des Teilnehmers, der die Verbindung
+herstellen möchte. Der Nachbar antwortet mit seiner IP-Adresse und seinem Port. Der Teilnehmer,
+der die Verbindung herstellen möchte, kann nun eine Verbindung zum Nachbarn aufbauen. Der
+Nachbar leitet die Nachrichten an den Teilnehmer weiter, der die Verbindung herstellen möchte.
