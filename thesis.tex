@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{report}
+\documentclass[11pt, a4paper]{report}
 \pagestyle{headings}
 \usepackage{lipsum}
 \usepackage[ngerman]{babel}
@@ -16,9 +16,6 @@
 \usepackage[backend=biber, style=authoryear]{biblatex}
 \addbibresource{sources.bib}
 \setlength{\bibitemsep}{1em}
-\DefineBibliographyStrings{german}{
-    nodate = {{}o\adddot\addnbthinspace J\adddot}
-}
 \DeclareLabeldate{
     \field{date}
     \field{eventdate}
@@ -41,6 +38,8 @@
 % - Tox Protocol (https://zetok.github.io/tox-spec/) verwendet auch DH als E2E Encryption und 
 %   hat durch ephemeral keys auch forward secrecy. Für NAT-Problem werden hole-punching, UPnP und 
 %   TCP-relays verwendet
+
+% #TODO: Das Wort "Kapitel" vielleicht entfernen? Sieht dann vielleicht ganz gut aus
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
