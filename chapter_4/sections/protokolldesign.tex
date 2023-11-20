@@ -1,20 +1,35 @@
 \section{Protokolldesign und -struktur}
+\label{sec:protokolldesign_und_struktur}
 
-% Das Protokoll basiert auf Peer-to-Peer.
+% Das Protokoll basiert auf Peer-to-Peer. Die direkte Verbindung mittels DHTs wird
+% bevorzugt, erst wenn diese nicht möglich ist, wird die Nachricht über ein TCP-Relay
+% weitergeleitet.
 
 Die Architektur des Protokolls basiert auf Peer-to-Peer. Das bedeutet, dass
 alle Teilnehmer gleichberechtigt sind und es keinen zentralen Server gibt, der
-die Kommunikation steuert. Die Kommunikation erfolgt direkt zwischen den
+die Kommunikation steuert. Somit erfolgt die Kommunikation direkt zwischen den
 Teilnehmern. Alle Teilnehmer sind in einem Netzwerk organisiert, das aus
 verschiedenen Knoten besteht, wobei jeder Knoten einen Teilnehmer des Netzwerks repräsentiert.
 Alle Knoten im Netzwerk sind untereinander verbunden und können Textnachrichten austauschen.
 
 \input{chapter_4/sections/subsections/protokollgrundlagen.tex}
 
-\input{chapter_4/sections/subsections/verbindung.tex}
+\input{chapter_4/sections/subsections/identifikation.tex}
 
-\input{chapter_4/sections/subsections/nachrichten.tex}
+\input{chapter_4/sections/subsections/nachrichtenformat.tex}
 
-\input{chapter_4/sections/subsections/nachrichtenverlauf.tex}
+\input{chapter_4/sections/subsections/routing.tex}
+
+\input{chapter_4/sections/subsections/statusinformation.tex}
+
+\input{chapter_4/sections/subsections/verbindungsmanagement.tex}
+
+%\input{chapter_4/sections/subsections/verbindung.tex}
+
+%\input{chapter_4/sections/subsections/nachrichten.tex}
+
+%\input{chapter_4/sections/subsections/nachrichtenverlauf.tex}
 
 \input{chapter_4/sections/subsections/sicherheit.tex}
+
+\input{chapter_4/sections/subsections/fehlerbehandlung.tex}

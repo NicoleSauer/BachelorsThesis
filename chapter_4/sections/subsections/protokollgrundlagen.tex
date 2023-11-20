@@ -11,9 +11,15 @@ vier Typen und ihre Unterteilung in unstrukturierte und strukturierte Netzwerke.
 \end{center}
 
 \noindent Das Protokoll dieser Arbeit fällt in die Kategorie der hybriden Peer-to-Peer Netzwerke.
-Es ist sowohl strukturiert als auch unstrukturiert. In diesem Fall kombiniert die hybride Struktur 
-Peer-to-Peer-Kommunikation mit einem zentralen Server als TCP-Relay, um Netzwerkadressübersetzung 
-(NAT) zu überwinden. Im Regelfall erfolgt die Kommunikation zwischen den Teilnehmern direkt, ohne dass ein
-zentraler Server die Kommunikation steuert. Der zentrale Server wird nur verwendet, um die
-Kommunikation zu ermöglichen, wenn die Teilnehmer nicht direkt miteinander kommunizieren können, was 
-der Fall ist, wenn die Teilnehmer sich hinter einer Firewall oder einem NAT befinden.
+Es ist sowohl strukturiert als auch unstrukturiert. Alle Teilnehmer sind in einem Netzwerk organisiert,
+das aus verschiedenen Knoten besteht, wobei jeder Knoten einen Teilnehmer des Netzwerks repräsentiert.
+Alle Knoten im Netzwerk sind untereinander verbunden und können Textnachrichten direkt, ohne die Verwendung 
+eines Servers austauschen. Sollte sich jedoch der gewünschte Empfänger nicht im Netzwerk befinden, besteht
+die Möglichkeit, dass sich der Empfänger hinter einem NAT-Gateway oder einer Firewall befindet. In diesem
+Fall wird die Nachricht über einen Server, genauer gesagt über ein TCP-Relay, an den Empfänger weitergeleitet.
+Der Server ist nur für die Weiterleitung der Nachricht zuständig und speichert diese nicht. Dies ist
+ein Unterschied zu anderen Instant-Messaging-Protokollen, wie zum Beispiel \textcolor{red}{[Beispiel 
+finden oder Satz weglassen]}, bei dem der Server die Nachrichten speichert, wenn der Empfänger offline ist. 
+Das Protokoll dieser Arbeit ist also ein hybrides Peer-to-Peer-Protokoll, da es sowohl strukturierte 
+als auch unstrukturierte Eigenschaften aufweist.
+

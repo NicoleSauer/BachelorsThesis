@@ -1,5 +1,6 @@
 \documentclass[11pt, a4paper]{report}
 \pagestyle{headings}
+\usepackage[pagestyles]{titlesec}
 \usepackage{lipsum}
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
@@ -23,23 +24,42 @@
     \literal{nodate}
 }
 
+% \makeatletter
+% \def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
+% \def\@makechapterhead#1{%
+%   \vspace*{10\p@}%
+%   {\parindent \z@ 
+%     {\raggedleft \reset@font
+%       \fontsize{15ex}{15ex}\selectfont %Problème avec les substitutions...
+%       \bfseries\thechapter\par\nobreak}%
+%     \par\nobreak
+%     \interlinepenalty\@M
+%     {\raggedright \Huge \bfseries #1}%
+%     \par\nobreak
+%     \hrulefill
+%     \par\nobreak
+%     \vskip 100\p@
+%   }}
+% \def\@makeschapterhead#1{%
+%   \vspace*{10\p@}%
+%   {\parindent \z@ 
+%     {\raggedleft \reset@font
+%       \fontsize{15ex}{15ex}\selectfont %Problème avec les substitutions...
+%       \bfseries\vphantom{\thechapter}\par\nobreak}%
+%     \par\nobreak
+%     \interlinepenalty\@M
+%     {\raggedright \Huge \bfseries #1}%
+%     \par\nobreak
+%     \hrulefill
+%     \par\nobreak
+%     \vskip 100\p@
+%   }}
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NOTES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % - #TODO: Keep the standard LaTeX font?
 %     NOTE: when using Tahoma font, you have to compile this with XeLaTeX (xelatex) or 
 %    LuaLaTeX (lualatex) instead of regular LaTeX.
-
-% - Relay kann keine Nachrichten speichern, wenn der Empfänger offline ist
-
-% - Passwort, um Key Pair zu erzeugen könnte das lokale speichern des Private Keys ersetzen
-
-% - #TODO: Signal als state of the art Protokoll benennen
-
-% - Tox Protocol (https://zetok.github.io/tox-spec/) verwendet auch DH als E2E Encryption und 
-%   hat durch ephemeral keys auch forward secrecy. Für NAT-Problem werden hole-punching, UPnP und 
-%   TCP-relays verwendet
-
-% #TODO: Das Wort "Kapitel" vielleicht entfernen? Sieht dann vielleicht ganz gut aus
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

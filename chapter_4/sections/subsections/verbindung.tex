@@ -1,17 +1,24 @@
 \subsection{Verbindung und Identität}
 
-Um eine Verbindung zwischen zwei Teilnehmern herzustellen, muss ein Teilnehmer den öffentlichen
-Schlüssel des anderen Teilnehmers kennen. Dieser wurde bei der Registrierung in die Blockchain
-geschrieben. Da in der Hashtabelle Schlüssel-Wert-Paare gespeichert werden, wird
-der öffentliche Schlüssel als Schlüssel und die IP-Adresse und der Port des Teilnehmers als
-Wert gespeichert. Der Teilnehmer, der eine Verbindung herstellen möchte, muss den öffentlichen
-Schlüssel des anderen Teilnehmers kennen. Dazu muss er den öffentlichen Schlüssel in der
-verteilten Hashtabelle suchen. Dazu berechnet er aus dem öffentlichen Schlüssel einen Hashwert.
-Der Hashwert wird in einem Zahlenbereich abgebildet. Der Teilnehmer sucht in der verteilten
-Hashtabelle nach dem nächsten Hashwert. Der Teilnehmer, der den Hashwert in der verteilten
-Hashtabelle gespeichert hat, ist der Nachbar des Teilnehmers, der die Verbindung herstellen
-möchte. Der Teilnehmer, der die Verbindung herstellen möchte, sendet eine Anfrage an den
-Nachbarn. Die Anfrage enthält den öffentlichen Schlüssel des Teilnehmers, der die Verbindung
-herstellen möchte. Der Nachbar antwortet mit seiner IP-Adresse und seinem Port. Der Teilnehmer,
-der die Verbindung herstellen möchte, kann nun eine Verbindung zum Nachbarn aufbauen. Der
-Nachbar leitet die Nachrichten an den Teilnehmer weiter, der die Verbindung herstellen möchte.
+Um eine Verbindung zwischen zwei Teilnehmern herzustellen, muss der Client des
+Absenders die IP-Adresse und den Port des Empfängers kennen. Diese Informationen
+werden benötigt, um eine Verbindung über das Internet herzustellen. In einem Peer
+to Peer-Netzwerk ist es jedoch nicht möglich, dass jeder Teilnehmer die IP-Adresse
+und den Port jedes anderen Teilnehmers kennt. Deshalb kommen hier die verteilten
+Hash-Tabellen zum Einsatz. Jeder Teilnehmer speichert in einer verteilten Hash-Tabelle
+seine IP-Adresse und seinen Port. Die verteilte Hash-Tabelle ist ein verteiltes
+System, das die IP-Adressen und Ports aller Teilnehmer speichert. Die verteilte
+Hash-Tabelle ist in mehrere Buckets unterteilt. Jeder Bucket enthält die IP-Adressen
+und Ports der Teilnehmer, die sich in einem bestimmten Bereich befinden. Die
+Buckets sind nach der Distanz der IP-Adressen und Ports der Teilnehmer zum eigenen
+IP-Adresse und Port sortiert. Die Buckets sind in der Regel so konfiguriert, dass
+jeder Bucket maximal 8 Teilnehmer enthalten kann. Wenn ein Teilnehmer eine Verbindung
+zu einem anderen Teilnehmer herstellen möchte, sucht er in der verteilten Hash-Tabelle
+nach der IP-Adresse und dem Port des Empfängers. Wenn der Empfänger in der verteilten
+Hash-Tabelle gefunden wird, kann eine Verbindung hergestellt werden. Wenn der Empfänger
+nicht in der verteilten Hash-Tabelle gefunden wird, wird die Nachricht über ein
+TCP-Relay an den Empfänger weitergeleitet. Wenn aber auch hier der Empfänger nicht
+gefunden wird, wird die Nachricht lokal auf dem Gerät des Absenders gespeichert,
+bis der Empfänger online ist. Wenn der Empfänger online ist, wird die Nachricht
+zugestellt. Die direkte Verbindung zwischen den Teilnehmern wird bevorzugt, erst wenn
+diese nicht möglich ist, wird die Nachricht über ein TCP-Relay weitergeleitet.
