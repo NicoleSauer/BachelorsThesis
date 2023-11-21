@@ -1,4 +1,26 @@
-\subsection{Routing und Weiterleitung von Nachrichten}
+\subsection{Routing}
 
-Festlegen, wie Nachrichten im Netzwerk weitergeleitet werden (z.B., DHT basiert).
-Adressauflösung für direkte Peer-Kommunikation.
+
+Durch die in Abschnitt \ref{subsec:identifikation_von_teilnehmern} erwähnte 
+Verwendung des Kademlia-Protokolls, wird das Routing und die Weiterleitung von
+Nachrichten durch die DHTs übernommen.
+
+Wenn ein Knoten einen Wert oder einen anderen Knoten im Netzwerk finden möchte, 
+führt er iterative Suchen durch, indem er eine auf XOR basierende Distanzmetrik 
+verwendet. Er fragt Knoten in seiner Routing-Tabelle basierend auf ihrer Nähe 
+zur Zielknoten-ID ab. Diese Abfragen helfen, die Suche auf das Ziel hin zu verfeinern, 
+indem sie sich mit jedem Schritt im Knoten-ID-Raum näher bewegen. Die iterative
+Suche wird beendet, wenn der Zielknoten gefunden wurde oder wenn die Suche
+keine Knoten mehr findet, die der Zielknoten-ID näher sind als der am nächsten
+gelegene Knoten, der bereits abgefragt wurde. In diesem Fall wird die Suche
+beendet und der am nächsten gelegene Knoten zurückgegeben.
+
+Im Kademlia-Protokoll sind vier Funktionen definiert, die für die Suche nach
+Knoten und Werten verwendet werden. Diese Funktionen sind \texttt{FIND\_NODE},
+\texttt{FIND\_VALUE}, \texttt{PING} und \texttt{STORE}. Die Funktionen
+\texttt{FIND\_NODE} und \texttt{FIND\_VALUE} werden verwendet, um nach Knoten
+oder Werten zu suchen. Die Funktion \texttt{PING} wird verwendet, um die
+Erreichbarkeit eines Knotens zu überprüfen. Die Funktion \texttt{STORE} wird
+verwendet, um einen Wert in einem Knoten zu speichern.
+
+

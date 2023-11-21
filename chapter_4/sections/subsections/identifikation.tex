@@ -1,21 +1,22 @@
 \subsection{Identifikation von Teilnehmern}
 \label{subsec:identifikation_von_teilnehmern}
 
-[Jeder Benutzer im Netzwerk hat eine eindeutige ID.Adressierung kann über 
+
+\begin{itemize}
+    \item Jeder Benutzer im Netzwerk hat eine eindeutige ID.
+    \item Adressierung kann über Benutzer-IDs oder Schlüsselpaare erfolgen.
+    \item Die ID wird als 32-Byte-Array gespeichert.
+\end{itemize}
+
+[Jeder Benutzer im Netzwerk hat eine eindeutige ID. Adressierung kann über 
 Benutzer-IDs oder Schlüsselpaare erfolgen.]
 
-\noindent Teilnehmer werden durch eine eindeutige ID identifiziert. Diese ID wird
-durch einen SHA-256-Hash des öffentlichen Schlüssels des Teilnehmers
-erzeugt. Durch die Verwendung einer Hashfunktion wird die ID auf eine
-festgelegte Länge begrenzt. Das Encoding der ID erfolgt in Base64 und UTF-8
-
-
-Der öffentliche Schlüssel wiederum wird durch eine Schlüsselableitungsfunktion
-aus dem Passwort des Teilnehmers erzeugt.
-
-
-
-Die ID wird als 32-Byte-Array
-gespeichert. Die ID wird verwendet, um Teilnehmer zu identifizieren und
-Nachrichten an sie zu senden. Die ID wird auch verwendet, um die
-Teilnehmerliste zu sortieren.
+\noindent Da es in Peer-to-Peer-Netzwerken keinen zentralen Server gibt, der die
+Kommunikation steuert, müssen die Teilnehmer auf andere Weise identifiziert
+werden. Hierfür können verschiedene Methoden zur
+Identifizierung von Teilnehmern verwendet werden. Für dieses Protokoll
+fiel die Wahl auf das Kademlia-Protokoll, das in vielen Peer-to-Peer-Netzwerken
+verwendet wird. Das Kademlia-Protokoll verwendet eine ID mit einer Länge von 160
+Bit, die durch einen \textcolor{red}{SHA-1-Hash} des öffentlichen Schlüssels des 
+Teilnehmers erzeugt wird. Durch die Verwendung einer Hashfunktion wird die ID auf eine
+festgelegte Länge begrenzt.
