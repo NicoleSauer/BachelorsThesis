@@ -1,26 +1,79 @@
-\subsection{Routing}
+\subsection{Routing und Peer Discovery}
+\label{subsec:routing}
+
+Wie bereits in Abschnitt \ref{subsec:identifikation_von_teilnehmern} 
+\nameref{subsec:identifikation_von_teilnehmern} erwähnt,
+wird das Kademlia-Protokoll verwendet, um die Knoten im Netzwerk zu identifizieren.
+Es wird auch verwendet, um die Nachrichten zwischen den Knoten zu routen.
+
+% Wenn ein Knoten einen Wert oder einen anderen Knoten im Netzwerk finden möchte, 
+% führt er iterative Suchen durch, indem er eine auf XOR basierende Distanzmetrik 
+% verwendet. Er fragt Knoten in seiner Routing-Tabelle basierend auf ihrer Nähe 
+% zur Zielknoten-ID ab. Diese Abfragen helfen, die Suche auf das Ziel hin zu verfeinern, 
+% indem sie sich mit jedem Schritt im Knoten-ID-Raum näher bewegen. Die iterative
+% Suche wird beendet, wenn der Zielknoten gefunden wurde oder wenn die Suche
+% keine Knoten mehr findet, die der Zielknoten-ID näher sind als der am nächsten
+% gelegene Knoten, der bereits abgefragt wurde. In diesem Fall wird die Suche
+% beendet und der am nächsten gelegene Knoten zurückgegeben.
+
+% Im Kademlia-Protokoll sind vier Funktionen definiert, die für die Suche nach
+% Knoten und Werten verwendet werden. Diese Funktionen sind \texttt{FIND\_NODE},
+% \texttt{FIND\_VALUE}, \texttt{PING} und \texttt{STORE}. Die Funktionen
+% \texttt{FIND\_NODE} und \texttt{FIND\_VALUE} werden verwendet, um nach Knoten
+% oder Werten zu suchen. Die Funktion \texttt{PING} wird verwendet, um die
+% Erreichbarkeit eines Knotens zu überprüfen. Die Funktion \texttt{STORE} wird
+% verwendet, um einen Wert in einem Knoten zu speichern.
 
 
-Durch die in Abschnitt \ref{subsec:identifikation_von_teilnehmern} erwähnte 
-Verwendung des Kademlia-Protokolls, wird das Routing und die Weiterleitung von
-Nachrichten durch die DHTs übernommen.
+Das Kademlia-Protokoll basiert auf einem Distanzmetrik-Konzept, das als \\
+"Kademlia-Distanz" bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige ID repräsentiert, 
+typischerweise als kryptografischer Hashwert, der sich aus der gehashten IP-Adresse 
+des jeweiligen Knotens mittels der SHA-1 Hashfunktion ergibt. Diese IDs sind in einem 
+großen binären Baum organisiert, wobei die Position eines Knotens im Baum seine 
+"Kademlia-Distanz" zu anderen Knoten definiert. Diese Distanz wird durch die XOR 
+(ausschließendes Oder)-Operation ihrer eindeutigen IDs bestimmt. Die XOR-Operation 
+ermöglicht eine effiziente Bestimmung der Distanz zwischen den Knoten-IDs, indem 
+sie auf deren Binärzahlen angewendet wird. Dieses Ergebnis repräsentiert die 
+Distanz zwischen den IDs und bildet die Grundlage für das Routing und die 
+Organisation im Kademlia-Netzwerk.
 
-Wenn ein Knoten einen Wert oder einen anderen Knoten im Netzwerk finden möchte, 
-führt er iterative Suchen durch, indem er eine auf XOR basierende Distanzmetrik 
-verwendet. Er fragt Knoten in seiner Routing-Tabelle basierend auf ihrer Nähe 
-zur Zielknoten-ID ab. Diese Abfragen helfen, die Suche auf das Ziel hin zu verfeinern, 
-indem sie sich mit jedem Schritt im Knoten-ID-Raum näher bewegen. Die iterative
-Suche wird beendet, wenn der Zielknoten gefunden wurde oder wenn die Suche
-keine Knoten mehr findet, die der Zielknoten-ID näher sind als der am nächsten
-gelegene Knoten, der bereits abgefragt wurde. In diesem Fall wird die Suche
-beendet und der am nächsten gelegene Knoten zurückgegeben.
+Kademlia verwendet ein Routingverfahren, bei dem jeder Knoten eine Routing-\\
+Tabelle 
+speichert, die als "K-Buckets" bezeichnet werden. Jedes K-Bucket enthält Verweise 
+auf andere Knoten im Netzwerk und ist nach der Kademlia-Distanz organisiert. Ein 
+K-Bucket enthält typischerweise eine begrenzte Anzahl von Einträgen und gruppiert 
+Knoten mit ähnlichen IDs.
 
-Im Kademlia-Protokoll sind vier Funktionen definiert, die für die Suche nach
-Knoten und Werten verwendet werden. Diese Funktionen sind \texttt{FIND\_NODE},
-\texttt{FIND\_VALUE}, \texttt{PING} und \texttt{STORE}. Die Funktionen
-\texttt{FIND\_NODE} und \texttt{FIND\_VALUE} werden verwendet, um nach Knoten
-oder Werten zu suchen. Die Funktion \texttt{PING} wird verwendet, um die
-Erreichbarkeit eines Knotens zu überprüfen. Die Funktion \texttt{STORE} wird
-verwendet, um einen Wert in einem Knoten zu speichern.
+Wenn ein Knoten eine Verbindung zu einem anderen Knoten herstellen muss, verwendet 
+er die Routing-Tabelle, um den am nächsten gelegenen Knoten zu finden, der die 
+Ziel-ID repräsentiert. Falls dieser Knoten nicht direkt bekannt ist, wird das 
+Routing iterative durchgeführt, wobei der Knoten jeweils näher an der Ziel-ID 
+liegende Knoten anfragt, bis der Zielknoten gefunden wird. Durch die Verwendung 
+dieses strukturierten Ansatzes ermöglicht Kademlia eine effiziente Suche und 
+Kommunikation zwischen Knoten in einem P2P-Netzwerk, wobei die Skalierbarkeit 
+und Robustheit des Systems erhalten bleiben. Es ist ein Schlüsselelement vieler 
+P2P-Anwendungen, einschließlich Filesharing, dezentraler Datenbanken und eben auch 
+Instant Messaging-Protokollen, da es die Grundlage für die direkte 
+Peer-to-Peer-Kommunikation schafft.
+\\
+
+\noindent Ein Beispiel für die XOR-Berechnung zwischen gehashten Knoten-IDs könnte wie folgt 
+aussehen:
+Knoten A hat die gehashte ID: 0x83a2c8f7,  
+Knoten B hat die gehashte ID: 0xe1b6d4a9.
+
+\noindent Die XOR-Operation zwischen diesen IDs ergibt:
+\begin{equation}
+    \begin{aligned}
+        \text{Knoten A:} & \quad \texttt{0x83a2c8f7} \\
+        \text{Knoten B:} & \quad \texttt{0xe1b6d4a9} \\
+        \text{Ergebnis:} & \quad \texttt{0x61f47c5e}
+    \end{aligned}
+\end{equation}
+% #TODO: Berechnung noch in binär umwandeln, damit die Berechnung besser verständlich ist?
 
 
+\noindent Diese Distanz repräsentiert die Maßeinheit für die Positionierung und das Routing 
+im Kademlia-Netzwerk. Knoten mit einer geringeren Distanz sind näher beieinander
+als Knoten mit einer größeren Distanz. Dabei hat die Distanz nichts mit der
+geographischen Entfernung zu tun, sondern nur mit der Position im Kademlia-Baum.
