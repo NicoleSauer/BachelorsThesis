@@ -2,30 +2,41 @@
 
 Struktur für Nachrichten festlegen (Header, Body, etc.).
 Verschlüsselung und Authentifizierung für Sicherheit hinzufügen.
+Jedes Instant Messaging-Protokoll benötigt die Definition eines Nachrichtenformats,
+das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden.
+Dieses Nachrichtenformat sollte die folgenden Elemente enthalten:
 
 \noindent Nachrichtenkopf:
 \begin{itemize}
-    \item Absender-ID: Eindeutige Kennung des Absenders
-    \item Empfänger-ID: Identifikation des Empfängers
+    \item Absender-ID: Eindeutige Kennung des Absenders (Benutzername? Public Key?)
+    \item Empfänger-ID: Identifikation des Empfängers (Benutzername? Public Key?)
     \item Zeitstempel: Zeitpunkt, zu dem die Nachricht gesendet wurde
     \item Nachrichten-ID: Eindeutige Kennung der Nachricht für die Identifikation 
     und Verfolgung
 \end{itemize}
 
+Im Nachrichtenkopf müssen sich die Absender- und Empfänger-IDs befinden,
+um die Kommunikation zwischen den Teilnehmern zu ermöglichen.
+Die Nachrichten-ID ist erforderlich, um die Nachrichten zu identifizieren und
+die Zustellung zu verfolgen. Der Zeitstempel ist hilfreich, um die Nachrichten
+zu sortieren und die Reihenfolge der Nachrichten zu bestimmen.
+
 
 \noindent Nachrichteninhalt:
 \begin{itemize}
-    \item Textinhalt: Der eigentliche Text der Nachricht.
-    \item Formatierung: Möglicherweise könntest du einfache Formatierungsoptionen 
+    \item Textinhalt: Der eigentliche Text der Nachricht
+    \item Formatierung: Möglicherweise könnte man einfache Formatierungsoptionen 
     unterstützen, z. B. fett, kursiv, Unterstreichungen usw.
 \end{itemize}
+
+Der Nachrichteninhalt sollte den eigentlichen Text der Nachricht enthalten.
 
 
 \noindent Zusätzliche Tags:
 \begin{itemize}
     \item Priorität: Wenn Nachrichten eine Priorität haben sollen, könnte 
     man Tags oder Flags einführen, um die Wichtigkeit zu markieren 
-    (z. B. "Dringend", "Normal", "Niedrige Priorität").
+    (z. B. "Dringend", "Normal", "Niedrige Priorität")
 \end{itemize}
 
 
@@ -33,7 +44,7 @@ Verschlüsselung und Authentifizierung für Sicherheit hinzufügen.
 \begin{itemize}
     \item Eine Option für eine Bestätigung der Nachrichtenzustellung könnte 
     hilfreich sein, um sicherzustellen, dass die Nachricht erfolgreich 
-    übermittelt wurde.
+    übermittelt wurde
 \end{itemize}
 
 
@@ -45,6 +56,6 @@ Verschlüsselung und Authentifizierung für Sicherheit hinzufügen.
 
 \noindent Verschlüsselung und Sicherheit:
 \begin{itemize}
-    \item Verschlüsselung und Authentifizierung erforderlich, um die 
-    Vertraulichkeit der Nachrichten zu gewährleisten
+    \item Verschlüsselung und Authentifizierung erforderlich, um 
+    die Vertraulichkeit der Nachrichten zu gewährleisten
 \end{itemize}

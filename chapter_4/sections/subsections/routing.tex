@@ -1,8 +1,8 @@
-\subsection{Routing und Peer Discovery}
+\subsection{Verbindungsmanagement/Routing und Peer Discovery}
 \label{subsec:routing}
 
-Wie bereits in Abschnitt \ref{subsec:identifikation_von_teilnehmern} 
-\nameref{subsec:identifikation_von_teilnehmern} erwähnt,
+Wie in Abschnitt \ref{subsec:identifikation_von_teilnehmern} 
+(\nameref{subsec:identifikation_von_teilnehmern}) erwähnt,
 wird das Kademlia-Protokoll verwendet, um die Knoten im Netzwerk zu identifizieren.
 Es wird auch verwendet, um die Nachrichten zwischen den Knoten zu routen.
 
@@ -26,7 +26,8 @@ Es wird auch verwendet, um die Nachrichten zwischen den Knoten zu routen.
 
 
 Das Kademlia-Protokoll basiert auf einem Distanzmetrik-Konzept, das als \\
-"Kademlia-Distanz" bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige ID repräsentiert, 
+"Kademlia-Distanz" bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige 
+ID repräsentiert, 
 typischerweise als kryptografischer Hashwert, der sich aus der gehashten IP-Adresse 
 des jeweiligen Knotens mittels der SHA-1 Hashfunktion ergibt. Diese IDs sind in einem 
 großen binären Baum organisiert, wobei die Position eines Knotens im Baum seine 
@@ -55,14 +56,11 @@ und Robustheit des Systems erhalten bleiben. Es ist ein Schlüsselelement vieler
 P2P-Anwendungen, einschließlich Filesharing, dezentraler Datenbanken und eben auch 
 Instant Messaging-Protokollen, da es die Grundlage für die direkte 
 Peer-to-Peer-Kommunikation schafft.
-\\
+Ein Beispiel für die XOR-Berechnung zwischen gehashten Knoten-IDs könnte 
+wie folgt aussehen:
+Angenommen, Knoten A hat die ID 0x83a2c8f7 und Knoten B die ID 0xe1b6d4a9.Die XOR-Operation 
+zwischen diesen IDs ergibt:
 
-\noindent Ein Beispiel für die XOR-Berechnung zwischen gehashten Knoten-IDs könnte wie folgt 
-aussehen:
-Knoten A hat die gehashte ID: 0x83a2c8f7,  
-Knoten B hat die gehashte ID: 0xe1b6d4a9.
-
-\noindent Die XOR-Operation zwischen diesen IDs ergibt:
 \begin{equation}
     \begin{aligned}
         \text{Knoten A:} & \quad \texttt{0x83a2c8f7} \\
@@ -72,8 +70,9 @@ Knoten B hat die gehashte ID: 0xe1b6d4a9.
 \end{equation}
 % #TODO: Berechnung noch in binär umwandeln, damit die Berechnung besser verständlich ist?
 
-
-\noindent Diese Distanz repräsentiert die Maßeinheit für die Positionierung und das Routing 
+\noindent Die Berechnung findet auf Bit-Ebene statt. Die Distanz zwischen den Knoten A und B
+ist also 0x61f47c5e.
+Diese Distanz repräsentiert die Maßeinheit für die Positionierung und das Routing 
 im Kademlia-Netzwerk. Knoten mit einer geringeren Distanz sind näher beieinander
 als Knoten mit einer größeren Distanz. Dabei hat die Distanz nichts mit der
 geographischen Entfernung zu tun, sondern nur mit der Position im Kademlia-Baum.
