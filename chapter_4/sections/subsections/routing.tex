@@ -27,12 +27,12 @@ Es wird auch verwendet, um die Nachrichten zwischen den Knoten zu routen.
 
 
 Das Kademlia-Protokoll basiert auf einem Distanzmetrik-Konzept, das als \\
-"Kademlia-Distanz" bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige 
+\enquote{Kademlia-Distanz} bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige 
 ID repräsentiert, typischerweise als kryptografischer Hashwert, der sich in diesem Fall 
 aus dem \textcolor{red}{gehashten?} öffentlichen Schlüssel
 des jeweiligen Knotens mittels der \textcolor{red}{SHA-1} Hashfunktion ergibt. Diese IDs 
 sind in einem großen binären Baum organisiert, wobei die Position eines Knotens im Baum seine 
-"Kademlia-Distanz" zu anderen Knoten definiert. Diese Distanz wird durch die XOR 
+\enquote{Kademlia-Distanz} zu anderen Knoten definiert. Diese Distanz wird durch die XOR 
 (ausschließendes Oder)-Operation ihrer eindeutigen IDs bestimmt. Die XOR-Operation 
 ermöglicht eine effiziente Bestimmung der Distanz zwischen den Knoten-IDs, indem 
 sie auf deren Binärzahlen angewendet wird. Dieses Ergebnis repräsentiert die 
@@ -41,7 +41,7 @@ Organisation im Kademlia-Netzwerk.
 
 Kademlia verwendet ein Routingverfahren, bei dem jeder Knoten eine Routing-\\
 Tabelle 
-speichert, die als "K-Buckets" bezeichnet werden. Jedes K-Bucket enthält Verweise 
+speichert, die als \enquote{K-Buckets} bezeichnet werden. Jedes K-Bucket enthält Verweise 
 auf andere Knoten im Netzwerk und ist nach der Kademlia-Distanz organisiert. Ein 
 K-Bucket enthält typischerweise eine begrenzte Anzahl von Einträgen und gruppiert 
 Knoten mit ähnlichen IDs.
