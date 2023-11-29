@@ -16,6 +16,7 @@ Es wird auch verwendet, um die Nachrichten zwischen den Knoten zu routen.
 % gelegene Knoten, der bereits abgefragt wurde. In diesem Fall wird die Suche
 % beendet und der am nächsten gelegene Knoten zurückgegeben.
 
+% #TODO: Funktion des Kademlia Protokolls nennen und erklären (vielleicht in Grundlagen)
 % Im Kademlia-Protokoll sind vier Funktionen definiert, die für die Suche nach
 % Knoten und Werten verwendet werden. Diese Funktionen sind \texttt{FIND\_NODE},
 % \texttt{FIND\_VALUE}, \texttt{PING} und \texttt{STORE}. Die Funktionen
@@ -27,10 +28,10 @@ Es wird auch verwendet, um die Nachrichten zwischen den Knoten zu routen.
 
 Das Kademlia-Protokoll basiert auf einem Distanzmetrik-Konzept, das als \\
 "Kademlia-Distanz" bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige 
-ID repräsentiert, 
-typischerweise als kryptografischer Hashwert, der sich aus der gehashten IP-Adresse 
-des jeweiligen Knotens mittels der SHA-1 Hashfunktion ergibt. Diese IDs sind in einem 
-großen binären Baum organisiert, wobei die Position eines Knotens im Baum seine 
+ID repräsentiert, typischerweise als kryptografischer Hashwert, der sich in diesem Fall 
+aus dem \textcolor{red}{gehashten?} öffentlichen Schlüssel
+des jeweiligen Knotens mittels der \textcolor{red}{SHA-1} Hashfunktion ergibt. Diese IDs 
+sind in einem großen binären Baum organisiert, wobei die Position eines Knotens im Baum seine 
 "Kademlia-Distanz" zu anderen Knoten definiert. Diese Distanz wird durch die XOR 
 (ausschließendes Oder)-Operation ihrer eindeutigen IDs bestimmt. Die XOR-Operation 
 ermöglicht eine effiziente Bestimmung der Distanz zwischen den Knoten-IDs, indem 
@@ -76,3 +77,8 @@ Diese Distanz repräsentiert die Maßeinheit für die Positionierung und das Rou
 im Kademlia-Netzwerk. Knoten mit einer geringeren Distanz sind näher beieinander
 als Knoten mit einer größeren Distanz. Dabei hat die Distanz nichts mit der
 geographischen Entfernung zu tun, sondern nur mit der Position im Kademlia-Baum.
+\\
+
+\noindent Zustellbestätigung
+
+\noindent Das Kademlia Protokoll besitzt keine Funktion für eine Zustellbestätigung.
