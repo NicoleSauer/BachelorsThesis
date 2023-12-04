@@ -5,12 +5,11 @@
 % bevorzugt, erst wenn diese nicht möglich ist, wird die Nachricht über ein TCP-Relay
 % weitergeleitet.
 
-Die Architektur des Protokolls basiert auf Peer-to-Peer. Das bedeutet, dass
-alle Teilnehmer gleichberechtigt sind und es keinen zentralen Server gibt, der
-die Kommunikation steuert. Somit erfolgt die Kommunikation direkt zwischen den
-Teilnehmern. Alle Teilnehmer sind in einem Netzwerk organisiert, das aus
-verschiedenen Knoten besteht, wobei jeder Knoten einen Teilnehmer des Netzwerks repräsentiert.
-Alle Knoten im Netzwerk sind untereinander verbunden und können Textnachrichten austauschen.
+% #TODO: hashing in Betracht gezogen, aber da er nur dazu dient eine ID zu erzeugen bzw. man einen Nutzer daran identifizieren soll, ist das eigentlich nicht notwendig zu hashen. Es ist kryptografisch nicht notwendig
+% #TODO: deshalb den Benutzernamen verwenden, der ja sowieso eindeutig sein muss (aus UX-Gründen), ihn auf 20 Zeichen limitieren (utf-8 -> 160 bits/8 = 20) und gegebenenfalls mit Nullen auffüllen, falls er kürzer ist
+
+
+Die Architektur des Protokolls basiert auf Peer-to-Peer. Das bedeutet, dass alle Teilnehmer gleichberechtigt sind und es keinen zentralen Server gibt, der die Kommunikation steuert. Somit erfolgt die Kommunikation direkt zwischen den Teilnehmern. Alle Teilnehmer sind in einem Netzwerk organisiert, das aus verschiedenen Knoten besteht, wobei jeder Knoten einen Teilnehmer des Netzwerks repräsentiert. Alle Knoten im Netzwerk sind untereinander verbunden und können Textnachrichten austauschen.
 
 \input{chapter_4/sections/subsections/protokollgrundlagen.tex}
 
