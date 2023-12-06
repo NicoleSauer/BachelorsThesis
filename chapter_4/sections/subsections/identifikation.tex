@@ -2,21 +2,4 @@
 \label{subsec:identifikation_von_teilnehmern}
 
 
-\begin{itemize}
-    \item Jeder Benutzer im Netzwerk hat eine eindeutige ID.
-    \item Adressierung kann über Benutzer-IDs oder Schlüsselpaare erfolgen.
-    \item Die ID wird als 32-Byte-Array gespeichert.
-\end{itemize}
-
-[Jeder Benutzer im Netzwerk hat eine eindeutige ID. Adressierung kann über 
-Benutzer-IDs oder Schlüsselpaare erfolgen.]
-
-\noindent Da es in Peer-to-Peer-Netzwerken keinen zentralen Server gibt, der die
-Kommunikation steuert, müssen die Teilnehmer auf andere Weise identifiziert
-werden. Hierfür können verschiedene Methoden zur
-Identifizierung von Teilnehmern verwendet werden. Für dieses Protokoll
-fiel die Wahl auf das Kademlia-Protokoll, das in vielen Peer-to-Peer-Netzwerken
-verwendet wird. Das Kademlia-Protokoll verwendet eine ID mit einer Länge von 160
-Bit, die durch einen \textcolor{red}{SHA-1-Hash} des öffentlichen Schlüssels des 
-Teilnehmers erzeugt wird. Durch die Verwendung einer Hashfunktion wird die ID auf eine
-festgelegte Länge begrenzt.
+\noindent Da es in Peer-to-Peer-Netzwerken keinen zentralen Server gibt, der unter anderem zur Auffindung anderer Teilnehmer verwendet werden kann, müssen die Teilnehmer auf andere Weise identifiziert werden. Hierfür können verschiedene Methoden verwendet werden. Für dieses Protokoll fiel die Wahl auf die Integration des Kademlia-Protokolls, das in vielen Peer-to-Peer-Netzwerken Anwendung findet. Um nun Teilnehmer identifizieren zu können, verwendet Kademlia eine ID, die jedem Teilnehmer zugeordnet wird. Diese ID muss laut der Spezifikation 160 Bit lang sein \Parencite[S. 2]{Maymounkov_Kademlia}. Weiter ist zu entnehmen, dass angenommen wird, dass die ID beim Netzwerkbeitritt aus einer zufälligen 160-Bit-Kennung gewählt wird. Für das hier entwickelte Protokoll wird der Benutzername des Teilnehmers als ID verwendet. Dieser ist in der Regel eindeutig und kann vom Benutzer frei gewählt werden. Um die Anforderung an die Länge zu erfüllen, werden die Zeichen des Benutzernamens auf 20 begrenzt und bei einer Formatierung in UTF-8 ergibt sich somit eine ID mit einer Länge von 160 Bit.

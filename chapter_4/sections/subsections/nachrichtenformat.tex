@@ -5,34 +5,31 @@ Verschlüsselung und Authentifizierung für Sicherheit hinzufügen.
 Jedes Instant Messaging-Protokoll benötigt die Definition eines Nachrichtenformats,
 das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden.
 Dieses Nachrichtenformat sollte die folgenden Elemente enthalten:
+\\
 
-\noindent Nachrichtenkopf:
+\noindent \textbf{Nachrichtenkopf:}
 \begin{itemize}
-    \item Absender-ID: Eindeutige Kennung des Absenders (Benutzername? Public Key?)
-    \item Empfänger-ID: Identifikation des Empfängers (Benutzername? Public Key?)
+    \item Absender-ID: Eindeutige Kennung des Absenders (Benutzername, IP-Adresse?)
+    \item Empfänger-ID: Identifikation des Empfängers (Benutzername, IP-Adresse?)
     \item Zeitstempel: Zeitpunkt, zu dem die Nachricht gesendet wurde
-    \item Nachrichten-ID: Eindeutige Kennung der Nachricht für die Identifikation 
-    und Verfolgung
+    \item Signatur: Signatur des Absenders, um die Authentizität der Nachricht zu gewährleisten
+    \item \textcolor{red}{Reihenfolge}: Nummer der Nachricht, um die Reihenfolge der Nachrichten zu bestimmen
 \end{itemize}
 
-Im Nachrichtenkopf müssen sich die Absender- und Empfänger-IDs befinden,
-um die Kommunikation zwischen den Teilnehmern zu ermöglichen.
-Die Nachrichten-ID ist erforderlich, um die Nachrichten zu identifizieren und
-die Zustellung zu verfolgen. Der Zeitstempel ist hilfreich, um die Nachrichten
-zu sortieren und die Reihenfolge der Nachrichten zu bestimmen.
+\noindent Im Nachrichtenkopf müssen sich die Absender- und Empfänger-IP-Adressen befinden, um die Nachrichten an die richtige Adresse zu senden. Die IP-Adresse des Absenders ist erforderlich, um eine Antwort auf die Nachricht zu senden. Die IP-Adresse des Empfängers ist erforderlich, um die Nachricht an den richtigen Empfänger zu senden. Der Zeitstempel ermöglicht es den Teilnehmern, die Nachrichten in der richtigen Reihenfolge anzuordnen. Die Signatur des Absenders ist erforderlich, um die Authentizität der Nachricht zu gewährleisten. Die Signatur wird mit dem privaten Schlüssel des Absenders erstellt und kann mit dem öffentlichen Schlüssel des Absenders überprüft werden.
 
 
-\noindent Nachrichteninhalt:
+\noindent \textbf{Nachrichteninhalt:}
 \begin{itemize}
     \item Textinhalt: Der eigentliche Text der Nachricht
     \item Formatierung: Möglicherweise könnte man einfache Formatierungsoptionen 
     unterstützen, z. B. fett, kursiv, Unterstreichungen usw.
 \end{itemize}
 
-Der Nachrichteninhalt sollte den eigentlichen Text der Nachricht enthalten.
+\noindent Der Nachrichteninhalt sollte den eigentlichen Text der Nachricht enthalten.
 
 
-\noindent Zustellbestätigung:
+\noindent \textbf{Zustellbestätigung:}
 \begin{itemize}
     \item Eine Option für eine Bestätigung der Nachrichtenzustellung könnte 
     hilfreich sein, um sicherzustellen, dass die Nachricht erfolgreich 
@@ -40,14 +37,13 @@ Der Nachrichteninhalt sollte den eigentlichen Text der Nachricht enthalten.
 \end{itemize}
 
 
-\noindent Unicode-Unterstützung:
+\noindent \textbf{Unicode-Unterstützung:}
 \begin{itemize}
     \item Unterstützung erforderlich, um eine breite Palette von Sprachen und
     Zeichen darstellen zu können
 \end{itemize}
 
-\noindent Verschlüsselung und Sicherheit:
+\noindent \textbf{Verschlüsselung und Sicherheit:}
 \begin{itemize}
-    \item Verschlüsselung und Authentifizierung erforderlich, um die Vertraulichkeit 
-    der Nachrichten zu gewährleisten
+    \item Verschlüsselung und Authentifizierung erforderlich, um die Vertraulichkeit der Nachrichten zu gewährleisten
 \end{itemize}
