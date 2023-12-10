@@ -1,22 +1,5 @@
 \subsection{Verbindungsmanagement}
 
-Mechanismen für den Aufbau und die Beendigung von Peer-Verbindungen.
-Pufferung von Nachrichten für offline Benutzer.
+Mechanismen für den Aufbau und die Beendigung von Peer-Verbindungen. Pufferung von Nachrichten für offline Benutzer.
 
-Die Herstellung einer Verbindung zwischen zwei Teilnehmern ist ein wichtiger
-Aspekt eines Instant Messaging-Protokolls. Der Benutzer, der eine Verbindung
-aufbauen möchte, muss die eindeutige ID des anderen Benutzers kennen. Diese
-ID wird verwendet, um eine Suche im Kademlia-Netzwerk durchzuführen, um den
-Knoten zu finden, der den Benutzer repräsentiert. Wenn der Knoten gefunden
-wurde, kann eine Verbindung hergestellt werden, indem eine Verbindungsanfrage
-gesendet wird. Wenn der Knoten die Anfrage akzeptiert, wird eine direkte Verbindung
-zwischen den beiden Knoten hergestellt. Wenn die Verbindung erfolgreich hergestellt
-wurde, können die Teilnehmer Nachrichten austauschen. Sollte der gesuchte Knoten
-nicht gefunden werden, wird auf ein TCP-Relay zurückgegriffen, um die Nachricht
-zu übermitteln. Dieses Relay ist ein Server, der die Nachrichten zwischen den
-Teilnehmern weiterleitet. Dieser Mechanismus wird verwendet, wenn die direkte
-Verbindung zwischen den Teilnehmern nicht möglich ist, z. B. wenn sich die Teilnehmer
-hinter einer Firewall befinden. Die Verwendung eines TCP-Relays ist jedoch nicht
-wünschenswert, da es die Skalierbarkeit des Systems beeinträchtigt und die
-Vertraulichkeit der Nachrichten gefährdet. Daher sollte die direkte Verbindung
-zwischen den Teilnehmern bevorzugt werden.
+Die Herstellung einer Verbindung zwischen zwei Teilnehmern ist ein wichtiger Aspekt eines Instant Messaging-Protokolls. Der Benutzer, der eine Verbindung aufbauen möchte, muss die eindeutige ID des anderen Benutzers kennen. DieseID wird verwendet, um eine Suche im Kademlia-Netzwerk durchzuführen, um den Knoten zu finden, der den Benutzer repräsentiert. Wenn der Knoten gefunden wurde, kann eine Verbindung hergestellt werden, indem eine Verbindungsanfrage gesendet wird. Wenn der Knoten die Anfrage akzeptiert, wird eine direkte Verbindung zwischen den beiden Knoten hergestellt. Wenn die Verbindung erfolgreich hergestellt wurde, können die Teilnehmer Nachrichten austauschen. Sollte der gesuchte Knoten nicht gefunden werden, wird auf ein TCP-Relay zurückgegriffen, um die Nachricht zu übermitteln. Dieses Relay ist ein Server, der die Nachrichten zwischen den Teilnehmern weiterleitet. Dieser Mechanismus wird verwendet, wenn die direkte Verbindung zwischen den Teilnehmern nicht möglich ist, z. B. wenn sich die Teilnehmer hinter einer Firewall befinden. Die Verwendung eines TCP-Relays ist jedoch nicht wünschenswert, da es die Skalierbarkeit des Systems beeinträchtigt und die Vertraulichkeit der Nachrichten gefährdet. Daher sollte die direkte Verbindung zwischen den Teilnehmern bevorzugt werden.

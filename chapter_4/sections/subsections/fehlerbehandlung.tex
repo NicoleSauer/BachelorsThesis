@@ -1,4 +1,20 @@
 \subsection{Fehlerbehandlung}
 
-Definition von Fehlercodes und deren Behandlung.
-Wiederholungsmechanismen für verlorene oder fehlerhafte Nachrichten.
+Fehlerbehandlung und -vermeidung sind wichtige Aspekte eines Instant Messaging-Protokolls. Fehler können zu einer Unterbrechung der Verbindung zwischen den Teilnehmern führen. Um dies zu verhindern, werden verschiedene Mechanismen implementiert, die die Verbindung zwischen den Teilnehmern aufrechterhalten.
+
+Netzwerkfehler können zu einer Unterbrechung der Verbindung zwischen den Teilnehmern führen. Um dies zu verhindern, wird eine Pufferung der Nachrichten implementiert. Wenn ein Teilnehmer eine Nachricht sendet, wird diese in einem Puffer gespeichert, bis der Empfänger die Nachricht empfangen hat. Wenn der Empfänger die Nachricht nicht empfangen kann, wird sie im Puffer gespeichert, bis der Empfänger wieder online ist. Wenn der Empfänger wieder online ist, wird die Nachricht erneut gesendet. Wenn der Empfänger die Nachricht empfangen hat, wird sie aus dem Puffer gelöscht. Wenn der Empfänger die Nachricht nicht empfangen kann, wird sie nach einer bestimmten Zeit aus dem Puffer gelöscht. Die Pufferung der Nachrichten ermöglicht es, die Verbindung zwischen den Teilnehmern aufrechtzuerhalten, auch wenn einer der Teilnehmer offline ist. Dies ist ein wichtiger Aspekt für ein Instant Messaging-Protokoll, da die Teilnehmer nicht immer online sind. 
+\\
+\\
+Firewall und NAT können ebenfalls zu Verbindungsproblemen führen. Um dies zu verhindern, wird ein TCP-Relay verwendet, um die Nachrichten zwischen den Teilnehmern weiterzuleiten. Dieser Mechanismus wird verwendet, wenn die direkte Verbindung zwischen den Teilnehmern nicht möglich ist, z. B. wenn sich die Teilnehmer hinter einer Firewall befinden. Die Verwendung eines TCP-Relays ist jedoch nicht wünschenswert, da es die Skalierbarkeit des Systems beeinträchtigt und die Vertraulichkeit der Nachrichten gefährdet. Daher sollte die direkte Verbindung zwischen den Teilnehmern bevorzugt werden.
+\\
+\\
+Peer-spezifische Fehler:
+\\
+\\
+In einem Peer to Peer Netzwerk kann es häufig vorkommen, dass der gewünschte Teilnehmer nicht online und somit nicht Teil des Netzwerks ist. In diesem Fall wird eine Fehlermeldung an den Absender zurückgegeben, dass der gewünschte Teilnehmer nicht gefunden werden konnte. Wie diese Fehlermeldung implementiert wird, ist dem Entwickler überlassen. Ein weiterer Fehler könnte im Zusammenhang mit Authentifizierung entstehen. Wenn ein Teilnehmer eine Nachricht an einen anderen Teilnehmer senden möchte, muss er sich zuerst authentifizieren. Die Authentifizierung erfolgt über die Blockchain, indem der öffentliche Schlüssel des Teilnehmers mit der ID des Teilnehmers verglichen wird. Wenn die IDs übereinstimmen, ist der Teilnehmer authentifiziert und die Nachricht kann gesendet werden. Wenn die IDs nicht übereinstimmen, ist der Teilnehmer nicht authentifiziert und die Nachricht wird nicht gesendet. In diesem Fall wird eine Fehlermeldung an den Absender zurückgegeben, dass der Teilnehmer nicht authentifiziert ist. Wie diese Fehlermeldung implementiert wird, ist dem Entwickler überlassen.
+\\
+\\
+Nachrichtenbezogene Fehler:
+\\
+\\
+Es besteht die Möglichkeit, dass Teile von Nachrichten oder auch ganze Nachrichten verloren gehen können. Da Kademlia über UDP läuft, hat es nicht die Möglichkeiten, die beispielsweise TCP bietet. TCP kann bei Paketverlust die Pakete erneut senden, UDP kann dies nicht. Zusätzlich können Nachrichten beschädigt werden (\textcolor{red}{Prüfsumme?}).
