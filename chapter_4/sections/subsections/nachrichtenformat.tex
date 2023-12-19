@@ -1,7 +1,5 @@
 \subsection{Nachrichtenformat}
 
-Struktur für Nachrichten festlegen (Header, Body, etc.).
-Verschlüsselung und Authentifizierung für Sicherheit hinzufügen.
 Jedes Instant Messaging-Protokoll benötigt die Definition eines Nachrichtenformats,
 das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden.
 Dieses Nachrichtenformat sollte die folgenden Elemente enthalten:
@@ -20,21 +18,13 @@ Dieses Nachrichtenformat sollte die folgenden Elemente enthalten:
 
 \noindent \textbf{Nachrichteninhalt:}
 \begin{itemize}
-    \item Textinhalt: Der eigentliche Text der Nachricht
-\end{itemize}
-
-\noindent Der Nachrichteninhalt sollte den eigentlichen Text der Nachricht enthalten. 
-\\
-
-
-\noindent \textbf{Unicode-Unterstützung:}
-\begin{itemize}
+    \item Nachrichtentext: Der eigentliche Text der Nachricht
     \item Encoding in UTF-8
 \end{itemize}
 
-% //TODO: Funktionsweise von UTF-8, UTF-16, UTF-32 noch genauer beschreiben?
-\noindent Unicode-Unterstützung ist heutzutage erforderlich, um die Verwendung von Sonderzeichen und Emojis zu ermöglichen. UTF-8 ist ein variables Zeichenkodierungsformat, das für Unicode definiert wurde. Es kann Zeichen mit einer Länge von 1 bis 4 Byte kodieren \parencite[S. 4]{rfc3629_utf-8}. UTF-8 ist das bevorzugte Encoding für Instant Messaging, da es die Unterstützung für eine breite Palette von Sprachen und Zeichen bietet. UTF-32 wurde anfangs in Betracht gezogen, da es in der Lage ist jeden Unicode-Codepunkt in einem 32-Bit-Wort zu kodieren. Es ist jedoch nicht sehr effizient, da es durch die feste Länge von 4 Byte für jedes Zeichen vergleichsweise viel Speicherplatz benötigt. Auch die mögliche Verwendung von UTF-16 wurde untersucht, da es eine ähnlich wie UTF-8 eine variable Länge von 1 bis 4 Byte für jedes Zeichen verwendet. 
+\noindent Der Nachrichteninhalt sollte den eigentlichen Text der Nachricht enthalten. Unicode-Unterstützung ist heutzutage erforderlich, um die Verwendung von Sonderzeichen und Emojis zu ermöglichen. UTF-8 ist ein variables Zeichenkodierungsformat, das für Unicode definiert wurde. Es kann Zeichen mit einer Länge von 1 bis 4 Byte kodieren \parencite[S. 4]{rfc3629_utf-8}. UTF-8 ist das bevorzugte Encoding für Instant Messaging, da es die Unterstützung für eine breite Palette von Sprachen und Zeichen bietet. UTF-32 wurde anfangs in Betracht gezogen, da es in der Lage ist jeden Unicode-Codepunkt in einem 32-Bit-Wort zu kodieren. Es ist jedoch nicht sehr effizient, da es durch die feste Länge von 4 Byte für jedes Zeichen vergleichsweise viel Speicherplatz benötigt. Auch die mögliche Verwendung von UTF-16 wurde untersucht, da es eine ähnlich wie UTF-8 eine variable Länge von 1 bis 4 Byte für jedes Zeichen verwendet.  
 \\
+
 
 \noindent \textbf{Verschlüsselung und Sicherheit:}
 \begin{itemize}
