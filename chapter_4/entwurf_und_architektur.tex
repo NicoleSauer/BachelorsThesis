@@ -1,6 +1,36 @@
 \chapter{Architektur des Protokolls}
 \label{chap:entwurf_und_architektur}
 
+% #TODO: hashing in Betracht gezogen, aber da er nur dazu dient eine ID zu erzeugen bzw. man einen Nutzer daran identifizieren soll, ist das eigentlich nicht notwendig zu hashen. Es ist kryptografisch nicht notwendig
+% #TODO: deshalb den Benutzernamen verwenden, der ja sowieso eindeutig sein muss (aus UX-Gründen), ihn auf 20 Zeichen limitieren (utf-8 -> 160 bits/8 = 20) und gegebenenfalls mit Nullen auffüllen, falls er kürzer ist
+
+% #TODO: Vielleicht noch den Sicherheitsaspekt der Blockchain erklären, dass die IDs nicht gefälscht werden können, da sie in der Blockchain gespeichert sind und somit nicht manipuliert werden können; wenn die Nachrichten mit dem public key, der in der Blockchain liegt, signiert werden, bietet auch das eine Sicherheit, dass die Nachrichten nicht gefälscht werden können
+
+% #TODO: neu schreiben, wenn der komplette Inhalt des Kapitels feststeht 
+Die Architektur des Protokolls basiert auf Peer-to-Peer. Das bedeutet, dass alle Teilnehmer gleichberechtigt sind und es keinen zentralen Server gibt, der die Kommunikation steuert. Somit erfolgt die Kommunikation direkt zwischen den Teilnehmern. Alle Teilnehmer sind in einem Netzwerk organisiert, das aus verschiedenen Knoten besteht, wobei jeder Knoten einen Teilnehmer des Netzwerks repräsentiert. Die direkte Verbindung wird bevorzugt, erst wenn diese nicht möglich ist, wird die Nachricht über ein Relay weitergeleitet. Die Blockchain findet ihren Einsatz bei der Identifikation und Authentifizierung der Teilnehmer. Jeder Teilnehmer hat eine eindeutige ID, die aus dem Benutzernamen besteht und bei der Registrierung in der Blockchain gespeichert wird, und somit für alle Teilnehmer einsehbar ist. Somit kann jeder Teilnehmer einen anderen Teilnehmer anhand seiner ID identifizieren. Die Authentifizierung erfolgt ebenfalls über die Blockchain, indem der öffentliche Schlüssel des Teilnehmers in der Blockchain gesucht wird. Wenn der öffentliche Schlüssel gefunden wird und der Benutzername mit der ID übereinstimmt, ist der Teilnehmer authentifiziert. 
+
+\input{chapter_4/sections/protokollgrundlagen.tex}
+
+\input{chapter_4/sections/identifikation.tex}
+
+\input{chapter_4/sections/nachrichtenformat.tex}
+
+\input{chapter_4/sections/routing.tex}
+
+%\input{chapter_4/sections/subsections/statusinformation.tex}
+
+\input{chapter_4/sections/subsections/verbindungsmanagement.tex}
+
+%\input{chapter_4/sections/subsections/verbindung.tex}
+
+%\input{chapter_4/sections/subsections/nachrichten.tex}
+
+%\input{chapter_4/sections/subsections/nachrichtenverlauf.tex}
+
+\input{chapter_4/sections/sicherheit.tex}
+
+\input{chapter_4/sections/fehlerbehandlung.tex}
+
 \input{chapter_4/sections/protokolldesign.tex}
 
 \input{chapter_4/sections/technologien_und_tools.tex}
