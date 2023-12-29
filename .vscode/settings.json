@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Blockierliste",
+        "Datagram",
         "Diffie",
         "ECDH",
         "Ehrenw",
@@ -14,6 +15,8 @@
         "Hashtabelle",
         "Hashtabellen",
         "Kademlia",
+        "Konnektivitätsprüfung",
+        "Konnektivitätsprüfungen",
         "Konsensmechanismen",
         "Konsensmechanismus",
         "Leutenbach",
@@ -21,6 +24,7 @@
         "Nachrichtenbezogene",
         "Präsenzinformation",
         "Präsenzinformationen",
+        "Prioritätsalgorithmus",
         "prüfungsrechtlichen",
         "Pseudonymität",
         "routen",

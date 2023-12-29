@@ -12,34 +12,60 @@
 % #TODO: ICE Protokoll verwenden, um die Verbindung aufzubauen, wenn die direkte Verbindung nicht möglich ist
 % #TODO: Wie verbinde ich Kademlia und ICE? -> Kademlia für die Peer Discovery und ICE für den Verbindungsaufbau?
 % #TODO: Zustellbestätigung?
+% #TODO: Was passiert, wenn der Empfänger nicht erreichbar ist? -> Nachricht wird nicht zugestellt, da keine Speicherung der Nachrichten vorgesehen ist
+% #TODO: Erwähnen, dass zuerst nur TURN verwendet werden sollte, da es einfacher zu implementieren ist, sich dann aber für ICE entschieden wurde, da es insgesamt eine bessere Lösung ist
 
 \noindent Das Verbindungsmanagement ist ein wichtiger Bestandteil des Protokolldesigns, da es die Grundlage für die Kommunikation zwischen den Teilnehmern bildet. Es ist dafür verantwortlich, dass die Nachrichtenübertragung zwischen den Teilnehmern funktioniert. Dazu gehört der Verbindungsaufbau, die Nachrichtenübertragung und der Verbindungsabbau.
 
-Nachdem die IP-Adresse und der Port des Ziels mittels des Kademlia-Netzwerks ermittelt wurden, wird das ICE (Interactive Connectivity Establishment)-Protokoll zur Herstellung einer zuverlässigen Verbindung genutzt. ICE ermöglicht eine effiziente Kommunikation zwischen den beteiligten Geräten, selbst wenn sich eines oder beide Geräte hinter Netzwerkadressübersetzungen (NATs) oder Firewalls befinden. Dazu werden die verfügbaren Verbindungsarten ermittelt und die beste Verbindung ausgewählt. Die Verbindungsarten werden in der Reihenfolge ihrer Priorität ausgewählt. Die Priorität wird durch die Kosten der Verbindung bestimmt. Die Kosten einer Verbindung werden durch die folgende Formel berechnet:
+\subsection{Verbindungsaufbau}
 
-\begin{equation}
-    \label{eq:ice_kosten}
-    \text{Kosten} = \text{Kostenbasis} + \text{Kostenfaktor} \cdot \text{Kostenindex}
-\end{equation}
+Nachdem das Kademlia-Netzwerk erfolgreich die IP-Adresse und den Port des Zielgeräts ermittelt hat, beginnt der Prozess der Vorbereitung für die Verbindungseinrichtung zwischen den beiden Teilnehmern. Dies beinhaltet das Sammeln verschiedener potenzieller Verbindungsadressen (auch \textit{Kandidatenadressen} genannt \parencite[S. 8]{rfc8445_ICE}), die für eine zuverlässige Kommunikation benötigt werden, insbesondere wenn einer oder beide Teilnehmer sich hinter Netzwerkadressübersetzungen (kurz: NATs) oder Firewalls befinden. Zuallererst werden die lokalen oder \textit{Host}-Adressen der beteiligten Geräte berücksichtigt. Diese Adressen repräsentieren die standardmäßigen IP-Adressen und Ports der Geräte innerhalb ihres lokalen Netzwerks. Sie dienen als potenzielle direkte Verbindungswege zwischen den Geräten, falls sie sich im gleichen Netzwerk oder Subnetz befinden. Dank der Peer-Discovery wurde die IP-Adresse und der Port des Zielgeräts bereits ermittelt und kann somit 
+als Host-Adresse verwendet werden.
 
-\noindent Die Kostenbasis ist ein Wert, der für jede Verbindungsart festgelegt wird. Der Kostenfaktor ist ein Wert, der für jede Verbindungsart festgelegt wird. Der Kostenindex ist ein Wert, der für jede Verbindung individuell berechnet wird. Die Kostenbasis und der Kostenfaktor werden in der Spezifikation von ICE festgelegt \parencite[S. 15]{rfc8445_ICE}. Die Kostenbasis und der Kostenfaktor werden in der Spezifikation von ICE festgelegt \parencite[S. 15]{rfc8445_ICE}.
+Zusätzlich zu den lokalen Adressen werden reflexive Adressen über STUN (Session Traversal Utilities for NAT) ermittelt. STUN ermöglicht es einem Gerät, seine eigene externe IP-Adresse und den entsprechenden Port zu identifizieren, wie sie von einem NAT-Gerät reflektiert werden \parencite[S. 4]{rfc8489_STUN}. Diese reflexiven Adressen stellen die externe Sichtbarkeit des Geräts aus der Perspektive des NAT-Geräts dar und helfen bei der Umgehung von NAT-Beschränkungen für den direkten Verbindungsaufbau. Sollte es jedoch aufgrund von restriktiven NAT-Konfigurationen nicht möglich sein, eine direkte Verbindung aufzubauen, kommen Relay-Adressen durch TURN (Traversal Using Relays around NAT) ins Spiel.
 
+Durch TURN werden Relay-Server genutzt, um den Datenverkehr zwischen den Geräten zu vermitteln \parencite[S. 10 f.]{rfc8656_TURN}. Diese Weiterleitungsadressen dienen als alternative Verbindungsmethode, indem sie den Datenverkehr über den Relay-Server leiten und so die Hindernisse von restriktiven NATs oder Firewalls umgehen. Die Verwendung eines Relay-Servers ist jedoch nicht wünschenswert, da er zusätzliche Kosten und Latenz verursacht.
 
-
-
-
-
-Basierend auf den durch Kademlia erhaltenen Informationen, einschließlich der IP-Adresse und des Ports des Ziels, werden potenzielle Verbindungsadressen für beide Geräte gesammelt. Diese Adressen umfassen Host-Adressen, reflexive Adressen (die über STUN ermittelt werden) sowie Weiterleitungsadressen (von TURN).
-
-
+Die kombinierte Nutzung dieser verschiedenen Arten von potenziellen Verbindungsadressen – von lokalen, reflexiven bis hin zu Relay-Adressen – ermöglicht eine Vielzahl von Optionen für die Verbindungseinrichtung zwischen den Geräten. Diese Vielfalt an Adressen gewährleistet, dass selbst in komplexen Netzwerkszenarien wie NATs oder Firewalls verschiedene Wege für eine zuverlässige Kommunikation vorhanden sind. 
+Die nächste Phase nach der Sammlung dieser Adressen umfasst die Durchführung von Konnektivitätsprüfungen und die Auswahl der am besten geeigneten Verbindungswege für eine erfolgreiche Kommunikation zwischen den beteiligten Geräten.
 
 
 \textbf{\textcolor{red}{TODO: UML-Diagramm für Verbindungsaufbau erstellen}}
 
 
+\subsection{Konnektivitätsprüfung}
+
+Nach der Sammlung potenzieller Verbindungsadressen werden Konnektivitätsprüfungen durchgeführt. Diese Prüfungen dienen dazu, die Eignung und Zuverlässigkeit der gesammelten Verbindungswege zwischen den Geräten zu bewerten, um die bestmögliche Verbindung für eine erfolgreiche Kommunikation zu identifizieren. Die Reihenfolge der Konnektivitätsprüfungen wird durch einen Prioritätsalgorithmus bestimmt, der die Verbindungsadressen nach ihrer Priorität ordnet. Aus den Guidelines von ICE geht hervor, dass die Priorität einer Verbindungsadresse durch die folgende Formel berechnet wird \parencite[S. 22]{rfc8445_ICE}:
+
+\begin{equation}
+    \label{eq:ice_priority}
+    \text{priority} = \text{2}^{24} \cdot \text{(type preference)} + \text{2}^{8} \cdot \text{(local preference)} + \text{2}^{0} \cdot \text{(256 - component ID)}
+\end{equation}
+
+\noindent Die Werte für die Typenpräferenz, die in der Dokumentation von ICE für die Berechnung der Priorität empfohlen werden, sind die folgenden: $126$ für Host-Adressen, $100$ für Peer-reflexive Adressen und $0$ für Relay-Adressen. Der Wert $0$ bedeutet nicht, dass Relay-Adressen nicht verwendet werden sollten, sondern dass sie die niedrigste Priorität haben. 
+
+Für die lokalen Präferenzen wird ein Wert von $65535$ empfohlen, um die Verwendung von lokalen Adressen zu priorisieren. Und der dritte und letzte Wert der Formel ist die Komponenten-ID, die dazu dient, verschiedene Datenströme oder Komponenten innerhalb eines einzelnen Kandidaten zu unterscheiden. Als Beispiel dient hier WebRTC, das mehrere Komponenten für verschiedene Arten von Datenströmen, wie beispielsweise Audio, Video oder Text, verwendet. Da in dem Protokoll dieser Arbeit nur ein Datenstrom verwendet wird - und zwar Text - wird der Komponenten-ID der Wert $1$ zugewiesen.
+
+Die Priorität einer Verbindungsadresse wird durch die Summe der drei Werte berechnet. Die Priorität wird dann verwendet, um die Reihenfolge der Konnektivitätsprüfungen zu bestimmen. Die Verbindungsadressen mit der höchsten Priorität werden zuerst getestet, da sie die besten Verbindungswege darstellen.
+\\
+\\
+Während der Konnektivitätsprüfung werden die gesammelten und priorisierten Kandidatenadressen getestet, um deren Erreichbarkeit, Stabilität und Latenzzeit zu bewerten. Dieser Prozess beinhaltet den Versuch, Verbindungen aufzubauen und Datenverkehr über verschiedene potenzielle Wege zu senden und zu empfangen.
+Durch das Senden von Probe-Paketen über jede potenzielle Verbindungsadresse wird geprüft, ob die Kommunikation erfolgreich erfolgen kann. Dabei werden die drei verschiedenen Arten von Adressen (lokale, reflexive und Relay-Adressen) verwendet, um verschiedene Möglichkeiten zu testen, wie die Geräte miteinander kommunizieren können. Die Probe-Pakete werden über UDP (User Datagram Protocol) gesendet, da es ein verbindungsloses Protokoll ist und somit keine Verbindung aufgebaut werden muss \parencite[S. 1]{rfc768_UDP}. Dies ermöglicht es, die Erreichbarkeit der Verbindungsadressen zu testen, ohne eine Verbindung aufzubauen. Die Probe-Pakete werden an die Verbindungsadressen gesendet und die Antwort wird überwacht. Wenn eine Antwort empfangen wird, wird die Verbindungsadresse als erreichbar angesehen. Wenn keine Antwort empfangen wird, wird die Verbindungsadresse als nicht erreichbar angesehen. Die Probe-Pakete werden in regelmäßigen Abständen gesendet, um die Stabilität der Verbindungsadressen zu testen. Wenn die Probe-Pakete über einen längeren Zeitraum nicht beantwortet werden, wird die Verbindungsadresse als nicht stabil angesehen. Die Latenzzeit wird durch die Zeit gemessen, die benötigt wird, um eine Antwort auf ein Probe-Paket zu erhalten. Die Latenzzeit wird verwendet, um die Verbindungsadressen nach ihrer Latenzzeit zu priorisieren. Je niedriger die Latenzzeit, desto höher die Priorität der Verbindungsadresse. Die Latenzzeit wird auch verwendet, um die Stabilität der Verbindungsadressen zu bewerten. Wenn die Latenzzeit über einen längeren Zeitraum zu hoch ist, wird die Verbindungsadresse als nicht stabil angesehen. 
+
+Ein Vorteil bei der Verwendung von ICE ist, dass es die Möglichkeit bietet, die Konnektivitätsprüfungen mit der Peer-Discovery zu kombinieren. Da die Peer-Discovery bereits die IP-Adresse und den Port des Zielgeräts ermittelt hat, kann dieser Prozess genutzt werden, um die Konnektivitätsprüfungen durchzuführen. Dadurch wird die Anzahl der Nachrichten, die zwischen den Geräten ausgetauscht werden müssen, reduziert, was zu einer effizienteren Kommunikation führt. Ein weiterer Vorteil ist die Flexibilität von ICE, die es ermöglicht, sich an sich ändernde Netzwerkbedingungen anzupassen. Falls während der Kommunikation Netzwerkparameter sich ändern - beispielsweise durch einen Wechsel zwischen Wi-Fi und Mobilfunknetzwerken - kann ICE dynamisch neue Kandidatenadressen identifizieren und die Verbindungen anpassen, ohne die laufende Kommunikation zu unterbrechen.
+
+\textbf{\textcolor{red}{TODO: Vielleicht hier auch ein Diagramm?}}
+
+\subsection{Nachrichtenübertragung}
+
+Nachdem die Konnektivitätsprüfungen abgeschlossen sind, wird die am besten geeignete Verbindungsadresse für die Kommunikation ausgewählt. Die Auswahl der Verbindungsadresse erfolgt durch den Prioritätsalgorithmus, der die Verbindungsadressen nach ihrer Priorität ordnet. Die Verbindungsadresse mit der höchsten Priorität wird als die am besten geeignete Verbindungsadresse ausgewählt. Wenn die am besten geeignete Verbindungsadresse eine lokale Adresse ist, wird eine direkte Verbindung zwischen den Geräten aufgebaut. Wenn die am besten geeignete Verbindungsadresse eine reflexive Adresse ist, wird eine direkte Verbindung zwischen den Geräten aufgebaut, indem die reflexive Adresse als Zieladresse verwendet wird. Wenn wiederum die am besten geeignete Verbindungsadresse eine Relay-Adresse ist, wird eine Verbindung über den Relay-Server aufgebaut, indem die Relay-Adresse als Zieladresse verwendet wird. Der Nachrichtenaustausch erfolgt über die ausgewählte Verbindungsadresse. 
+
+Wobei hier mit \textit{Verbindung aufbauen} gemeint ist, dass die Nachrichten über die Verbindungsadresse gesendet und empfangen werden können. Eine wirkliche Verbindung wird nicht aufgebaut, da die Nachrichten mittels UDP gesendet werden, und UDP ist verbindungslos. Das bedeutet, dass keine Verbindung aufgebaut werden muss, um die Nachrichten zu senden und zu empfangen. Die Nachrichten werden über die Verbindungsadresse gesendet und empfangen. Ein Nachteil bei der Verwendung von UDP ist, dass die Nachrichten nicht zuverlässig zugestellt werden. Was bedeutet, dass Nachrichten verloren gehen können, ohne dass der Absender oder Empfänger davon erfährt. Das Transportprotokoll TCP (Transmission Control Protocol) hingegen ist zuverlässig, da es eine Verbindung aufbaut und sicherstellt, dass die Nachrichten erfolgreich zugestellt werden \parencite[S. 36]{rfc9293_TCP}. Im Falle von Paketverlusten ist auf der gleichen Seite definiert, dass TCP in der Lage ist, die verlorenen Pakete zu erkennen und erneut zu senden.
+
+Doch TCP hat auch Nachteile: ein Nachteil ist, dass es eine Verbindung aufbauen muss, bevor die Nachrichten gesendet werden können. Dies kann zu einer höheren Latenz führen. Ein weiterer Nachteil ist, dass die Verbindung aufrechterhalten werden muss, um die Nachrichten zu senden und zu empfangen. Dies führt zu einem höheren Ressourcenverbrauch, da die Verbindung aufrechterhalten werden muss, auch wenn keine Nachrichten gesendet werden. Auch bei NATs hat TCP Nachteile. NATs schließen die Verbindungen nach einer gewissen Zeit, wenn keine Daten übertragen werden. Dies kann dazu führen, dass die Verbindung geschlossen werden, bevor die Nachrichten gesendet werden können.Bei Instant Messaging zählt die Geschwindigkeit, mit der die Nachrichten gesendet und empfangen werden, mehr als die Zuverlässigkeit der Nachrichten.
+Daher ist es besser, die Nachrichten schnell zu senden und zu empfangen, auch wenn dies bedeutet, dass die Nachrichten nicht zuverlässig zugestellt werden. Und auch in Verbindung mit NATs stellt sich UDP als die bessere Wahl heraus. Aus diesen Gründen wurde UDP als Transportprotokoll für die Nachrichtenübertragung gewählt.
 
 
+\subsection{Verbindungsabbau}
 
-
-
-
+Da es wie bereits erwähnt keine Verbindung gibt, die aufgebaut werden muss, um die Nachrichten zu senden und zu empfangen, gibt es auch keinen Verbindungsabbau. Die Nachrichtenübertragung kann jederzeit gestoppt werden, indem einfach keine Nachrichten mehr gesendet werden. 
