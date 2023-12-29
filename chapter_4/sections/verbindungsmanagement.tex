@@ -2,58 +2,44 @@
 \label{subsec:routing}
 
 \begin{itemize}
-    \item Verbindungsaufbau (UDP)
+    \item Verbindungsaufbau
     \item Nachrichtenübertragung
     \item Verbindungsabbau
 \end{itemize}
 
+% Nachdem die IP-Adresse und Port des Empfängers ermittelt wurden, kann die Nachricht auf dem direkten Weg an den Empfänger gesendet werden
+% Für die Kommunikation wird das ICE Protokoll verwendet
+% #TODO: ICE Protokoll verwenden, um die Verbindung aufzubauen, wenn die direkte Verbindung nicht möglich ist
+% #TODO: Wie verbinde ich Kademlia und ICE? -> Kademlia für die Peer Discovery und ICE für den Verbindungsaufbau?
+% #TODO: Zustellbestätigung?
 
-\noindent Das Verbindungsmanagement ist ein wichtiger Bestandteil des Protokolldesigns, da es die Grundlage für die Kommunikation zwischen den Teilnehmern bildet. Es ist dafür verantwortlich, dass die Nachrichtenübertragung zwischen den Teilnehmern funktioniert. Dazu gehört der Verbindungsaufbau, die Nachrichtenübertragung und der Verbindungsabbau. In diesem Abschnitt wird der Verbindungsaufbau und der Verbindungsabbau behandelt.
+\noindent Das Verbindungsmanagement ist ein wichtiger Bestandteil des Protokolldesigns, da es die Grundlage für die Kommunikation zwischen den Teilnehmern bildet. Es ist dafür verantwortlich, dass die Nachrichtenübertragung zwischen den Teilnehmern funktioniert. Dazu gehört der Verbindungsaufbau, die Nachrichtenübertragung und der Verbindungsabbau.
+
+Nachdem die IP-Adresse und der Port des Ziels mittels des Kademlia-Netzwerks ermittelt wurden, wird das ICE (Interactive Connectivity Establishment)-Protokoll zur Herstellung einer zuverlässigen Verbindung genutzt. ICE ermöglicht eine effiziente Kommunikation zwischen den beteiligten Geräten, selbst wenn sich eines oder beide Geräte hinter Netzwerkadressübersetzungen (NATs) oder Firewalls befinden. Dazu werden die verfügbaren Verbindungsarten ermittelt und die beste Verbindung ausgewählt. Die Verbindungsarten werden in der Reihenfolge ihrer Priorität ausgewählt. Die Priorität wird durch die Kosten der Verbindung bestimmt. Die Kosten einer Verbindung werden durch die folgende Formel berechnet:
+
+\begin{equation}
+    \label{eq:ice_kosten}
+    \text{Kosten} = \text{Kostenbasis} + \text{Kostenfaktor} \cdot \text{Kostenindex}
+\end{equation}
 
 
-Nach einer erfolgreichen Peer Discovery im Kademlia-Netzwerk, bei der die IP-Adresse und der Port des Zielknotens ermittelt wurde, erfolgt der Aufbau einer direkten Verbindung über das User Datagram Protocol (UDP). Dabei wird vorausgesetzt, dass bei allen Teilnehmern ein UDP-Socket an einem bestimmten Port geöffnet ist, um eingehende Verbindungen zu empfangen. Dieser Port wird vom Kademlia-Protokoll festgelegt und ist somit für alle Teilnehmer gleich.
-Der Verbindungsaufbau erfolgt in folgenden Schritten:
 
-\begin{enumerate}
-    \item Der Sender erstellt ein UDP-Paket, das eine Verbindungsanfrage an den Empfänger enthält. Das Paket enthält die IP-Adresse und den Port des Senders, damit der Empfänger eine Antwort senden kann.
-    \item Der Sender sendet das UDP-Paket an die IP-Adresse und den Port des Empfängers, welche er durch die Peer Discovery erhalten hat.
-    \item Der Empfänger empfängt das UDP-Paket und überprüft, ob es sich um eine Verbindungsanfrage handelt.
-    \item Der Empfänger sendet ein UDP-Paket als Antwort auf die Verbindungsanfrage an den Sender, die bestätigt, dass die Verbindung hergestellt wurde.
-    \item Der Sender empfängt das UDP-Paket und überprüft, ob es sich um eine Bestätigung der Verbindungsanfrage handelt. Wenn dies der Fall ist, ist die Verbindung hergestellt und die Kommunikation kann beginnen. Wenn dies nicht der Fall ist, wird die Verbindung abgebrochen und der Verbindungsaufbau wird erneut gestartet.
-\end{enumerate}
+
+
+
+
+
+Basierend auf den durch Kademlia erhaltenen Informationen, einschließlich der IP-Adresse und des Ports des Ziels, werden potenzielle Verbindungsadressen für beide Geräte gesammelt. Diese Adressen umfassen Host-Adressen, reflexive Adressen (die über STUN ermittelt werden) sowie Weiterleitungsadressen (von TURN).
+
+
+
 
 \textbf{\textcolor{red}{TODO: UML-Diagramm für Verbindungsaufbau erstellen}}
 
-% #TODO: TURN-Server erklären und dessen IP-Adresse und Port in der Nachricht angeben, wenn die direkte Verbindung nicht möglich ist
-% ICE Protokoll implementieren, um die Verbindung aufzubauen, wenn die direkte Verbindung nicht möglich ist
 
-\noindent Wie in Abschnitt \ref{sec:grundlagen_des_protokolls} (\nameref{sec:grundlagen_des_protokolls}) erwähnt, wird das Kademlia-Protokoll verwendet, um andere Teilnehmer (auch Peers genannt) im Netzwerk zu finden und deren IP-Adresse und Port zu ermitteln. 
 
-% #TODO: Funktion des Kademlia Protokolls nennen und erklären (vielleicht in Grundlagen)
-% Im Kademlia-Protokoll sind vier Funktionen definiert, die für die Suche nach
-% Knoten und Werten verwendet werden. Diese Funktionen sind \texttt{FIND\_NODE},
-% \texttt{FIND\_VALUE}, \texttt{PING} und \texttt{STORE}. Die Funktionen
-% \texttt{FIND\_NODE} und \texttt{FIND\_VALUE} werden verwendet, um nach Knoten
-% oder Werten zu suchen. Die Funktion \texttt{PING} wird verwendet, um die
-% Erreichbarkeit eines Knotens zu überprüfen. Die Funktion \texttt{STORE} wird
-% verwendet, um einen Wert in einem Knoten zu speichern.
 
-\textbf{Verbindungsaufbau} \\
-Wenn ein Knoten eine Verbindung zu einem anderen Knoten herstellen muss, verwendet er die Routing-Tabelle, um den am nächsten gelegenen Knoten zu finden, der die Ziel-ID repräsentiert. Falls dieser Knoten nicht direkt bekannt ist, wird das Routing iterative durchgeführt, wobei der Knoten jeweils näher an der Ziel-ID liegende Knoten anfragt, bis der Zielknoten gefunden wird. Durch die Verwendung dieses strukturierten Ansatzes ermöglicht Kademlia eine effiziente Suche und Kommunikation zwischen Knoten in einem P2P-Netzwerk, wobei die Skalierbarkeit und Robustheit des Systems erhalten bleiben. Es ist ein Schlüsselelement vieler P2P-Anwendungen, einschließlich Filesharing, dezentraler Datenbanken und eben auch Instant Messaging-Protokollen, da es die Grundlage für die direkte Peer-to-Peer-Kommunikation schafft. Ein Beispiel für die XOR-Berechnung zwischen gehashten Knoten-IDs könnte wie folgt aussehen:
-Angenommen, Knoten A hat die ID 0x83a2c8f7 und Knoten B die ID 0xe1b6d4a9.Die XOR-Operation zwischen diesen IDs ergibt:
 
-\begin{equation}
-    \begin{aligned}
-        \text{Knoten A:} & \quad \texttt{0x83a2c8f7} \\
-        \text{Knoten B:} & \quad \texttt{0xe1b6d4a9} \\
-        \text{Ergebnis:} & \quad \texttt{0x61f47c5e}
-    \end{aligned}
-\end{equation}
-% #TODO: Berechnung noch in binär umwandeln, damit die Berechnung besser verständlich ist?
 
-\noindent Die Berechnung findet auf Bit-Ebene statt. Die Distanz zwischen den Knoten A und B ist also 0x61f47c5e. Diese Distanz repräsentiert die Maßeinheit für die Positionierung und das Routing im Kademlia-Netzwerk. Knoten mit einer geringeren Distanz sind näher beieinander als Knoten mit einer größeren Distanz. Dabei hat die Distanz nichts mit der geographischen Entfernung zu tun, sondern nur mit der Position im Kademlia-Baum.
-\\
 
-% #TODO: Zustellbestätigung?
-% #TODO: ICE Protokoll verwenden, um die Verbindung aufzubauen, wenn die direkte Verbindung nicht möglich ist
-% #TODO: Wie verbinde ich Kademlia und ICE? -> Kademlia für die Peer Discovery und ICE für den Verbindungsaufbau?
+
