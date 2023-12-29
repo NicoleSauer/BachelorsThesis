@@ -22,9 +22,12 @@ Der Verbindungsaufbau erfolgt in folgenden Schritten:
     \item Der Sender empfängt das UDP-Paket und überprüft, ob es sich um eine Bestätigung der Verbindungsanfrage handelt. Wenn dies der Fall ist, ist die Verbindung hergestellt und die Kommunikation kann beginnen. Wenn dies nicht der Fall ist, wird die Verbindung abgebrochen und der Verbindungsaufbau wird erneut gestartet.
 \end{enumerate}
 
-% #TODO: TURN-Server erklären und dessen IP-Adresse und Port in der Nachricht angeben, wenn die direkte Verbindung nicht möglich ist
+\textbf{\textcolor{red}{TODO: UML-Diagramm für Verbindungsaufbau erstellen}}
 
-\noindent Wie in Abschnitt \ref{subsec:identifikation_von_teilnehmern} (\nameref{subsec:identifikation_von_teilnehmern}) erwähnt, wird das Kademlia-Protokoll verwendet, um andere Teilnehmer (auch Peers genannt) im Netzwerk zu finden und eine direkte Verbindung zu ihnen herzustellen. \textcolor{red}{Begriff Peer Discovery einbringen}
+% #TODO: TURN-Server erklären und dessen IP-Adresse und Port in der Nachricht angeben, wenn die direkte Verbindung nicht möglich ist
+% ICE Protokoll implementieren, um die Verbindung aufzubauen, wenn die direkte Verbindung nicht möglich ist
+
+\noindent Wie in Abschnitt \ref{sec:grundlagen_des_protokolls} (\nameref{sec:grundlagen_des_protokolls}) erwähnt, wird das Kademlia-Protokoll verwendet, um andere Teilnehmer (auch Peers genannt) im Netzwerk zu finden und deren IP-Adresse und Port zu ermitteln. 
 
 % #TODO: Funktion des Kademlia Protokolls nennen und erklären (vielleicht in Grundlagen)
 % Im Kademlia-Protokoll sind vier Funktionen definiert, die für die Suche nach
@@ -35,11 +38,6 @@ Der Verbindungsaufbau erfolgt in folgenden Schritten:
 % Erreichbarkeit eines Knotens zu überprüfen. Die Funktion \texttt{STORE} wird
 % verwendet, um einen Wert in einem Knoten zu speichern.
 
-%#TODO: Was wird jetzt für die ID verwendet? Benutzername oder Hashwert?
-Das Kademlia-Protokoll basiert auf einem Distanzmetrik-Konzept, das als \enquote{Kademlia-Distanz} bekannt ist. Jeder Knoten im Netzwerk wird durch eine eindeutige ID repräsentiert, typischerweise als kryptografischer Hashwert, der sich in diesem Fall aus dem \textcolor{red}{gehashten?} öffentlichen Schlüssel des jeweiligen Knotens mittels der \textcolor{red}{SHA-1} Hashfunktion ergibt. Diese IDs sind in einem großen binären Baum organisiert, wobei die Position eines Knotens im Baum seine \enquote{Kademlia-Distanz} zu anderen Knoten definiert. Diese Distanz wird durch die XOR (ausschließendes Oder)-Operation ihrer eindeutigen IDs bestimmt. Die XOR-Operation ermöglicht eine effiziente Bestimmung der Distanz zwischen den Knoten-IDs, indem sie auf deren Binärzahlen angewendet wird. Dieses Ergebnis repräsentiert die Distanz zwischen den IDs und bildet die Grundlage für das Routing und die Organisation im Kademlia-Netzwerk.
-Kademlia verwendet ein Routingverfahren, bei dem jeder Knoten eine Routing-Tabelle speichert, die als \enquote{K-Buckets} bezeichnet werden. Jedes K-Bucket enthält Verweise auf andere Knoten im Netzwerk und ist nach der Kademlia-Distanz organisiert. Ein k-Bucket enthält typischerweise eine begrenzte Anzahl von Einträgen und gruppiert Knoten mit ähnlichen IDs. 
-Die Anzahl der Einträge in einem k-Bucket ist konfigurierbar und wird durch die Konstante \texttt{K} definiert. 
- \\
 \textbf{Verbindungsaufbau} \\
 Wenn ein Knoten eine Verbindung zu einem anderen Knoten herstellen muss, verwendet er die Routing-Tabelle, um den am nächsten gelegenen Knoten zu finden, der die Ziel-ID repräsentiert. Falls dieser Knoten nicht direkt bekannt ist, wird das Routing iterative durchgeführt, wobei der Knoten jeweils näher an der Ziel-ID liegende Knoten anfragt, bis der Zielknoten gefunden wird. Durch die Verwendung dieses strukturierten Ansatzes ermöglicht Kademlia eine effiziente Suche und Kommunikation zwischen Knoten in einem P2P-Netzwerk, wobei die Skalierbarkeit und Robustheit des Systems erhalten bleiben. Es ist ein Schlüsselelement vieler P2P-Anwendungen, einschließlich Filesharing, dezentraler Datenbanken und eben auch Instant Messaging-Protokollen, da es die Grundlage für die direkte Peer-to-Peer-Kommunikation schafft. Ein Beispiel für die XOR-Berechnung zwischen gehashten Knoten-IDs könnte wie folgt aussehen:
 Angenommen, Knoten A hat die ID 0x83a2c8f7 und Knoten B die ID 0xe1b6d4a9.Die XOR-Operation zwischen diesen IDs ergibt:
