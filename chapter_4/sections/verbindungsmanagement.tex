@@ -36,15 +36,15 @@ Zuerst wird ein Datenpaket via UDP (User Datagram Protocol) an den Empfänger ge
 
 \noindent Deshalb wurde sich, wenn die direkte Verbindung nicht funktioniert, für die Verwendung des ICE-Protokolls entschieden, da es für dieses Problem eine Lösung bietet.
 ICE ist ein Protokoll, das die Verbindungseinrichtung zwischen zwei Geräten ermöglicht, die sich hinter NATs (Network Address Translation) oder Firewalls befinden \parencite[S. 6 ff.]{rfc8445_ICE}. Es ist ein Protokoll, das in der Lage ist, sich an sich ändernde Netzwerkbedingungen anzupassen und verschiedene Arten von Verbindungen zu unterstützen, wie beispielsweise direkte Verbindungen, Verbindungen über STUN (Session Traversal Utilities for NAT) oder Verbindungen über TURN (Traversal Using Relays around NAT) \parencite[S. 1]{rfc8445_ICE}. 
-Zuallererst werden die lokalen oder \textit{Host}-Adressen der beteiligten Geräte berücksichtigt. Diese Adressen repräsentieren die standardmäßigen IP-Adressen und Ports der Geräte innerhalb ihres lokalen Netzwerks. Sie dienen als potenzielle direkte Verbindungswege zwischen den Geräten, falls sie sich im gleichen Netzwerk oder Subnetz befinden. 
+
+Um eine Verbindung zwischen zwei Geräten aufzubauen, durchläuft ICE drei Phasen: die Sammlung und der Austausch von Verbindungsadressen, die Konnektivitätsprüfung und die Auswahl der am besten geeigneten Verbindungsadresse für die Kommunikation \parencite[S. 7 ff.]{rfc8445_ICE}. 
+\\
+\\
+Die erste Phase beinhaltet das Sammeln verschiedener potenzieller Verbindungsadressen (auch \textit{Kandidaten} genannt \parencite[S. 8]{rfc8445_ICE}), die für eine zuverlässige Kommunikation benötigt werden, insbesondere wenn einer oder beide Teilnehmer sich hinter NATs oder Firewalls befinden. Zuallererst werden die lokalen oder \textit{Host}-Adressen der beteiligten Geräte berücksichtigt. Diese Adressen repräsentieren die standardmäßigen IP-Adressen und Ports der Geräte innerhalb ihres lokalen Netzwerks. Sie dienen als potenzielle direkte Verbindungswege zwischen den Geräten, falls sie sich im gleichen Netzwerk oder Subnetz befinden.
 Zusätzlich zu den lokalen Adressen werden reflexive Adressen über STUN (Session Traversal Utilities for NAT) ermittelt. STUN ermöglicht es einem Gerät, seine eigene externe IP-Adresse und den entsprechenden Port zu identifizieren, wie sie von einem NAT-Gerät reflektiert werden \parencite[S. 4]{rfc8489_STUN}. Diese reflexiven Adressen stellen die externe Sichtbarkeit des Geräts aus der Perspektive des NAT-Geräts dar und helfen bei der Umgehung von NAT-Beschränkungen für den direkten Verbindungsaufbau. Sollte es jedoch aufgrund von restriktiven NAT-Konfigurationen nicht möglich sein, eine direkte Verbindung aufzubauen, kommen Relay-Adressen durch TURN (Traversal Using Relays around NAT) ins Spiel.
-
-Durch TURN werden Relay-Server genutzt, um den Datenverkehr zwischen den Geräten zu vermitteln \parencite[S. 10 f.]{rfc8656_TURN}. Diese Weiterleitungsadressen dienen als alternative Verbindungsmethode, indem sie den Datenverkehr über den Relay-Server leiten und so die Hindernisse von restriktiven NATs oder Firewalls umgehen. In der Spezifikation von TURN ist nicht definiert, wie die \textit{relayed transport address} an die Teilnehmer kommuniziert wird.
+Durch TURN werden Relay-Server genutzt, um den Datenverkehr zwischen den Geräten zu vermitteln \parencite[S. 10 f.]{rfc8656_TURN}. Diese Weiterleitungsadressen dienen als alternative Verbindungsmethode, indem sie den Datenverkehr über den Relay-Server leiten und so die Hindernisse von restriktiven NATs oder Firewalls umgehen.
 Die kombinierte Nutzung dieser verschiedenen Arten von potenziellen Verbindungsadressen – von lokalen, reflexiven bis hin zu Relay-Adressen – ermöglicht eine Vielzahl von Optionen für die Verbindungseinrichtung zwischen den Geräten. Diese Vielfalt an Adressen gewährleistet, dass selbst in komplexen Netzwerkszenarien wie NATs oder Firewalls verschiedene Wege für eine zuverlässige Kommunikation vorhanden sind.
-
-
-
-Deshalb wird diese Aufgabe im ICE-Protokoll vom Signaling Server übernommen. Der Signaling Server ist für den Austausch der potenziellen Verbindungsadressen zwischen den Teilnehmern zuständig. Aus der Definition von ICE geht nicht hervor, wie die Verbindungsadressen zwischen den Teilnehmern (in ICE als \textit{Agents} bezeichnet) ausgetauscht werden sollen. Es wird nur erwähnt, dass das Protokoll annimmt, dass die Agents dazu in der Lage sind.
+Nachdem alle potenziellen Verbindungsadressen gesammelt wurden, werden sie an den anderen Teilnehmer gesendet. Dieser Prozess wird als \textit{Kandidatenaustausch} bezeichnet und erfolgt unter Verwendung eines Signaling Servers. Der Signaling Server ist für den Austausch der potenziellen Verbindungsadressen zwischen den Teilnehmern zuständig. Aus der Definition von ICE geht nicht hervor, wie die Verbindungsadressen zwischen den Teilnehmern (in ICE als \textit{Agents} bezeichnet) ausgetauscht werden sollen. Wie aus dem nachstehenden Zitat zu verstehen ist, nimmt das Protokoll an, dass die Agents dazu in der Lage sind, doch wie genau das geschehen soll, wird nicht definiert \Parencite[S. 7 ff.]{rfc8445_ICE}.
 
 \begin{quote}
     \textit{In a typical ICE deployment, there are two endpoints (ICE agents)
@@ -54,11 +54,25 @@ Deshalb wird diese Aufgabe im ICE-Protokoll vom Signaling Server übernommen. De
     establish a signaling connection between each other.} \parencite[S. 7]{rfc8445_ICE}
 \end{quote}
 
+\noindent Eine eigene Definition für den Austausch der Verbindungsadressen zwischen den Teilnehmern über einen Signaling Server zu erstellen, würde den Rahmen dieser Arbeit übersteigen. Es sei aber gesagt, dass der Server die Benutzernamen der Teilnehmer kennt und die Verbindungsadressen der Teilnehmer anhand der Benutzernamen an die jeweiligen Teilnehmer sendet. Ein Beispiel:
 
-Um eine Verbindung zwischen zwei Geräten aufzubauen, durchläuft ICE drei Phasen: die Sammlung und der Austausch von Verbindungsadressen, die Konnektivitätsprüfung und die Auswahl der am besten geeigneten Verbindungsadresse für die Kommunikation \parencite[S. 7 ff.]{rfc8445_ICE}.
+\begin{itemize}
+    \item Alice möchte eine Nachricht an Bob senden
+    \item Alice kennt den Benutzernamen von Bob
+    \item Alice sendet eine Nachricht an den Signaling Server mit dem Benutzernamen von Bob
+    \item Bob sendet seine Verbindungsadressen über den Signaling Server an Alice
+    \item Alice sendet ihre Verbindungsadressen über den Signaling Server an Bob
+    \item Alice und Bob haben nun die Verbindungsadressen des jeweils anderen
+\end{itemize}
+
+%\begin{center}
+%    \captionsetup{type=figure}
+%    \includegraphics[width=0.7\linewidth]{images/signaling_server.jpg}
+%    \captionof{figure}{Kandidatenaustausch über einen Signaling Server}
+%    \label{fig:signaling_server}
+%\end{center}
 
 
-Die erste Phase beinhaltet das Sammeln verschiedener potenzieller Verbindungsadressen (auch \textit{Kandidatenadressen} genannt \parencite[S. 8]{rfc8445_ICE}), die für eine zuverlässige Kommunikation benötigt werden, insbesondere wenn einer oder beide Teilnehmer sich hinter Netzwerkadressübersetzungen (kurz: NATs) oder Firewalls befinden. Zuallererst werden die lokalen oder \textit{Host}-Adressen der beteiligten Geräte berücksichtigt. Diese Adressen repräsentieren die standardmäßigen IP-Adressen und Ports der Geräte innerhalb ihres lokalen Netzwerks. Sie dienen als potenzielle direkte Verbindungswege zwischen den Geräten, falls sie sich im gleichen Netzwerk oder Subnetz befinden.
 
 
 
