@@ -7,3 +7,5 @@ Bei der Registrierung wird ein statisches Schlüsselpaar generiert. Der private 
 Durch die Anwendung von flüchtigen Schlüsseln wird die Sicherheit erhöht, da diese nur für eine kurze Zeit existieren und somit ein Angreifer nur für einen kurzen Zeitraum Zugriff auf diese hat.
 Mit Hilfe dieser Methode wird eine Ende-zu-Ende-Verschlüsselung ermöglicht, da nur der Sender und der Empfänger den gemeinsamen geheimen Schlüssel kennen. Selbst wenn die Verbindung über ein Relay läuft, kann dieses die Nachricht nicht entschlüsseln, da es den gemeinsamen geheimen Schlüssel nicht kennt.
 Die Verwendung von flüchtigen Schlüsseln hat jedoch auch Nachteile. So muss bei jedem Verbindungsaufbau ein neues Schlüsselpaar generiert werden, was einen erhöhten Rechenaufwand bedeutet. 
+
+% Sessions könnten so ca. 10 Minuten dauern, dann wird ein neuer symmetrischer Schlüssel ausgehandelt
