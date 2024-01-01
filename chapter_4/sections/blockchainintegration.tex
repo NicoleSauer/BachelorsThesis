@@ -1,9 +1,20 @@
 \section{Integration von Blockchain in das Protokoll}
 \label{sec:blockchainintegration}
 
-Bei der Auswahl der Blockchain fiel die Entscheidung auf Ethereum. Ethereum ist eine quelloffene dezentrale Plattform, die es ermöglicht, Smart Contracts zu erstellen und auszuführen. Smart Contracts sind Programme, die auf der Blockchain ausgeführt werden und die Möglichkeit bieten, Transaktionen und Verträge zu erstellen, die automatisch ausgeführt werden, sobald bestimmte Bedingungen erfüllt sind. Mit Hilfe der Smart Contracts können Benutzer des Protokolls ihre Identität verifizieren und öffentliche Schlüssel austauschen. 
+
+\subsection{Auswahl der Blockchain}
+
+Bei der Auswahl der Blockchain fiel die Wahl auf Ethereum. Ethereum ist eine quelloffene dezentrale Plattform, die es ermöglicht, Smart Contracts zu erstellen und auszuführen. Smart Contracts sind Programme, die auf der Blockchain ausgeführt werden und die Möglichkeit bieten, Transaktionen und Verträge zu erstellen, die automatisch ausgeführt werden, sobald bestimmte Bedingungen erfüllt sind. Mit Hilfe der Smart Contracts können Benutzer des Protokolls ihre Identität verifizieren und öffentliche Schlüssel austauschen. 
 
 
+
+
+
+
+
+
+
+\subsection{Smart Contracts}
 Bei der Registrierung wird ein Smart Contract angestoßen, der die Registrierung des Benutzers auf der Blockchain durchführt. Da das Kademlia-Protokoll eine ID mit einer Länge von 160 Bit erwartet, bestand die erste Idee daraus, den Benutzernamen mittels SHA-256 zu hashen, diesen Hash dann auf die Länge von 160 Bits zu kürzen sodass dieser die ID des Benutzers darstellt. Außerdem kann es durch die Kürzung des Hashes auf 160 Bit möglich sein, dass zwei Benutzernamen den gleichen Hashwert haben und es somit zu Kollisionen kommt.
 Da aber weder die künstliche Erzeugung einer ID noch die Hashfunktion kryptografisch erforderlich sind, wurde sich dazu entschieden, den Benutzernamen, der, wie zu Beginn festgelegt, eindeutig sein muss, als ID zu verwenden. Der Benutzername wird auf 20 Zeichen begrenzt, da ein Zeichen in UTF-8 8 Bit entspricht und somit 160 Bit ergeben. Sollte der Benutzername kürzer als 20 Zeichen sein, wird er mit Nullen aufgefüllt. Somit ist sichergestellt, dass die ID des Benutzers immer 160 Bit lang ist. Der Smart Contract wird mit der ID, dem Benutzernamen, und den öffentlichen Schlüssel des Benutzers aufgerufen und erstellt einen neuen Eintrag in der Blockchain.
 
