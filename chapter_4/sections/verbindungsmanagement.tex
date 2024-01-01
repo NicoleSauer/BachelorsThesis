@@ -7,13 +7,8 @@
     \item Verbindungsabbau
 \end{itemize}
 
-% Nachdem die IP-Adresse und Port des Empfängers ermittelt wurden, kann die Nachricht auf dem direkten Weg an den Empfänger gesendet werden
-% Für die Kommunikation wird das ICE Protokoll verwendet
-% #TODO: ICE Protokoll verwenden, um die Verbindung aufzubauen, wenn die direkte Verbindung nicht möglich ist
-% #TODO: Wie verbinde ich Kademlia und ICE? -> Kademlia für die Peer Discovery und ICE für den Verbindungsaufbau?
 % #TODO: Zustellbestätigung?
 % #TODO: Was passiert, wenn der Empfänger nicht erreichbar ist? -> Nachricht wird nicht zugestellt, da keine Speicherung der Nachrichten vorgesehen ist
-% #TODO: Erwähnen, dass zuerst nur TURN verwendet werden sollte, da es einfacher zu implementieren ist, sich dann aber für ICE entschieden wurde, da es insgesamt eine bessere Lösung ist
 % #TODO: Erklären, dass ICE Kademlia eigentlich ersetzt, da es auch die lokale IP-Adresse und den Port des Empfängers ermittelt, aber Kademlia trotzdem verwendet wird, da es die Auslastung vom Signaling Server nimmt
 
 \noindent Das Verbindungsmanagement ist ein wichtiger Bestandteil des Protokolldesigns, da es die Grundlage für die Kommunikation zwischen den Teilnehmern bildet. Es ist dafür verantwortlich, dass die Nachrichtenübertragung zwischen den Teilnehmern funktioniert. Dazu gehört der Verbindungsaufbau, die Nachrichtenübertragung und der Verbindungsabbau.
@@ -37,9 +32,8 @@ Ursprünglich war die Idee, dass bei einer fehlgeschlagenen direkten Verbindung 
 \noindent Deshalb wurde sich, wenn die direkte Verbindung nicht funktioniert, für die Verwendung des ICE-Protokolls entschieden, da es für dieses Problem eine Lösung bietet.
 ICE ist ein Protokoll, das die Verbindungseinrichtung zwischen zwei Geräten ermöglicht, die sich hinter NATs (Network Address Translation) oder Firewalls befinden \parencite[S. 6 ff.]{rfc8445_ICE}. Es ist ein Protokoll, das in der Lage ist, sich an sich ändernde Netzwerkbedingungen anzupassen und verschiedene Arten von Verbindungen zu unterstützen, wie beispielsweise direkte Verbindungen, Verbindungen über STUN (Session Traversal Utilities for NAT) oder Verbindungen über TURN (Traversal Using Relays around NAT) \parencite[S. 1]{rfc8445_ICE}. 
 
-Um eine Verbindung zwischen zwei Geräten aufzubauen, durchläuft ICE drei Phasen: die Sammlung und der Austausch von Verbindungsadressen, die Konnektivitätsprüfung und die Auswahl der am besten geeigneten Verbindungsadresse für die Kommunikation \parencite[S. 7 ff.]{rfc8445_ICE}. 
-\\
-\\
+Um eine Verbindung zwischen zwei Geräten aufzubauen, durchläuft ICE drei Phasen: die Sammlung und der Austausch von Verbindungsadressen, die Konnektivitätsprüfung und die Auswahl der am besten geeigneten Verbindungsadresse für die Kommunikation \parencite[S. 7 ff.]{rfc8445_ICE}.
+
 Die erste Phase beinhaltet das Sammeln verschiedener potenzieller Verbindungsadressen (auch \textit{Kandidaten} genannt \parencite[S. 8]{rfc8445_ICE}), die für eine zuverlässige Kommunikation benötigt werden, insbesondere wenn einer oder beide Teilnehmer sich hinter NATs oder Firewalls befinden. Zuallererst werden die lokalen oder \textit{Host}-Adressen der beteiligten Geräte berücksichtigt. Diese Adressen repräsentieren die standardmäßigen IP-Adressen und Ports der Geräte innerhalb ihres lokalen Netzwerks. Sie dienen als potenzielle direkte Verbindungswege zwischen den Geräten, falls sie sich im gleichen Netzwerk oder Subnetz befinden.
 Zusätzlich zu den lokalen Adressen werden reflexive Adressen über STUN (Session Traversal Utilities for NAT) ermittelt. STUN ermöglicht es einem Gerät, seine eigene externe IP-Adresse und den entsprechenden Port zu identifizieren, wie sie von einem NAT-Gerät reflektiert werden \parencite[S. 4]{rfc8489_STUN}. Diese reflexiven Adressen stellen die externe Sichtbarkeit des Geräts aus der Perspektive des NAT-Geräts dar und helfen bei der Umgehung von NAT-Beschränkungen für den direkten Verbindungsaufbau. Sollte es jedoch aufgrund von restriktiven NAT-Konfigurationen nicht möglich sein, eine direkte Verbindung aufzubauen, kommen Relay-Adressen durch TURN (Traversal Using Relays around NAT) ins Spiel.
 Durch TURN werden Relay-Server genutzt, um den Datenverkehr zwischen den Geräten zu vermitteln \parencite[S. 10 f.]{rfc8656_TURN}. Diese Weiterleitungsadressen dienen als alternative Verbindungsmethode, indem sie den Datenverkehr über den Relay-Server leiten und so die Hindernisse von restriktiven NATs oder Firewalls umgehen.
@@ -48,13 +42,12 @@ Nachdem alle potenziellen Verbindungsadressen gesammelt wurden, werden sie an de
 
 \begin{quote}
     \textit{In a typical ICE deployment, there are two endpoints (ICE agents)
-    that want to communicate. Note that ICE is not intended for NAT
-    traversal for the signaling protocol, which is assumed to be provided
-    via another mechanism. ICE assumes that the agents are able to
+    that want to communicate. [...]. ICE assumes that the agents are able to
     establish a signaling connection between each other.} \parencite[S. 7]{rfc8445_ICE}
 \end{quote}
 
-\noindent Eine eigene Definition für den Austausch der Verbindungsadressen zwischen den Teilnehmern über einen Signaling Server zu erstellen, würde den Rahmen dieser Arbeit übersteigen. Es sei aber gesagt, dass der Server die Benutzernamen der Teilnehmer kennt und die Verbindungsadressen der Teilnehmer anhand der Benutzernamen an die jeweiligen Teilnehmer sendet. Ein Beispiel:
+\noindent Eine eigene Definition für den Austausch der Verbindungsadressen zwischen den Teilnehmern über einen Signaling Server zu erstellen, würde den Rahmen dieser Arbeit übersteigen. Es sei aber gesagt, dass der Server die Benutzernamen der Teilnehmer kennt und die Verbindungsadressen der Teilnehmer anhand der Benutzernamen an die jeweiligen Teilnehmer sendet. Ein Beispiel \textcolor{red}{(Diagramm drin lassen?)}:
+% Sequenzdiagramm behalten?
 
 \begin{itemize}
     \item Alice möchte eine Nachricht an Bob senden
@@ -65,18 +58,20 @@ Nachdem alle potenziellen Verbindungsadressen gesammelt wurden, werden sie an de
     \item Alice und Bob haben nun die Verbindungsadressen des jeweils anderen
 \end{itemize}
 
-%\begin{center}
-%    \captionsetup{type=figure}
-%    \includegraphics[width=0.7\linewidth]{images/signaling_server.jpg}
-%    \captionof{figure}{Kandidatenaustausch über einen Signaling Server}
-%    \label{fig:signaling_server}
-%\end{center}
+\begin{center}
+    \captionsetup{type=figure}
+    \includegraphics[width=1.0\linewidth]{images/signaling_sequence.png}
+    \captionof{figure}{Kandidatenaustausch über einen Signaling Server}
+    \label{fig:signaling_server}
+\end{center}
+
+\noindent Man könnte außerdem argumentieren, dass Kademlia durch die Verwendung von ICE ersetzt wird, da auch ICE  die lokale IP-Adresse und den Port des Empfängers ermittelt. Doch Kademlia wird bewusst weiterhin verwendet, da es die Auslastung vom Signaling Server so gering wie möglich hält, indem der erste Versuch des Verbindungsaufbaus immer über Kademlia erfolgt. Erst wenn dieser fehlschlägt, wird das ICE-Protokoll verwendet, wodurch die Anzahl der Verbindungsversuche über den Signaling Server minimiert wird.
 
 
 \textbf{\textcolor{red}{TODO: UML-Diagramm für Verbindungsaufbau erstellen}}
 
 
-In Phase zwei werden Konnektivitätsprüfungen durchgeführt. Diese Prüfungen dienen dazu, die Eignung und Zuverlässigkeit der gesammelten Verbindungswege zwischen den Geräten zu bewerten, um die bestmögliche Verbindung für eine erfolgreiche Kommunikation zu identifizieren. Die Reihenfolge der Konnektivitätsprüfungen wird durch einen Prioritätsalgorithmus bestimmt, der die Verbindungsadressen nach ihrer Priorität ordnet. Aus der Dokumentation von ICE geht hervor, dass die Priorität einer Verbindungsadresse durch die folgende Formel berechnet wird \parencite[S. 22]{rfc8445_ICE}:
+\noindent In Phase zwei werden Konnektivitätsprüfungen durchgeführt. Diese Prüfungen dienen dazu, die Eignung und Zuverlässigkeit der gesammelten Verbindungswege zwischen den Geräten zu bewerten, um die bestmögliche Verbindung für eine erfolgreiche Kommunikation zu identifizieren. Die Reihenfolge der Konnektivitätsprüfungen wird durch einen Prioritätsalgorithmus bestimmt, der die Verbindungsadressen nach ihrer Priorität ordnet. Aus der Dokumentation von ICE geht hervor, dass die Priorität einer Verbindungsadresse durch die folgende Formel berechnet wird \parencite[S. 22]{rfc8445_ICE}:
 
 \begin{equation}
     \label{eq:ice_priority}
@@ -106,4 +101,3 @@ Daher ist es besser, die Nachrichten schnell zu senden und zu empfangen, auch we
 \subsection{Verbindungsabbau}
 
 Da es wie bereits erwähnt keine Verbindung gibt, die aufgebaut werden muss, um die Nachrichten zu senden und zu empfangen, gibt es auch keinen Verbindungsabbau. Die Nachrichtenübertragung kann jederzeit gestoppt werden, indem einfach keine Nachrichten mehr gesendet werden. 
-
