@@ -1,7 +1,7 @@
 # manual or report (eher manual) für white papers und working papers
 # misc für RFCs
 
-# Instant Messaging
+############################### Instant Messaging ###############################
 @online{Hedda_digiKommunikationVeraendert,
   author         = {Nier, Hedda},
   title          = {Wie sich die digitale Kommunikation verändert hat},
@@ -9,7 +9,22 @@
   url            = {https://de.statista.com/infografik/11426/wie-sich-die-digitale-kommunikation-veraendert-hat/},
   note           = {Abgerufen am 30.10.2023},
 }
-# Anforderungsanalyse
+@misc{rfc3629_utf-8,
+    series =    {Request for Comments},
+    number =    3629,
+    howpublished =  {RFC 3629},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC3629},
+    url =       {https://www.rfc-editor.org/info/rfc3629},
+    author =    {François Yergeau},
+    title =     {{UTF-8, a transformation format of ISO 10646}},
+    pagetotal = {14},
+    year =      {2003},
+    month =     {11},
+    date =      {2003},
+    abstract =  {ISO/IEC 10646-1 defines a large character set called the Universal Character Set (UCS) which encompasses most of the world's writing systems. The originally proposed encodings of the UCS, however, were not compatible with many current applications and protocols, and this has led to the development of UTF-8, the object of this memo. UTF-8 has the characteristic of preserving the full US-ASCII range, providing compatibility with file systems, parsers and other software that rely on US-ASCII values but are transparent to other values. This memo obsoletes and replaces RFC 2279.},
+}
+################################ Anforderungsanalyse ###############################
 @book{Sommerville_AnfAnalyse,
   author         = {Sommerville, Ian},
   publisher      = {Pearson Deutschland},
@@ -18,7 +33,7 @@
   edition        = {10., aktualisierte Auflage},
   isbn           = {978-3-86894-344-3},
 }
-# Kryptografie
+#################################### Kryptografie #################################
 @book{Wong_KryptoPraxis,
   author         = {Wong, David},
   publisher      = {dpunkt.verlag},
@@ -55,7 +70,7 @@
     date =      {2016},
     abstract =  {This memo specifies two elliptic curves over prime fields that offer a high level of practical security in cryptographic applications, including Transport Layer Security (TLS). These curves are intended to operate at the \textasciitilde{}128-bit and \textasciitilde{}224-bit security level, respectively, and are generated deterministically based on a list of required properties.},
 }
-# Netzwerke, Peer-to-Peer
+######################################### Netzwerke, Peer-to-Peer #########################################
 @book{Luntovskyy_ModRechnernetze,
   author         = {Luntovskyy, Andriy AND Gütter, Dietbert},
   publisher      = {Springer Vieweg Wiesbaden},
@@ -176,20 +191,15 @@
     abstract =  {This document specifies the Transmission Control Protocol (TCP). TCP is an important transport-layer protocol in the Internet protocol stack, and it has continuously evolved over decades of use and growth of the Internet. Over this time, a number of changes have been made to TCP as it was specified in RFC 793, though these have only been documented in a piecemeal fashion. This document collects and brings those changes together with the protocol specification from RFC 793. This document obsoletes RFC 793, as well as RFCs 879, 2873, 6093, 6429, 6528, and 6691 that updated parts of RFC 793. It updates RFCs 1011 and 1122, and it should be considered as a replacement for the portions of those documents dealing with TCP requirements. It also updates RFC 5961 by adding a small clarification in reset handling while in the SYN-RECEIVED state. The TCP header control bits from RFC 793 have also been updated based on RFC 3168.},
 }
 
-
-# Encoding
-@misc{rfc3629_utf-8,
-    series =    {Request for Comments},
-    number =    3629,
-    howpublished =  {RFC 3629},
-    publisher = {RFC Editor},
-    doi =       {10.17487/RFC3629},
-    url =       {https://www.rfc-editor.org/info/rfc3629},
-    author =    {François Yergeau},
-    title =     {{UTF-8, a transformation format of ISO 10646}},
-    pagetotal = {14},
-    year =      {2003},
-    month =     {11},
-    date =      {2003},
-    abstract =  {ISO/IEC 10646-1 defines a large character set called the Universal Character Set (UCS) which encompasses most of the world's writing systems. The originally proposed encodings of the UCS, however, were not compatible with many current applications and protocols, and this has led to the development of UTF-8, the object of this memo. UTF-8 has the characteristic of preserving the full US-ASCII range, providing compatibility with file systems, parsers and other software that rely on US-ASCII values but are transparent to other values. This memo obsoletes and replaces RFC 2279.},
+################################ Blockchain ################################
+@book{Antonopoulos_MasteringEthereum,
+  author         = {Andreas M. Antonopoulos and Gavin Wood},
+  editor         = {},
+  publisher      = {O´Reilly Media},
+  title          = {Mastering Ethereum},
+  subtitle       = {Building Smart Contracts and DApps},
+  year           = {2018},
+  date           = {2018},
+  edition        = {1. Auflage},
+  isbn           = {978-1-491-97194-9},
 }

@@ -1,24 +1,22 @@
-\section{Integration von Blockchain in das Protokoll}
+\section{Integration von Blockchain}
 \label{sec:blockchainintegration}
 
 
 \subsection{Auswahl der Blockchain}
-
-Bei der Auswahl der Blockchain fiel die Wahl auf Ethereum. Ethereum ist eine quelloffene dezentrale Plattform, die es ermöglicht, Smart Contracts zu erstellen und auszuführen. Smart Contracts sind Programme, die auf der Blockchain ausgeführt werden und die Möglichkeit bieten, Transaktionen und Verträge zu erstellen, die automatisch ausgeführt werden, sobald bestimmte Bedingungen erfüllt sind. Mit Hilfe der Smart Contracts können Benutzer des Protokolls ihre Identität verifizieren und öffentliche Schlüssel austauschen. 
-
+Für die Integration der Blockchain in das Protokoll wurde zunächst eine geeignete Blockchain gesucht. Dabei wurde sich auf die beiden bekanntesten Blockchains, Bitcoin und Ethereum, beschränkt. Da Bitcoin eine reine Kryptowährung ist und keine Smart Contracts unterstützt, wurde sich für Ethereum entschieden. Ethereum ist eine Blockchain, die zwar auch eine Kryptowährung, Ether, besitzt, aber zusätzlich auch Smart Contracts unterstützt. Der Grund für die Existenz einer Währung auf der Blockchain ist, dass die Smart Contracts, die auf der Blockchain ausgeführt werden, mit Ether bezahlt werden müssen \parencite[S. 2]{Antonopoulos_MasteringEthereum}. Somit ist es nicht möglich, Smart Contracts auf der Blockchain auszuführen, ohne Ether zu besitzen. Da die Smart Contracts auf der Blockchain aber mit Ether bezahlt werden müssen, ist es notwendig, dass jeder Nutzer, der einen Smart Contract ausführen möchte, Ether besitzt.
 
 
+\subsection{Registrierung}
+Um das Protokoll zu nutzen, muss sich jeder Nutzer zunächst auf der Blockchain registrieren. Dazu muss ein Smart Contract auf der Blockchain ausgeführt werden, der die Registrierung des Nutzers durchführt. Dieser Smart Contract wird mit dem Benutzernamen und dem statischen öffentlichen Schlüssel aufgerufen. Der statische öffentliche Schlüssel wird bei der Registrierung festgelegt und kann nicht mehr geändert werden. Der Smart Contract erstellt einen neuen Eintrag in der Blockchain, der den Benutzernamen und den öffentlichen Schlüssel des Nutzers enthält. Der Smart Contract wird nur einmalig bei der Registrierung aufgerufen. Sollte ein Nutzer seinen Benutzernamen ändern wollen, muss er sich mit dem neuen Benutzernamen und dem öffentlichen Schlüssel eines neu erzeugten statischen Schlüsselpaars erneut registrieren.
+% Der alte Benutzername wird dann aus der Blockchain gelöscht. -> wie könnte man das absichern?
 
+\subsection{Kommunikation}
+Für die Kommunikation mit anderen Teilnehmern, muss zunächst die ID des anderen Teilnehmers im Kademlia-Netzwerk bekannt sein. Dazu wird der Benutzername des anderen Teilnehmers auf der Blockchain gesucht um zu kontrollieren, ob dieser bereits registriert ist. Ist der Benutzername nicht auf der Blockchain vorhanden, ist der andere Teilnehmer nicht registriert und es kann keine Verbindung aufgebaut werden. Ist der Benutzername auf der Blockchain vorhanden, wird der dazugehörige öffentliche Schlüssel ausgelesen. Der Benutzername entspricht gleichzeitig der ID des Teilnehmers im Kademlia-Netzwerk. Somit kann der Verbindungsaufbau, der in Abschnitt \ref{subsec:verbindungsmanagement} \nameref{subsec:verbindungsmanagement} beschrieben wird, durchgeführt werden.
+Wenn der Verbindungsaufbau erfolgreich war, kann die Kommunikation beginnen. Dazu wird der öffentliche Schlüssel des anderen Teilnehmers benötigt. Dieser wird ebenfalls auf der Blockchain gespeichert. Somit kann jeder Teilnehmer die öffentlichen Schlüssel der anderen Teilnehmer auf der Blockchain finden und die Nachrichten, die er erhält, mit dem öffentlichen Schlüssel des Absenders verifizieren. Somit kann sichergestellt werden, dass die Nachrichten tatsächlich vom angegebenen Absender stammen und nicht von einem anderen Teilnehmer gesendet wurden, der sich als jemand anderes ausgibt.
 
+\subsection{Entwurf der Smart Contracts}
+\label{subsec:smartcontracts}
 
+Auf der Ethereum-Blockchain wird die hauptsächlich Programmiersprache Solidity verwendet, um Smart Contracts zu erstellen. Solidity ist eine objektorientierte Programmiersprache, die stark an JavaScript angelehnt ist \parencite[S. 131]{Antonopoulos_MasteringEthereum}. Die Smart Contracts, die für das Protokoll benötigt werden, sind in Solidity implementiert.
 
-
-
-\subsection{Smart Contracts}
-Bei der Registrierung wird ein Smart Contract angestoßen, der die Registrierung des Benutzers auf der Blockchain durchführt. Da das Kademlia-Protokoll eine ID mit einer Länge von 160 Bit erwartet, bestand die erste Idee daraus, den Benutzernamen mittels SHA-256 zu hashen, diesen Hash dann auf die Länge von 160 Bits zu kürzen sodass dieser die ID des Benutzers darstellt. Außerdem kann es durch die Kürzung des Hashes auf 160 Bit möglich sein, dass zwei Benutzernamen den gleichen Hashwert haben und es somit zu Kollisionen kommt.
-Da aber weder die künstliche Erzeugung einer ID noch die Hashfunktion kryptografisch erforderlich sind, wurde sich dazu entschieden, den Benutzernamen, der, wie zu Beginn festgelegt, eindeutig sein muss, als ID zu verwenden. Der Benutzername wird auf 20 Zeichen begrenzt, da ein Zeichen in UTF-8 8 Bit entspricht und somit 160 Bit ergeben. Sollte der Benutzername kürzer als 20 Zeichen sein, wird er mit Nullen aufgefüllt. Somit ist sichergestellt, dass die ID des Benutzers immer 160 Bit lang ist. Der Smart Contract wird mit der ID, dem Benutzernamen, und den öffentlichen Schlüssel des Benutzers aufgerufen und erstellt einen neuen Eintrag in der Blockchain.
-
-Wenn nun ein Nutzer mit einem anderen Nutzer kommunizieren möchte, muss er zunächst die ID des anderen Nutzers kennen. Dazu wird der zuvor, bei der Registrierung festgelegte, Benutzername auf der Blockchain gesucht und der dazugehörige Hashwert ausgelesen. Da dieser Hashwert gleichzeitig auch die ID des Benutzers im Kademlia-Netzwerk ist, kann somit eine direkte Verbindung zwischen den beiden Nutzern hergestellt werden.
-
-Ein weiterer Nutzen, den die Blockchain für dieses Protokoll bietet, ist, dass die Herkunft der Nachrichten verifiziert werden kann. Da die öffentlichen Schlüssel der Nutzer auf der Blockchain gespeichert sind, kann jeder Nutzer die Nachrichten, die er erhält, mit dem öffentlichen Schlüssel des Absenders verifizieren. Somit kann sichergestellt werden, dass die Nachrichten tatsächlich vom angegebenen Absender stammen und nicht von einem anderen Nutzer gesendet wurden, der sich als jemand anderes ausgibt.
 
