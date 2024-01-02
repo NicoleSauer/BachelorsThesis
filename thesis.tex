@@ -26,6 +26,7 @@
     \literal{nodate}
 }
 
+% Add substitutes for umlauts
 \lstset{
     inputencoding=utf8,
     extendedchars=true,
@@ -38,6 +39,7 @@
     {ü}{{\"u}}1
 }
 
+% Define Solidity as a language for listings because it is not supported by default
 \lstdefinelanguage{Solidity}{
   keywords={address, bool, string, uint, mapping, contract, function, modifier, event, require, assert, bytes},
   keywordstyle=\color{blue}\bfseries,
@@ -51,6 +53,7 @@
   morestring=[b]"
 }
 
+% Define the Solidity style for listings
 \lstset{
   language=Solidity,
   basicstyle=\small\ttfamily,
@@ -160,6 +163,7 @@
     \input{no_chapter/ehrenwoertliche_erklaerung.tex}
     \tableofcontents
     \listoffigures
+    \lstlistoflistings
     %\input{no_chapter/kurzfassung.tex}
     %\input{no_chapter/abstract}
     %%%%%%%%%%%%%%%%%%%%%%%%% END: ToC, LoF, Abstract DE/ENG, Ehrenw. Erkl. %%%%%%%%%%%%%%%%%%%%%%%%%
