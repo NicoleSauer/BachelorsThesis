@@ -9,7 +9,7 @@
 \usepackage{geometry}
 \usepackage{caption}
 \usepackage[hidelinks]{hyperref}
-\usepackage{listings}
+\usepackage{listingsutf8}
 \usepackage{float}
 \usepackage{setspace}
 \usepackage{xcolor}
@@ -24,6 +24,48 @@
     \field{eventdate}
     \field{origdate}
     \literal{nodate}
+}
+
+\lstset{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=%
+    {Ä}{{\"A}}1
+    {Ö}{{\"O}}1
+    {Ü}{{\"U}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {ü}{{\"u}}1
+}
+
+\lstdefinelanguage{Solidity}{
+  keywords={address, bool, string, uint, mapping, contract, function, modifier, event, require, assert, bytes},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{gray}\ttfamily,
+  stringstyle=\color{teal}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+  language=Solidity,
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+  tabsize=2,
+  frame=lines,
+  showtabs=false,
+  showspaces=false,
+  extendedchars=true,
+  inputencoding=utf8,
+  captionpos=b
 }
 
 % \makeatletter
