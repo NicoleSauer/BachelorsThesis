@@ -13,9 +13,8 @@ Wenn ein Teilnehmer eine Nachricht an einen anderen Teilnehmer senden möchte, m
 \begin{enumerate}
     \item Der Teilnehmer, der die Nachricht senden möchte, sendet eine \textit{FIND\_NODE}-Nachricht an den Teilnehmer, dessen IP-Adresse er sucht. In dieser Nachricht ist die ID des Teilnehmers enthalten, dessen IP-Adresse gesucht wird.
     \item Der Teilnehmer, der die Nachricht erhalten hat, sucht in seiner Routing-Tabelle nach dem Teilnehmer, dessen ID in der Nachricht enthalten ist. Falls der Teilnehmer gefunden wird, wird eine Nachricht an den Teilnehmer gesendet, der die \textit{FIND\_NODE}-Nachricht gesendet hat. In dieser Nachricht ist die IP-Adresse des Teilnehmers enthalten.
-    \item Falls der Teilnehmer nicht in der Routing-Tabelle gefunden wird, wird die \\
-    \textit{FIND\_NODE}-Nachricht an den Teilnehmer weitergeleitet, der der ID des gesuchten Teilnehmers am nächsten ist. Dieser Vorgang wird solange wiederholt, bis der Teilnehmer gefunden wird.
-    \item Falls der Teilnehmer nicht gefunden wird, wird eine \\ \textit{NODE\_NOT\_FOUND}-Nachricht an den Teilnehmer gesendet, der die \\ \textit{FIND\_NODE}-Nachricht gesendet hat.
+    \item Falls der Teilnehmer nicht in der Routing-Tabelle gefunden wird, wird die \textit{FIND\_\\NODE}-Nachricht an den Teilnehmer weitergeleitet, der der ID des gesuchten Teilnehmers am nächsten ist. Dieser Vorgang wird solange wiederholt, bis der Teilnehmer gefunden wird.
+    \item Falls der Teilnehmer nicht gefunden wird, wird eine \textit{NODE\_NOT\_FOUND}-\\Nachricht an den Teilnehmer gesendet, der die \textit{FIND\_NODE}-Nachricht gesendet hat.
     \item Der Teilnehmer, der die Nachricht mit der IP-Adresse seines Ziels erhalten hat, speichert diese in seiner Routing-Tabelle ab.
 \end{enumerate}
 
