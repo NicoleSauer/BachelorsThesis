@@ -40,6 +40,16 @@ Strukturierte Peer-to-Peer-Netzwerke hingegen weisen klare Regeln und Algorithme
 
 \subsection{Problematik von Peer-to-Peer-Netzwerken}
 
+Peer-to-Peer-Netzwerke sind nicht ohne Probleme. Die dezentrale Struktur der Netzwerke bringt einige Herausforderungen mit sich, die es zu bewältigen gilt. Eines der Probleme stellen die \textit{Network Address Translators} (kurz: NATs) dar. NATs sind dafür verantwortlich, dass die IP-Adressen der Teilnehmer nicht öffentlich sichtbar sind. Man unterscheidet zwischen vier verschiedenen Arten von NATs: Full Cone NAT, Restricted Cone NAT, Port Restricted Cone NAT und Symmetric NAT \parencite[S. 5]{rfc8489_STUN}. Full Cone NATs sind die einfachste Form von NATs. Sie ermöglichen es, dass ein Teilnehmer, der sich hinter einem Full Cone NAT befindet, von einem anderen Teilnehmer, der sich außerhalb des NATs befindet, erreicht werden kann, indem der Teilnehmer außerhalb des NATs eine Nachricht an den Teilnehmer hinter dem NAT sendet. Jeder Teilnehmer außerhalb des NATs kann den Teilnehmer hinter dem NAT erreichen, indem er eine Nachricht an die öffentliche IP-Adresse des NATs sendet. Das NAT leitet die Nachricht dann an den Teilnehmer hinter dem NAT weiter. Restricted Cone NATs sind ähnlich wie Full Cone NATs, mit dem Unterschied, dass nur Nachrichten von Teilnehmern akzeptiert werden, an die der Teilnehmer hinter dem NAT zuvor eine Nachricht gesendet hat. Port Restricted Cone NATs sind ähnlich wie Restricted Cone NATs, mit dem Unterschied, dass nur Nachrichten von Teilnehmern akzeptiert werden, an die der Teilnehmer hinter dem NAT zuvor eine Nachricht gesendet hat, die von demselben Port gesendet wurde, an den der Teilnehmer hinter dem NAT die Nachricht gesendet hat. Symmetric NATs sind die komplexeste Form von NATs. Sie ermöglichen es, dass ein Teilnehmer, der sich hinter einem Symmetric NAT befindet, von einem anderen Teilnehmer, der sich außerhalb des NATs befindet, erreicht werden kann, indem der Teilnehmer außerhalb des NATs eine Nachricht an den Teilnehmer hinter dem NAT sendet. Das NAT leitet die Nachricht dann an den Teilnehmer hinter dem NAT weiter. Der Teilnehmer hinter dem NAT kann jedoch nur Nachrichten von dem Teilnehmer außerhalb des NATs empfangen, an den er zuvor eine Nachricht gesendet hat.
+
+
+
+
+
+
+Dies ist ein Problem, da die Teilnehmer nicht direkt miteinander kommunizieren können, wenn sie sich hinter einem NAT befinden. Um dieses Problem zu lösen, gibt es verschiedene Ansätze, wie beispielsweise STUN (Session Traversal Utilities for NAT), TURN (Traversal Using Relays around NAT) und ICE (Interactive Connectivity Establishment) \parencite[S. 1]{rfc8489_STUN}.
+
+
 % #TODO: Overlay Netzwerk erklären? Kademlia ist ein Overlay Netzwerk
 \begin{itemize}
     \item NAT und NAT-Problem erklären (siehe RFC 5128)
