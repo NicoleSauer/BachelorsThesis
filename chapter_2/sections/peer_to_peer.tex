@@ -58,7 +58,21 @@ ICE (Interactive Connectivity Establishment) ist ein Framework, das mehrere Tech
 
 Peer-to-Peer-Netzwerke können als Overlay-Netzwerk betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das über ein physisches Netzwerk gelegt wird. Es besteht aus einer Reihe von Knoten, die über eine logische Verbindung miteinander verbunden sind. Die Verbindungen zwischen den Knoten werden durch Routing-Algorithmen verwaltet. Die Knoten können sich über das physische Netzwerk befinden, aber auch über das Internet verteilt sein \parencite{Lua_P2POverlayNetworksPaper}. 
 
-Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. All diese Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. Eine \textit{Distributed Hash Table} (kurz: DHT) ist eine verteilte Datenstruktur, die es ermöglicht, Daten in einem Netzwerk zu speichern und zu verwalten. Sie besteht aus einer Reihe von Knoten, die miteinander verbunden sind und die Daten speichern. Die Knoten sind über das Netzwerk verteilt und die Daten werden wiederum auf die Knoten verteilt und in Form von Schlüssel-Wert-Paaren gespeichert. Die Schlüssel werden dabei gehasht, um die Daten auf die Knoten zu verteilen. Die Knoten speichern nur die Daten, die sich in ihrem Verantwortungsbereich befinden. Wenn ein Knoten eine Anfrage für einen bestimmten Schlüssel erhält, leitet er die Anfrage an den Knoten weiter, der für diesen Schlüssel verantwortlich ist. Dieser Knoten antwortet dann mit dem entsprechenden Wert. Die DHTs sind selbstorganisierend, was bedeutet, dass sie sich selbst verwalten und anpassen können, wenn sich die Netzwerktopologie ändert. Kademlia, Chord und Pastry sind Beispiele für die Implementierung von DHTs \parencite[S. 1-2]{Maymounkov_Kademlia} \parencite[S. 1-2]{Stoica_Chord} \parencite[S. 1-2]{Rowstron_Pastry}.
+Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. All diese Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. Eine \textit{Distributed Hash Table} (kurz: DHT) ist eine verteilte Datenstruktur, die es ermöglicht, Daten in einem Netzwerk zu speichern und zu verwalten. 
+Distributed Hash Tables (DHTs) sind verteilte Datenstrukturen, die in Peer-to-Peer-Netzwerken verwendet werden, um effizient Schlüssel-Wert-Paare zu speichern und abzurufen. Anders als herkömmliche zentralisierte Datenbanken oder Speicherlösungen benötigen DHTs keinen zentralen Server zur Speicherung oder Verwaltung von Daten.
+
+Sie funktionieren auf Basis von Hash-Funktionen, die einen Schlüssel in einen eindeutigen Hash umwandeln. Diese Hashes dienen als Adressen, um zu bestimmen, wo die entsprechenden Daten im Netzwerk gespeichert sind. Die Daten werden über verschiedene Peers im Netzwerk verteilt, wobei jeder Peer nur einen Teil der Daten basierend auf seinem Verantwortungsbereich speichert.
+
+Um effizient auf die gespeicherten Daten zuzugreifen, verwenden DHTs spezielle Routing-Algorithmen. Diese Algorithmen ermöglichen es, Peers im Netzwerk zu finden, die für die Speicherung oder Abfrage von Daten zuständig sind, selbst wenn sich die Netzwerktopologie ständig verändert.
+
+Ein entscheidender Vorteil von DHTs ist ihre Skalierbarkeit. Sie können mit der Netzwerkgröße wachsen, ohne an Effizienz zu verlieren. Neue Peers können nahtlos hinzugefügt werden, und die Struktur der DHT passt sich dynamisch an Veränderungen im Netzwerk an.
+
+
+
+
+
+
+Die DHTs sind selbstorganisierend, was bedeutet, dass sie sich selbst verwalten und anpassen können, wenn sich die Netzwerktopologie ändert. Kademlia, Chord und Pastry sind Beispiele für die Implementierung von DHTs \parencite[S. 1-2]{Maymounkov_Kademlia} \parencite[S. 1-2]{Stoica_Chord} \parencite[S. 1-2]{Rowstron_Pastry}.
 
 \subsection{Kademlia, Chord, Pastry}
 
