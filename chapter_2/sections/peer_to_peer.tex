@@ -11,7 +11,7 @@
 
 Peer-to-Peer-Technologien können in zwei Kategorien unterteilt werden: Peer-to-Peer-Anwendungen und Peer-to-Peer-Infrastrukturen. Die Kategorie der Peer-to-Peer-Anwen-\\dungen umfasst den Dienst der Inhaltsverteilung, bei dem die Teilnehmer Inhalte wie Musik, Videos oder andere Dateien direkt untereinander austauschen \Parencite[730-731]{Khatibi_StructuredUnstructuredP2P}. 
 
-Daher werden viele Peer-to-Peer schnell mit Filesharing in Verbindung bringen, da diese Technologie in der Vergangenheit vor allem dafür genutzt wurde. Das bekannteste Beispiel ist das Filesharing-Netzwerk \textit{Napster}, das 1999 von Shawn \enquote{Napster} Fanning entwickelt wurde. \textit{Napster} war das erste weit verbreitete Filesharing-Netzwerk, das auf Peer-to-Peer-Technologie basierte. Es ermöglichte den Austausch von Musikdateien zwischen den Teilnehmern. Die Musikdateien wurden dabei auf den Computern der Teilnehmer gespeichert und konnten von anderen Teilnehmern heruntergeladen werden. Da diese Art des Datenaustauschs oftmals illegal war, wurde Napster 2001 aufgrund von Urheberrechtsverletzungen abgeschaltet \parencite[S. 4-6]{Mahlmann_P2PNetzwerke}.
+Daher werden viele Peer-to-Peer schnell mit Filesharing in Verbindung bringen, da diese Technologie in der Vergangenheit vor allem dafür genutzt wurde. Das bekannteste Beispiel ist das Filesharing-Netzwerk \textit{Napster}, das 1999 von Shawn \enquote{Napster} Fanning entwickelt wurde. \textit{Napster} war das erste weit verbreitete Filesharing-Netzwerk, das auf Peer-to-Peer-Technologie basierte. Es ermöglichte den Austausch von Musikdateien zwischen den Teilnehmern. Die Musikdateien wurden dabei auf den Computern der Teilnehmer gespeichert und konnten von anderen Teilnehmern heruntergeladen werden. Da diese Art des Datenaustauschs oftmals illegal war, wurde Napster 2001 aufgrund von Urheberrechtsverletzungen abgeschaltet \parencite[S. 55-57]{Mahlmann_P2PNetzwerke}.
 
 Die Peer-to-Peer-Infrastruktur umfasst die Peer-to-Peer-Netzwerke, die für die Kommunikation zwischen den Teilnehmern verwendet werden \parencite[S. 730-731]{Khatibi_StructuredUnstructuredP2P}. Diese Arbeit konzentriert sich auf die Peer-to-Peer-Infrastruktur, die die Kommunikation zwischen den Teilnehmern ermöglichen soll.
 
@@ -38,7 +38,7 @@ Strukturierte Peer-to-Peer-Netzwerke hingegen weisen klare Regeln und Algorithme
 
 
 
-\subsection{Problematik bei Peer-to-Peer-Netzwerken}
+\subsection{Problemstellung und mögliche Lösungen}
 
 Peer-to-Peer-Netzwerke sind nicht ohne Probleme. Die dezentrale Struktur der Netzwerke bringt einige Herausforderungen mit sich, die es zu bewältigen gilt. Eines der Probleme stellen die \textit{Network Address Translators} (kurz: NATs) dar. NATs sind dafür zuständig, private IP-Adressen in öffentliche IP-Adressen umzuwandeln und umgekehrt. Sie werden in Routern oder Gateways eingesetzt und dienen dazu, den Zugang von Geräten im lokalen Netzwerk (die private IP-Adressen verwenden) zum Internet zu ermöglichen, indem sie den Datenverkehr zwischen dem lokalen Netzwerk und dem externen Netzwerk, wie dem Internet, verwalten. Peer-to-Peer Verbindungen stoßen bei Network Address Translators oft auf Probleme, was daran liegt, dass NATs normalerweise nicht erlauben, dass externe Geräte direkt mit internen kommunizieren. Zudem werden Ports dynamisch für ausgehenden Traffic zugewiesen, was das Weiterleiten eingehender Verbindungen erschwert. Symmetrische NATs verschärfen dieses Problem, da sie für ausgehende Verbindungen eine eindeutige Kombination von IP-Adresse und Port verwenden, die sich bei jeder neuen Verbindung ändert \Parencite[S. 1-9]{rfc2663_NAT_Terminology}.
 
@@ -46,7 +46,6 @@ Dies ist ein Problem, da die Teilnehmer nicht direkt miteinander kommunizieren k
 Ein weiterer Ansatz ist die \textit{Connection Reversal}. Bei der Connection Reversal wird ein \textit{Rendezvous-Server} verwendet, um eine Verbindung zwischen den Teilnehmern herzustellen. Der Teilnehmer hinter dem NAT verbindet sich mit dem Rendezvous-Server und teilt diesem seine öffentliche IP-Adresse und Port mit. Der andere Teilnehmer verbindet sich ebenfalls mit dem Rendezvous-Server und erhält die IP-Adresse und Port des  Teilnehmers hinter dem NAT. Bei dieser Technik darf sich nur einer der Teilnehmer hinter einem NAT befinden.
 \textit{Hole Punching} beschreibt einen weiteren Lösungsansatz. Zwei Geräte, die eine direkte Verbindung miteinander aufbauen möchten, initiieren gleichzeitig eine Verbindung zu einem Server, der sich außerhalb des NATs befindet. Der Server sammelt die IP-Adressen und Ports der beiden Geräte und leitet diese an die jeweils andere Partei weiter. Die beiden Geräte versuchen dann, eine Verbindung zueinander herzustellen, indem sie gleichzeitig Datenpakete an die IP-Adresse und den Port des anderen Geräts senden. Dabei wird versucht, das NAT dazu zu bringen, die Verbindung zu öffnen, indem es die ankommenden Pakete als Antwort auf die ausgehenden Pakete erkennt. Wenn dies gelingt, wird ein temporäres Loch im NAT geöffnet, das es den Geräten ermöglicht, direkt miteinander zu kommunizieren. Diese Technik erfordert eine präzise Koordination und die Fähigkeit der beiden Geräte zur gleichen Zeit Datenpakete zu senden und zu empfangen. Zudem ist es nicht immer möglich, ein temporäres Loch im NAT zu öffnen, da es von der Implementierung des NATs abhängt. Eine Abwandlung vom Hole Punching ist die \textit{Port Number Prediction}. Hierbei wird versucht, die Portnummer vorherzusagen, die das NAT für die Verbindung verwenden wird.Durch Beobachtung und Analyse vorheriger Verbindungen wird versucht Muster oder Trends in der Art und Weise zu erkennen, wie Portnummern zugewiesen werden. Dies könnte auf bestimmte Algorithmen oder Verhaltensweisen des Systems hinweisen, woraus dann die Portnummer vorhergesagt werden kann. Diese Technik ist jedoch nicht immer zuverlässig, da es rein auf Annahmen basiert und das Risiko besteht, dass sich das Portzuweisungsmuster jederzeit ändert \Parencite[S. 7-21]{rfc5128_P2P_NATs}.
 
-\subsection{Protokolle als Lösung für Peer-to-Peer-Netzwerke}
 
 Um die Problematik von Peer-to-Peer-Netzwerken zu lösen, können verschiedene Protokolle zum Einsatz kommen. Eines dieser Protokolle ist STUN (Session Traversal Utilities for NAT). STUN ist ein Netzwerkprotokoll, das es Geräten, die sich hinter einem NAT befinden, ermöglicht, ihre öffentliche IP-Adresse und Port zu ermitteln. Es bietet an sich keine Möglichkeit für eine Umgehung des NATs, sondern ist dafür gedacht, als eines von mehreren Werkzeugen verwendet zu werden, um ein NAT zu umgehen. Mittels STUN lässt sich nur ermitteln, ob sich ein Gerät hinter einem NAT befindet und welche IP-Adresse und Port es verwendet \parencite[S. 4]{rfc8489_STUN}.
 
@@ -55,15 +54,16 @@ TURN (Traversal Using Relays around NAT) ist ein weiteres Netzwerkprotokoll, das
 ICE (Interactive Connectivity Establishment) ist ein Framework, das mehrere Techniken kombiniert, um eine Verbindung zwischen zwei Endpunkten herzustellen, die sich hinter NATs befinden. Es verwendet STUN und TURN, um die öffentliche IP-Adresse und Port eines Geräts zu ermitteln und den Datenverkehr über einen Server zu leiten \Parencite[S. 6]{rfc8445_ICE}.
 
 
-\subsection{Peer-to-Peer-Protokolle}
+\subsection{Overlay-Netzwerke}
+
+Peer-to-Peer-Netzwerke können als Overlay-Netzwerk betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das über ein physisches Netzwerk gelegt wird. Es besteht aus einer Reihe von Knoten, die über eine logische Verbindung miteinander verbunden sind. Die Verbindungen zwischen den Knoten werden durch Routing-Algorithmen verwaltet. Die Knoten können sich über das physische Netzwerk befinden, aber auch über das Internet verteilt sein \parencite{Galuba_P2POverlayNetworks}. 
+Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. All diese Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. Eine \textit{Distributed Hash Table} (kurz: DHT) ist eine verteilte Datenstruktur, die es ermöglicht, Daten in einem Netzwerk zu speichern und zu verwalten. Sie besteht aus einer Reihe von Knoten, die miteinander verbunden sind und die Daten speichern. Die Knoten sind über das Netzwerk verteilt und die Daten werden wiederum auf die Knoten verteilt und in Form von Schlüssel-Wert-Paaren gespeichert. Die Schlüssel werden dabei gehasht, um die Daten auf die Knoten zu verteilen. Die Knoten speichern nur die Daten, die sich in ihrem Verantwortungsbereich befinden. Wenn ein Knoten eine Anfrage für einen bestimmten Schlüssel erhält, leitet er die Anfrage an den Knoten weiter, der für diesen Schlüssel verantwortlich ist. Dieser Knoten antwortet dann mit dem entsprechenden Wert. Die DHTs sind selbstorganisierend, was bedeutet, dass sie sich selbst verwalten und anpassen können, wenn sich die Netzwerktopologie ändert.
 
 
 
 
 
 
-
-%Firewalls können ebenfalls ein Problem darstellen, da sie den Datenverkehr zwischen dem lokalen Netzwerk und dem externen Netzwerk überwachen und filtern. Sie können den Datenverkehr blockieren, wenn sie verdächtige Aktivitäten erkennen. Dies kann dazu führen, dass die Teilnehmer nicht miteinander kommunizieren können.
 
 
 
@@ -74,3 +74,5 @@ ICE (Interactive Connectivity Establishment) ist ein Framework, das mehrere Tech
     \item Kademlia vs. Angriffe
     \item Angriffe gegen ICE gucken und erklären
 \end{itemize}
+
+%Firewalls können ebenfalls ein Problem darstellen, da sie den Datenverkehr zwischen dem lokalen Netzwerk und dem externen Netzwerk überwachen und filtern. Sie können den Datenverkehr blockieren, wenn sie verdächtige Aktivitäten erkennen. Dies kann dazu führen, dass die Teilnehmer nicht miteinander kommunizieren können.
