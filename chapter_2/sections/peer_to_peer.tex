@@ -56,38 +56,30 @@ ICE (Interactive Connectivity Establishment) ist ein Framework, das mehrere Tech
 
 \subsection{Overlay-Netzwerke(drin lassen?)}
 
-Peer-to-Peer-Netzwerke können als Overlay-Netzwerk betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das über ein physisches Netzwerk gelegt wird. Es besteht aus einer Reihe von Knoten, die über eine logische Verbindung miteinander verbunden sind. Die Verbindungen zwischen den Knoten werden durch Routing-Algorithmen verwaltet. Die Knoten können sich über das physische Netzwerk befinden, aber auch über das Internet verteilt sein \parencite{Lua_P2POverlayNetworksPaper}. 
+Peer-to-Peer-Netzwerke können als Overlay-Netzwerk betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das über ein physisches Netzwerk gelegt wird. In diesem Fall ist das physische Netzwerk das Internet. Das Overlay-Netzwerk ist eine logische Struktur, die es ermöglicht, die Kommunikation zwischen den Teilnehmern zu organisieren. Es besteht aus einer Reihe von Knoten, die über eine logische Verbindung miteinander verbunden sind. Die Verbindungen zwischen den Knoten werden durch Routing-Algorithmen verwaltet \parencite{Lua_P2POverlayNetworksPaper}. 
 
-Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. All diese Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. Eine \textit{Distributed Hash Table} (kurz: DHT) ist eine verteilte Datenstruktur, die es ermöglicht, Daten in einem Netzwerk zu speichern und zu verwalten. 
-Distributed Hash Tables (DHTs) sind verteilte Datenstrukturen, die in Peer-to-Peer-Netzwerken verwendet werden, um effizient Schlüssel-Wert-Paare zu speichern und abzurufen. Anders als herkömmliche zentralisierte Datenbanken oder Speicherlösungen benötigen DHTs keinen zentralen Server zur Speicherung oder Verwaltung von Daten.
-
-Sie funktionieren auf Basis von Hash-Funktionen, die einen Schlüssel in einen eindeutigen Hash umwandeln. Diese Hashes dienen als Adressen, um zu bestimmen, wo die entsprechenden Daten im Netzwerk gespeichert sind. Die Daten werden über verschiedene Peers im Netzwerk verteilt, wobei jeder Peer nur einen Teil der Daten basierend auf seinem Verantwortungsbereich speichert.
-
-Um effizient auf die gespeicherten Daten zuzugreifen, verwenden DHTs spezielle Routing-Algorithmen. Diese Algorithmen ermöglichen es, Peers im Netzwerk zu finden, die für die Speicherung oder Abfrage von Daten zuständig sind, selbst wenn sich die Netzwerktopologie ständig verändert.
-
-Ein entscheidender Vorteil von DHTs ist ihre Skalierbarkeit. Sie können mit der Netzwerkgröße wachsen, ohne an Effizienz zu verlieren. Neue Peers können nahtlos hinzugefügt werden, und die Struktur der DHT passt sich dynamisch an Veränderungen im Netzwerk an.
+Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. All diese Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. \textit{Distributed Hash Tables} (kurz: DHTs) sind verteilte Datenstrukturen, die in Peer-to-Peer-Netzwerken verwendet werden, um effizient Schlüssel-Wert-Paare zu speichern und abzurufen. Anders als herkömmliche zentralisierte Datenbanken oder Speicherlösungen benötigen DHTs keinen zentralen Server zur Speicherung oder Verwaltung von Daten. Sie funktionieren auf Basis von Hash-Funktionen, die einen Schlüssel in einen eindeutigen Hash umwandeln. Diese Hashes dienen als Adressen, um zu bestimmen, wo die entsprechenden Daten im Netzwerk gespeichert sind. Die Daten werden über verschiedene Peers im Netzwerk verteilt, wobei jeder Peer nur einen Teil der Daten basierend auf seinem Verantwortungsbereich speichert . Um effizient auf die gespeicherten Daten zuzugreifen, verwenden DHTs  Routing-Algorithmen wie Pastry, Kademlia oder Chord. Diese Algorithmen ermöglichen es, Peers im Netzwerk zu finden, die für die Speicherung oder Abfrage von Daten zuständig sind, selbst wenn sich die Netzwerktopologie ständig verändert. Ein großer Vorteil von DHTs ist ihre Skalierbarkeit. Sie können mit der Netzwerkgröße wachsen, ohne an Effizienz zu verlieren. Neue Peers können nahtlos hinzugefügt werden, und die Struktur der DHT passt sich dynamisch an Veränderungen im Netzwerk an \parencite[S. 43-46]{Balakrishnan_LookingUpDataInP2PSystems} \parencite[postnote]{Stoica_Chord,Rowstron_Pastry,Maymounkov_Kademlia}.
 
 
-
-
-
-
-Die DHTs sind selbstorganisierend, was bedeutet, dass sie sich selbst verwalten und anpassen können, wenn sich die Netzwerktopologie ändert. Kademlia, Chord und Pastry sind Beispiele für die Implementierung von DHTs \parencite[S. 1-2]{Maymounkov_Kademlia} \parencite[S. 1-2]{Stoica_Chord} \parencite[S. 1-2]{Rowstron_Pastry}.
-
-\subsection{Kademlia, Chord, Pastry}
+\subsection{Kademlia vs. Chord vs. Pastry}
 
 \textit{Kademlia} ist ein Peer-to-Peer-Protokoll, das für die Organisation von Knoten in einem Netzwerk verwendet wird. Es ist ein strukturiertes Peer-to-Peer-Netzwerk, das auf einer K-Bucket-Struktur basiert. Die K-Buckets enthalten eine Liste von Knoten für verschiedene Schlüsselbereiche basierend auf ihrer Nähe, die durch XOR-Distanzen der IDs berechnet wird. Die Verbindungen zwischen den Knoten sind asymmetrisch, und jeder Knoten speichert Informationen über andere Knoten in seinen K-Buckets. Bei der Suche nach einem bestimmten Schlüssel erfolgt das Routing durch die XOR-Entfernung, wodurch die nächsten Knoten für diesen Schlüssel gefunden werden. Dieses Verfahren ermöglicht eine logarithmische Anzahl von Schritten für die Suche und bietet eine robuste Struktur, die gut mit dynamischen Netzwerkänderungen umgehen kann \parencite[S. 1-2]{Maymounkov_Kademlia}.
 
 \textit{Chord} ist ein weiteres Peer-to-Peer-Protokoll, das für die Organisation von Knoten in einem Netzwerk verwendet wird. Es ist ebenfalls ein strukturiertes Peer-to-Peer-Netzwerk, basiert allerdings auf einer Ringstruktur. Die Knoten sind in einem Ring angeordnet und jeder Knoten ist für einen bestimmten Schlüsselbereich verantwortlich. Die Verbindungen zwischen den Knoten sind durch ihren Platz im Ring definiert, wobei jeder Knoten eine Verbindung zu seinem nächsten Nachbarn im Uhrzeigersinn hat. Bei der Suche nach einem bestimmten Schlüssel durchläuft eine Anfrage einen logarithmischen Pfad im Ring, wobei die Knoten auf dem Weg begrenzte Informationen über andere Knoten behalten, um Anfragen weiterzuleiten. Dieses Modell ist recht einfach und effizient für viele Anwendungsfälle, aber es könnte anfällig sein für Engpässe oder längere Suchzeiten, insbesondere wenn das Netzwerk dynamisch ist und sich die Konfiguration häufig ändert \parencite[S. 1-2]{Stoica_Chord}.
 
-Auch \textit{Pastry} findet Anwendung als Peer-to-Peer-Protokoll zur Organisation von Knoten in einem Netzwerk. Es ist ein strukturiertes Peer-to-Peer-Netzwerk, das auf einer Baumstruktur basiert 
+Auch \textit{Pastry} basiert auf einer Ringstruktur und ist darauf ausgerichtet, die Übertragung von Daten und die Suche nach Peers in großen, dynamischen Netzwerken zu optimieren. Im Kern funktioniert Pastry wie folgt: Es organisiert Peers in einem virtuellen Ring, wobei jeder Peer eine eindeutige ID hat. Diese IDs sind im metrischen Raum angeordnet, wodurch ähnliche IDs oder Schlüssel ähnliche Peers im Ring finden. Jeder Peer in Pastry verfügt über Routing-Tabellen, die Informationen über andere Peers im Ring enthalten, die in der Nähe ihrer eigenen ID liegen. Diese Routing-Tabellen ermöglichen es, Peers in logarithmischer Zeit zu erreichen, unabhängig von der Netzwerkgröße. Wenn eine Nachricht gesendet werden soll, wählt der Sender anhand der Ziel-ID des Peers den nächsten Peer in seiner Routing-Tabelle aus, der der Ziel-ID am nächsten liegt. Diese Prozedur wird iterativ wiederholt, bis die Nachricht ihren Ziel-Peer erreicht hat. Pastry ist widerstandsfähig gegen Ausfälle und kann sich an dynamische Netzwerkänderungen anpassen, indem es die Routing-Struktur und -Tabellen entsprechend aktualisiert \parencite[S. 331-339]{Rowstron_Pastry}.
+
+% Alle einmal erklären und dann aufzeigen, warum Kademlia das beste ist -> dann überleiten zu  den Sicherheitsaspekten
+
+\subsection{Angriffe gegen Kademlia}
+
+
 
 
 
 
 % #TODO: Overlay Netzwerk erklären? Kademlia ist ein Overlay Netzwerk
 \begin{itemize}
-    \item Was gibt es so für P2P-Protokolle/Algorithmen Chord, Kademlia, Pastry, Tapestry, CAN + DHTs + Churnrate
     \item Kademlia vs. Angriffe
     \item Angriffe gegen ICE gucken und erklären
 \end{itemize}
