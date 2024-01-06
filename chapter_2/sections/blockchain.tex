@@ -11,6 +11,7 @@ Christoph Meinel und Tatiana Gayvoronskaya beschreiben die Blockchain-Technologi
 \end{quote}
 
 \noindent Daraus ergibt sich die Frage, was Blockchain eigentlich ist und wie die bereits vorhandenen technologischen Ansätze miteinander vereint werden. Diese Fragen werden in diesem Kapitel beantwortet. Zunächst wird der Begriff Blockchain definiert und anschließend die Funktionsweise erläutert. Daraufhin werden die Konsensmechanismen Proof-of-Work und Proof-of-Stake vorgestellt. Abschließend wird auf die Sicherheit von Blockchain eingegangen und Angriffe auf Blockchain werden erläutert.
+% #TODO: Distributed Ledger als Vorgänger zu Blockchain erwähnen?
 
 \subsection{Definition}
 \label{subsec:blockchain_definition}
@@ -36,12 +37,13 @@ Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{b
 
 % Die Transaktionen enthalten jeweils Informationen zum Sender, dem Empfänger und dem Betrag.
 
-\subsection{Funktionsweise}
-\label{subsec:blockchain_funktionsweise}
+\subsection{Technologische Grundlagen}
+\label{subsec:blockchain_technological_basics}
 
-Die Blockchain funktioniert durch die Kombination von verschiedenen Technologien. Die wichtigsten sind Kryptografie, dezentrale Netzwerke und Konsensmechanismen. Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet.
+Die Blockchain funktioniert durch die Kombination von verschiedenen Technologien. Die wichtigsten sind Kryptografie, dezentrale Netzwerke und Konsensmechanismen. 
 
-Hash-Funktionen können dazu verwendet werden, um die Integrität von Daten zu gewährleisten. Eine Hash-Funktion bildet eine beliebig lange Eingabe auf eine feste Länge ab. Kryptografische Hash-Funktionen sind Hash-Funktionen, die bestimmte Eigenschaften erfüllen müssen. Die beiden wichtigsten Eigenschaften sind die \textit{Einwegfunktion} und die \textit{Kollisionsresistenz}. Eine Hash-Funktion erfüllt die Eigenschaft der Einwegfunktion, wenn es nicht möglich ist, von der Ausgabe auf die Eingabe zu schließen. Das bedeutet, dass es nicht möglich ist, aus dem Hash-Wert die ursprünglichen Daten zu rekonstruieren. Die Eigenschaft der \textit{Kollisionsresistenz} ist erfüllt, wenn es nicht möglich ist, zwei verschiedene Eingaben zu finden, die auf den gleichen Hash-Wert abgebildet werden \parencites[S. 12-13]{Brünnler_BlockchainKurzGut}[S. 6]{Fill_BlockchainGrundlagen}.
+\subsubsection{Kryptografie}
+Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet. Hash-Funktionen können dazu verwendet werden, um die Integrität von Daten zu gewährleisten. Eine Hash-Funktion bildet eine beliebig lange Eingabe auf eine feste Länge ab. Kryptografische Hash-Funktionen sind Hash-Funktionen, die bestimmte Eigenschaften erfüllen müssen. Die beiden wichtigsten Eigenschaften sind die \textit{Einwegfunktion} und die \textit{Kollisionsresistenz}. Eine Hash-Funktion erfüllt die Eigenschaft der Einwegfunktion, wenn es nicht möglich ist, von der Ausgabe auf die Eingabe zu schließen. Das bedeutet, dass es nicht möglich ist, aus dem Hash-Wert die ursprünglichen Daten zu rekonstruieren. Die Eigenschaft der \textit{Kollisionsresistenz} ist erfüllt, wenn es nicht möglich ist, zwei verschiedene Eingaben zu finden, die auf den gleichen Hash-Wert abgebildet werden \parencites[S. 12-13]{Brünnler_BlockchainKurzGut}[S. 6]{Fill_BlockchainGrundlagen}.
 
 Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut Definition der Einwegfunktion ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencite[S. 6-7]{Fill_BlockchainGrundlagen}.
 
@@ -54,16 +56,26 @@ Ein \textit{Merkle-Baum} ist ein binärer Baum, bei dem jeder Knoten den Hash-We
     \label{fig:merkle_tree}
 \end{figure}
 
+\noindent Von jedem Dokument $D_{1}$, $D_{2}$, $D_{3}$ und $D_{4}$ wird ein Hash-Wert berechnet und in einem Blatt des Baumes gespeichert. Die Hash-Werte der Blätter werden dann paarweise gehasht und in den Knoten darüber gespeichert. Dieser Vorgang wird solange wiederholt, bis nur noch ein Knoten übrig ist. Dieser Knoten enthält den Root-Hash. Sollte sich ein Dokument ändern, ändert sich auch der Root-Hash. Außerdem kann bewiesen werden, dass beispielsweise $D_{2}$ Teil des Baumes ist, indem mit dem Hash-Wert von $D_{2}$ und den Hash-Werten von $D_{1}$, $D_{3}$ und $D_{4}$ versucht wird, den Root-Hash zu berechnen. Wenn der berechnete Root-Hash mit dem tatsächlichen Root-Hash übereinstimmt, ist bewiesen, dass $D_{2}$ Teil des Baumes ist \parencite[S. 9]{Fill_BlockchainGrundlagen}.
+
+Ein weitere Technologie aus der Kryptografie, die in der Blockchain verwendet wird, sind digitale Signaturen. Digitale Signaturen werden verwendet, um die Authentizität von Daten zu gewährleisten. Wenn zwei Benutzer Alice und Bob miteinander kommunizieren wollen, kann Alice eine Nachricht an Bob senden. Jeder Benutzer hat einen privaten und einen öffentlichen Schlüssel. Der öffentliche Schlüssel darf beliebig verteilt werden, während der private Schlüssel geheim gehalten werden muss. Wenn Alice eine Nachricht an Bob senden möchte, kann sie die Nachricht mit ihrem privaten Schlüssel signieren. Bob kann dann die Signatur mit dem öffentlichen Schlüssel von Alice überprüfen. Wenn die Signatur gültig ist, kann Bob sicher sein, dass die Nachricht von Alice stammt. Wenn die Signatur wiederum ungültig ist, kann Bob sicher sein, dass die Nachricht nicht von Alice stammt \parencite[S. 9-10]{Fill_BlockchainGrundlagen}.
 
 
+\subsubsection{Dezentrale Netzwerke}
 
-%\subsection{Konsensmechanismen}
+Nicht nur Peer-to-Peer-Netzwerke, sondern auch Blockchain-Netzwerke sind dezentral. Das bedeutet, dass es keinen zentralen Server gibt, der die Daten verwaltet. Stattdessen werden die Daten auf allen Teilnehmern des Netzwerkes gespeichert. Dadurch ist es nicht möglich, die Daten zu manipulieren, da die Daten auf allen Teilnehmern des Netzwerkes gespeichert sind. Wenn ein Teilnehmer versucht, die Daten zu manipulieren, wird dies von den anderen Teilnehmern bemerkt und die manipulierten Daten werden nicht akzeptiert \parencite[S. 10]{Fill_BlockchainGrundlagen}. 
+
+\subsection{Konsensmechanismen}
+
+In einem dezentralen Netzwerk müssen sich die Teilnehmer auf einen gemeinsamen, für alle \textit{richtigen}, Zustand einigen. Dieser Zustand kann beispielsweise die Reihenfolge der getätigten Transaktionen sein. Wenn sich die Teilnehmer nicht auf einen gemeinsamen \textit{Konsens} einigen können, kann das Netzwerk nicht funktionieren. Die Aufgabe der Konsensmechanismen ist es also, einen gemeinsamen Zustand zu finden. Die beiden bekanntesten Konsensmechanismen sind Proof-of-Work und Proof-of-Stake.
+
+\subsubsection{Proof-of-Work}
+
+Der \textit{Proof-of-Work} (PoW) ist der Konsensmechanismus, der in der Bitcoin-Blockchain verwendet wird. Der PoW besteht aus dem bereits in Abschnitt \ref{subsec:blockchain_definition} \nameref{subsec:blockchain_definition} beschriebenen kryptografischen Puzzle. Das Lösen des Puzzles durch einen beliebigen Teilnehmer dient als Nachweis für geleistete Rechenarbeit - daher die Bezeichnung \textit{Proof-of-Work} \parencite[S. 27]{Brünnler_BlockchainKurzGut}. 
 
 
 \textbf{\textcolor{red}{Ralph Merkle!}}
 \begin{itemize}
-    \item Was ist Blockchain?
-    \item Wie funktioniert Blockchain?
     \item Konsensmechanismen (PoW, PoS)
     \item Warum ist Blockchain sicher?
     \item Angriffe auf Blockchain (Sybil, 51\%, etc.)
