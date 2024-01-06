@@ -34,8 +34,7 @@ Nicht jedes Peer-to-Peer-Netzwerk ist gleich. Es gibt verschiedene Typen von Pee
 Unstrukturierte Netzwerke sind charakterisiert durch ihre fehlende explizite Organisationsstruktur, was eine einfache Konnektivität ermöglicht. \textit{Typ A} in Abbildung \ref{p2p_typen} zeigt ein zentralisiertes Netzwerk, was bedeutet, dass alle Teilnehmer mit einem zentralen Server verbunden sind. Als Beispiel für diese Form des Peer-to-Peer dient \textit{Napster}. Bei \textit{Napster} gab es mehrere Server, die die Dateien der Teilnehmer indizierten. Die Teilnehmer konnten Dateien von anderen Teilnehmern herunterladen, indem sie eine Anfrage an einen der Server stellten, der dann die IP-Adresse des Teilnehmers zurückgab, der die Datei zur Verfügung stellte \parencite[S. 171]{Saroiu_MeasuringAndAnalyzingNapsterAndGnutellaHosts}. Diese Form ermöglicht eine schnelle und effiziente Suche nach Ressourcen, da die Ressourcen zentral verwaltet werden, aber die Abhängigkeit von einem zentralen Server macht das Netzwerk nicht skalierbar und anfällig für Ausfälle \parencite[S. 732]{Khatibi_StructuredUnstructuredP2P}.
 Bei \textit{Typ B} handelt es sich um ein reines Peer-to-Peer-Netzwerk, bei dem die Teilnehmer direkt miteinander verbunden sind und jeder sowohl als Client als auch als Server fungiert \parencite[S. 732]{Khatibi_StructuredUnstructuredP2P}. Ein Beispiel für diese Form des Peer-to-Peer ist \textit{Gnutella}. Bei \textit{Gnutella} gab es keine zentrale Instanz, die die Ressourcen der Teilnehmer indizierte. Die Suche nach Ressourcen oder Informationen erfolgt durch Broadcasts oder zufällige Weiterleitungen, was jedoch zu ineffizienten Suchprozessen führen kann, da keine klare Routing-Struktur vorhanden ist \parencite[S. 171]{Saroiu_MeasuringAndAnalyzingNapsterAndGnutellaHosts}. Beim dritten und letzten Typ der unstrukturierten Netzwerke handelt es sich um ein hybrides Peer-to-Peer-Netzwerk, das Elemente aus den beiden anderen Typen kombiniert. In einem hybriden Netzwerk gibt es besondere Knoten (engl. Nodes), die die Funktionen eines Servers, wie beispielsweise Indexierung der Ressourcen, für eine bestimmte Gruppe von Teilnehmern übernehmen. Diese Knoten werden als Superknoten (engl. Super Nodes) bezeichnet. Die Super Nodes selbst sind untereinander dezentralisiert miteinander verbunden. Ein Beispiel für diese Form des Peer-to-Peer ist \textit{Gnutella2} \parencite[S. 732]{Khatibi_StructuredUnstructuredP2P}. 
 
-Strukturierte Peer-to-Peer-Netzwerke hingegen weisen klare Regeln und Algorithmen zur Organisation der Knoten auf. Diese Netzwerke verfügen über eine explizite Organisationsstruktur, sei es eine Ringstruktur, k-bucket basierte Systeme oder andere, die es ermöglichen, effizientes Routing und eine optimierte Ressourcenverwaltung zu erreichen. Durch diese klar definierte Struktur sind strukturierte Netzwerke oft stabiler und bieten eine effizientere Ressourcenlokalisierung im Vergleich zu ihren unstrukturierten Gegenstücken. Allerdings kann diese Stabilität auf Kosten von Flexibilität und Anpassungsfähigkeit gehen, da Änderungen in der Netzwerktopologie oder hohe Dynamik der Knoten schwerer zu handhaben sind \textcolor{red}{[QUELLE]}.
-
+Strukturierte Peer-to-Peer-Netzwerke hingegen weisen klare Regeln und Algorithmen zur Organisation der Knoten auf. Diese Netzwerke verfügen über eine explizite Organisationsstruktur, sei es eine Ringstruktur, k-bucket basierte Systeme oder andere, die es ermöglichen, effizientes Routing und eine optimierte Ressourcenverwaltung zu erreichen. Durch diese klar definierte Struktur sind strukturierte Netzwerke oft stabiler und bieten eine effizientere Ressourcenlokalisierung im Vergleich zu ihren unstrukturierten Gegenstücken. Allerdings kann diese Stabilität auf Kosten von Flexibilität und Anpassungsfähigkeit gehen, da Änderungen in der Netzwerktopologie oder hohe Dynamik der Knoten schwerer zu handhaben sind \parencite[S. 40]{Vu_P2PComputing}.
 
 
 \subsection{Problemstellung und mögliche Lösungen}
@@ -71,21 +70,19 @@ Auch \textit{Pastry} basiert auf einer Ringstruktur und ist darauf ausgerichtet,
 
 % Alle einmal erklären und VERGLEICHEN!
 
-% Warum Kademlia und was die Sicherheitsaspekte angeht, erst in Architektur aufgreifen.
-    % Signaling Server könnte auch mit Anfragen geflutet werden -> der Sever könnte bei jedem checken, ob es sich um einen validen Teilnehmer handelt, was aber sehr aufwändig wäre
-    % wenn Kademlia mit Anfragen geflutet wird, könnte es zu einem Denial of Service kommen, da die Knoten nicht mehr erreichbar sind -> habe aber ja mit dem Signaling Server noch eine weitere Instanz, die die Anfragen entgegen nimmt und weiterleitet
-
-\subsection{Angriffe gegen Kademlia}
+Für den Anwendungsfall des Instant Messaging ist die effektive Bewältigung von \textit{Churn} von entscheidender Bedeutung. Churn bezieht sich auf die häufigen Ein- und Austritte von Teilnehmern in einem Peer-to-Peer-Netzwerk. In einem Instant Messaging Kontext bedeutet dies, dass Benutzer sich ständig anmelden oder abmelden. Ein Protokoll, das gut mit Churn umgehen kann, ist entscheidend, um eine zuverlässige und nahtlose Kommunikation zu gewährleisten. Das richtige Handling von Churn ist daher ein Schlüsselfaktor für die Leistungsfähigkeit und Stabilität eines Instant Messaging Protokolls \parencite[S. 316-317]{Peris_KademliaChurn}.
 
 
+Kademlia ist bekannt für seine Effizienz bei der Skalierung und der Robustheit gegenüber Churn. Es verwendet eine XOR-Metrik, um Peers in einem logarithmischen Adressraum zu organisieren, was zu kurzen Pfaden für Anfragen führt. Dadurch eignet es sich gut für große, dynamische Netzwerke, da es leicht neue Peers integrieren und Ausfälle tolerieren kann \Parencite[postnote]{MedranoChavez_ChordKademliaHighChurnScenarios}.
+
+Chord hingegen basiert auf einem ringförmigen Adressraum, in dem jeder Peer für eine bestimmte Adresse verantwortlich ist. Es bietet eine deterministische Routing-Tabelle und erfordert im Vergleich zu Kademlia weniger Overhead für Routinginformationen. Dies macht Chord gut geeignet für statischere Netzwerke, in denen die Stabilität der Routinginformationen wichtiger ist als die Anpassungsfähigkeit an dynamische Veränderungen.
+
+Pastry verwendet eine gemeinsame Präfix-Länge als Grundlage für die Adressierung und organisiert Peers in einem hyperkubischen Raum. Es bietet eine gute Balance zwischen Effizienz und Skalierbarkeit, indem es kurze Routingpfade mit geringem Overhead ermöglicht. Pastry eignet sich gut für mittelgroße Netzwerke mit moderater Dynamik und bietet eine solide Leistung bei der Bewältigung von Knotenausfällen.
+
+Insgesamt bieten alle drei Algorithmen Lösungen für verteilte Systeme, variierend in ihrer Anpassungsfähigkeit, Skalierbarkeit und Effizienz je nach den spezifischen Anforderungen des Netzwerks. Die Wahl zwischen Kademlia, Chord und Pastry hängt von Faktoren wie der Größe des Netzwerks, der erwarteten Dynamik und der Priorität zwischen Skalierbarkeit und Routingstabilität ab.
 
 
 
 
-% #TODO: Overlay Netzwerk erklären? Kademlia ist ein Overlay Netzwerk
-\begin{itemize}
-    \item Kademlia vs. Angriffe
-    \item Angriffe gegen ICE gucken und erklären
-\end{itemize}
 
 %Firewalls können ebenfalls ein Problem darstellen, da sie den Datenverkehr zwischen dem lokalen Netzwerk und dem externen Netzwerk überwachen und filtern. Sie können den Datenverkehr blockieren, wenn sie verdächtige Aktivitäten erkennen. Dies kann dazu führen, dass die Teilnehmer nicht miteinander kommunizieren können.
