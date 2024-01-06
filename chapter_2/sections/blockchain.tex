@@ -1,17 +1,70 @@
 \section{Blockchain-Technologie}
+\label{sec:blockchain_basics}
+
+
+Christoph Meinel und Tatiana Gayvoronskaya beschreiben die Blockchain-Technologie in ihrem Buch \textit{Blockchain - Hype oder Innovation} wie folgt:
+
+\begin{quote}
+    \textit{Die Innovation der Blockchain-Technologie ist weder ein neuer Verschlüsselungsalgorithmus
+    noch eine „Alientechnologie“, sondern eine erfolgreiche Kombination bereits
+    vorhandener technologischen Ansätze wie Kryptografie, dezentrale Netzwerke und Konsensfindungsmodelle.}\parencite[S. 17]{Meinel_BlockchainHypeInnovation}
+\end{quote}
+
+\noindent Daraus ergibt sich die Frage, was Blockchain eigentlich ist und wie die bereits vorhandenen technologischen Ansätze miteinander vereint werden. Diese Fragen werden in diesem Kapitel beantwortet. Zunächst wird der Begriff Blockchain definiert und anschließend die Funktionsweise erläutert. Daraufhin werden die Konsensmechanismen Proof-of-Work und Proof-of-Stake vorgestellt. Abschließend wird auf die Sicherheit von Blockchain eingegangen und Angriffe auf Blockchain werden erläutert.
+
+\subsection{Definition}
+\label{subsec:blockchain_definition}
+
+Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (Block) und \textit{chain} (Kette) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:blockchain} zu sehen ist, beinhaltet ein Block den Block-Header und mehrere Transaktionen. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{images/blockchain_block.png}
+    \caption{Aufbau eines Blocks \parencite[S. 11]{Fill_BlockchainGrundlagen}}
+    \label{fig:blockchain}
+\end{figure}
+
+
+\noindent Der Block-Header enthält Informationen über den Block, wie zum Beispiel den Hash des vorherigen Blocks, die Schwierigkeit, den Zeitstempel und die Nonce. Die Schwierigkeit wird durch das \textit{Target}-Feld angegeben und beschreibt, wie schwer es ist, das kryptografische Puzzle zu lösen und damit auch wie schwer es ist, einen neuen Block an die Blockchain anzuhängen. Die Suche nach der Lösung dieses Puzzles wird auch als \textit{Mining} bezeichnet. Der erste, der das Puzzle löst, präsentiert als Beweis dieser Lösung die sogenannte \textit{Nonce}. Nachdem diese neue Version der Blockchain (mit dem neu angehängten Block) an alle anderen Teilnehmer verteilt wurde, kann jeder Teilnehmer überprüfen, ob die Lösung korrekt ist. Die Nonce ist eine zufällige Zahl, die bei der Lösung des Puzzles verwendet wird und aufwändig zu berechnen ist. Durch den Verweis im Block-Header auf den vorherigen Block entsteht eine Kette von Blöcken (siehe Abbildung \ref{fig:chain_of_blocks}), die \textit{Blockchain} genannt wird \parencite[S. 10-12]{Fill_BlockchainGrundlagen}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/chain_of_blocks.png}
+    \caption{Kette aus Blöcken \parencite[S. 12]{Fill_BlockchainGrundlagen}}
+    \label{fig:chain_of_blocks}
+\end{figure}
+
+% Die Transaktionen enthalten jeweils Informationen zum Sender, dem Empfänger und dem Betrag.
+
+\subsection{Funktionsweise}
+\label{subsec:blockchain_funktionsweise}
+
+Die Blockchain funktioniert durch die Kombination von verschiedenen Technologien. Die wichtigsten sind Kryptografie, dezentrale Netzwerke und Konsensmechanismen. Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet.
+
+Hash-Funktionen können dazu verwendet werden, um die Integrität von Daten zu gewährleisten. Eine Hash-Funktion bildet eine beliebig lange Eingabe auf eine feste Länge ab. Kryptografische Hash-Funktionen sind Hash-Funktionen, die bestimmte Eigenschaften erfüllen müssen. Die beiden wichtigsten Eigenschaften sind die \textit{Einwegfunktion} und die \textit{Kollisionsresistenz}. Eine Hash-Funktion erfüllt die Eigenschaft der Einwegfunktion, wenn es nicht möglich ist, von der Ausgabe auf die Eingabe zu schließen. Das bedeutet, dass es nicht möglich ist, aus dem Hash-Wert die ursprünglichen Daten zu rekonstruieren. Die Eigenschaft der \textit{Kollisionsresistenz} ist erfüllt, wenn es nicht möglich ist, zwei verschiedene Eingaben zu finden, die auf den gleichen Hash-Wert abgebildet werden \parencites[S. 12-13]{Brünnler_BlockchainKurzGut}[S. 6]{Fill_BlockchainGrundlagen}.
+
+Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut Definition der Einwegfunktion ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencite[S. 6-7]{Fill_BlockchainGrundlagen}.
+
+Ein \textit{Merkle-Baum} ist ein binärer Baum, bei dem jeder Knoten den Hash-Wert seiner Kinder enthält. Der nach seinem Erfinder Ralph Merkle benannten Hash-Baum wird in der Blockchain zum Aufbau von Datenstrukturen verwendet. Der Hash-Wert der Wurzel des Baumes wird auch als \textit{Root-Hash} oder \textit{Merkle-Root} bezeichnet. Wenn sich ein Blatt des Baumes ändert, ändert sich auch der Hash-Wert der Wurzel. Dadurch kann überprüft werden, ob sich die Daten geändert haben. Wenn sich die Daten geändert haben, ändert sich auch der Root-Hash. Wenn sich die Daten nicht geändert haben, bleibt der Root-Hash gleich. Dadurch kann die Integrität der Daten überprüft werden \parencite[S. 7-8]{Fill_BlockchainGrundlagen}. In Abbildung is der Aufbau eines Merkle-Baumes zu sehen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/merkle_tree.png}
+    \caption{Aufbau eines Merkle-Baumes \parencite[S. 8]{Fill_BlockchainGrundlagen}}
+    \label{fig:merkle_tree}
+\end{figure}
+
+
+
+
+%\subsection{Konsensmechanismen}
+
+
 \textbf{\textcolor{red}{Ralph Merkle!}}
-Die Blockchain-Technologie ist... . Blockchains sind auch bekannt als Distributed Ledger Technology (DLT) und das sind auch nur verteilte Datenbanken. Die Blockchain ist eine spezielle Form der DLT. Die Blockchain ist eine Kette von Blöcken, die jeweils einen Hash des vorherigen Blocks enthalten. Die Blockchain ist eine dezentrale Datenbank, die von allen Teilnehmern des Netzwerks verwaltet wird.
-
-Proof of Work und Proof of Stake sind zwei verschiedene Konsensmechanismen, die verwendet werden, um die Blockchain zu validieren. Proof of Work ist der Konsensmechanismus, der von Bitcoin verwendet wird. Proof of Stake ist der Konsensmechanismus, der von Ethereum (2.0) verwendet wird.
-
-Der bekannteste Anwendungsfall für Blockchain ist Bitcoin. Bitcoin ist eine Kryptowährung, die auf der Blockchain-Technologie basiert. Bitcoin wurde 2008 von Satoshi Nakamoto entwickelt und ist seitdem stetig gewachsen. Bitcoin ist eine dezentrale Kryptowährung, die von niemandem kontrolliert wird.
-
-Eine weitere bekannte Anwendung für Blockchain ist Ethereum. Ethereum ist eine dezentrale Plattform, die es ermöglicht, Smart Contracts zu erstellen und auszuführen. Smart Contracts sind Programme, die auf der Blockchain ausgeführt werden und die Möglichkeit bieten, Transaktionen und Verträge zu erstellen, die automatisch ausgeführt werden, sobald bestimmte Bedingungen erfüllt sind. Ethereum ist eine der bekanntesten und am weitesten verbreiteten Blockchain-Plattformen. Die Plattform wurde 2015 von Vitalik Buterin entwickelt und ist seitdem stetig gewachsen.
-
-
-Auf der Ethereum-Blockchain wird hauptsächlich Programmiersprache Solidity verwendet, um Smart Contracts zu erstellen. Solidity ist eine objektorientierte Programmiersprache, die stark an JavaScript angelehnt ist \parencite[S. 131]{Antonopoulos_MasteringEthereum}. Die Smart Contracts, die für das Protokoll benötigt werden, sind in Solidity implementiert. Die Smart Contracts werden auf der Ethereum-Blockchain ausgeführt und können von jedem Teilnehmer des Netzwerks aufgerufen werden.
-
 \begin{itemize}
+    \item Was ist Blockchain?
+    \item Wie funktioniert Blockchain?
+    \item Konsensmechanismen (PoW, PoS)
     \item Warum ist Blockchain sicher?
     \item Angriffe auf Blockchain (Sybil, 51\%, etc.)
 \end{itemize}
