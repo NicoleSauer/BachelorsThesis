@@ -13,7 +13,7 @@ Christoph Meinel und Tatiana Gayvoronskaya beschreiben die Blockchain-Technologi
     vorhandener technologischen Ansätze wie Kryptografie, dezentrale Netzwerke und Konsensfindungsmodelle.}\parencite[S. 17]{Meinel_BlockchainHypeInnovation}
 \end{quote}
 
-\noindent Daraus ergibt sich die Frage, was Blockchain eigentlich ist und wie die bereits vorhandenen technologischen Ansätze miteinander vereint werden. Diese Fragen werden in diesem Kapitel beantwortet. Zunächst wird der Begriff Blockchain definiert und anschließend die Funktionsweise erläutert. Daraufhin werden die Konsensmechanismen Proof-of-Work und Proof-of-Stake vorgestellt. Abschließend wird auf die Sicherheit von Blockchain eingegangen und Angriffe auf Blockchain werden erläutert.
+\noindent Daraus ergibt sich die Frage, was Blockchain eigentlich ist und wie die bereits vorhandenen technologischen Ansätze miteinander vereint werden. Diese Fragen werden in diesem Kapitel beantwortet. Zunächst wird der Begriff Blockchain definiert und anschließend die Funktionsweise erläutert. Daraufhin werden die Konsensmechanismen\textit{Proof-of-Work} und \textit{Proof-of-Stake} vorgestellt. Abschließend wird auf die Sicherheit von Blockchain eingegangen und Angriffe auf Blockchain werden erläutert.
 % #TODO: Distributed Ledger als Vorgänger zu Blockchain erwähnen?
 
 \subsection{Definition von Blockchain}
@@ -72,39 +72,39 @@ In einem dezentralen Netzwerk müssen sich die Teilnehmer auf einen gemeinsamen,
 
 \subsubsection{Proof-of-Work vs. Proof-of-Stake}
 
-Der \textit{Proof-of-Work} (PoW) ist der Konsensmechanismus, der in der Bitcoin-Blockchain verwendet wird. Der PoW besteht aus dem bereits in Abschnitt \ref{subsec:blockchain_definition} \nameref{subsec:blockchain_definition} beschriebenen kryptografischen Puzzle. Das Lösen des Puzzles durch einen beliebigen Teilnehmer dient als Nachweis für geleistete Rechenarbeit - daher die Bezeichnung \textit{Proof-of-Work} \parencite[S. 27]{Brünnler_BlockchainKurzGut}. Ein großer Nachteil bei Proof-of-Work ist der hohe Energieverbrauch, der dem hohen Rechenaufwand zum Lösen des Puzzles geschuldet ist \parencite{Zhang_EvaluationOfEnergyConsumptionInBlockChains}. 
+Der \textit{Proof-of-Work} (PoW) ist der Konsensmechanismus, der in der Bitcoin-Blockchain verwendet wird. Bitcoin wurde 2008 von Satoshi Nakamoto in einem Whitepaper vorgestellt und ist die erste dezentrale Kryptowährung \parencites{Nakamoto_Bitcoin}{Zhang_DoubleSpendingWithASybilAttack}. Der PoW besteht aus dem bereits in Abschnitt \ref{subsec:blockchain_definition} \nameref{subsec:blockchain_definition} beschriebenen kryptografischen Puzzle. Das Lösen des Puzzles durch einen beliebigen Teilnehmer dient als Nachweis für geleistete Rechenarbeit - daher die Bezeichnung \textit{Proof-of-Work} \parencite[S. 27]{Brünnler_BlockchainKurzGut}. Ein großer Nachteil bei Proof-of-Work ist der hohe Energieverbrauch, der dem hohen Rechenaufwand zum Lösen des Puzzles geschuldet ist \parencite{Zhang_EvaluationOfEnergyConsumptionInBlockChains}. Die Website \textit{Digiconomist.net} führt einen Energieindex für Bitcoin, der den Energieverbrauch von Bitcoin in Relation zu verschiedenen Ländern setzt. Aktuell benötigt Bitcoin jährlich rund $144$ TWh, was ungefähr dem Energieverbrauch von Schweden entspricht \parencite{Digiconomist_BitcoinEnergyConsumption}.
 
 
-Der \textit{Proof-of-Stake} (PoS) ist ein alternativer Konsensmechanismus. Im Gegensatz zum PoW wird beim PoS kein kryptografisches Puzzle gelöst. Stattdessen wird ein Teilnehmer ausgewählt, der einen neuen Block an die Blockchain anhängen darf. Die Auswahl erfolgt zufällig, wobei die Wahrscheinlichkeit, ausgewählt zu werden, von der Anzahl der Coins abhängt, die der Teilnehmer besitzt (Stake). Wenn ein Teilnehmer beispielsweise 10\% aller Coins besitzt, hat er eine 10\%ige Chance, ausgewählt zu werden. Der Teilnehmer, der ausgewählt wurde, wird auch als \textit{Validator} bezeichnet. Der Validator kann dann einen neuen Block an die Blockchain anhängen. Wenn der Validator einen Block an die Blockchain anhängt, erhält er eine Belohnung. Wenn er allerdings einen Block an die Blockchain anhängt, der ungültig ist, verliert er einen Teil seiner Coins. Dadurch wird sichergestellt, dass von den Validatoren nur gültige Blöcke an die Blockchain anhängt werden \parencites[S. 96-97]{Kapengut_EthereumTransitionToProofOfStake}[S. 34]{Meinel_BlockchainHypeInnovation}[S. 320-321]{Antonopoulos_MasteringEthereum}.
+Der \textit{Proof-of-Stake} (PoS) ist ein alternativer Konsensmechanismus. Im Gegensatz zum PoW wird beim PoS kein kryptografisches Puzzle gelöst. Stattdessen wird ein Teilnehmer ausgewählt, der einen neuen Block an die Blockchain anhängen darf. Die Auswahl erfolgt zufällig, wobei die Wahrscheinlichkeit, ausgewählt zu werden, von der Anzahl der Coins abhängt, die der Teilnehmer besitzt (Stake). Wenn ein Teilnehmer beispielsweise 10\% aller Coins besitzt, hat er eine 10\%ige Chance, ausgewählt zu werden. Der Teilnehmer, der ausgewählt wurde, wird auch als \textit{Validator} bezeichnet. Der Validator kann dann einen neuen Block an die Blockchain anhängen. Wenn der Validator einen Block an die Blockchain anhängt, erhält er eine Belohnung. Wenn er allerdings einen Block an die Blockchain anhängt, der ungültig ist, verliert er einen Teil seiner Coins. Dadurch wird sichergestellt, dass von den Validatoren nur gültige Blöcke an die Blockchain angehängt werden \parencites[S. 96-97]{Kapengut_EthereumTransitionToProofOfStake}[S. 34]{Meinel_BlockchainHypeInnovation}[S. 320-321]{Antonopoulos_MasteringEthereum}.
 
 % #TODO: Vergleich drinlassen?
-Die beiden Konsensmechanismen unterscheiden sich grundlegend in ihrer Funktionsweise. PoW, das beispielsweise von Bitcoin genutzt wird, erfordert von Minern, komplexe mathematische Rätsel zu lösen. Diese Rätsel sind rechenintensiv und benötigen viel Energie. Der Miner, der das Rätsel zuerst löst, kann einen neuen Block hinzufügen und erhält Belohnungen. PoW ist bekannt für:
+Die beiden Konsensmechanismen unterscheiden sich grundlegend in ihrer Funktionsweise. PoW, das von Bitcoin genutzt wird, erfordert von Minern, komplexe mathematische Rätsel zu lösen, welche rechenintensiv sind und deshalb viel Energie benötigen. Der Miner, der das Rätsel zuerst löst, kann einen neuen Block hinzufügen und erhält eine Belohnung in Form von Kryptowährung \parencite{Fill_BlockchainGrundlagen}. PoW ist bekannt für:
 
 \begin{itemize}
-    \item Energieintensität: PoW erfordert hohe Rechenleistung und verbraucht viel Energie, was Umweltbedenken aufwirft.
-    \item Sicherheit: Das Netzwerk ist widerstandsfähig gegen Angriffe, da ein Angreifer die Kontrolle über die Mehrheit der Rechenleistung benötigt.
+    \item Energieintensität: PoW erfordert hohe Rechenleistung und verbraucht viel Energie, was Umweltbedenken aufwirft \parencite[S. 96-97]{Kapengut_EthereumTransitionToProofOfStake}.
+    \item Sicherheit: Das Netzwerk ist widerstandsfähig gegen Angriffe, da ein Angreifer die Kontrolle über die Mehrheit der Rechenleistung benötigt, um das Netzwerk zu übernehmen, was sehr teuer ist.
 \end{itemize}
 
-Im Gegensatz dazu nutzt PoS den Besitz von Kryptowährung als Sicherheitsfaktor. Validatoren werden auf Basis ihres Einsatzes (Stake) ausgewählt, um Transaktionen zu bestätigen. PoS bietet:
+\noindent Im Gegensatz dazu nutzt PoS den Besitz von Kryptowährung als Sicherheitsfaktor. Validatoren werden auf Basis ihres Einsatzes (engl. \textit{Stake}) ausgewählt, um Transaktionen zu bestätigen \parencites[S. 34]{Meinel_BlockchainHypeInnovation}[S. 320-321]{Antonopoulos_MasteringEthereum}. PoS bietet:
 
 \begin{itemize}
-    \item Energieeffizienz: PoS ist energieeffizienter, da es nicht die immense Rechenleistung von PoW erfordert.
-    \item Sicherheit durch Einsätze: Die ValidatorInnen haben einen Anreiz, sich ehrlich zu verhalten, da sie ihren Einsatz verlieren könnten, wenn sie betrügen.
+    \item Energieeffizienz: PoS ist energieeffizienter, da es nicht die immense Rechenleistung von PoW erfordert \parencite[S. 96-97]{Kapengut_EthereumTransitionToProofOfStake}.
+    \item Sicherheit durch Einsätze: Die ValidatorInnen haben einen Anreiz, sich ehrlich zu verhalten, da sie ihren Einsatz verlieren könnten, wenn sie betrügen \parencites[S. 34]{Meinel_BlockchainHypeInnovation}[S. 320-321]{Antonopoulos_MasteringEthereum}.
 \end{itemize}
 
-Zusammenfassend: PoW ist energieintensiver und bietet Sicherheit durch Rechenleistung, während PoS energieeffizienter ist und Sicherheit durch den Einsatz von Kryptowährung gewährleistet. Beide Mechanismen haben Vor- und Nachteile, und ihre Anwendung hängt von den spezifischen Anforderungen und Zielen des jeweiligen Blockchain-Netzwerks ab. \textbf{\textcolor{red}{(Quelle finden)}}
+\noindent Zusammenfassend: PoW ist energieintensiver und bietet Sicherheit durch Rechenleistung, während PoS energieeffizienter ist und Sicherheit durch den Einsatz von Kryptowährung gewährleistet. Beide Mechanismen haben Vor- und Nachteile, und ihre Anwendung hängt von den spezifischen Anforderungen und Zielen des jeweiligen Blockchain-Netzwerks ab.
 
 
 \subsection{Sicherheit von Blockchain}
 
-Die Blockchain gilt als sicher, da sie auf verschiedenen kryptografischen Technologien basiert (siehe Abschnitt \ref{subsec:cryptography_basics} \nameref{subsec:cryptography_basics}). Hinzu kommt die Unveränderlichkeit der Blockchain, was bedeutet, dass einmal geschriebene Transaktionen nach der Bestätigung durch den Konsensmechanismus als unveränderlich gelten. Da Blöcke durch kryptografische Hashes verknüpft sind, wäre eine nachträgliche Änderung äußerst rechenintensiv und offensichtlich, da alle nachfolgenden Blöcke ebenfalls verändert werden müssten. Zusätzlich zu diesen Grundlagen sind Sicherheitsmaßnahmen entscheidend. Anreizstrukturen belohnen Miner/Validatoren für ehrliches Handeln und bestrafen bösartiges Verhalten, was als Abschreckung dient. Die dezentrale Natur der Blockchain macht sie widerstandsfähig gegen verschiedene Angriffe, da es keinen einzelnen Angriffspunkt gibt.
+Die Blockchain gilt als sicher, da sie auf verschiedenen kryptografischen Technologien basiert (siehe Abschnitt \ref{subsec:cryptography_basics} \nameref{subsec:cryptography_basics}). Hinzu kommt die Unveränderlichkeit der Blockchain, was bedeutet, dass einmal geschriebene Transaktionen nach der Bestätigung durch den Konsensmechanismus als unveränderlich gelten \Parencite[S. 1-2]{Landerreche_ImmutabilityOfBlockchains}. Da Blöcke durch kryptografische Hashes verknüpft sind, wäre eine nachträgliche Änderung äußerst rechenintensiv und offensichtlich, da alle nachfolgenden Blöcke ebenfalls verändert werden müssten. Zusätzlich zu diesen Grundlagen sind Sicherheitsmaßnahmen entscheidend. Anreizstrukturen belohnen Miner/Validatoren für ehrliches Handeln und bestrafen bösartiges Verhalten, was als Abschreckung dient. Die dezentrale Natur der Blockchain macht sie widerstandsfähig gegen verschiedene Angriffe, da es keinen einzelnen Angriffspunkt gibt.
 
 Letztendlich unterliegt die Sicherheit der Blockchain jedoch keinem absoluten Schutz. Risiken wie 51\%-Angriffe oder Schwachstellen in spezifischen Implementierungen können weiterhin Bedrohungen darstellen. Daher sind kontinuierliche Forschung, Protokollaktualisierungen und bewährte Sicherheitspraktiken entscheidend, um Risiken zu minimieren und die Sicherheit der Blockchain weiter zu verbessern \textbf{\textcolor{red}{(Quelle finden)}}.
 
 
 \subsection{Angriffe auf Blockchain}
 
-Die Blockchain-Technologie ist nicht immun gegen Angriffe. Es gibt verschiedene Angriffe, die auf Blockchain durchgeführt werden können. Die bekanntesten Angriffe sind der 51\%-Angriff, der Sybil-Angriff und der Eclipse-Angriff. Diese Angriffe werden in den folgenden Abschnitten erläutert.
+Die Blockchain-Technologie ist nicht immun gegen Angriffe. Es gibt verschiedene Angriffe, die auf Blockchains durchgeführt werden können. Die bekanntesten Angriffe sind der 51\%-Angriff und der Sybil-Angriff. Diese Angriffe werden in den folgenden Abschnitten erläutert.
 
 \subsubsection{51\%-Angriff}
 
@@ -113,7 +113,7 @@ Ein 51\%-Angriff ist ein potenziell bedrohlicher Angriff auf eine Blockchain, be
 
 
 \begin{itemize}
-    \item Angriffe auf Blockchain (51\%-Angriff, Sybil-Angriff, Eclipse-Angriff, ...)
+    \item Angriffe auf Blockchain (51\%-Angriff, Sybil-Angriff)
 \end{itemize}
 
 \input{chapter_2/sections/subsections/ethereum.tex}
