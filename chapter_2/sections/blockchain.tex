@@ -19,13 +19,13 @@ Christoph Meinel und Tatiana Gayvoronskaya beschreiben die Blockchain-Technologi
 \subsection{Definition von Blockchain}
 \label{subsec:blockchain_definition}
 
-Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (Block) und \textit{chain} (Kette) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:blockchain} zu sehen ist, beinhaltet ein Block den Block-Header und mehrere Transaktionen. 
+Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (Block) und \textit{chain} (Kette) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:block} zu sehen ist, beinhaltet ein Block den Block-Header und mehrere Transaktionen. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{images/blockchain_block.png}
     \caption{Aufbau eines Blocks \parencite[S. 11]{Fill_BlockchainGrundlagen}}
-    \label{fig:blockchain}
+    \label{fig:block}
 \end{figure}
 
 
@@ -38,8 +38,6 @@ Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{b
     \label{fig:chain_of_blocks}
 \end{figure}
 
-% Die Transaktionen enthalten jeweils Informationen zum Sender, dem Empfänger und dem Betrag.
-
 
 \subsection{Kryptografische Grundlagen}
 \label{subsec:cryptography_basics}
@@ -48,27 +46,37 @@ Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäum
 
 Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut Definition der Einwegfunktion ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencites[S. 6-7]{Fill_BlockchainGrundlagen}[S. 320]{Antonopoulos_MasteringEthereum}.
 
-Ein \textit{Merkle-Baum} ist ein binärer Baum, bei dem jeder Knoten den Hash-Wert seiner Kinder enthält. Der nach seinem Erfinder Ralph Merkle benannten Hash-Baum wird in der Blockchain zum Aufbau von Datenstrukturen verwendet. Der Hash-Wert der Wurzel des Baumes wird auch als \textit{Root-Hash} oder \textit{Merkle-Root} bezeichnet. Wenn sich ein Blatt des Baumes ändert, ändert sich auch der Hash-Wert der Wurzel. Dadurch kann überprüft werden, ob sich die Daten geändert haben. Wenn sich die Daten geändert haben, ändert sich auch der Root-Hash. Wenn sich die Daten nicht geändert haben, bleibt der Root-Hash gleich. Dadurch kann die Integrität der Daten überprüft werden \parencite[S. 7-8]{Fill_BlockchainGrundlagen}. In Abbildung is der Aufbau eines Merkle-Baumes zu sehen.
+Ein \textit{Merkle-Baum} ist ein binärer Baum, bei dem jeder Knoten den Hash-Wert seiner Kinder enthält. Der nach seinem Erfinder Ralph Merkle benannten Hash-Baum wird in der Blockchain zum Aufbau von Datenstrukturen verwendet. Der Hash-Wert der Wurzel des Baumes wird auch als \textit{Root-Hash} oder \textit{Merkle-Root} bezeichnet (siehe Abbildung \ref{fig:block}: \textit{Root-Hash}). Wenn sich ein Blatt des Baumes ändert, ändert sich auch der Hash-Wert der Wurzel. Dadurch kann überprüft werden, ob sich die Daten geändert haben. Wenn sich die Daten geändert haben, ändert sich auch der Root-Hash. Wenn sich die Daten nicht geändert haben, bleibt der Root-Hash gleich. Dadurch kann die Integrität der Daten überprüft werden \parencite[S. 7-8]{Fill_BlockchainGrundlagen}. In Abbildung is der Aufbau eines Merkle-Baumes zu sehen, der aus vier Transaktionen besteht.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/merkle_tree.png}
-    \caption{Aufbau eines Merkle-Baumes \parencite[S. 8]{Fill_BlockchainGrundlagen}}
+    \includegraphics[width=0.9\linewidth]{images/merkle_tree_modified.png}
+    \caption{Aufbau eines Merkle-Baumes (in Anlehnung an \cite[S. 8]{Fill_BlockchainGrundlagen})}
     \label{fig:merkle_tree}
 \end{figure}
 
-\noindent Von jedem Dokument $D_{1}$, $D_{2}$, $D_{3}$ und $D_{4}$ wird ein Hash-Wert berechnet und in einem Blatt des Baumes gespeichert. Die Hash-Werte der Blätter werden dann paarweise gehasht und in den Knoten darüber gespeichert. Dieser Vorgang wird solange wiederholt, bis nur noch ein Knoten übrig ist. Dieser Knoten enthält den Root-Hash. Sollte sich ein Dokument ändern, ändert sich auch der Root-Hash. Außerdem kann bewiesen werden, dass beispielsweise $D_{2}$ Teil des Baumes ist, indem mit dem Hash-Wert von $D_{2}$ und den Hash-Werten von $D_{1}$, $D_{3}$ und $D_{4}$ versucht wird, den Root-Hash zu berechnen. Wenn der berechnete Root-Hash mit dem tatsächlichen Root-Hash übereinstimmt, ist bewiesen, dass $D_{2}$ Teil des Baumes ist \parencite[S. 9]{Fill_BlockchainGrundlagen}.
+\noindent Von jeder Transaktion $T_{1}$, $T_{2}$, $T_{3}$ und $T_{4}$ wird ein Hash-Wert berechnet und in einem Blatt des Baumes gespeichert. Die Hash-Werte der Blätter werden dann paarweise gehasht und in den Knoten darüber gespeichert. Dieser Vorgang wird solange wiederholt, bis nur noch ein Knoten übrig ist. Dieser Knoten enthält den Root-Hash. Sollte sich eine Transaktion ändern, ändert sich auch der Root-Hash. Außerdem kann bewiesen werden, dass beispielsweise $T_{2}$ Teil des Baumes ist, indem mit dem Hash-Wert von $T_{2}$ und den Hash-Werten von $T_{1}$, $T_{3}$ und $T_{4}$ versucht wird, den Root-Hash zu berechnen. Wenn der berechnete Root-Hash mit dem tatsächlichen Root-Hash übereinstimmt, ist bewiesen, dass $T_{2}$ Teil des Baumes ist \parencite[S. 9]{Fill_BlockchainGrundlagen}.
 
-Ein weitere Technologie aus der Kryptografie, die in der Blockchain verwendet wird, sind digitale Signaturen. Digitale Signaturen werden verwendet, um die Authentizität von Daten zu gewährleisten. Wenn zwei Benutzer Alice und Bob miteinander kommunizieren wollen, kann Alice eine Nachricht an Bob senden. Jeder Benutzer hat einen privaten und einen öffentlichen Schlüssel. Der öffentliche Schlüssel darf beliebig verteilt werden, während der private Schlüssel geheim gehalten werden muss. Wenn Alice eine Nachricht an Bob senden möchte, kann sie die Nachricht mit ihrem privaten Schlüssel signieren. Bob kann dann die Signatur mit dem öffentlichen Schlüssel von Alice überprüfen. Wenn die Signatur gültig ist, kann Bob sicher sein, dass die Nachricht von Alice stammt. Wenn die Signatur wiederum ungültig ist, kann Bob sicher sein, dass die Nachricht nicht von Alice stammt \parencite[S. 9-10]{Fill_BlockchainGrundlagen}.
+Die folgende Abbildung zeigt das Zusammenspiel von Blöcken, Transaktionen und Merkle-Bäumen:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{images/chain_of_blocks_with_merkle_tree.png}
+    \caption{Verkettete Blöcke mit Transaktionen im Block-Body \parencite[S. 95035]{Nam_51PercentAttacks}}
+    \label{fig:chain_of_blocks_with_merkle_tree}
+\end{figure}
+
+
+\noindent Eine weitere Technologie aus der Kryptografie, die in der Blockchain verwendet wird, sind digitale Signaturen. Digitale Signaturen werden verwendet, um die Authentizität von Daten zu gewährleisten. Wenn zwei Benutzer Alice und Bob miteinander kommunizieren wollen, kann Alice eine Nachricht an Bob senden. Jeder Benutzer hat einen privaten und einen öffentlichen Schlüssel. Der öffentliche Schlüssel darf beliebig verteilt werden, während der private Schlüssel geheim gehalten werden muss. Wenn Alice eine Nachricht an Bob senden möchte, kann sie die Nachricht mit ihrem privaten Schlüssel signieren. Bob kann dann die Signatur mit dem öffentlichen Schlüssel von Alice überprüfen. Wenn die Signatur gültig ist, kann Bob sicher sein, dass die Nachricht von Alice stammt. Wenn die Signatur wiederum ungültig ist, kann Bob sicher sein, dass die Nachricht nicht von Alice stammt \parencite[S. 9-10]{Fill_BlockchainGrundlagen}.
 
 
 \subsection{Dezentrale Netzwerke}
 
-Blockchains basieren auf einem Peer-to-Peer-Netzwerk. Ein Peer-to-Peer-Netzwerk ist ein Netzwerk, bei dem alle Teilnehmer gleichberechtigt sind. Es gibt keinen zentralen Server, der die Daten verwaltet. Stattdessen werden die Daten auf allen Teilnehmern des Netzwerkes gespeichert. Wenn ein Teilnehmer Daten an das Netzwerk senden möchte, sendet er die Daten an alle anderen Teilnehmer des Netzwerkes. Wenn ein Teilnehmer Daten vom Netzwerk empfangen möchte, empfängt er die Daten von allen anderen Teilnehmern des Netzwerkes. Dadurch ist es nicht möglich, das Netzwerk zu manipulieren, da die Daten auf allen Teilnehmern des Netzwerkes gespeichert sind. Wenn ein Teilnehmer versucht, die Daten zu manipulieren, wird dies von den anderen Teilnehmern bemerkt und die manipulierten Daten werden nicht akzeptiert \parencite[S. 10]{Fill_BlockchainGrundlagen}.
+Blockchains basieren auf einem Peer-to-Peer-Netzwerk. Ein Peer-to-Peer-Netzwerk ist ein Netzwerk, bei dem alle Teilnehmer gleichberechtigt sind. Es gibt keinen zentralen Server, der die Daten verwaltet. Stattdessen werden die Daten auf allen Teilnehmern des Netzwerkes gespeichert. Wenn ein Teilnehmer Daten an das Netzwerk senden möchte, sendet er die Daten an alle anderen Teilnehmer des Netzwerkes. Wenn ein Teilnehmer Daten vom Netzwerk empfangen möchte, empfängt er die Daten von allen anderen Teilnehmern des Netzwerkes. Dadurch ist es nicht möglich, das Netzwerk zu manipulieren, da die Daten auf allen Teilnehmern des Netzwerkes gespeichert sind. Wenn ein Teilnehmer versucht, die Daten zu manipulieren, wird dies von den anderen Teilnehmern bemerkt und die manipulierten Daten werden nicht akzeptiert \parencite[S. 10/31]{Fill_BlockchainGrundlagen}.
 
 \subsection{Konsensmechanismen}
 
-In einem dezentralen Netzwerk müssen sich die Teilnehmer auf einen gemeinsamen, für alle \textit{richtigen}, Zustand einigen. Dieser Zustand kann beispielsweise die Reihenfolge der getätigten Transaktionen sein. Wenn sich die Teilnehmer nicht auf einen gemeinsamen \textit{Konsens} einigen können, kann das Netzwerk nicht funktionieren. Die Aufgabe der Konsensmechanismen ist es also, einen gemeinsamen Zustand zu finden. Die beiden bekanntesten Konsensmechanismen sind \textit{Proof-of-Work} und \textit{Proof-of-Stake}.
+In einem dezentralen Netzwerk müssen sich die Teilnehmer auf einen gemeinsamen, für alle \textit{richtigen}, Zustand einigen. Dieser Zustand kann beispielsweise die Reihenfolge der getätigten Transaktionen sein. Wenn sich die Teilnehmer nicht auf einen gemeinsamen \textit{Konsens} einigen können, kann das Netzwerk nicht funktionieren. Die Aufgabe der Konsensmechanismen ist es also, einen gemeinsamen Zustand zu finden. Die beiden bekanntesten Konsensmechanismen sind \textit{Proof-of-Work} und \textit{Proof-of-Stake} \textcolor{red}{(QUELLE)}.
 
 \subsubsection{Proof-of-Work vs. Proof-of-Stake}
 
@@ -77,7 +85,6 @@ Der \textit{Proof-of-Work} (PoW) ist der Konsensmechanismus, der in der Bitcoin-
 
 Der \textit{Proof-of-Stake} (PoS) ist ein alternativer Konsensmechanismus. Im Gegensatz zum PoW wird beim PoS kein kryptografisches Puzzle gelöst. Stattdessen wird ein Teilnehmer ausgewählt, der einen neuen Block an die Blockchain anhängen darf. Die Auswahl erfolgt zufällig, wobei die Wahrscheinlichkeit, ausgewählt zu werden, von der Anzahl der Coins abhängt, die der Teilnehmer besitzt (Stake). Wenn ein Teilnehmer beispielsweise 10\% aller Coins besitzt, hat er eine 10\%ige Chance, ausgewählt zu werden. Der Teilnehmer, der ausgewählt wurde, wird auch als \textit{Validator} bezeichnet. Der Validator kann dann einen neuen Block an die Blockchain anhängen. Wenn der Validator einen Block an die Blockchain anhängt, erhält er eine Belohnung. Wenn er allerdings einen Block an die Blockchain anhängt, der ungültig ist, verliert er einen Teil seiner Coins. Dadurch wird sichergestellt, dass von den Validatoren nur gültige Blöcke an die Blockchain angehängt werden \parencites[S. 96-97]{Kapengut_EthereumTransitionToProofOfStake}[S. 34]{Meinel_BlockchainHypeInnovation}[S. 320-321]{Antonopoulos_MasteringEthereum}.
 
-% #TODO: Vergleich drinlassen?
 Die beiden Konsensmechanismen unterscheiden sich grundlegend in ihrer Funktionsweise. PoW, das von Bitcoin genutzt wird, erfordert von Minern, komplexe mathematische Rätsel zu lösen, welche rechenintensiv sind und deshalb viel Energie benötigen. Der Miner, der das Rätsel zuerst löst, kann einen neuen Block hinzufügen und erhält eine Belohnung in Form von Kryptowährung \parencite{Fill_BlockchainGrundlagen}. PoW ist bekannt für:
 
 \begin{itemize}
@@ -97,24 +104,32 @@ Die beiden Konsensmechanismen unterscheiden sich grundlegend in ihrer Funktionsw
 
 \subsection{Sicherheit von Blockchain}
 
-Die Blockchain gilt als sicher, da sie auf verschiedenen kryptografischen Technologien basiert (siehe Abschnitt \ref{subsec:cryptography_basics} \nameref{subsec:cryptography_basics}). Hinzu kommt die Unveränderlichkeit der Blockchain, was bedeutet, dass einmal geschriebene Transaktionen nach der Bestätigung durch den Konsensmechanismus als unveränderlich gelten \Parencite[S. 1-2]{Landerreche_ImmutabilityOfBlockchains}. Da Blöcke durch kryptografische Hashes verknüpft sind, wäre eine nachträgliche Änderung äußerst rechenintensiv und offensichtlich, da alle nachfolgenden Blöcke ebenfalls verändert werden müssten. Zusätzlich zu diesen Grundlagen sind Sicherheitsmaßnahmen entscheidend. Anreizstrukturen belohnen Miner/Validatoren für ehrliches Handeln und bestrafen bösartiges Verhalten, was als Abschreckung dient. Die dezentrale Natur der Blockchain macht sie widerstandsfähig gegen verschiedene Angriffe, da es keinen einzelnen Angriffspunkt gibt.
+Die Blockchain gilt als sicher, da sie auf verschiedenen kryptografischen Technologien basiert (siehe Abschnitt \ref{subsec:cryptography_basics} \nameref{subsec:cryptography_basics}). Hinzu kommt die Unveränderlichkeit der Blockchain, was bedeutet, dass einmal geschriebene Transaktionen nach der Bestätigung durch den Konsensmechanismus als unveränderlich gelten und die Blockchain damit eine Fälschungssicherheit bietet \Parencites[S. 1-2]{Landerreche_ImmutabilityOfBlockchains}[S. 70]{Brünnler_BlockchainKurzGut}. Da Blöcke durch kryptografische Hashes verknüpft sind, wäre eine nachträgliche Änderung äußerst rechenintensiv und offensichtlich, da alle nachfolgenden Blöcke ebenfalls verändert werden müssten \Parencite[S. 12]{Fill_BlockchainGrundlagen}. Zusätzlich zu diesen Grundlagen sind Sicherheitsmaßnahmen entscheidend. Anreizstrukturen belohnen Miner/Validatoren für ehrliches Handeln und bestrafen bösartiges Verhalten, was als Abschreckung dient \parencite[S. 320-321]{Antonopoulos_MasteringEthereum}. Die dezentrale Natur der Blockchain macht sie widerstandsfähig gegen verschiedene Angriffe, da es keinen einzelnen Angriffspunkt gibt \parencite[S. 31]{Fill_BlockchainGrundlagen}.
 
 Letztendlich unterliegt die Sicherheit der Blockchain jedoch keinem absoluten Schutz. Risiken wie 51\%-Angriffe oder Schwachstellen in spezifischen Implementierungen können weiterhin Bedrohungen darstellen. Daher sind kontinuierliche Forschung, Protokollaktualisierungen und bewährte Sicherheitspraktiken entscheidend, um Risiken zu minimieren und die Sicherheit der Blockchain weiter zu verbessern \textbf{\textcolor{red}{(Quelle finden)}}.
 
 
 \subsection{Angriffe auf Blockchain}
 
-Die Blockchain-Technologie ist nicht immun gegen Angriffe. Es gibt verschiedene Angriffe, die auf Blockchains durchgeführt werden können. Die bekanntesten Angriffe sind der 51\%-Angriff und der Sybil-Angriff. Diese Angriffe werden in den folgenden Abschnitten erläutert.
+Die Blockchain-Technologie ist nicht immun gegen Angriffe. Es gibt verschiedene Angriffe, die auf Blockchains durchgeführt werden können. Die bekanntesten Angriffe sind der 51\%-Angriff und der Sybil-Angriff \Parencites[S. 95034]{Nam_51PercentAttacks}[S. 251]{Douceur_SybilAttack}. Diese Angriffe werden in den folgenden Abschnitten erläutert.
 
 \subsubsection{51\%-Angriff}
 
-Ein 51\%-Angriff ist ein potenziell bedrohlicher Angriff auf eine Blockchain, bei dem eine einzelne Entität oder eine koordinierte Gruppe die Kontrolle über die Mehrheit der Rechenleistung (bei PoW) oder der Stake (bei PoS) eines Netzwerks erlangt. Dies könnte dazu führen, dass die Angreifer die Blockchain manipulieren, doppelte Ausgaben tätigen oder Transaktionen zensieren können.
+Ein 51\%-Angriff ist ein potenziell bedrohlicher Angriff auf eine Blockchain, bei dem eine einzelne Entität oder eine koordinierte Gruppe die Kontrolle über die Mehrheit der Rechenleistung (bei PoW) oder der Stake (bei PoS) eines Netzwerks erlangt. Dies könnte dazu führen, dass die Angreifer die Blockchain manipulieren, doppelte Ausgaben tätigen (auch als \textit{Double Spending} bekannt) oder Transaktionen zensieren können \Parencites[S. 95034]{Nam_51PercentAttacks}[S. 2]{Rosenfeld_DoubleSpending}.
+
+\subsubsection{Smart Contract Exploits}
+
+Smart Contracts sind Programme, die auf der Blockchain ausgeführt werden. Sie werden mit Hilfe einer Programmiersprache geschrieben und wie auch bei jedem anderen Programm können auch Smart Contracts Fehler enthalten. Wenn ein Fehler in einem Smart Contract identifiziert wird, kann dieser Fehler ausgenutzt werden, um den Smart Contract zu manipulieren. Ein Beispiel für einen Smart Contract Exploit ist der \textit{DAO Hack}. Der DAO Hack ist ein Angriff auf den Smart Contract \textit{The DAO}, der auf der Ethereum-Blockchain ausgeführt wurde. Der Smart Contract wurde so manipuliert, dass der Angreifer Ether im Wert von 50 Millionen US-Dollar stehlen konnte. Der DAO Hack ist ein Beispiel dafür, dass Smart Contracts nicht immun gegen Fehler sind und dass diese Fehler ausgenutzt werden können, um den Smart Contract zu manipulieren.
 
 
 
-\begin{itemize}
-    \item Angriffe auf Blockchain (51\%-Angriff, Sybil-Angriff)
-\end{itemize}
+
+
+
+
+\subsubsection{Sybil-Angriff}
+
+Der Sybil-Angriff ist nicht spezifisch für Blockchain, sondern kann in jedem Peer-to-Peer-Netzwerk durchgeführt werden. Bei diesem Angriff erstellt ein einzelner Angreifer mehrere Identitäten, um die Kontrolle über das Netzwerk zu erlangen. Der Angreifer kann dann die Kontrolle über das Netzwerk übernehmen, indem er die Mehrheit der Identitäten kontrolliert. Der Sybil-Angriff ist nach dem Buch \textit{Sybil} von Flora Rheta Schreiber  aus dem Jahr 1973 benannt, in dem die Geschichte einer Frau mit multipler Persönlichkeitsstörung erzählt wird \parencite[S. 251]{Douceur_SybilAttack}.
 
 \input{chapter_2/sections/subsections/ethereum.tex}
 \input{chapter_2/sections/subsections/smart_contracts.tex}
