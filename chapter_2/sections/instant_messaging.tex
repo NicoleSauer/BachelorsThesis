@@ -13,54 +13,39 @@ Sicherheit und Datenschutz sind in der Welt des Instant Messaging von entscheide
 
 \subsection{IM-Protokolle in der Übersicht}
 
-Es gibt bereits diverse IM-Protokolle, die P2P verwenden. Diese Protokolle werden in diesem Kapitel
-vorgestellt und verglichen. Die Protokolle werden in zwei Kategorien unterteilt: Protokolle, die
-einen zentralen Server verwenden und Protokolle, die P2P verwenden. Die Protokolle, die einen
-zentralen Server verwenden, werden in zwei weitere Kategorien unterteilt: Protokolle, die
-einen zentralen Server für die Kommunikation verwenden und Protokolle, die einen zentralen
-Server für die Vermittlung verwenden. Die Protokolle, die P2P verwenden, werden in zwei weitere
-Kategorien unterteilt: Protokolle, die ein hybrides P2P-Netzwerk verwenden und Protokolle, die
-ein reines P2P-Netzwerk verwenden. Die Protokolle werden in den folgenden Abschnitten vorgestellt
-und verglichen.
+Durch die Verwendung von Instant Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant Messaging-Anwendung ermöglichen. Es gibt unterschiedliche Ansätze, um die Kommunikation zu ermöglichen. 
+
+
+\subsubsection{Protokolle mit zentralem Server}
+Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet. Die Kommunikation zwischen den Teilnehmern erfolgt über das Client-zu-Server-Protokoll (C2S). Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-Protokoll (S2S). Die meisten Instant Messaging-Anwendungen verwenden diese Art von Protokoll. Einige Beispiele für Instant Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp}, \textit{Signal}, \textit{Telegram} und \textit{Threema}.
+
+
 
 Protokolle mit zentralem Server:
 
 \begin{itemize}
-    \item XMPP
-    \item Matrix
-    \item Telegram
-    \item Signal
-    \item Threema
-    \item WhatsApp
-    \item IRC
-    \item Skype
+    \item XMPP, Matrix, Telegram, Signal, Threema, WhatsApp, IRC, Skype
 \end{itemize}
 
 Protokolle mit P2P:
 
 \begin{itemize}
-    \item Tox
-    \item Briar
-    \item Jami
-    \item Ring
-    \item Ricochet
-    \item Bitmessage
-    \item RetroShare
+    \item Tox, Ricochet, Briar, Jami, Ring, Bitmessage, RetroShare
 \end{itemize}
 
-XMPP:
+\subsubsection{XMPP}
 Dieses Protokoll ist ein offener Standard für Instant Messaging und basiert auf XML. Es ist ein
 Protokoll mit zentralem Server. Es gibt verschiedene XMPP-Server, die miteinander kommunizieren
 können. Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-Protokoll (S2S).
 Die Kommunikation zwischen den Teilnehmern erfolgt über das Client-zu-Server-Protokoll (C2S).
 
-Matrix:
+\subsubsection{Matrix}
 Dieses Protokoll ist ein offener Standard für Instant Messaging und basiert auf JSON. Es ist ein
 Protokoll mit zentralem Server. Es gibt verschiedene Matrix-Server, die miteinander kommunizieren
 können. Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-Protokoll (S2S).
 Die Kommunikation zwischen den Teilnehmern erfolgt über das Client-zu-Server-Protokoll (C2S).
 
-Telegram:
+\subsubsection{Telegram}
 Dieses Protokoll ist ein proprietäres Protokoll für Instant Messaging und basiert auf JSON. Es ist
 ein Protokoll mit zentralem Server. Es gibt verschiedene Telegram-Server, die miteinander
 kommunizieren können. Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-

@@ -7,7 +7,7 @@
   title           = {Wie sich die digitale Kommunikation verändert hat},
   date            = {2017},
   url             = {https://de.statista.com/infografik/11426/wie-sich-die-digitale-kommunikation-veraendert-hat/},
-  note            = {Abgerufen am 30.10.2023},
+  urldate         = {2023-10-30},
 }
 @misc{rfc3629_utf-8,
   series          = {Request for Comments},
@@ -34,7 +34,7 @@
 }
 # TODO: a bit hacky but it works
 @online{whatsapp_funktionen,
-  author          = {WhatsApp}, 
+  publisher       = {WhatsApp}, 
   title           = {WhatsApp Funktionen},
   url             = {https://www.whatsapp.com/expressyourself},
   urldate         = {2024-01-02},
@@ -45,13 +45,18 @@
   url             = {https://www.placetel.de/ratgeber/instant-messaging},
   urldate         = {2024-01-08},
 }
-@manual{Wang_IMSecurity,
-  author       = {Zhen Wang AND Zhaofeng Ma AND Shoushan Luo AND Hongmin Gao},
-  title        = {Enhanced Instant Message Security and Privacy Protection Scheme for Mobile Social Network Systems},
-  date         = {2018},
-  doi          = {10.1109/ACCESS.2018.2813432},
-  url          = {https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8314115},
-}
+@article{Wang_IMSecurity,
+  author          = {Wang, Zhen and Ma, Zhaofeng and Luo, Shoushan and Gao, Hongmin},
+  journal         = {IEEE Access}, 
+  title           = {Enhanced Instant Message Security and Privacy Protection Scheme for Mobile Social Network Systems}, 
+  year            = {2018},
+  date            = {2018},
+  volume          = {6},
+  number          = {},
+  pages           = {13706-13715},
+  abstract        = {Instant messaging (IM) systems can be considered the most frequently used applications in mobile social networks. Nowadays, people are becoming increasingly concerned about data security and privacy protection with IM applications. Therefore, a comprehensive enhanced secure IM scheme was proposed in this paper, which is based on the elliptic curve cryptosystem and the advanced encryption standard algorithm. An offline key agreement process between users was designed under the computational Diffie-Hellman (CDH) assumption by updating the ephemeral key periodically. The proposed scheme supports denial of replaying attack and denial of forgery attack by utilizing timestamps and the elliptic curve digital signature algorithm. It supports multiple types of messages (such as document and multimedia messages) and prevents privacy leakage by storing sent and received messages with ciphertext. We proved the security of the proposed scheme under the elliptic curve discrete logarithm assumption and the CDH assumption. The comparison results of the proposed scheme with other schemes and the results of an experiment show that it is a comprehensive secure scheme with high security and good practicability.practicability.},
+  doi             = {10.1109/ACCESS.2018.2813432}
+  }
 ################################ Anforderungsanalyse ###############################
 @book{Sommerville_AnfAnalyse,
   author          = {Sommerville, Ian},
@@ -491,7 +496,7 @@ abstract          = {Although there are several special features in block-chain 
   title           = {Bitcoin Energy Consumption Index},
   date            = {2024},
   url             = {https://digiconomist.net/bitcoin-energy-consumption},
-  note            = {Abgerufen am 07.01.2024},
+  urldate         = {2024-01-07},
 }
 @article{Sorge_BitcoinZahlungsmittelDerZukunft,
   author          = {Christoph Sorge AND Artus Krohn-Grimberghe},
@@ -508,7 +513,7 @@ abstract          = {Although there are several special features in block-chain 
   publisher       = {Ethereum Classic},
   title           = {Researcher FAQs},
   url             = {https://ethereumclassic.org/faqs/researchers#what-is-the-difference-between-ethereum-classic-and-ethereum},
-  note            = {Abgerufen am 07.01.2024},
+  urldate         = {2024-01-07},
 }
 ############################### Blockchain Security ###############################
 @InProceedings{Douceur_SybilAttack,
