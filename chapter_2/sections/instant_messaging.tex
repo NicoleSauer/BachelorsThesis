@@ -13,24 +13,16 @@ Sicherheit und Datenschutz sind in der Welt des Instant Messaging von entscheide
 
 \subsection{IM-Protokolle in der Übersicht}
 
-Durch die Verwendung von Instant Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk \Parencite[S. 69]{nist_mobileDeviceForensics}. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant Messaging-Anwendung ermöglichen \Parencite{Novalnet_Protokoll}. Im Jahr 2023 waren in Deutschland die folgenden Instant Messaging-Anwendungen am beliebtesten: \textit{WhatsApp}, \textit{Facebook Messenger}, \textit{Telegram}, \textit{Skype}, \textit{Discord} und \textit{Microsoft Teams} \parencite{Statista_MessengerNutzung}. Diese Anwendungen verwenden unterschiedliche Protokolle, um die Kommunikation zu ermöglichen.
+Durch die Verwendung von Instant Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk \Parencite[S. 69]{nist_mobileDeviceForensics}. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant Messaging-Anwendung realisieren \Parencite{Novalnet_Protokoll}. Im Jahr 2023 waren in Deutschland die folgenden Instant Messaging-Anwendungen am beliebtesten: \textit{WhatsApp}, \textit{Facebook Messenger} und \textit{Telegram} \parencite{Statista_MessengerNutzung}. Diese Anwendungen verwenden unterschiedliche Protokolle, um die Kommunikation zu ermöglichen. Es gibt unterschiedliche Ansätze, um die Kommunikation zu ermöglichen \parencite[S. 103]{Luntovskyy_ModRechnernetze}. 
 
 
 
+\subsection{Architekturmodelle}
 
+\subsubsection{Client-Server-Architektur}
 
-
-Es gibt unterschiedliche Ansätze, um die Kommunikation zu ermöglichen \parencite[S. 103]{Luntovskyy_ModRechnernetze}. 
-
-
-\subsubsection{Protokolle mit zentralem Server}
 Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet\Parencite[S. 3]{Hanson_ServerManagement}. Einige Beispiele für Instant Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp}, \textit{Signal}, \textit{Telegram} und \textit{Threema} \Parencites{Vanerio_WhatsAppArchitecture}{Github_libsignal}{Telegram_ServerSourceCode}{Threema_ServerLocation}.
 
+\subsubsection{Peer-to-Peer-Modell}
 
-
-\subsection{Client-Server-Architektur und Peer-to-Peer-Modell}
-
-Instant Messaging-Anwendungen können auf verschiedene Arten strukturiert sein, wobei zwei Hauptansätze hervorstechen: die Client-Server-Architektur und das Peer-to-Peer-Modell.
-Die Client-Server-Architektur ist bei vielen gängigen Instant Messaging-Diensten verbreitet. Hierbei fungiert ein zentraler Server als Vermittler zwischen den Benutzergeräten. Die Nachrichten werden von den Clients (den Benutzergeräten) an den Server gesendet, der sie dann an die Empfänger weiterleitet. Dieser Ansatz bietet eine einfache Verwaltung der Kommunikation, zentralisierte Datenverwaltung und ermöglicht Dienstleistungen wie das Offline-Speichern von Nachrichten.
-Im Gegensatz dazu basiert das Peer-to-Peer-Modell (kurz: P2P) auf direkten Verbindungen zwischen den Benutzergeräten ohne die Notwendigkeit eines zentralen Servers. Jedes Gerät agiert sowohl als Client als auch als Server, wodurch die Kommunikation direkt zwischen den Teilnehmern stattfindet. Diese Struktur bietet potenzielle Vorteile in Bezug auf Datenschutz, da die Nachrichten nicht über einen zentralen Server geleitet werden müssen.
-Beide Ansätze haben ihre eigenen Vor- und Nachteile. Die Client-Server-Architektur ermöglicht eine einfachere Verwaltung und Zuverlässigkeit, birgt jedoch potenzielle Datenschutzrisiken, da Daten zentralisiert gespeichert werden. Auf der anderen Seite bietet das Peer-to-Peer-Modell potenziell mehr Privatsphäre und Sicherheit, aber es könnte Schwierigkeiten bei der Skalierbarkeit und Verlässlichkeit geben, da es keine zentrale Instanz gibt, die die Kommunikation steuert. Die Wahl zwischen diesen Architekturen hängt von den spezifischen Anforderungen, Sicherheitsbedenken und dem Nutzungskontext der Instant Messaging-Anwendung ab.
+Bei dieser Art von Protokoll kommunizieren die Teilnehmer direkt miteinander, ohne einen zentralen Server zu verwenden. Die Kommunikation erfolgt direkt zwischen den Teilnehmern \parencites[S. 6-8]{Mahlmann_P2PNetzwerke}{Galuba_P2POverlayNetworks}. Einige Beispiele für Instant Messaging-Anwendungen, die ein Protokoll mit Peer-to-Peer-Modell verwenden, sind \textit{Tox} und \textit{Briar} \Parencites{Tox_FAQ}{Briar_HowItWorks}.
