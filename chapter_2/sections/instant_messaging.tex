@@ -13,44 +13,19 @@ Sicherheit und Datenschutz sind in der Welt des Instant Messaging von entscheide
 
 \subsection{IM-Protokolle in der Übersicht}
 
-Durch die Verwendung von Instant Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk \Parencite[S. 69]{nist_mobileDeviceForensics}. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant Messaging-Anwendung ermöglichen \Parencite{Novalnet_Protokoll}. Es gibt unterschiedliche Ansätze, um die Kommunikation zu ermöglichen \parencite[S. 103]{Luntovskyy_ModRechnernetze}. 
+Durch die Verwendung von Instant Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk \Parencite[S. 69]{nist_mobileDeviceForensics}. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant Messaging-Anwendung ermöglichen \Parencite{Novalnet_Protokoll}. Im Jahr 2023 waren in Deutschland die folgenden Instant Messaging-Anwendungen am beliebtesten: \textit{WhatsApp}, \textit{Facebook Messenger}, \textit{Telegram}, \textit{Skype}, \textit{Discord} und \textit{Microsoft Teams} \parencite{Statista_MessengerNutzung}. Diese Anwendungen verwenden unterschiedliche Protokolle, um die Kommunikation zu ermöglichen.
+
+
+
+
+
+
+Es gibt unterschiedliche Ansätze, um die Kommunikation zu ermöglichen \parencite[S. 103]{Luntovskyy_ModRechnernetze}. 
 
 
 \subsubsection{Protokolle mit zentralem Server}
 Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet\Parencite[S. 3]{Hanson_ServerManagement}. Einige Beispiele für Instant Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp}, \textit{Signal}, \textit{Telegram} und \textit{Threema} \Parencites{Vanerio_WhatsAppArchitecture}{Github_libsignal}{Telegram_ServerSourceCode}{Threema_ServerLocation}.
 
-
-
-Protokolle mit zentralem Server:
-
-\begin{itemize}
-    \item XMPP, Matrix, Telegram, Signal, Threema, WhatsApp, IRC, Skype
-\end{itemize}
-
-Protokolle mit P2P:
-
-\begin{itemize}
-    \item Tox, Ricochet, Briar, Jami, Ring, Bitmessage, RetroShare
-\end{itemize}
-
-\subsubsection{XMPP}
-Dieses Protokoll ist ein offener Standard für Instant Messaging und basiert auf XML. Es ist ein
-Protokoll mit zentralem Server. Es gibt verschiedene XMPP-Server, die miteinander kommunizieren
-können. Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-Protokoll (S2S).
-Die Kommunikation zwischen den Teilnehmern erfolgt über das Client-zu-Server-Protokoll (C2S).
-
-\subsubsection{Matrix}
-Dieses Protokoll ist ein offener Standard für Instant Messaging und basiert auf JSON. Es ist ein
-Protokoll mit zentralem Server. Es gibt verschiedene Matrix-Server, die miteinander kommunizieren
-können. Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-Protokoll (S2S).
-Die Kommunikation zwischen den Teilnehmern erfolgt über das Client-zu-Server-Protokoll (C2S).
-
-\subsubsection{Telegram}
-Dieses Protokoll ist ein proprietäres Protokoll für Instant Messaging und basiert auf JSON. Es ist
-ein Protokoll mit zentralem Server. Es gibt verschiedene Telegram-Server, die miteinander
-kommunizieren können. Die Kommunikation zwischen den Servern erfolgt über das Server-zu-Server-
-Protokoll (S2S). Die Kommunikation zwischen den Teilnehmern erfolgt über das Client-zu-Server-
-Protokoll (C2S).
 
 
 \subsection{Client-Server-Architektur und Peer-to-Peer-Modell}
