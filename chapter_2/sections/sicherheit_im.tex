@@ -13,7 +13,11 @@ Die Vertraulichkeit der Kommunikation wird durch Verschlüsselung gewährleistet
 
 \subsection{Integrität}
 
-Um die Integrität der Kommunikation zu gewährleisten, werden Signaturen verwendet. Für eine Signatur wird der Hashwert einer Nachricht mit dem privaten Schlüssel des Senders verschlüsselt und an die Nachricht angehängt. Der Empfänger kann den verschlüsselten Hashwert mit dem öffentlichen Schlüssel des Senders entschlüsseln, um dann anschließend selbst den Hashwert der Nachricht zu berechnen. Wenn der berechnete Hashwert mit dem entschlüsselten Hashwert übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht nicht verändert wurde und somit die Integrität der Nachricht gewährleistet ist. Falls der berechnete Hashwert nicht mit dem entschlüsselten Hashwert übereinstimmt, wurde die Nachricht verändert und die Integrität der Nachricht ist nicht mehr gewährleistet \Parencite[S. 73-78]{Hellmann_IT-Sicherheit}.
+Um die Integrität der Kommunikation zu gewährleisten, werden Signaturen verwendet. Für eine Signatur wird der Hashwert einer Nachricht mit dem privaten Schlüssel des Senders verschlüsselt und an die Nachricht angehängt. 
+
+Um den Hashwert zu erhalten, wird die Nachricht mit einer Hashfunktion gehasht. Hashfunktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hashfunktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Einwegfunktion ist eine Funktion, die einfach zu berechnen ist, aber schwierig zu invertieren ist. Das bedeutet, dass es einfach ist, den Hashwert einer Nachricht zu berechnen, aber schwierig ist, die Nachricht aus dem Hashwert zu berechnen. Kollisionsresistenz bedeutet, dass es schwierig ist, zwei Nachrichten zu finden, die den gleichen Hashwert haben \parencite[S. 13-15]{Brünnler_BlockchainKurzGut}.
+
+Der Empfänger kann den verschlüsselten Hashwert mit dem öffentlichen Schlüssel des Senders entschlüsseln, um dann anschließend selbst den Hashwert der Nachricht zu berechnen. Wenn der berechnete Hashwert mit dem entschlüsselten Hashwert übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht nicht verändert wurde und somit die Integrität der Nachricht gewährleistet ist. Falls der berechnete Hashwert nicht mit dem entschlüsselten Hashwert übereinstimmt, wurde die Nachricht verändert und die Integrität der Nachricht ist nicht mehr gewährleistet \Parencite[S. 73-78]{Hellmann_IT-Sicherheit}.
 
 
 \subsection{Authentizität}
