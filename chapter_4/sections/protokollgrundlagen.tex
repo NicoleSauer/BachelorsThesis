@@ -2,7 +2,9 @@
 \label{sec:grundlagen_des_protokolls}
 
 
-Um die Peer-to-Peer Funktionalität für das Protokoll dieser Arbeit zu gewährleisten, wird ein mehrschichtiges Verfahren verwendet. Für den effizienten Aufbau einer Direktverbindung zwischen zwei Teilnehmern kamen Chord und Kademlia in die engere Auswahl, welche beide lange Gegenstand intensiver Forschung waren, sowohl in der Industrie als auch in der akademischen Welt \parencite[S. 808]{MedranoChavez_ChordKademliaHighChurnScenarios}. 
+Um die Peer-to-Peer Funktionalität für das Protokoll dieser Arbeit zu gewährleisten, wird ein mehrschichtiges Verfahren verwendet.
+
+Für den effizienten Aufbau einer Direktverbindung zwischen zwei Teilnehmern kamen Chord und Kademlia in die engere Auswahl, welche beide lange Gegenstand intensiver Forschung waren, sowohl in der Industrie als auch in der akademischen Welt \parencite[S. 808]{MedranoChavez_ChordKademliaHighChurnScenarios}. 
 Das Chord-Protokoll und das Kademlia-Protokoll sind zwei grundlegend verschiedene Ansätze zur Organisation von Peer-to-Peer-Netzwerken. Beide Protokolle sind strukturiert und bieten eine effiziente Ressourcenlokalisierung, aber sie unterscheiden sich in ihrer Routing-Struktur und der Art und Weise, wie sie die Knoteninformationen verwalten.
 
 Chord basiert auf einer Ringstruktur (siehe Abbildung \ref{chord_ring}), bei der die Knoten in einem Ring angeordnet sind und jeder Knoten für einen bestimmten Schlüsselbereich verantwortlich ist. Die Verbindungen zwischen den Knoten sind durch ihren Platz im Ring definiert, wobei jeder Knoten eine Verbindung zu seinem nächsten Nachbarn im Uhrzeigersinn hat. Ein Knoten besitzt zwei Informationsmengen: eine \textit{Successor-Liste} und eine \textit{Finger-Tabelle}. Die Successor-Liste enthält die Knoten, die direkt nach dem Knoten im Uhrzeigersinn im Ring kommen. Die Anzahl der dort enthaltenen Knoten hängt davon ab, wie viele Knoten im Netzwerk insgesamt vorhanden sind. Die Finger-Tabelle enthält die Knoten, die für die Schlüsselbereiche verantwortlich sind, die durch eine Berechnung auf der ID des Knotens basieren \Parencite[S. 810-811]{MedranoChavez_ChordKademliaHighChurnScenarios}.
@@ -10,7 +12,7 @@ Chord basiert auf einer Ringstruktur (siehe Abbildung \ref{chord_ring}), bei der
 \begin{center}
     \captionsetup{type=figure}
     \includegraphics[width=1\linewidth]{images/chord_ring_altered.png}
-    \captionof{figure}{Visualisierung der Ringstruktur von Chord, in Anlehnung an \cite{MedranoChavez_ChordKademliaHighChurnScenarios}}
+    \captionof{figure}{Visualisierung der Ringstruktur von Chord, in Anlehnung an \cite[S. 811]{MedranoChavez_ChordKademliaHighChurnScenarios}}
     \label{chord_ring}
 \end{center}
 
@@ -18,17 +20,19 @@ Chord basiert auf einer Ringstruktur (siehe Abbildung \ref{chord_ring}), bei der
 
 In Abbildung \ref{chord_ring} ist zu erkennen, dass Knoten $59$ eine Suchanfrage für den Knoten mit der ID $20$ beginnt. Unter Verwendung der Finger-Tabelle von Knoten $59$ wird die Anfrage an den Knoten gesendet, der am nächsten an Knoten $20$ liegt. In diesem Fall ist dies Knoten $16$. Knoten $16$ wiederum leitet die Anfrage an den Knoten weiter, der ebenfalls am nächsten an Knoten $20$ liegt, was Knoten $23$ ist. Knoten $23$ ist für den Schlüsselbereich verantwortlich, in dem sich der gesuchte Schlüssel befindet, und sendet daher die Antwort an Knoten $59$ zurück. Durch die Verwendung dieser Strategie wurde Knoten $20$ in nur zwei Schritten gefunden, anstatt in fünft Schritten, wenn die Anfrage sequentiell weitergeleitet worden wäre.    
 
-Im Gegensatz dazu verwendet Kademlia eine K-Bucket-Struktur, die in Abbildung \ref{kademlia_tree} zu sehen ist, um eine effiziente Verwaltung von Knoteninformationen zu ermöglichen. Die K-Buckets enthalten eine Liste von Knoten für verschiedene Schlüsselbereiche basierend auf ihrer Nähe, die durch XOR-Distanzen der IDs berechnet wird. Die Verbindungen zwischen den Knoten sind asymmetrisch, und jeder Knoten speichert Informationen über andere Knoten in seinen K-Buckets. Bei der Suche nach einem bestimmten Schlüssel erfolgt das Routing durch die XOR-Entfernung, wodurch die nächsten Knoten für diesen Schlüssel gefunden werden. Dieses Verfahren ermöglicht ebenfalls eine logarithmische Anzahl von Schritten für die Suche und bietet eine robuste Struktur, die gut mit dynamischen Netzwerkänderungen umgehen kann.
+Im Gegensatz dazu verwendet Kademlia eine K-Bucket-Struktur, die in Abbildung \ref{kademlia_tree} zu sehen ist, um eine effiziente Verwaltung von Knoteninformationen zu ermöglichen. Die K-Buckets enthalten eine Liste von Knoten für verschiedene Schlüsselbereiche basierend auf ihrer Nähe, die durch XOR-Distanzen der IDs berechnet wird. Die Verbindungen zwischen den Knoten sind asymmetrisch, und jeder Knoten speichert Informationen über andere Knoten in seinen K-Buckets. Bei der Suche nach einem bestimmten Schlüssel erfolgt das Routing durch die XOR-Entfernung, wodurch die nächsten Knoten für diesen Schlüssel gefunden werden.
 
 \begin{center}
     \captionsetup{type=figure}
-    \includegraphics[width=0.9\linewidth]{images/kademlia_tree.png}
-    \captionof{figure}{Visualisierung der Baumstruktur von Kademlia \parencite{MedranoChavez_ChordKademliaHighChurnScenarios}}
+    \includegraphics[width=1\linewidth]{images/kademlia_tree_altered.png}
+    \captionof{figure}{Visualisierung der Baumstruktur von Kademlia, in Anlehnung an \cite[S. 812]{MedranoChavez_ChordKademliaHighChurnScenarios}}
     \label{kademlia_tree}
 \end{center}
 
+\noindent In Abbildung \ref{kademlia_tree} ist zu sehen, wie der Knoten $1011$ ein Suche nach Knoten $0010$ startet. Der Knoten $1011$ sucht in seinen vier K-Buckets nach dem nächsten Knoten, der am Schlüssel $0010$ liegt. Im ersten Bucket sind Knoten mit dem Präfix $0xxx$ enthalten. In Bucket zwei sind Knoten mit dem Präfix $11xx$, in Bucket drei Knoten mit dem Präfix $100x$ und in Bucket vier Knoten mit dem Präfix $101x$. Da der Schlüssel $0010$ mit dem Präfix $00$ beginnt, wird der nächste Knoten für diesen Schlüssel im ersten Bucket gesucht. Knoten $0011$ wird als nächster Knoten für den Schlüssel $0010$ gefunden. Knoten $1011$ sendet die Anfrage also an Knoten $0011$, der wiederum den nächsten Knoten für den Schlüssel $0010$ sucht. Da dieser Knoten den Schlüssel $0010$ in seinem K-Bucket besitzt, sendet er die Antwort auf die Suchanfrage an Knoten $1011$ zurück. Es werden zwei Weiterleitungen durchgeführt, um den Zielknoten zu finden, woraus sich eine Komplexität von $\mathcal{O}(\log n)$ ergibt, wobei $n$ die Anzahl der Knoten im Netzwerk ist \parencite[S. 812]{MedranoChavez_ChordKademliaHighChurnScenarios}.    
 
-\noindent Da bei einem Instant-Messaging-Protokoll häufig Teilnehmer das Netzwerk verlassen und neue Teilnehmer dem Netzwerk beitreten, ist es wichtig, dass das Protokoll mit hoher Fluktuation umgehen kann. Diese Fluktuation von Nodes wird als Churn (engl. Abwanderung) bezeichnet. In einer Studie von Medrano-Chávez et al. \parencite{MedranoChavez_ChordKademliaHighChurnScenarios}, welche im hybriden Journal \textit{Peer-to-Peer Networking and Applications} veröffentlicht wurde, wurde die Leistung von Chord und Kademlia in Bezug auf Netzwerkfluktuation untersucht. Die Ergebnisse zeigen, dass Kademlia bei hoher Fluktuation besser abschneidet als Chord. Aus diesem Grund wird Kademlia in diesem Protokoll als Grundlage für das Auffinden von Teilnehmern und das Routing verwendet.
+
+Da bei einem Instant-Messaging-Protokoll häufig Teilnehmer das Netzwerk verlassen und neue Teilnehmer dem Netzwerk beitreten, ist es wichtig, dass das Protokoll mit hoher Fluktuation umgehen kann. Diese Fluktuation von Nodes wird als Churn (engl. Abwanderung) bezeichnet. In einer Studie von Medrano-Chávez et al. \parencite{MedranoChavez_ChordKademliaHighChurnScenarios}, welche im hybriden Journal \textit{Peer-to-Peer Networking and Applications} veröffentlicht wurde, wurde die Leistung von Chord und Kademlia in Bezug auf Netzwerkfluktuation untersucht. Die Ergebnisse zeigen, dass Kademlia bei hoher Fluktuation besser abschneidet als Chord. Aus diesem Grund wird Kademlia in diesem Protokoll als Grundlage für das Auffinden von Teilnehmern und das Routing verwendet.
 
 % #TODO: Warum Kademlia und was die Sicherheitsaspekte angeht, erst in Architektur aufgreifen.
     % Signaling Server könnte auch mit Anfragen geflutet werden -> der Sever könnte bei jedem checken, ob es sich um einen validen Teilnehmer handelt, was aber sehr aufwändig wäre
