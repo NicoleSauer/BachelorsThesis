@@ -91,5 +91,12 @@ Mit einem \textit{Denial-of-Service}-Angriff (kurz: \textit{DoS-Angriff}) wird v
 \subsubsection{Sybil-Angriff}
 \label{subsubsec:sybil_attack_p2p}
 
-Der Sybil-Angriff ist nicht spezifisch für Blockchain, sondern kann in jedem Peer-to-Peer-Netzwerk durchgeführt werden. Bei diesem Angriff erstellt ein einzelner Angreifer mehrere Identitäten, um die Kontrolle über das Netzwerk zu erlangen. Der Angreifer kann dann die Kontrolle über das Netzwerk übernehmen, indem er die Mehrheit der Identitäten kontrolliert \parencite[S. 251]{Douceur_SybilAttack}. Nach einer erfolgreichen Übernahme von Teilen des Netzwerks, besteht die Möglichkeit der Durchführung eines \textit{Eclipse}-Angriffs, der im nächsten Abschnitt erklärt wird \parencite[S. 13-15]{Baptiste_AttacksOnP2PNetworks}.
+Der Sybil-Angriff ist nicht spezifisch für Blockchain, sondern kann in jedem Peer-to-Peer-Netzwerk durchgeführt werden. Bei diesem Angriff erstellt ein einzelner Angreifer mehrere Identitäten, um die Kontrolle über das Netzwerk zu erlangen. Der Angreifer kann dann die Kontrolle über das Netzwerk übernehmen, indem er die Mehrheit der Identitäten kontrolliert \parencite[S. 251]{Douceur_SybilAttack}. Nach einer erfolgreichen Übernahme von Teilen des Netzwerks, besteht die Möglichkeit der Durchführung eines \textit{Eclipse}-Angriffs, welcher im nächsten Abschnitt erklärt wird \parencite[S. 13-15]{Baptiste_AttacksOnP2PNetworks}.
+
+
+\subsubsection{Eclipse-Angriff}
+\label{subsubsec:eclipse_attack_p2p}
+
+
+Bei einem \textit{Eclipse}-Angriff wird versucht, einen Peer von allen anderen Peers im Netzwerk zu isolieren. Dies wird erreicht, indem bereits durch den vorhergegangenen Sybil-Angriff die Mehrheit der Peers kontrolliert wird. Der Angreifer kann dann die Verbindungen des Opfers zu anderen Peers im Netzwerk verhindern, indem er die Verbindungen zu anderen Peers kontrolliert \Parencite[S. 14]{Baptiste_AttacksOnP2PNetworks}. 
 
