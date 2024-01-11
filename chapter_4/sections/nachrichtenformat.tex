@@ -6,6 +6,7 @@
 
 Jedes Instant-Messaging-Protokoll benötigt die Definition eines Nachrichtenformats, das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden. Im Folgenden wird das Nachrichtenformat für das Instant-Messaging-Protokoll beschrieben.
 
+% #TODO: Kopf und Inhalt zusammenführen
 \subsection{Nachrichtenkopf}
 
 Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Der Nachrichtenkopf enthält die folgenden Informationen:
@@ -13,7 +14,6 @@ Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kan
 \begin{itemize}
     \item Quell-IP-Adresse und Quell-Port
     \item Ziel-IP-Adresse und Ziel-Port
-    \item Prüfsumme
     \item Timestamp
     \item Signatur
     \item Sequenznummer
@@ -26,6 +26,7 @@ Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kan
 Der Nachrichteninhalt enthält die folgenden Informationen:
 
 \begin{itemize}
+    \item Nachrichtentyp
     \item Nachrichtenlänge
     \item Nachrichteninhalt
 \end{itemize}
