@@ -11,7 +11,8 @@ Diese Anzahl ist so groß, dass sie in der Praxis nicht erreicht werden sollte u
 In der Node werden dann Schlüssel-Wert-Paare gespeichert, wobei der Schlüssel die ID des Teilnehmers ist und der Wert die IP-Adresse und der Port. Es wird festgelegt, dass immer Port $49152$ verwendet wird, da sich dieser Port im Bereich der dynamischen Ports befindet und somit nicht für andere Anwendungen reserviert ist \parencite[S. 20]{rfc6335_IANA_Ports}. 
 
 Wenn ein Teilnehmer eine Nachricht an einen anderen Teilnehmer senden möchte, muss er dessen IP-Adresse kennen. Um an diese Information zu gelangen, muss zuerst die ID des Teilnehmers in der Blockchain gesucht werden und anschließend eine Peer-Discovery durchgeführt werden, um die IP-Adresse des Teilnehmers zu erhalten. Eine Peer-Discovery läuft wie folgt ab:
-
+ % #TODO: KORRIGIEREN! NODE_NOT_FOUND gibt es nicht!
+ % #TODO: Doch noch eine Abbildung einfügen?
 \begin{enumerate}
     \item Der Teilnehmer, der die Nachricht senden möchte, sendet eine \textit{FIND\_NODE}-Nachricht an den Teilnehmer, dessen IP-Adresse er sucht. In dieser Nachricht ist die ID des Teilnehmers enthalten, dessen IP-Adresse gesucht wird.
     \item Der Teilnehmer, der die Nachricht erhalten hat, sucht in seiner Routing-Tabelle nach dem Teilnehmer, dessen ID in der Nachricht enthalten ist. Falls der Teilnehmer gefunden wird, wird eine Nachricht an den Teilnehmer gesendet, der die \textit{FIND\_NODE}-Nachricht gesendet hat. In dieser Nachricht ist die IP-Adresse des Teilnehmers enthalten.

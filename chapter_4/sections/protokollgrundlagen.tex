@@ -23,6 +23,7 @@ In Abbildung \ref{chord_ring} ist zu erkennen, dass Knoten $59$ eine Suchanfrage
 
 \subsubsection{Kademlia}
 Im Gegensatz dazu verwendet Kademlia eine K-Bucket-Struktur, die in Abbildung \ref{kademlia_tree} zu sehen ist, um eine effiziente Verwaltung von Knoteninformationen zu ermöglichen. Die K-Buckets enthalten eine Liste von Knoten für verschiedene Schlüsselbereiche basierend auf ihrer Nähe, die durch XOR-Distanzen der IDs berechnet wird. Die Verbindungen zwischen den Knoten sind asymmetrisch, und jeder Knoten speichert Informationen über andere Knoten in seinen K-Buckets. Bei der Suche nach einem bestimmten Schlüssel erfolgt das Routing durch die XOR-Entfernung, wodurch die nächsten Knoten für diesen Schlüssel gefunden werden.
+% asymmetrisch -> Knoten A kann Knoten B kennen, aber Knoten B kennt Knoten A nicht
 
 \begin{center}
     \captionsetup{type=figure}
@@ -31,17 +32,31 @@ Im Gegensatz dazu verwendet Kademlia eine K-Bucket-Struktur, die in Abbildung \r
     \label{kademlia_tree}
 \end{center}
 
-\noindent In Abbildung \ref{kademlia_tree} ist zu sehen, wie der Knoten $1011$ ein Suche nach Knoten $0010$ startet. Der Knoten $1011$ sucht in seinen vier K-Buckets nach dem nächsten Knoten, der am Schlüssel $0010$ liegt. Im ersten Bucket sind Knoten mit dem Präfix $0xxx$ enthalten. In Bucket zwei sind Knoten mit dem Präfix $11xx$, in Bucket drei Knoten mit dem Präfix $100x$ und in Bucket vier Knoten mit dem Präfix $101x$. Da der Schlüssel $0010$ mit dem Präfix $00$ beginnt, wird der nächste Knoten für diesen Schlüssel im ersten Bucket gesucht. Knoten $0011$ wird als nächster Knoten für den Schlüssel $0010$ gefunden. Knoten $1011$ sendet die Anfrage also an Knoten $0011$, der wiederum den nächsten Knoten für den Schlüssel $0010$ sucht. Da dieser Knoten den Schlüssel $0010$ in seinem K-Bucket besitzt, sendet er die Antwort auf die Suchanfrage an Knoten $1011$ zurück. Es werden zwei Weiterleitungen durchgeführt, um den Zielknoten zu finden, woraus sich eine Komplexität von $\mathcal{O}(\log n)$ ergibt, wobei $n$ die Anzahl der Knoten im Netzwerk ist \parencite[S. 812]{MedranoChavez_ChordKademliaHighChurnScenarios}.    
+\noindent In Abbildung \ref{kademlia_tree} ist zu sehen, wie der Knoten $1011$ ein Suche nach Knoten $0010$ startet. Der Knoten $1011$ sucht in seinen vier K-Buckets nach dem nächsten Knoten, der am Schlüssel $0010$ liegt. Im ersten Bucket sind Knoten mit dem Präfix $0xxx$ enthalten. In Bucket zwei sind Knoten mit dem Präfix $11xx$, in Bucket drei Knoten mit dem Präfix $100x$ und in Bucket vier Knoten mit dem Präfix $101x$. Da der Schlüssel $0010$ mit dem Präfix $00$ beginnt, wird der nächste Knoten für diesen Schlüssel im ersten Bucket gesucht. Knoten $0011$ wird als nächster Knoten für den Schlüssel $0010$ gefunden. Knoten $1011$ sendet die Anfrage also an Knoten $0011$, der wiederum den nächsten Knoten für den Schlüssel $0010$ sucht. Da dieser Knoten den Schlüssel $0010$ in seinem K-Bucket besitzt, sendet er die Antwort auf die Suchanfrage an Knoten $1011$ zurück. Es werden zwei Weiterleitungen durchgeführt, um den Zielknoten zu finden, woraus sich eine Komplexität von $\mathcal{O}(\log n)$ ergibt, wobei $n$ die Anzahl der Knoten im Netzwerk ist \parencite[S. 812]{MedranoChavez_ChordKademliaHighChurnScenarios}.
 
+Funktionen, wie diese Suche, werden durch die vier Nachrichten \textit{FIND\_NODE}, \\\textit{FIND\_VALUE}, \textit{PING} und \textit{STORE} des Kademlia-Protokolls ermöglicht. Sie haben die folgende Verwendung \Parencite[S. 3]{Maymounkov_Kademlia}:
 
-Da bei einem Instant-Messaging-Protokoll häufig Teilnehmer das Netzwerk verlassen und neue Teilnehmer dem Netzwerk beitreten, ist es wichtig, dass das Protokoll mit hoher Fluktuation umgehen kann. Diese Fluktuation von Nodes wird als Churn (engl. Abwanderung) bezeichnet. In einer Studie von Medrano-Chávez et al. \parencite{MedranoChavez_ChordKademliaHighChurnScenarios}, welche im hybriden Journal \textit{Peer-to-Peer Networking and Applications} veröffentlicht wurde, wurde die Leistung von Chord und Kademlia in Bezug auf Netzwerkfluktuation untersucht. Die Ergebnisse zeigen, dass Kademlia bei hoher Fluktuation besser abschneidet als Chord. Aus diesem Grund wird Kademlia in diesem Protokoll als Grundlage für das Auffinden von Teilnehmern und das Routing verwendet.
+\begin{itemize}
+    \item \textit{FIND\_NODE}: Diese Nachricht wird verwendet, um den nächsten Knoten für einen bestimmten Schlüssel zu finden. Sie wird von einem Knoten an einen anderen Knoten gesendet, der den Schlüssel in seinem K-Bucket hat. Der Knoten, der die Nachricht erhält, antwortet mit einer Liste von Knoten, die den Schlüssel in ihrem K-Bucket haben \Parencite[S. 3]{Maymounkov_Kademlia}. 
+    \item \textit{FIND\_VALUE}: Diese Nachricht wird verwendet, um den Wert für einen bestimmten Schlüssel zu finden. Sie wird von einem Knoten an einen anderen Knoten gesendet, der den Schlüssel in seinem K-Bucket hat. Der Knoten, der die Nachricht erhält, antwortet mit dem Wert, der dem Schlüssel zugeordnet ist, oder mit einer Liste von Knoten, die den Schlüssel in ihrem K-Bucket haben \Parencite[S. 3]{Maymounkov_Kademlia}.
+    \item \textit{PING}: Diese Nachricht wird verwendet, um die Erreichbarkeit eines Knotens zu überprüfen. Sie wird von einem Knoten an einen anderen Knoten gesendet, um zu überprüfen, ob der Knoten noch erreichbar ist \Parencite[S. 2-3]{Maymounkov_Kademlia}.
+    \item \textit{STORE}: Diese Nachricht wird verwendet, um einen Schlüssel-Wert-Paar in einem K-Bucket zu speichern. Sie wird von einem Knoten an einen anderen Knoten gesendet, um den Schlüssel-Wert-Paar in seinem K-Bucket zu speichern. Der Knoten, der die Nachricht erhält, speichert den Schlüssel-Wert-Paar in seinem K-Bucket \Parencite[S. 3]{Maymounkov_Kademlia}.
+\end{itemize}
+
+\noindent Da bei einem Instant-Messaging-Protokoll häufig Teilnehmer das Netzwerk verlassen und neue Teilnehmer dem Netzwerk beitreten, ist es wichtig, dass das Protokoll mit hoher Fluktuation umgehen kann. Diese Fluktuation von Nodes wird als Churn (engl. Abwanderung) bezeichnet. In einer Studie von Medrano-Chávez et al. \parencite{MedranoChavez_ChordKademliaHighChurnScenarios}, welche im hybriden Journal \textit{Peer-to-Peer Networking and Applications} veröffentlicht wurde, wurde die Leistung von Chord und Kademlia in Bezug auf Netzwerkfluktuation untersucht. Die Ergebnisse zeigen, dass Kademlia bei hoher Fluktuation besser abschneidet als Chord. Aus diesem Grund wird Kademlia in diesem Protokoll als Grundlage für das Auffinden von Teilnehmern und das Routing verwendet.
 
 % #TODO: Warum Kademlia und was die Sicherheitsaspekte angeht, erst in Architektur aufgreifen.
     % Signaling Server könnte auch mit Anfragen geflutet werden -> der Sever könnte bei jedem checken, ob es sich um einen validen Teilnehmer handelt, was aber sehr aufwändig wäre
     % wenn Kademlia mit Anfragen geflutet wird, könnte es zu einem Denial of Service kommen, da die Knoten nicht mehr erreichbar sind -> habe aber ja mit dem Signaling Server noch eine weitere Instanz, die die Anfragen entgegen nimmt und weiterleitet
 
+Durch die Entscheidung für die Implementierung von Kademlia als Grundlage für das Auffinden von Teilnehmern und das Routing, wird die Sicherheit des Protokolls beeinflusst. Da Kademlia ein dezentralisiertes Protokoll ist, ist es anfällig für den in Abschnitt \ref{subsubsec:sybil_attack} (\textit{\nameref{subsubsec:sybil_attack}}) beschriebenen Sybil-Angriff. Um diesen Angriff zu verhindern bzw. zu erschweren, wird in dieser Arbeit die Teilnahme am Netzwerk erst durch eine vorherige Registrierung ermöglicht. Die Registrierung wird durch die Blockchain-Technologie realisiert und ist mit Kosten verbunden, die ein Angreifer aufbringen muss, um am Netzwerk teilzunehmen. Da bei einem Sybil-Angriff der Angreifer mehrere Identitäten verwendet, um das Netzwerk zu übernehmen, muss er für jede Identität die Kosten aufbringen. Dadurch wird der Angriff erschwert, da der Angreifer mehr Ressourcen benötigt, um das Netzwerk zu übernehmen.
 
-% #TODO: Overlay Netzwerk erklären? Kademlia ist ein Overlay Netzwerk
+
+
+
+
+
+
 \begin{itemize}
     \item Kademlia vs. Angriffe
     \item Angriffe gegen ICE gucken und erklären

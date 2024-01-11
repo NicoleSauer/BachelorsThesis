@@ -79,6 +79,17 @@ Pastry verwendet eine gemeinsame Präfix-Länge als Grundlage für die Adressier
 
 Insgesamt bieten alle drei Algorithmen Lösungen für verteilte Systeme, variierend in ihrer Anpassungsfähigkeit, Skalierbarkeit und Effizienz je nach den spezifischen Anforderungen des Netzwerks. Die Wahl zwischen Kademlia, Chord und Pastry hängt von Faktoren wie der Größe des Netzwerks, der erwarteten Dynamik (Churn) und der Priorität zwischen Skalierbarkeit und Routingstabilität ab.
 
+\subsection{Angriffe auf Peer-to-Peer-Netzwerke}
+
+% DOS Angriff, Man in the Middle(?), Sybil Attack, Eclipse Attack erklären, damit diese später aufgegriffen werden können
+
+\subsubsection{Denial-of-Service-Angriff}
+
+Mit einem \textit{Denial-of-Service}-Angriff (kurz: \textit{DoS-Angriff}) wird versucht, die Verfügbarkeit eines Dienstes zu beeinträchtigen, indem die Ressourcen des Dienstes erschöpft werden, sodass diese ausfallen \parencite{Bicakci_DoSAttacks}. In einem Peer-to-Peer-Netzwerk kann ein DoS-Angriff auf verschiedene Arten durchgeführt werden. Eine Möglichkeit ist es, einen Peer mit Anfragen zu überfluten, um ihn zu überlasten. Eine andere Möglichkeit ist es, einen Peer mit gefälschten Informationen zu überfluten, um ihn zu täuschen. Beide Methoden führen dazu, dass der Peer nicht mehr in der Lage ist, seine Aufgaben zu erfüllen, was zu einem Ausfall des Dienstes führt. Dieser Angriff wird noch effektiver, wenn er von mehreren Angreifern gleichzeitig durchgeführt wird. Dies wird als \textit{Distributed Denial-of-Service}-Angriff (kurz: \textit{DDoS-Angriff}) bezeichnet. Bei einem DDoS-Angriff wird der Peer mit Anfragen von mehreren Angreifern überflutet, was es schwieriger macht, den Angriff zu stoppen \Parencite[S. 6]{Baptiste_AttacksOnP2PNetworks}.
 
 
-%Firewalls können ebenfalls ein Problem darstellen, da sie den Datenverkehr zwischen dem lokalen Netzwerk und dem externen Netzwerk überwachen und filtern. Sie können den Datenverkehr blockieren, wenn sie verdächtige Aktivitäten erkennen. Dies kann dazu führen, dass die Teilnehmer nicht miteinander kommunizieren können.
+\subsubsection{Sybil-Angriff}
+\label{subsubsec:sybil_attack_p2p}
+
+Der Sybil-Angriff ist nicht spezifisch für Blockchain, sondern kann in jedem Peer-to-Peer-Netzwerk durchgeführt werden. Bei diesem Angriff erstellt ein einzelner Angreifer mehrere Identitäten, um die Kontrolle über das Netzwerk zu erlangen. Der Angreifer kann dann die Kontrolle über das Netzwerk übernehmen, indem er die Mehrheit der Identitäten kontrolliert \parencite[S. 251]{Douceur_SybilAttack}. Nach einer erfolgreichen Übernahme von Teilen des Netzwerks, besteht die Möglichkeit der Durchführung eines \textit{Eclipse}-Angriffs, der im nächsten Abschnitt erklärt wird \parencite[S. 13-15]{Baptiste_AttacksOnP2PNetworks}.
+
