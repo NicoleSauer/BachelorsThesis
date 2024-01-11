@@ -55,9 +55,18 @@ ICE (Interactive Connectivity Establishment) ist ein Framework, das mehrere Tech
 
 \subsection{Overlay-Netzwerke}
 
-Peer-to-Peer-Netzwerke können als Overlay-Netzwerk betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das über ein physisches Netzwerk gelegt wird. In diesem Fall ist das physische Netzwerk das Internet. Das Overlay-Netzwerk ist eine logische Struktur, die es ermöglicht, die Kommunikation zwischen den Teilnehmern zu organisieren. Es besteht aus einer Reihe von Knoten, die über eine logische Verbindung miteinander verbunden sind. Die Verbindungen zwischen den Knoten werden durch Routing-Algorithmen verwaltet \parencite{Lua_P2POverlayNetworksPaper}. 
+Peer-to-Peer-Netzwerke können als Overlay-Netzwerke betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das, wie in Abbildung \ref{overlay_network} (\textit{\nameref{overlay_network}}) zu sehen ist, über ein physisches Netzwerk gelegt wird.
 
-Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. All diese Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. \textit{Distributed Hash Tables} (kurz: DHTs) sind verteilte Datenstrukturen, die in Peer-to-Peer-Netzwerken verwendet werden, um effizient Schlüssel-Wert-Paare zu speichern und abzurufen. Anders als herkömmliche zentralisierte Datenbanken oder Speicherlösungen benötigen DHTs keinen zentralen Server zur Speicherung oder Verwaltung von Daten. Sie funktionieren auf Basis von Hash-Funktionen, die einen Schlüssel in einen eindeutigen Hash umwandeln. Diese Hashes dienen als Adressen, um zu bestimmen, wo die entsprechenden Daten im Netzwerk gespeichert sind. Die Daten werden über verschiedene Peers im Netzwerk verteilt, wobei jeder Peer nur einen Teil der Daten basierend auf seinem Verantwortungsbereich speichert . Um effizient auf die gespeicherten Daten zuzugreifen, verwenden DHTs  Routing-Algorithmen wie Pastry, Kademlia oder Chord. Diese Algorithmen ermöglichen es, Peers im Netzwerk zu finden, die für die Speicherung oder Abfrage von Daten zuständig sind, selbst wenn sich die Netzwerktopologie ständig verändert. Ein großer Vorteil von DHTs ist ihre Skalierbarkeit. Sie können mit der Netzwerkgröße wachsen, ohne an Effizienz zu verlieren. Neue Peers können nahtlos hinzugefügt werden, und die Struktur der DHT passt sich dynamisch an Veränderungen im Netzwerk an \parencite[S. 43-46]{Balakrishnan_LookingUpDataInP2PSystems} \parencite[postnote]{Stoica_Chord,Rowstron_Pastry,Maymounkov_Kademlia}.
+\begin{center}
+    \captionsetup{type=figure}
+    \includegraphics[width=0.9\linewidth]{images/overlay_network.png}
+    \captionof{figure}{Peer-to-Peer-Overlay-Netzwerk mit darunterliegendem physischen Netzwerk \parencite{Kunzmann_OverlayNetworksImageSource}}
+    \label{overlay_network}
+\end{center}
+
+\noindent In diesem Fall ist das physische Netzwerk das Internet. Das Overlay-Netzwerk ist eine logische Struktur, die es ermöglicht, die Kommunikation zwischen den Teilnehmern zu organisieren. Es besteht aus einer Reihe von Knoten, die über eine logische Verbindung miteinander verbunden sind. Die Verbindungen zwischen den Knoten werden durch Routing-Algorithmen verwaltet \parencite{Lua_P2POverlayNetworksPaper}.
+
+Beispiele für Routing-Algorithmen sind \textit{Kademlia}, \textit{Chord} und \textit{Pastry}. Diese drei Algorithmen verwenden sogenannte \textit{Distributed Hash Tables}, um die Knoten zu verwalten. \textit{Distributed Hash Tables} (kurz: DHTs) sind verteilte Datenstrukturen, die in Peer-to-Peer-Netzwerken verwendet werden, um effizient Schlüssel-Wert-Paare zu speichern und abzurufen. Anders als herkömmliche zentralisierte Datenbanken oder Speicherlösungen benötigen DHTs keinen zentralen Server zur Speicherung oder Verwaltung von Daten. Sie funktionieren auf Basis von Hash-Funktionen, die einen Schlüssel in einen eindeutigen Hash umwandeln. Diese Hashes dienen als Adressen, um zu bestimmen, wo die entsprechenden Daten im Netzwerk gespeichert sind. Die Daten werden über verschiedene Peers im Netzwerk verteilt, wobei jeder Peer nur einen Teil der Daten basierend auf seinem Verantwortungsbereich speichert . Um effizient auf die gespeicherten Daten zuzugreifen, verwenden DHTs  Routing-Algorithmen wie Pastry, Kademlia oder Chord. Diese Algorithmen ermöglichen es, Peers im Netzwerk zu finden, die für die Speicherung oder Abfrage von Daten zuständig sind, selbst wenn sich die Netzwerktopologie ständig verändert. Ein großer Vorteil von DHTs ist ihre Skalierbarkeit. Sie können mit der Netzwerkgröße wachsen, ohne an Effizienz zu verlieren. Neue Peers können nahtlos hinzugefügt werden, und die Struktur der DHT passt sich dynamisch an Veränderungen im Netzwerk an \parencite[S. 43-46]{Balakrishnan_LookingUpDataInP2PSystems} \parencite[postnote]{Stoica_Chord,Rowstron_Pastry,Maymounkov_Kademlia}.
 
 
 \subsection{Kademlia vs. Chord vs. Pastry}
@@ -81,8 +90,6 @@ Insgesamt bieten alle drei Algorithmen Lösungen für verteilte Systeme, variier
 
 \subsection{Angriffe auf Peer-to-Peer-Netzwerke}
 
-% DOS Angriff, Man in the Middle(?), Sybil Attack, Eclipse Attack erklären, damit diese später aufgegriffen werden können
-
 \subsubsection{Denial-of-Service-Angriff}
 
 Mit einem \textit{Denial-of-Service}-Angriff (kurz: \textit{DoS-Angriff}) wird versucht, die Verfügbarkeit eines Dienstes zu beeinträchtigen, indem die Ressourcen des Dienstes erschöpft werden, sodass diese ausfallen \parencite{Bicakci_DoSAttacks}. In einem Peer-to-Peer-Netzwerk kann ein DoS-Angriff auf verschiedene Arten durchgeführt werden. Eine Möglichkeit ist es, einen Peer mit Anfragen zu überfluten, um ihn zu überlasten. Eine andere Möglichkeit ist es, einen Peer mit gefälschten Informationen zu überfluten, um ihn zu täuschen. Beide Methoden führen dazu, dass der Peer nicht mehr in der Lage ist, seine Aufgaben zu erfüllen, was zu einem Ausfall des Dienstes führt. Dieser Angriff wird noch effektiver, wenn er von mehreren Angreifern gleichzeitig durchgeführt wird. Dies wird als \textit{Distributed Denial-of-Service}-Angriff (kurz: \textit{DDoS-Angriff}) bezeichnet. Bei einem DDoS-Angriff wird der Peer mit Anfragen von mehreren Angreifern überflutet, was es schwieriger macht, den Angriff zu stoppen \Parencite[S. 6]{Baptiste_AttacksOnP2PNetworks}.
@@ -96,7 +103,6 @@ Der Sybil-Angriff ist nicht spezifisch für Blockchain, sondern kann in jedem Pe
 
 \subsubsection{Eclipse-Angriff}
 \label{subsubsec:eclipse_attack_p2p}
-
 
 Bei einem \textit{Eclipse}-Angriff wird versucht, einen Peer von allen anderen Peers im Netzwerk zu isolieren. Dies wird erreicht, indem bereits durch den vorhergegangenen Sybil-Angriff die Mehrheit der Peers kontrolliert wird. Der Angreifer kann dann die Verbindungen des Opfers zu anderen Peers im Netzwerk verhindern, indem er die Verbindungen zu anderen Peers kontrolliert \Parencite[S. 14]{Baptiste_AttacksOnP2PNetworks}. 
 
