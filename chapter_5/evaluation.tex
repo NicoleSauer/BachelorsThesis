@@ -1,0 +1,12 @@
+\chapter{Evaluation}
+
+Abgleich des entwickelten Protokolls mit den in der Anforderungsanalyse identifizierten funktionalen und
+nicht-funktionalen Anforderungen. Welche konnte ich erfüllen und welche nicht? Falls nicht, warum
+konnte ich diese Anforderung gar nicht oder nur teilweise erfüllen?
+
+\begin{itemize}
+    \item Implementierung von ICE, weil im TURN Protokoll nicht steht, wie denn die \textit{relayed addresses} zwischen den Teilnehmern ausgetauscht werden sollen.
+    \item ICE hat das Manko, dass nicht definiert ist, wie das Signaling abläuft; es wird einfach vorausgesetzt, dass das funktioniert\dots
+    \item Angriffe auf Kademlia und Blockchain nochmal überprüfen und Risiken aufzeigen, die ich nicht verhindert habe/konnte
+    \item Kosten für Registrierung von Benutzern könnte abschreckend sein, da es viele Alternativen gibt, die kostenlos sind (und mehr Features bieten); dies bietet allerdings Schutz vor Sybil-Angriffen (habe ich auch so in der Arbeit geschrieben)
+\end{itemize}
