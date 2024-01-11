@@ -1,15 +1,40 @@
 \section{Sicherheit}
 \label{sec:sicherheit_basics}
 
-% Key Derivation Function erklären
 
-Peer-to-Peer bildet das Overlay-Netzwerk. Darunter liegt das Internet, welches die Infrastruktur für die Kommunikation bereitstellt. Da die Kommunikation über das Internet läuft, ist es wichtig, dass die Kommunikation sicher ist, da sie über mehrere Knoten geht, die nicht vertrauenswürdig sind. Mittels Kryptografie kann die Vertraulichkeit, Integrität und Authentizität der Kommunikation gewährleistet werden \Parencite[S. 7]{Hellmann_IT-Sicherheit}. 
+Peer-to-Peer bildet das Overlay-Netzwerk. Darunter liegt das Internet, welches die Infrastruktur für die Kommunikation bereitstellt. Da bei der Übertragung von Nachrichten über das Internet die Gefahr besteht, dass die Nachrichten abgefangen und mitgelesen werden können, ist es wichtig, dass die Kommunikation sicher ist. Die Nachrichten müssen über Verteilerknoten oder Access Points übertragen werden, die nicht vertrauenswürdig sind. Mittels Kryptografie kann die Vertraulichkeit, Integrität und Authentizität der Kommunikation gewährleistet werden \Parencite[S. 7]{Hellmann_IT-Sicherheit}.
 
 \subsection{Vertraulichkeit}
 
-Die Vertraulichkeit der Kommunikation wird durch Verschlüsselung gewährleistet. Es gibt zwei Arten von Verschlüsselung: \textit{symmetrische} und \textit{asymmetrische} Verschlüsselung. Bei der \textit{symmetrischen} Verschlüsselung wird nur ein Schlüssel für die Verschlüsselung und Entschlüsselung verwendet. Der Sender der Nachricht verschlüsselt die Nachricht mit einem Schlüssel und sendet die nun verschlüsselte Nachricht an den Empfänger. Der Empfänger kann die Nachricht mit dem gleichen Schlüssel entschlüsseln. Dadurch kann ein Angreifer, der die Nachricht abfängt, diese nicht entschlüsseln, da er den Schlüssel nicht kennt. Das Problem bei der symmetrischen Verschlüsselung ist, dass der Schlüssel zu Beginn der Kommunikation vom Sender an den Empfänger gelangen muss. Dies stellt eine Herausforderung dar, wenn Sender und Empfänger sich noch nicht kennen und noch nie zuvor miteinander kommuniziert haben oder noch nicht über andere Wege einen Schlüssel ausgetauscht haben. Sollte der Schlüssel bei der Übertragung über einen unsicheren Kanal abgefangen werden, kann der Angreifer die Kommunikation entschlüsseln und somit mitlesen \Parencites[S. 644]{DiffieHellman_NewDirectionsInCryptography}[S. 5-8]{Wong_KryptoPraxis}. Um dieses Problem zu lösen, wurde die \textit{asymmetrische} Verschlüsselung, welche auch unter dem Begriff \textit{Public-Key Kryptografie} bekannt ist, entwickelt. Bei der asymmetrischen Verschlüsselung wird anstatt eines Schlüssels ein Schlüsselpaar generiert, das aus einem öffentlichen und einem privaten Schlüssel besteht. Der öffentliche Schlüssel wird zum Verschlüsseln der Nachrichten verwendet und der private Schlüssel wird zum Entschlüsseln der Nachrichten verwendet. 
+Die Vertraulichkeit der Kommunikation wird durch Verschlüsselung gewährleistet. Man unterschiedet zwei Formen der Kryptografie: \textit{symmetrische} und \textit{asymmetrische} Kryptografie. Bei der \textit{symmetrischen} Kryptografie wird nur ein Schlüssel für die Verschlüsselung und Entschlüsselung verwendet. Der Sender der Nachricht verschlüsselt die Nachricht mit einem Schlüssel und sendet die nun verschlüsselte Nachricht an den Empfänger. Der Empfänger kann die Nachricht mit dem gleichen Schlüssel entschlüsseln. Dadurch kann ein Angreifer, der die Nachricht abfängt, diese nicht entschlüsseln, da er den Schlüssel nicht kennt. Abbildung \ref{fig:symmetrische_verschluesselung} zeigt den Ablauf der symmetrischen Verschlüsselung.
 
-% #TODO: Abbildung vor asymmetrische Verschlüsselung einfügen, hilft beim Verständnis
+\begin{center}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{images/symmetric_encryption.png}
+        \caption{Symmetrische Verschlüsselung, in Anlehnung an \cite{ElektronikKompendium_symmetrischeVerschluesselung}}
+        \label{fig:symmetrische_verschluesselung}
+    \end{figure}
+\end{center}
+
+\noindent Das Problem bei der symmetrischen Kryptografie ist, dass der Schlüssel zu Beginn der Kommunikation vom Sender an den Empfänger gelangen muss. Dies stellt eine Herausforderung dar, wenn Sender und Empfänger sich noch nicht kennen und noch nie zuvor miteinander kommuniziert haben oder noch nicht über andere Wege einen Schlüssel ausgetauscht haben. Sollte der Schlüssel bei der Übertragung über einen unsicheren Kanal abgefangen werden, kann der Angreifer die Kommunikation entschlüsseln und somit mitlesen \Parencites[S. 644]{DiffieHellman_NewDirectionsInCryptography}[S. 5-8]{Wong_KryptoPraxis}. In diesem Fall kann eine Schlüsselvereinbarung verwendet werden, um einen gemeinsamen Schlüssel zu erhalten. Bei der Schlüsselvereinbarung wird ein Schlüssel zwischen zwei Parteien vereinbart, ohne dass dieser über einen unsicheren Kanal übertragen werden muss. Dies läuft wie folgt ab: Beide Teilnehmer generieren einen privaten Schlüssel und einen öffentlichen Schlüssel. Durch die Kombination des öffentlichen Schlüssels des anderen Teilnehmers und des eigenen privaten Schlüssels wird ein gemeinsamer Schlüssel generiert. Dieser gemeinsame Schlüssel kann dann für die symmetrische Verschlüsselung verwendet werden \Parencite[S. 11-12]{Wong_KryptoPraxis}. 
+
+
+Bei der \textit{asymmetrische} Kryptografie (auch \textit{Public-Key-Kryptografie} genannt) wird anstatt nur eines Schlüssels ein Schlüsselpaar generiert, das aus einem öffentlichen und einem privaten Schlüssel besteht. Der öffentliche Schlüssel des Empfängers wird zum Verschlüsseln der Nachrichten verwendet und zum Entschlüsseln der Nachrichten wird der private Schlüssel des Empfängers verwendet. Der öffentliche Schlüssel des Empfängers kann von jedem verwendet werden, um Nachrichten an den Empfänger zu verschlüsseln. Nur der Empfänger kann die Nachrichten entschlüsseln, da nur er den privaten Schlüssel besitzt. Der Ablauf der asymmetrischen Verschlüsselung ist in Abbildung \ref{fig:asymmetrische_verschluesselung} dargestellt.
+
+
+\begin{center}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{images/asymmetric_encryption.png}
+        \caption{Asymmetrische Verschlüsselung, in Anlehnung an \cite{ElektronikKompendium_asymmetrischeVerschluesselung}}
+        \label{fig:asymmetrische_verschluesselung}
+    \end{figure}
+\end{center}
+
+\noindent Es ist außerdem nicht möglich, Nachrichten, die mit dem öffentlichen Schlüssel verschlüsselt wurden, mit diesem auch wieder zu entschlüsseln \parencite{ElektronikKompendium_asymmetrischeVerschluesselung}. 
+
+Diese beiden Verschlüsselungstechniken können kombiniert werden, um die Vorteile beider Verfahren zu nutzen. Der Schlüsselaustausch wird mit der asymmetrischen Verschlüsselung durchgeführt und die eigentliche Kommunikation wird mit der symmetrischen Verschlüsselung durchgeführt. Dadurch wird die Sicherheit der Kommunikation erhöht, da der Schlüssel nicht über einen unsicheren Kanal übertragen werden muss \Parencite[S. 5-8]{Wong_KryptoPraxis}. 
 
 \subsection{Integrität}
 
