@@ -1,8 +1,8 @@
 \section{Sicherheit}
 \label{sec:sicherheit_basics}
 
-
 Peer-to-Peer bildet das Overlay-Netzwerk. Darunter liegt das Internet, welches die Infrastruktur für die Kommunikation bereitstellt. Da bei der Übertragung von Nachrichten über das Internet die Gefahr besteht, dass die Nachrichten abgefangen und mitgelesen werden können, ist es wichtig, dass die Kommunikation sicher ist. Die Nachrichten müssen über Verteilerknoten oder Access Points übertragen werden, die nicht vertrauenswürdig sind. Mittels Kryptografie kann die Vertraulichkeit, Integrität und Authentizität der Kommunikation gewährleistet werden \Parencite[S. 7]{Hellmann_IT-Sicherheit}.
+
 
 \subsection{Vertraulichkeit}
 
@@ -43,11 +43,10 @@ Bei der \textit{asymmetrische} Kryptografie (auch \textit{Public-Key-Kryptografi
 
 Diese beiden Verschlüsselungstechniken können kombiniert werden, um die Vorteile beider Verfahren zu nutzen. Der Schlüsselaustausch wird mit der asymmetrischen Verschlüsselung durchgeführt und die eigentliche Kommunikation wird mit der symmetrischen Verschlüsselung durchgeführt. Dadurch wird die Sicherheit der Kommunikation erhöht, da der Schlüssel nicht über einen unsicheren Kanal übertragen werden muss \Parencite[S. 5-8]{Wong_KryptoPraxis}. 
 
+
 \subsection{Integrität}
 
-Um die Integrität der Kommunikation zu gewährleisten, werden Signaturen verwendet. Für eine Signatur wird der Hashwert einer Nachricht mit dem privaten Schlüssel des Senders verschlüsselt und an die Nachricht angehängt. 
-
-Um den Hashwert zu erhalten, wird die Nachricht mit einer Hashfunktion gehasht. Hashfunktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hashfunktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Einwegfunktion ist eine Funktion, die einfach zu berechnen ist, aber schwierig zu invertieren ist. Das bedeutet, dass es einfach ist, den Hashwert einer Nachricht zu berechnen, aber schwierig ist, die Nachricht aus dem Hashwert zu berechnen. Kollisionsresistenz bedeutet, dass es schwierig ist, zwei Nachrichten zu finden, die den gleichen Hashwert haben \parencite[S. 13-15]{Brünnler_BlockchainKurzGut}.
+Um die Integrität der Kommunikation zu gewährleisten, werden digitale Signaturen verwendet. Um den Hash-Wert zu erhalten, wird die Nachricht mit einer Hashfunktion gehasht. Hashfunktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hashfunktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Einwegfunktion ist eine Funktion, die einfach zu berechnen ist, aber schwierig zu invertieren ist. Das bedeutet, dass es einfach ist, den Hash-Wert einer Nachricht zu berechnen, aber schwierig ist, die Nachricht aus dem Hash-Wert zu berechnen. Kollisionsresistenz bedeutet, dass es schwierig ist, zwei Nachrichten zu finden, die den gleichen Hash-Wert haben \parencite[S. 13-15]{Brünnler_BlockchainKurzGut}. Die folgende Abbildung zeigt, wie eine digitale Signatur funktioniert:
 
 \begin{center}
     \captionsetup{type=figure}
@@ -56,9 +55,7 @@ Um den Hashwert zu erhalten, wird die Nachricht mit einer Hashfunktion gehasht. 
     \label{fig:signatur}
 \end{center}
 
-% #TODO: Text an Bild anpassen
-
-\noindent Der Empfänger kann den verschlüsselten Hashwert mit dem öffentlichen Schlüssel des Senders entschlüsseln, um dann anschließend selbst den Hashwert der Nachricht zu berechnen. Wenn der berechnete Hashwert mit dem entschlüsselten Hashwert übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht nicht verändert wurde und somit die Integrität der Nachricht gewährleistet ist. Falls der berechnete Hashwert nicht mit dem entschlüsselten Hashwert übereinstimmt, wurde die Nachricht verändert und die Integrität der Nachricht ist nicht mehr gewährleistet \Parencite[S. 73-78]{Hellmann_IT-Sicherheit}.
+\noindent Der Sender berechnet den Hash-Wert der Nachricht, verschlüsselt diesen mit seinem privaten Schlüssel und hängt ihn (den Hash-Wert) an die Nachricht an. Der Empfänger entschlüsselt den Hash-Wert mit dem öffentlichen Schlüssel des Senders und berechnet den Hash-Wert der Nachricht selbst. Wenn der berechnete Hash-Wert mit dem entschlüsselten Hash-Wert übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht nicht verändert wurde und somit die Integrität der Nachricht gewährleistet ist. Falls der berechnete Hash-Wert nicht mit dem entschlüsselten Hash-Wert übereinstimmt, wurde die Nachricht verändert und die Integrität der Nachricht ist nicht mehr gewährleistet \Parencite[S. 73-78]{Hellmann_IT-Sicherheit}. 
 
 
 \subsection{Authentizität}
