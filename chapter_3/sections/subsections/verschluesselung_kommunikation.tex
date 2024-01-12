@@ -1,7 +1,5 @@
-\subsection{Verschlüsselung der Kommunikation}
+\subsection{Sicherheit und Verschlüsselung}
 
-% Wenn Public Key des anderen bekannt ist, gilt das als authentifizierter Schlüsselaustausch. Bietet Schutz 
-% vor Man in the Middle Attacken, da bekannt ist, wem der Public Key gehört. Da in meinem Fall beide
-% authentifiziert sind, ist es ein wechselseitiger authentifizierter Schlüsselaustausch.
 
-Für eine sichere Kommunikation müssen Vertraulichkeit, Integrität und Authentizität der Nachrichten gewährleistet sein. Die Kommunikation muss verschlüsselt werden, um die Vertraulichkeit zu gewährleisten. Um die Integrität sicherzustellen, müssen die Nachrichten signiert werden. Um die Authentizität zu gewährleisten, muss sichergestellt werden, dass beide Benutzer wissen, mit wem sie kommunizieren.  
+Es müssen Mechanismen zur Verschlüsselung der Kommunikation zwischen den Peers implementiert werden, um die Vertraulichkeit der Nachrichten zu gewährleisten. Eine Ende-zu-Ende-Verschlüsselung ist erforderlich, um sicherzustellen, dass die Nachrichten nur vom Absender und Empfänger gelesen werden können.
+Das Netzwerk muss so gestaltet sein, dass es vor den gängigen Angriffen eines Peer-to-Peer-Netzwerks geschützt ist. Dazu gehören unter anderem Sybil-Angriffe, Eclipse-Angriffe und Routing-Angriffe. 
