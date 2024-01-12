@@ -1,4 +1,10 @@
 \section{Sicherheit}
 \label{subsec:sicherheit}
 
-Um die Kommunikation zwischen den Teilnehmern zu schützen, finden sowohl asymmetrische als auch symmetrische Verschlüsselung Anwendung. Die asymmetrische Verschlüsselung wird für die Authentifizierung und die symmetrische Verschlüsselung für die Ende-zu-Ende-Verschlüsselung der Nachrichten verwendet. Die Implementierung der asymmetrischen Verschlüsselung basiert auf Public-Key-Kryptographie. In dem von Whitfield Diffie und Martin Hellman 1976 veröffentlichten Paper \textit{New Directions in Cryptography} \parencite{DiffieHellman_NewDirectionsInCryptography} wurde die Public-Key-Kryptographie erstmals beschrieben. Darin wird die Problematik der symmetrischen Verschlüsselung beschrieben, dass ein Schlüssel für die Verschlüsselung und Entschlüsselung verwendet wird und dieser Schlüssel zu Beginn der Kommunikation über einen unsicheren Kanal zwischen den Teilnehmern ausgetauscht werden muss. Die Lösung dieses Problems ist die Public-Key-Kryptographie.
+% #TODO: Checken, ob das nach der Umstrukturierung noch so passt
+Um die Kommunikation zwischen den Teilnehmern zu schützen, finden sowohl asymmetrische als auch symmetrische Verschlüsselung Anwendung. Die asymmetrische Verschlüsselung wird für die Authentifizierung und die symmetrische Verschlüsselung für die Ende-zu-Ende-Verschlüsselung der Nachrichten verwendet. 
+
+\subsection{Vertrauliche Kommunikation}
+\label{subsec:vertrauliche_kommunikation}
+
+Die Kommunikation zwischen den Teilnehmern soll vertraulich sein. Das bedeutet, dass die Nachrichten nur von den Teilnehmern gelesen werden können. Um dies zu gewährleisten, wird die Ende-zu-Ende-Verschlüsselung verwendet. Bei der Ende-zu-Ende-Verschlüsselung wird die Nachricht vom Sender verschlüsselt und erst beim Empfänger wieder entschlüsselt. Dadurch kann ein Angreifer, der die Nachricht abfängt, diese nicht lesen, da er den Schlüssel nicht kennt. Im Detail 
