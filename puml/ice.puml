@@ -1,0 +1,69 @@
+@startuml
+actor Alice
+actor SignalingServer
+actor STUNServer
+actor TURNServer
+actor Bob
+
+Alice -> Alice: Gathers candidate addresses
+activate Alice
+Alice -> SignalingServer: Request to connect to Bob
+Alice -> SignalingServer: Sends own candidate addresses
+deactivate Alice
+activate SignalingServer
+SignalingServer -> Bob: Request for candidate addresses
+deactivate SignalingServer
+activate Bob
+Bob -> Bob: Gathers candidate addresses
+Bob --> SignalingServer: Response with candidate addresses
+deactivate Bob
+activate SignalingServer
+SignalingServer --> Alice: Response with Bob´s candidate addresses
+deactivate SignalingServer
+activate Alice
+Alice -> Alice: Builds candidate pairs
+Alice -> Alice: Builds checklist of candidate pairs
+Alice -> Alice: Performs connectivity checks based on checklist
+Alice -> Alice: Selects candidate pair
+deactivate Alice
+
+group Direct Connection
+    Alice -> Bob: Sends message
+    activate Bob
+    Bob -> Alice: Sends message
+    deactivate Bob
+end
+
+group STUN
+    Alice -> STUNServer: Sends STUN request
+    activate STUNServer
+    STUNServer --> Alice: Sends STUN response
+    deactivate STUNServer
+    Bob -> STUNServer: Sends STUN request
+    activate STUNServer
+    STUNServer --> Bob: Sends STUN response
+    deactivate STUNServer
+    Alice -> Bob: Sends message
+    Bob -> Alice: Sends message
+end
+
+group TURN
+    Alice -> TURNServer: Sends TURN request
+    activate TURNServer
+    TURNServer --> Alice: Sends TURN response
+    deactivate TURNServer
+    Bob -> TURNServer: Sends TURN request
+    activate TURNServer
+    TURNServer --> Bob: Sends TURN response
+    deactivate TURNServer
+    Alice -> TURNServer: Sends message
+    activate TURNServer
+    TURNServer -> Bob: Sends message
+    deactivate TURNServer
+    Bob -> TURNServer: Sends message
+    activate TURNServer
+    TURNServer -> Alice: Sends message
+    deactivate TURNServer
+end
+
+@enduml

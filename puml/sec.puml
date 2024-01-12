@@ -1,0 +1,47 @@
+@startuml
+actor Alice
+actor Bob
+
+group Authenticated Diffie-Hellman key exchange
+    
+    Alice -> Alice: Generate ephemeral key pair
+    activate Alice
+    Alice -> Alice: Sign ephemeral public key
+    Alice -> Bob: Send ephemeral public key and signature
+    deactivate Alice
+
+    activate Bob
+    Bob -> Bob: Verify signature of ephemeral public key of Alice
+    Bob -> Bob: Generate ephemeral key pair
+    Bob -> Bob: Sign ephemeral public key
+    Bob -> Alice: Send ephemeral public key and signature
+    deactivate Bob
+end
+
+group Compute shared secret
+    
+    Alice -> Alice: Compute shared secret
+    activate Alice
+    Alice -> Alice: Compute shared key
+    deactivate Alice
+
+    
+    Bob -> Bob: Compute shared secret
+    activate Bob
+    Bob -> Bob: Compute shared key
+    deactivate Bob
+end
+
+group Encrypt message
+    
+    Alice -> Alice: Encrypt message
+    activate Alice
+    Alice -> Bob: Send encrypted message
+    deactivate Alice
+
+    activate Bob
+    Bob -> Bob: Decrypt message
+    deactivate Bob
+end
+
+@enduml
