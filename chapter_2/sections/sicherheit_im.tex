@@ -5,6 +5,7 @@ Peer-to-Peer bildet das Overlay-Netzwerk. Darunter liegt das Internet, welches d
 
 
 \subsection{Vertraulichkeit}
+\label{subsec:vertraulichkeit_basics}
 
 Die Vertraulichkeit der Kommunikation wird durch Verschlüsselung gewährleistet. Man unterschiedet zwei Formen der Kryptografie: \textit{symmetrische} und \textit{asymmetrische} Kryptografie. Bei der \textit{symmetrischen} Kryptografie wird nur ein Schlüssel für die Verschlüsselung und Entschlüsselung verwendet. Der Sender der Nachricht verschlüsselt die Nachricht mit einem Schlüssel und sendet die nun verschlüsselte Nachricht an den Empfänger. Der Empfänger kann die Nachricht mit dem gleichen Schlüssel entschlüsseln. Dadurch kann ein Angreifer, der die Nachricht abfängt, diese nicht entschlüsseln, da er den Schlüssel nicht kennt. Abbildung \ref{fig:symmetrische_verschluesselung} zeigt den Ablauf der symmetrischen Verschlüsselung.
 
@@ -45,6 +46,7 @@ Diese beiden Verschlüsselungstechniken können kombiniert werden, um die Vortei
 
 
 \subsection{Integrität}
+\label{subsec:integritaet_signatur}
 
 Um die Integrität der Kommunikation zu gewährleisten, werden digitale Signaturen verwendet. Um den Hash-Wert zu erhalten, wird die Nachricht mit einer Hashfunktion gehasht. Hashfunktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hashfunktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Einwegfunktion ist eine Funktion, die einfach zu berechnen ist, aber schwierig zu invertieren ist. Das bedeutet, dass es einfach ist, den Hash-Wert einer Nachricht zu berechnen, aber schwierig ist, die Nachricht aus dem Hash-Wert zu berechnen. Kollisionsresistenz bedeutet, dass es schwierig ist, zwei Nachrichten zu finden, die den gleichen Hash-Wert haben \parencite[S. 13-15]{Brünnler_BlockchainKurzGut}. Die folgende Abbildung zeigt, wie eine digitale Signatur funktioniert:
 

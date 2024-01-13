@@ -2,45 +2,45 @@
 actor Alice
 actor Bob
 
-group Authenticated Diffie-Hellman key exchange
+group Authentifizierter Diffie-Hellman-Schlüsselaustausch
     
-    Alice -> Alice: Generate ephemeral key pair
+    Alice -> Alice: Erzeugt flüchtiges Schlüsselpaar
     activate Alice
-    Alice -> Alice: Sign ephemeral public key
-    Alice -> Bob: Send ephemeral public key and signature
+    Alice -> Alice: Signiert flüchtigen öffentlichen Schlüssel
+    Alice -> Bob: Sendet flüchtigen öffentlichen Schlüssel und Signatur
     deactivate Alice
 
     activate Bob
-    Bob -> Bob: Verify signature of ephemeral public key of Alice
-    Bob -> Bob: Generate ephemeral key pair
-    Bob -> Bob: Sign ephemeral public key
-    Bob -> Alice: Send ephemeral public key and signature
+    Bob -> Bob: Verifiziert Signatur des flüchtigen öffentlichen Schlüssels von Alice
+    Bob -> Bob: Erzeugt flüchtiges Schlüsselpaar
+    Bob -> Bob: Signiert flüchtigen öffentlichen Schlüssel
+    Bob -> Alice: Sendet flüchtigen öffentlichen Schlüssel und Signatur
     deactivate Bob
 end
 
-group Compute shared secret
+group Berechnung des gemeinsamen Schlüssels
     
-    Alice -> Alice: Compute shared secret
+    Alice -> Alice: Berenchnet gemeinsames Geheimnis
     activate Alice
-    Alice -> Alice: Compute shared key
+    Alice -> Alice: Berechnet gemeinsamen Schlüssel
     deactivate Alice
 
     
-    Bob -> Bob: Compute shared secret
+    Bob -> Bob: Berechnet gemeinsames Geheimnis
     activate Bob
-    Bob -> Bob: Compute shared key
+    Bob -> Bob: Berechnet gemeinsamen Schlüssel
     deactivate Bob
 end
 
-group Encrypt message
+group Symmetrische Verschlüsselung
     
-    Alice -> Alice: Encrypt message
+    Alice -> Alice: Verschlüsselt Nachricht
     activate Alice
-    Alice -> Bob: Send encrypted message
+    Alice -> Bob: Sendet verschlüsselte Nachricht
     deactivate Alice
 
     activate Bob
-    Bob -> Bob: Decrypt message
+    Bob -> Bob: Entschlüsselt Nachricht
     deactivate Bob
 end
 

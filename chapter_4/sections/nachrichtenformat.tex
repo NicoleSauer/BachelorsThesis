@@ -7,16 +7,19 @@
 Jedes Instant-Messaging-Protokoll benötigt die Definition eines Nachrichtenformats, das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden. Im Folgenden wird das Nachrichtenformat für das Instant-Messaging-Protokoll beschrieben.
 
 % #TODO: Kopf und Inhalt zusammenführen
+% #TODO: Endianness erwähnen    
 \subsection{Nachrichtenkopf}
 
-Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Der Nachrichtenkopf enthält die folgenden Informationen:
+Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Die Nachricht wird in binär serialisierter Form übertragen. 
+
+
+Der Nachrichtenkopf enthält die folgenden Informationen:
 
 \begin{itemize}
     \item Quell-IP-Adresse und Quell-Port
     \item Ziel-IP-Adresse und Ziel-Port
-    \item Timestamp
+    \item Timestamp (auch für Reihenfolge verwenden)
     \item Signatur
-    \item Sequenznummer
 \end{itemize}
 
 \noindent Die Quell-IP-Adresse und der Quell-Port stammen vom Sender, die Ziel-IP-Adresse und der Ziel-Port enthalten die IP-Adresse und den Port des Empfängers. Die Prüfsumme wird aus dem Nachrichteninhalt berechnet und dient der Integritätsprüfung. Der Timestamp enthält die aktuelle Zeit, zu der die Nachricht gesendet wird. Jede Nachricht wird aus Sicherheitsgründen mit dem statischen privaten Schlüssel des Senders signiert und kann somit vom Empfänger verifiziert werden. Die Sequenznummer spielt bei der Verwendung von UDP eine wichtige Rolle, da UDP keine Garantie für die Reihenfolge der Nachrichten bietet. Somit kann der Empfänger die Nachrichten anhand der Sequenznummer in die richtige Reihenfolge bringen.
@@ -31,4 +34,4 @@ Der Nachrichteninhalt enthält die folgenden Informationen:
     \item Nachrichteninhalt
 \end{itemize}
 
-\noindent Der Nachrichtentyp gibt an, um welche Art von Nachricht es sich handelt. Die Nachrichtenlänge gibt die Länge des Nachrichteninhalts an. Der Nachrichteninhalt enthält die eigentliche Nachricht, die vom Sender an den Empfänger gesendet wird.
+\noindent Der Nachrichtentyp gibt an, um welche Art von Nachricht es sich handelt. Die Nachrichtenlänge gibt die Länge des Nachrichteninhalts an. Der Nachrichteninhalt enthält die eigentliche Nachricht, die vom Sender an den Empfänger gesendet wird. Ab Byte so und so ist der verschlüsselte Nachrichteninhalt. Das kann fix so geasgt werde, dann die Metadaten davor eine fixe Länge haben.
