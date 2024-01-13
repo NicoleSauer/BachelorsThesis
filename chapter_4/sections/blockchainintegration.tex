@@ -1,9 +1,12 @@
-\section{Integration von Blockchain}
+\section{Sicherheit durch Blockchain}
 \label{sec:blockchainintegration}
+
+% #TODO: maybe add a short introduction to this section
+% #TODO: verschiedene Möglichkeiten der Blockchainintegration vorstellen und erklären, warum ich mich für diese entschieden habe (siehe Ideen von ChatGPT)
 
 
 \subsection{Auswahl der Blockchain}
-Für die Integration der Blockchain in das Protokoll wurde zunächst eine geeignete Blockchain gesucht. Dabei wurde sich auf die beiden bekanntesten Blockchains, Bitcoin und Ethereum, beschränkt. Da Bitcoin eine reine Kryptowährung ist und keine Smart Contracts unterstützt, wurde sich für Ethereum entschieden. Ethereum ist eine Blockchain, die zwar auch eine Kryptowährung, Ether, besitzt, aber zusätzlich auch Smart Contracts unterstützt. Der Grund für die Existenz einer Währung auf der Blockchain ist, dass die Smart Contracts, die auf der Blockchain ausgeführt werden, mit Ether bezahlt werden müssen \parencite[S. 2]{Antonopoulos_MasteringEthereum}. Das bedeutet für die Teilnehmer des Protokolls, dass sie Ether besitzen müssen, um sich registrieren zu können. Für die zwei weiteren Funktionen, die die Blockchain im Protokoll übernimmt, ist keine Währung notwendig, da es sich um reine Lesezugriffe handelt, welche keine Kosten verursachen. Die beiden Funktionen sind die Suche nach einem Benutzernamen und die Suche nach einem öffentlichen Schlüssel anhand eines Benutzernamens. Diese beiden Funktionen werden in Abschnitt \ref{subsec:contract_registrierung} (\nameref{subsec:contract_kommunikation}) und Abschnitt \ref{subsec:kommunikation} (\nameref{subsec:kommunikation}) beschrieben. Die Blockchain wird also nur für die Registrierung der Teilnehmer und für die Suche nach Benutzernamen und öffentlichen Schlüsseln verwendet.
+Für die Integration der Blockchain in das Protokoll wurde zunächst eine geeignete Blockchain gesucht. Dabei wurde sich auf die beiden bekanntesten Blockchains, Bitcoin und Ethereum, beschränkt. Da Bitcoin eine reine Kryptowährung ist und keine Smart Contracts unterstützt, wurde sich für Ethereum entschieden. Ethereum ist eine Blockchain, die zwar auch eine Kryptowährung, Ether, besitzt, aber zusätzlich auch Smart Contracts unterstützt. Der Grund für die Existenz einer Währung auf der Blockchain ist, dass die Smart Contracts, die auf der Blockchain ausgeführt werden, mit Ether bezahlt werden müssen \parencite[S. 2]{Antonopoulos_MasteringEthereum}. Das bedeutet für die Teilnehmer des Protokolls, dass sie Ether besitzen müssen, um sich registrieren zu können. Für die zwei weiteren Funktionen, die die Blockchain im Protokoll übernimmt, ist keine Währung notwendig, da es sich um reine Lesezugriffe handelt, welche keine Kosten verursachen. Die beiden Funktionen sind die Suche nach einem Benutzernamen und die Suche nach einem öffentlichen Schlüssel anhand eines Benutzernamens. Die Blockchain wird also für die Registrierung der Teilnehmer und für die Suche nach Benutzernamen und öffentlichen Schlüsseln verwendet.
 
 
 \subsection{Registrierung}
@@ -40,33 +43,32 @@ function registerUser(string memory _username,
 }
 \end{lstlisting}
 
-
-\subsection{Kommunikation}
-\label{subsec:contract_kommunikation}
 Für die Kommunikation mit anderen Teilnehmern, benötigt man die ID des anderen Teilnehmers im Kademlia-Netzwerk. Da die ID im Kademlia-Netzwerk dem Benutzernamen entspricht, muss der Benutzername des anderen Teilnehmers bekannt sein. Dazu wird dieser Benutzername auf der Blockchain gesucht, um zu kontrollieren, ob dieser bereits registriert ist. Hierfür wird eine Funktion im Smart Contract auf der Blockchain aufgerufen, die den Benutzernamen als Parameter erhält. Der Smart Contract sucht dann in der Blockchain nach dem Benutzernamen und gibt ihn, falls vorhanden, zurück. Sollte kein Benutzer mit diesem Benutzernamen auf der Blockchain vorhanden sein, wird ein leerer String zurückgegeben, der darauf hinweist, dass der gesuchte Benutzer nicht registriert ist und somit keine Verbindung aufgebaut werden kann. Der Rückgabewert muss von der Applikation, die dieses Protokoll nutzt, abgefangen werden. 
 Die Funktion könnte wie folgt aussehen:
 
 \begin{lstlisting}[language=Solidity, caption={Suche nach einem Benutzernamen auf der Blockchain},captionpos=b]
-// Function to verify a user's username
-function verifyUsername(string memory _username) external view 
-    returns (string memory) {
-        // Try to get the address associated with the username
-        address userAddress = usernames[_username];
-
-        // Check if the address is empty
-        require(userAddress != address(0), 
-            "User does not exist.");
-
-        // Get the user's details
-        User storage user = users[userAddress];
-
-        // Return the user's username
-        return (user.username);
+// Function to check if a user is registered
+function isUserRegistered(string memory _username) external view returns (bool) {
+    // Try to get the address associated with the username
+    address userAddress = usernames[_username];
+    // Check if the address is empty
+    if (userAddress == address(0)) {
+        // If the address is empty, return false
+        return false;
+    }
+    // If the address is not empty, get the user details using the address
+    User storage user = users[userAddress];
+    // Return the user's registration status
+    return (user.isRegistered);
 }
 \end{lstlisting}
 
 
-\noindent Ist der Benutzername auf der Blockchain vorhanden und es kommt zum Verbindungsaufbau wie in Abschnitt \ref{subsec:verbindungsmanagement} (\nameref{subsec:verbindungsmanagement}) beschrieben, wird der öffentliche Schlüssel des Benutzers ausgelesen. Dafür wird die nachstehende Funktion genutzt:
+
+\subsection{Öffentlicher Schlüssel}
+\label{subsec:contract_oeffentlicher_schluessel}
+
+Ist der Benutzername auf der Blockchain vorhanden und es kommt zum Verbindungsaufbau wie in Abschnitt \ref{subsec:verbindungsmanagement} (\nameref{subsec:verbindungsmanagement}) beschrieben, wird der öffentliche Schlüssel des Benutzers ausgelesen. Dafür wird die nachstehende Funktion genutzt:
 
 \begin{lstlisting}[language=Solidity, caption={Suche nach einem öffentlichen Schlüssel auf der Blockchain},captionpos=b]
 // Function to get a user's public key
