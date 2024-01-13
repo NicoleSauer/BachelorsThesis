@@ -5,64 +5,63 @@ actor STUNServer
 actor TURNServer
 actor Bob
 
-Alice -> Alice: Gathers candidate addresses
+Alice -> Alice: Sammelt Kandidatenadressen
 activate Alice
-Alice -> SignalingServer: Request to connect to Bob
-Alice -> SignalingServer: Sends own candidate addresses
-deactivate Alice
+Alice -> SignalingServer: Verbindungsanfrage für Bob
 activate SignalingServer
-SignalingServer -> Bob: Request for candidate addresses
+Alice -> SignalingServer: Sendet eigene Kandidatenadressen
+deactivate Alice
+SignalingServer -> Bob: Anfrage der Kanidatenadressen von Bob
 deactivate SignalingServer
 activate Bob
-Bob -> Bob: Gathers candidate addresses
-Bob --> SignalingServer: Response with candidate addresses
+Bob -> Bob: Sammelt Kandidatenadressen
+Bob --> SignalingServer: Antwort mit Kandidatenadressen
 deactivate Bob
 activate SignalingServer
-SignalingServer --> Alice: Response with Bob´s candidate addresses
+SignalingServer --> Alice: Antwort mit Kandidatenadressen von Bob
 deactivate SignalingServer
 activate Alice
-Alice -> Alice: Builds candidate pairs
-Alice -> Alice: Builds checklist of candidate pairs
-Alice -> Alice: Performs connectivity checks based on checklist
-Alice -> Alice: Selects candidate pair
+Alice -> Alice: Erstellt Kandidatenpaare
+Alice -> Alice: ERstellt Checkliste aus Kandidatenpaaren
+Alice -> Alice: Führt Konnektivitätschecks anhand der Checkliste durch
+Alice -> Alice: Wählt Kandidatenpaar aus
 deactivate Alice
 
-group Direct Connection
-    Alice -> Bob: Sends message
+
+alt Direkte Verbindung
+    Alice -> Bob: Sendet Nachricht
     activate Bob
-    Bob -> Alice: Sends message
+    Bob -> Alice: Sendet Nachricht
     deactivate Bob
-end
 
-group STUN
-    Alice -> STUNServer: Sends STUN request
+else Verbindung über STUN
+    Alice -> STUNServer: Sendet STUN-Anfrage
     activate STUNServer
-    STUNServer --> Alice: Sends STUN response
+    STUNServer --> Alice: Sendet STUN-Antwort
     deactivate STUNServer
-    Bob -> STUNServer: Sends STUN request
+    Bob -> STUNServer: Sendet STUN-Anfrage
     activate STUNServer
-    STUNServer --> Bob: Sends STUN response
+    STUNServer --> Bob: Sendet STUN-Antwort
     deactivate STUNServer
-    Alice -> Bob: Sends message
-    Bob -> Alice: Sends message
-end
+    Alice -> Bob: Sendet Nachricht
+    Bob -> Alice: Sendet Nachricht
 
-group TURN
-    Alice -> TURNServer: Sends TURN request
+else Verbindung über TURN
+    Alice -> TURNServer: Sendet TURN-Anfrage
     activate TURNServer
-    TURNServer --> Alice: Sends TURN response
+    TURNServer --> Alice: Sendet TURN-Antwort
     deactivate TURNServer
-    Bob -> TURNServer: Sends TURN request
+    Bob -> TURNServer: Sendet TURN-Anfrage
     activate TURNServer
-    TURNServer --> Bob: Sends TURN response
+    TURNServer --> Bob: Sendet TURN-Antwort
     deactivate TURNServer
-    Alice -> TURNServer: Sends message
+    Alice -> TURNServer: Sendet Nachricht
     activate TURNServer
-    TURNServer -> Bob: Sends message
+    TURNServer -> Bob: Sendet Nachricht
     deactivate TURNServer
-    Bob -> TURNServer: Sends message
+    Bob -> TURNServer: Sendet Nachricht
     activate TURNServer
-    TURNServer -> Alice: Sends message
+    TURNServer -> Alice: Sendet Nachricht
     deactivate TURNServer
 end
 

@@ -1,0 +1,36 @@
+@startuml
+actor Alice
+actor SignalingServer
+actor Bob
+
+Alice -> Alice: Sammelt ICE Kandidaten
+activate Alice
+Alice -> SignalingServer: Verfügbarkeitsabfrage für Bob
+activate SignalingServer
+Alice -> SignalingServer: Sendet ICE Kandidaten
+deactivate Alice
+SignalingServer -> SignalingServer: Prüft Verfügbarkeit von Bob
+
+
+
+alt Bob ist verfügbar
+SignalingServer -> Bob: Sendet ICE Kanidaten von Alice
+deactivate SignalingServer
+activate Bob
+Bob -> Bob: Sammelt ICE Kandidaten
+Bob --> SignalingServer: Antwortet mit eigenen ICE Kandidaten
+deactivate Bob
+activate SignalingServer
+SignalingServer --> Alice: Antowrtet mit ICE Kandidaten von Bob
+deactivate SignalingServer
+activate Alice
+Alice -> Alice: Erstellt Kandidatenpaare
+deactivate Alice
+
+else Bob ist nicht verfügbar
+activate SignalingServer
+SignalingServer --> Alice: Antwortet mit Fehlermeldung
+deactivate SignalingServer
+end
+
+@enduml
