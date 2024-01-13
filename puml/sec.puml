@@ -35,11 +35,13 @@ end
 group Symmetrische Verschlüsselung
     
     Alice -> Alice: Verschlüsselt Nachricht
+    Alice -> Alice: Signiert Nachricht
     activate Alice
-    Alice -> Bob: Sendet verschlüsselte Nachricht
+    Alice -> Bob: Sendet verschlüsselte und signierte Nachricht
     deactivate Alice
 
     activate Bob
+    Bob -> Bob: Verifiziert Signatur
     Bob -> Bob: Entschlüsselt Nachricht
     deactivate Bob
 end

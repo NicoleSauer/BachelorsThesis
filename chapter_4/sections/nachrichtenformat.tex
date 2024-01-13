@@ -1,37 +1,17 @@
 \section{Nachrichtenformat}
 \label{sec:nachrichtenformat}
 
-% #TODO: Warum ist das so aufgebaut? Woran habe ich mich orientiert?
-% #TODO: Pre-Key Message: In certain situations, such as during initial communication setup or key changes, additional data called pre-key messages might be included. These messages contain necessary information for establishing or updating encryption keys. <- brauche ich das?
 
 Jedes Instant-Messaging-Protokoll benötigt die Definition eines Nachrichtenformats, das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden. Im Folgenden wird das Nachrichtenformat für das Instant-Messaging-Protokoll beschrieben.
-
-% #TODO: Kopf und Inhalt zusammenführen
-% #TODO: Endianness erwähnen    
-\subsection{Nachrichtenkopf}
-
-Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Die Nachricht wird in binär serialisierter Form übertragen. 
-
-
-Der Nachrichtenkopf enthält die folgenden Informationen:
+Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Die Nachricht wird in binär serialisierter Form übertragen und enthält die folgenden Informationen:
 
 \begin{itemize}
-    \item Quell-IP-Adresse und Quell-Port
-    \item Ziel-IP-Adresse und Ziel-Port
-    \item Timestamp (auch für Reihenfolge verwenden)
+    \item Benutzername des Senders
+    \item Benutzername des Empfängers
+    \item Timestamp
     \item Signatur
-\end{itemize}
-
-\noindent Die Quell-IP-Adresse und der Quell-Port stammen vom Sender, die Ziel-IP-Adresse und der Ziel-Port enthalten die IP-Adresse und den Port des Empfängers. Die Prüfsumme wird aus dem Nachrichteninhalt berechnet und dient der Integritätsprüfung. Der Timestamp enthält die aktuelle Zeit, zu der die Nachricht gesendet wird. Jede Nachricht wird aus Sicherheitsgründen mit dem statischen privaten Schlüssel des Senders signiert und kann somit vom Empfänger verifiziert werden. Die Sequenznummer spielt bei der Verwendung von UDP eine wichtige Rolle, da UDP keine Garantie für die Reihenfolge der Nachrichten bietet. Somit kann der Empfänger die Nachrichten anhand der Sequenznummer in die richtige Reihenfolge bringen.
-
-\subsection{Nachrichteninhalt}
-
-Der Nachrichteninhalt enthält die folgenden Informationen:
-
-\begin{itemize}
-    \item Nachrichtentyp
     \item Nachrichtenlänge
     \item Nachrichteninhalt
 \end{itemize}
 
-\noindent Der Nachrichtentyp gibt an, um welche Art von Nachricht es sich handelt. Die Nachrichtenlänge gibt die Länge des Nachrichteninhalts an. Der Nachrichteninhalt enthält die eigentliche Nachricht, die vom Sender an den Empfänger gesendet wird. Ab Byte so und so ist der verschlüsselte Nachrichteninhalt. Das kann fix so geasgt werde, dann die Metadaten davor eine fixe Länge haben.
+\noindent Bei der Erstellung des Nachrichtenformats wurde sich an \cite[S. 9]{rfc2779_IMPP} orientiert. Die Benutzernamen erlauben die Zuordnung der Nachricht. Der Timestamp enthält die aktuelle Zeit, zu der die Nachricht gesendet wird und wird für die richtige Sortierung der Nachrichten verwendet. Die Signatur dient der Authentifizierung des Senders (siehe \ref{subsec:vertrauliche_kommunikation} \textit{\nameref{subsec:vertrauliche_kommunikation}}). Aus Sicherheitsgründen wird jede Nachricht signiert. Die Nachrichtenlänge gibt die Länge des Nachrichteninhalts an und der Nachrichteninhalt enthält die eigentliche Nachricht, die vom Sender an den Empfänger gesendet werden soll.

@@ -1,4 +1,9 @@
 \chapter{Evaluation}
+\label{chap:evaluation}
+
+% Signaling Server könnte auch mit Anfragen geflutet werden -> der Sever könnte bei jedem checken, ob es sich um einen validen Teilnehmer handelt, was aber sehr aufwändig wäre
+
+% wenn Kademlia mit Anfragen geflutet wird, könnte es zu einem Denial of Service kommen, da die Knoten nichtmehr erreichbar sind -> habe aber ja mit dem Signaling Server noch eine weitere Instanz, die die Anfragen entgegen nimmt und weiterleitet
 
 Abgleich des entwickelten Protokolls mit den in der Anforderungsanalyse identifizierten funktionalen und
 nicht-funktionalen Anforderungen. Welche konnte ich erfüllen und welche nicht? Falls nicht, warum
@@ -9,4 +14,9 @@ konnte ich diese Anforderung gar nicht oder nur teilweise erfüllen?
     \item ICE hat das Manko, dass nicht definiert ist, wie das Signaling abläuft; es wird einfach vorausgesetzt, dass das funktioniert\dots
     \item Angriffe auf Kademlia und Blockchain nochmal überprüfen und Risiken aufzeigen, die ich nicht verhindert habe/konnte
     \item Kosten für Registrierung von Benutzern könnte abschreckend sein, da es viele Alternativen gibt, die kostenlos sind (und mehr Features bieten); dies bietet allerdings Schutz vor Sybil-Angriffen (habe ich auch so in der Arbeit geschrieben)
+    \item Neuaushandlung des Schlüssels für jede Nachricht könnte zu viel sein
 \end{itemize}
+
+
+Um diesen Angriff zu erschweren, wird in dieser Arbeit die Teilnahme am Netzwerk erst durch eine vorherige Registrierung ermöglicht. Die Registrierung wird durch die Blockchain-Technologie realisiert und ist mit Kosten verbunden, die ein Angreifer aufbringen muss, um am Netzwerk teilzunehmen. Da bei einem Sybil-Angriff der Angreifer mehrere Identitäten verwendet, um das Netzwerk zu übernehmen, muss er für jede Identität die Kosten aufbringen. Dadurch wird der Angriff erschwert, da der Angreifer mehr Ressourcen benötigt, um das Netzwerk zu übernehmen.
+

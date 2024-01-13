@@ -1,7 +1,6 @@
 \section{Sicherheit}
 \label{subsec:sicherheit}
 
-% #TODO: Checken, ob das nach der Umstrukturierung noch so passt
 Um die Kommunikation zwischen den Teilnehmern zu schützen, finden sowohl asymmetrische als auch symmetrische Verschlüsselung Anwendung. Die asymmetrische Verschlüsselung wird für die Authentifizierung und die symmetrische Verschlüsselung für die Ende-zu-Ende-Verschlüsselung der Nachrichten verwendet. 
 
 \subsection{Vertrauliche Kommunikation}
@@ -9,11 +8,6 @@ Um die Kommunikation zwischen den Teilnehmern zu schützen, finden sowohl asymme
 
 Die Kommunikation zwischen den Teilnehmern soll vertraulich sein. Das bedeutet, dass die Nachrichten nur von den Teilnehmern gelesen werden können, die an der Kommunikation beteiligt sind. Um dies gewährleisten zu können, wird eine Ende-zu-Ende-Verschlüsselung verwendet. Ende-zu-Ende-Verschlüsselung ist ein Konzept, das besagt, dass die Nachrichten vom Sender verschlüsselt und erst beim Empfänger wieder entschlüsselt werden \parencite[S. 233-260]{Wong_KryptoPraxis}. Die folgende Abbildung \ref{fig:ende_zu_ende} zeigt den Ablauf einer Ende-zu-Ende-Verschlüsselung.
 
-% Signatur mit EdDSA -> warum habe ich mich dafür entschieden?
-% Key Derivation Function
-% symmetrische Verschlüsselung mit AES (state of the art <- Quelle)
-% Perfect Forward Secrecy erwähnen
-% Ed25519 (EdDSA) -> warum habe ich mich dafür entschieden? Signatur
 
 \begin{figure}[H]
     \centering
@@ -35,18 +29,26 @@ Solch ein Schlüsselaustauschverfahren für sich genommen, hat den Nachteil, das
 
 Im Block \textit{Authentifizierter Diffie-Hellman Schlüsselaustausch} aus Abbildung \ref{fig:ende_zu_ende} erzeugt Alice ein neues X25519-Schlüsselpaar und signiert ihren öffentlichen Schlüssel unter Verwendung des privaten statischen Ed25519-Schlüssels. Dieser signierte öffentliche Schlüssel wird an Bob gesendet. Bob erzeugt ebenfalls ein X25519-Schlüsselpaar und signiert seinen öffentlichen Schlüssel mit seinem privaten statischen Ed25519-Schlüssel. Dieser signierte öffentliche Schlüssel wird an Alice gesendet. Alice und Bob können nun das gemeinsame Geheimnis berechnen (siehe \ref{fig:schluesselvereinbarung} \textit{\nameref{fig:schluesselvereinbarung}}).
 
+
 \subsubsection{Berechnung des gemeinsamen Schlüssels}
 
 Um aus diesem Geheimnis ein möglichst gleichverteiltes Geheimnis zu erzeugen, wird eine \textit{Schlüsselableitungsfunktion} (englisch: \textit{Key Derivation Function}) verwendet. Eine Schlüsselableitungsfunktion ist eine Funktion, die aus einem Eingabeschlüssel (hier das Geheimnis) einen Ausgabeschlüssel erzeugt. Dieser wird dann für die eigentliche Verschlüsselung der Nachricht verwendet. Laut Wong kann dafür eine einfache Hashfunktion (siehe \ref{subsec:vertraulichkeit_basics} \textit{\nameref{subsec:vertraulichkeit_basics}}) verwendet werden, wenn die Ausgabelänge für den Ausgabeschlüssel passend ist \Parencite[S. 194]{Wong_KryptoPraxis}. In diesem Fall wird die \textit{SHA-256} Hashfunktion verwendet, da diese eine Ausgabelänge von $256$ Bit hat \Parencite{rfc6234_SHA2}.
 
+Im Block \textit{Berechnung des gemeinsamen Schlüssels} aus Abbildung \ref{fig:ende_zu_ende} wird das Geheimnis mit der SHA-256 Hashfunktion gehasht und das Ergebnis als symmetrischer Schlüssel verwendet.
+
 
 \subsubsection{Symmetrische Verschlüsselung}
 
+Der am häufigsten verwendete Verschlüsselungsalgorithmus ist \textit{Advanced Encryption Standard (AES)}. Dieser Algorithmus ist ein symmetrischer Verschlüsselungsalgorithmus (siehe \ref{fig:symmetrische_verschluesselung} \textit{\nameref{fig:symmetrische_verschluesselung}}). Da die Länge des Schlüssels den Grad der Sicherheit bestimmt, wird die maximal mögliche Schlüssellänge von $256$ Bit verwendet \parencite[S. 76]{Wong_KryptoPraxis}. 
+Diese Schlüssellänge passt zu der Ausgabelänge der verwendeten Ableitungsfunktion SHA-256.
+
+Im Block \textit{Symmetrische Verschlüsselung} aus Abbildung \ref{fig:ende_zu_ende} wird die Nachricht von Alice mit dem symmetrischen Schlüssel verschlüsselt, signiert und an Bob gesendet. Bob kann die Nachricht mit dem symmetrischen Schlüssel entschlüsseln und die Signatur mit dem öffentlichen statischen Ed25519-Schlüssel von Alice verifizieren.
+
+Dieser Vorgang wird für jede Nachricht wiederholt. Der symmetrische Schlüssel wird für jede Nachricht neu berechnet. Dadurch wird die \textit{Perfect Forward Secrecy} (PFS) gewährleistet. Die PFS ist ein Konzept, welches besagt, dass die Kompromittierung des Schlüssels nicht die Kompromittierung der Kommunikation in der Vergangenheit ermöglichen darf \parencite[S. 921-922]{Krawczyk_PerfectForwardSecrecy}.
 
 
+\subsubsection{Statische Schlüssel}
 
+Die statischen Schlüssel werden verwendet, um die Teilnehmer zu authentifizieren (Berechnung und Verifikation der Signaturen). Diese Schlüssel werden einmalig bei der Registrierung (siehe \ref{subsec:identifikation_von_teilnehmern} \textit{\nameref{subsec:identifikation_von_teilnehmern}}) eines Teilnehmers erzeugt. Der private Schlüssel wird lokal auf dem Gerät des Teilnehmers gespeichert. Für den öffentlichen Schlüssel muss ein Weg gefunden werden, diesen allen anderen Teilnehmern öffentlich zugänglich und eindeutig zuordenbar zu machen. Hierfür wird die Blockchain verwendet. 
 
-%\noindent Beim Aufbau einer Verbindung wird ein Diffie-Hellman-Schlüsselaustausch durchgeführt. Dieser Schlüsselaustausch wird verwendet, um einen symmetrischen Schlüssel für die Ende-zu-Ende-Verschlüsselung zu erzeugen. Der Diffie-Hellman-Schlüsselaustausch wird in Abbildung \ref{fig:ende_zu_ende} dargestellt. 
-
-%Zu Beginn erzeugt Alice ein flüchtiges Schlüsselpaar. Flüchtige Schlüssel sind Schlüssel, die nur für eine Verbindung verwendet werden. Nach der Verwendung werden sie verworfen \parencite{NIST_ephemeralKey}. Diesen Schlüssel signiert sie mit ihrem privaten statischen Schlüssel und sendet ihn an Bob. Bob kann die Signatur mit dem öffentlichen statischen Schlüssel von Alice verifizieren, da dieser bei Alice´ Registrierung in die Blockchain geschrieben wurde und mit Hilfe einer Funktion aus der Blockchain gelesen werden kann. Bob erzeugt nun ebenfalls ein flüchtiges Schlüsselpaar und signiert den flüchtigen öffentlichen Schlüssel mit seinem privaten statischen Schlüssel. Diesen signierten Schlüssel sendet er an Alice. Auch Alice kann nun die Signatur durch das Hinterlegen des öffentlichen statischen Schlüssels von Bob in der Blockchain prüfen. Der nächste Schritt ist die Berechnung des gemeinsamen Geheimnis. Dazu wird der flüchtige öffentliche Schlüssel des anderen Teilnehmers mit dem eigenen privaten flüchtigen Schlüssel multipliziert (?). Das Ergebnis ist das gemeinsame Geheimnis. Dieses wird nun mit einer \textit{Schlüsselableitungsfunktion} (englisch: \textit{Key Derivation Function}) in einen symmetrischen Schlüssel umgewandelt, mit dem die Nachrichten verschlüsselt werden. Alice kann nun eine, mit dem symmetrischen Schlüssel verschlüsselte, Nachricht an Bob senden und Bob ist in der Lage diese Nachricht mit dem symmetrischen Schlüssel zu entschlüsseln. 
 
