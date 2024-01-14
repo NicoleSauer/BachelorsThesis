@@ -1,6 +1,31 @@
 \chapter{Evaluation}
 \label{chap:evaluation}
 
+Siehe \nameref{chap:anforderungsanalyse}.
+
+Funktionale Anforderungen:
+
+\begin{itemize}
+    \item \textbf{F1}: Teilnehmer können sich anhand des Namens finden (Peer-Discovery and Routing)
+    \item \textbf{F2}: Teilnehmer können sich miteinander verbinden (Aufbau, Abbau und Verbindung wiederherstellen, wenn Abbruch wegen Netzwerkfehler)
+    \item \textbf{F3}: Nachrichtenformat muss definiert sein, sodass alle Teilnehmer es verstehen
+    \item \textbf{F4}: Sicherheit und Verschlüsselung, um Vertraulichkeit zu gewährleisten
+    \item \textbf{F5}: Protokoll muss plattformunabhängig sein, sollte standardisierte Technologien wie UDP, TCP, HTTP, JSON, etc. verwenden
+    \item \textbf{F6}: Fehlerbehandlung und Wiederholungsmechanismen, Erkennung von Übertragungsfehlern
+\end{itemize}
+
+Nicht-funktionale Anforderungen:
+
+\begin{itemize}
+    \item \textbf{NF1}: Performanz: schnelle Nachrichtenübertragung, geringe Latenz
+    \item \textbf{NF2}: Vertraulichkeit, Integrität und Authentizität der Daten muss gewährleistet sein
+    \item \textbf{NF3}: Zuverlässigkeit: Das System muss kontinuierlich verfügbar sein, um die Kommunikation zu ermöglichen
+    \item \textbf{NF4}: Kompatibilität: Ermöglichung einer nahtlosen Kommunikation zwischen Usern mit unterschiedlicher Plattform/Gerät
+    \item \textbf{NF5}: Skalierbarkeit: Kommunikationseffizienz und -qualität muss auch bei steigender Anzahl an Teilnehmern ohne signifikante Einbußen gewährleistet sein
+\end{itemize}
+
+
+
 % Signaling Server könnte auch mit Anfragen geflutet werden -> der Sever könnte bei jedem checken, ob es sich um einen validen Teilnehmer handelt, was aber sehr aufwändig wäre
 
 % wenn Kademlia mit Anfragen geflutet wird, könnte es zu einem Denial of Service kommen, da die Knoten nichtmehr erreichbar sind -> habe aber ja mit dem Signaling Server noch eine weitere Instanz, die die Anfragen entgegen nimmt und weiterleitet
