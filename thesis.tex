@@ -71,36 +71,6 @@
   captionpos=b
 }
 
-% \makeatletter
-% \def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
-% \def\@makechapterhead#1{%
-%   \vspace*{10\p@}%
-%   {\parindent \z@ 
-%     {\raggedleft \reset@font
-%       \fontsize{15ex}{15ex}\selectfont %Problème avec les substitutions...
-%       \bfseries\thechapter\par\nobreak}%
-%     \par\nobreak
-%     \interlinepenalty\@M
-%     {\raggedright \Huge \bfseries #1}%
-%     \par\nobreak
-%     \hrulefill
-%     \par\nobreak
-%     \vskip 100\p@
-%   }}
-% \def\@makeschapterhead#1{%
-%   \vspace*{10\p@}%
-%   {\parindent \z@ 
-%     {\raggedleft \reset@font
-%       \fontsize{15ex}{15ex}\selectfont %Problème avec les substitutions...
-%       \bfseries\vphantom{\thechapter}\par\nobreak}%
-%     \par\nobreak
-%     \interlinepenalty\@M
-%     {\raggedright \Huge \bfseries #1}%
-%     \par\nobreak
-%     \hrulefill
-%     \par\nobreak
-%     \vskip 100\p@
-%   }}
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NOTES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -156,19 +126,24 @@
             \end{tabular} \\
         \end{center}
     \end{titlepage}
+
+    \pagenumbering{Roman}
     
     % Change vertical spacing to 1.5 for the rest of the document
     \onehalfspacing
 
     %%%%%%%%%%%%%%%%%%%%%%%% BEGIN: ToC, LoF, Abstract DE/ENG, Ehrenw. Erkl. %%%%%%%%%%%%%%%%%%%%%%%%
-    %\input{no_chapter/ehrenwoertliche_erklaerung.tex}
+    \input{no_chapter/ehrenwoertliche_erklaerung.tex}
     \tableofcontents
-    %\listoffigures
-    %\lstlistoflistings
-    %\input{no_chapter/kurzfassung.tex}
-    %\input{no_chapter/abstract}
+    \listoffigures
+    \lstlistoflistings
+    \input{no_chapter/kurzfassung.tex}
+    \input{no_chapter/abstract}
     %%%%%%%%%%%%%%%%%%%%%%%%% END: ToC, LoF, Abstract DE/ENG, Ehrenw. Erkl. %%%%%%%%%%%%%%%%%%%%%%%%%
 
+    \clearpage
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN: Numbered Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \input{chapter_1/einleitung.tex}
@@ -182,8 +157,6 @@
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN: Literature %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \printbibliography[nottype=online]
-    %\printbibliography[nottype=online, title={Standards}]
-    %\printbibliography[nottype=online, title={Papers}]
     \printbibliography[type=online, title={Webseiten}]
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END: Literature %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
