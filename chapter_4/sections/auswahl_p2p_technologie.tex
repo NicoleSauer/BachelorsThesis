@@ -1,8 +1,7 @@
 \section{Auswahl der Peer-to-Peer-Technologie}
 \label{sec:grundlagen_des_protokolls}
 
-
-Um die Peer-to-Peer Funktionalität für das Protokoll dieser Arbeit zu gewährleisten, wird ein mehrschichtiges Verfahren verwendet.
+Das Tox-Protokoll, das auch auf Peer-to-Peer-Technologie aufbaut, verwendet zur Auffindung der Teilnehmer verteilte Hashtabellen \Parencite{tox_spec}. Da dies eine effiziente Möglichkeit ist, um Teilnehmer zu finden, wird diese Technologie auch für das Protokoll dieser Arbeit verwendet. Verteilte Hashtabellen haben allerdings den Nachteil, das der Verbindungsaufbau im modernen Internet durch NATs erschwert wird. Deshalb wird für das entwickelte Protokoll ein mehrstufiger Ansatz verwendet. In den folgenden Abschnitten wird der Ansatz erläutert und die verwendeten Technologien beschrieben.
 
 Für den effizienten Aufbau einer Direktverbindung zwischen zwei Teilnehmern kamen Chord und Kademlia in die engere Auswahl, welche beide lange Gegenstand intensiver Forschung waren, sowohl in der Industrie als auch in der akademischen Welt \parencite[S. 808]{MedranoChavez_ChordKademliaHighChurnScenarios}. 
 Das Chord-Protokoll und das Kademlia-Protokoll sind zwei grundlegend verschiedene Ansätze zur Organisation von Peer-to-Peer-Netzwerken. Beide Protokolle sind strukturiert und bieten eine effiziente Ressourcenlokalisierung, aber sie unterscheiden sich in ihrer Routing-Struktur und der Art und Weise, wie sie die Knoteninformationen verwalten.

@@ -32,7 +32,6 @@
   organization    = {National Institute of Standards and Technology},
   number          = {800-101 Revision 1},
 }
-# TODO: a bit hacky but it works
 @online{whatsapp_funktionen,
   publisher       = {WhatsApp}, 
   title           = {WhatsApp Funktionen},
@@ -96,22 +95,72 @@
   url             = {https://de.statista.com/prognosen/999735/deutschland-beliebteste-messenger},
   urldate         = {2024-01-08},
 }
+@misc{rfc6120_XMPP,
+  series =    {Request for Comments},
+  number =    6120,
+  howpublished =  {RFC 6120},
+  publisher = {RFC Editor},
+  doi =       {10.17487/RFC6120},
+  url =       {https://www.rfc-editor.org/info/rfc6120},
+  author =    {Peter Saint-Andre},
+  title =     {{Extensible Messaging and Presence Protocol (XMPP): Core}},
+  pagetotal = {211},
+  year =      {2011},
+  date =      {2011},
+  month =     {03},
+  abstract =  {The Extensible Messaging and Presence Protocol (XMPP) is an application profile of the Extensible Markup Language (XML) that enables the near-real-time exchange of structured yet extensible data between any two or more network entities. This document defines XMPP's core protocol methods: setup and teardown of XML streams, channel encryption, authentication, error handling, and communication primitives for messaging, network availability ("presence"), and request-response interactions. This document obsoletes RFC 3920. {[}STANDARDS-TRACK{]}},
+}
+@online{xmpp_extensions,
+  publisher       = {XMPP},
+  title           = {XMPP Specifications},
+  url             = {https://xmpp.org/extensions/},
+  urldate         = {2024-01-08},
+}
+@online{xmpp_im,
+  publisher       = {XMPP},
+  title           = {XMPP Instant Messaging},
+  url             = {https://xmpp.org/uses/instant-messaging/},
+  urldate         = {2024-01-08},
+}
+@online{tox_about,
+  publisher       = {Tox},
+  title           = {Tox - The Tox Project},
+  url             = {https://tox.chat/about.html},
+  urldate         = {2024-01-08},
+}
+@online{tox_spec,
+  author          = {zetok},
+  title           = {Tox - The Tox Reference},
+  url             = {https://zetok.github.io/tox-spec/},
+  urldate         = {2024-01-08},
+}
 # Apps mit Peer-to-Peer
 @online{Tox_FAQ,
   publisher       = {Tox},
-  title           = {User FAQ},
+  title           = {Tox User FAQ},
   url             = {https://tox.chat/faq.html#how-tox-privacy},
   urldate         = {2024-01-08},
 }
 @online{Briar_HowItWorks,
   publisher       = {Briar},
-  title           = {How it works},
+  title           = {Briar{:} How it works},
   url             = {https://briarproject.org/how-it-works/},
   urldate         = {2024-01-08},
 }
+@online{Signal_website,
+  publisher       = {Signal},
+  title           = {Signal Website},
+  url             = {https://www.signal.org/de/#signal},
+  urldate         = {2024-01-08},
+}
+@online{Signal_Docs,
+  publisher       = {Signal},
+  title           = {Signal Technical information},
+  url             = {https://www.signal.org/docs/},
+  urldate         = {2024-01-08},
+}
 ###################################### Architektur ######################################
-# TODO: this does not show up correctly in the bibliography; book title is in the wrong place
-@inbook{Hanson_ServerManagement,
+@book{Hanson_ServerManagement,
   author         = {M. David Hanson},
   chapter        = {The Client/Server Architecture},
   editor         = {Gilbert Held},
@@ -120,6 +169,7 @@
   title          = {Server Management},
   year           = {1999},
   date           = {1999},
+  isbn           = {978-0849398230},
 }
 ################################ Anforderungsanalyse ###############################
 @book{Sommerville_AnfAnalyse,
