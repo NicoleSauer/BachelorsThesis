@@ -1,48 +1,93 @@
 \chapter{Evaluation}
 \label{chap:evaluation}
 
-Siehe \nameref{chap:anforderungsanalyse}.
-
-Funktionale Anforderungen:
-
-\begin{itemize}
-    \item \textbf{F1}: Teilnehmer können sich anhand des Namens finden (Peer-Discovery and Routing)
-    \item \textbf{F2}: Teilnehmer können sich miteinander verbinden (Aufbau, Abbau und Verbindung wiederherstellen, wenn Abbruch wegen Netzwerkfehler)
-    \item \textbf{F3}: Nachrichtenformat muss definiert sein, sodass alle Teilnehmer es verstehen
-    \item \textbf{F4}: Sicherheit und Verschlüsselung, um Vertraulichkeit zu gewährleisten
-    \item \textbf{F5}: Protokoll muss plattformunabhängig sein, sollte standardisierte Technologien wie UDP, TCP, HTTP, JSON, etc. verwenden
-    \item \textbf{F6}: Fehlerbehandlung und Wiederholungsmechanismen, Erkennung von Übertragungsfehlern
-\end{itemize}
-
-Nicht-funktionale Anforderungen:
-
-\begin{itemize}
-    \item \textbf{NF1}: Performanz: schnelle Nachrichtenübertragung, geringe Latenz
-    \item \textbf{NF2}: Vertraulichkeit, Integrität und Authentizität der Daten muss gewährleistet sein
-    \item \textbf{NF3}: Zuverlässigkeit: Das System muss kontinuierlich verfügbar sein, um die Kommunikation zu ermöglichen
-    \item \textbf{NF4}: Kompatibilität: Ermöglichung einer nahtlosen Kommunikation zwischen Usern mit unterschiedlicher Plattform/Gerät
-    \item \textbf{NF5}: Skalierbarkeit: Kommunikationseffizienz und -qualität muss auch bei steigender Anzahl an Teilnehmern ohne signifikante Einbußen gewährleistet sein
-\end{itemize}
+In diesem Kapitel wird das entwickelte Protokoll mit den in der Anforderungsanalyse definierten Anforderungen verglichen und Verbesserungsmöglichkeiten und Kritikpunkte aufgezeigt.
 
 
+\section{Erfüllung der Anforderungen}
+\label{sec:erfuellung_der_anforderungen}
 
-% Signaling Server könnte auch mit Anfragen geflutet werden -> der Sever könnte bei jedem checken, ob es sich um einen validen Teilnehmer handelt, was aber sehr aufwändig wäre
-
-% wenn Kademlia mit Anfragen geflutet wird, könnte es zu einem Denial of Service kommen, da die Knoten nichtmehr erreichbar sind -> habe aber ja mit dem Signaling Server noch eine weitere Instanz, die die Anfragen entgegen nimmt und weiterleitet
-
-Abgleich des entwickelten Protokolls mit den in der Anforderungsanalyse identifizierten funktionalen und
-nicht-funktionalen Anforderungen. Welche konnte ich erfüllen und welche nicht? Falls nicht, warum
-konnte ich diese Anforderung gar nicht oder nur teilweise erfüllen?
-
-\begin{itemize}
-    \item Implementierung von ICE, weil im TURN Protokoll nicht steht, wie denn die \textit{relayed addresses} zwischen den Teilnehmern ausgetauscht werden sollen.
-    \item ICE hat das Manko, dass nicht definiert ist, wie das Signaling abläuft; es wird einfach vorausgesetzt, dass das funktioniert\dots
-    \item Angriffe auf Kademlia und Blockchain nochmal überprüfen und Risiken aufzeigen, die ich nicht verhindert habe/konnte
-    \item Kosten für Registrierung von Benutzern könnte abschreckend sein, da es viele Alternativen gibt, die kostenlos sind (und mehr Features bieten); dies bietet allerdings Schutz vor Sybil-Angriffen (habe ich auch so in der Arbeit geschrieben)
-    \item Neuaushandlung des Schlüssels für jede Nachricht könnte zu viel sein
-    \item warum habe ich nicht die Kademlia ID in die Blockchain geschrieben? dadurch wäre der Benutzername frei wählbar und die ID wäre trotzdem eindeutig -> zusätzliche Transaktionen auf der Blockchain, die Geld kosten
-\end{itemize}
+Dieser Abschnitt beinhaltet zuerst eine Betrachtung der funktionalen Anforderungen und anschließend eine Betrachtung der nicht-funktionalen Anforderungen. Dabei wird aufgezeigt, welche Anforderungen erfüllt wurden und welche nicht. Außerdem wird aufgezeigt, welche Anforderungen nur teilweise erfüllt wurden und warum dies der Fall ist.  
 
 
-Um diesen Angriff zu erschweren, wird in dieser Arbeit die Teilnahme am Netzwerk erst durch eine vorherige Registrierung ermöglicht. Die Registrierung wird durch die Blockchain-Technologie realisiert und ist mit Kosten verbunden, die ein Angreifer aufbringen muss, um am Netzwerk teilzunehmen. Da bei einem Sybil-Angriff der Angreifer mehrere Identitäten verwendet, um das Netzwerk zu übernehmen, muss er für jede Identität die Kosten aufbringen. Dadurch wird der Angriff erschwert, da der Angreifer mehr Ressourcen benötigt, um das Netzwerk zu übernehmen.
+\subsection{Funktionale Anforderungen}
+\label{subsec:funktionale_anforderungen}
+
+Die funktionalen Anforderungen beziehen sich auf die Funktionalität des Protokolls und werden im Folgenden betrachtet.
+
+\subsubsection{Peer-Discovery and Routing}
+
+Das entwickelte Protokoll bietet die Möglichkeit, dass sich Teilnehmer anhand ihres Benutzernamens finden können. Die Anforderung der Peer-Discovery und des Routings wird deshalb als erfüllt angesehen. Eine Einschränkung ist, dass die Länge des Benutzernamens auf 20 Zeichen begrenzt ist. Das wäre lösbar, indem eine vom Benutzernamen unabhängige ID erzeugt und in der Blockchain abgelegt wird. Dadurch wäre der Benutzername frei wählbar und die ID wäre trotzdem eindeutig. Allerdings würde dies zusätzliche Transaktionen auf der Blockchain erfordern, die Geld kosten. Deshalb wurde diese Lösung nicht implementiert.
+
+
+\subsubsection{Verbindungsmanagement}
+
+Auch diese Anforderung wird durch das entwickelte Protokoll erfüllt. Die Teilnehmer sind in der Lage eine Verbindung zu einem anderen Teilnehmer aufzubauen und Nachrichten auszutauschen. Hierbei wird ein mehrstufiges Verfahren verwendet, das die Herausforderungen eines reinen Peer-to-Peer-Netzwerks bezüglich NAT-Traversal (siehe Abschnitt \ref{subsec:problemstellung_und_moegliche_loesungen} \textit{\nameref{subsec:problemstellung_und_moegliche_loesungen}}) löst.
+
+
+\subsubsection{Nachrichtenformatierung}
+
+Das Nachrichtenformat wurde so gestaltet, dass es die Anforderungen erfüllt. Es ist in Abschnitt \ref{sec:nachrichtenformat} \textit{\nameref{sec:nachrichtenformat}} beschrieben und kann somit von allen Teilnehmern verstanden werden.
+
+
+\subsubsection{Sicherheit und Verschlüsselung}
+
+Die Anforderungen an die Sicherheit und Verschlüsselung werden durch das entwickelte Protokoll teilweise erfüllt. Es wurde eine Ende-zu-Ende-Verschlüsselung implementiert, die die Vertraulichkeit der Nachrichten gewährleistet. Die Integrität der Nachrichten wird durch die Signatur gewährleistet. Für die Authentizität der Teilnehmer dient die Integration der Ethereum-Blockchain. Die Anforderungen an die Sicherheit des Netzwerks werden nur teilweise erfüllt, da keine Schutzmechanismen gegen Sybil-Angriffe oder Denial-of-Service-Angriffe implementiert wurden. Eine Möglichkeit, um Sybil-Angriffe zu erschweren, wäre das Verknüpfen der Kademlia-ID mit einer vom Benutzernamen unabhängigen ID, welche mit in die Blockchain geschrieben wird. Das würde zum einen verhindern, dass nicht-registrierte Nutzer dem Kademlia-Netzwerk beitreten können und zum anderen wäre die damit verpflichtende Registrierung mit Kosten verbunden, die ein Angreifer aufbringen muss, um am Netzwerk teilzunehmen. Da ein Sybil-Angriff darauf basiert, viele Identitäten zu verwenden, um das Netzwerk zu übernehmen, müsste der Angreifer für jede Identität die Kosten der Registrierung aufbringen. Dadurch wird der Angriff erschwert, da der Angreifer mehr Ressourcen benötigt, um das Netzwerk zu übernehmen. Was die Gefahr von Denial-of-Service-Angriffen angeht, so bietet Kademlia bereits einen gewissen Schutz gegen diese Angriffe, da durch die Verwendung der k-Buckets nur eine begrenzte Anzahl an Teilnehmern pro Knoten gespeichert werden kann. Hingegen bei ICE ist es möglich, dass ein Angreifer die ICE-Server (Signaling, STUN, TURN) mit Anfragen flutet, sodass dieser nicht mehr erreichbar ist. Um das zu verhindern, müssten die Server bei jeder Anfrage prüfen, ob es sich um einen validen Teilnehmer handelt, was allerdings sehr aufwändig wäre. Eine andere Möglichkeit wäre, dass der Server die Anfragen an einen anderen Server weiterleitet, der die Anfragen verarbeitet. Dadurch würde der Server entlastet werden, allerdings würde die Anzahl der Server dadurch erhöht werden, was wiederum Kosten verursacht.
+
+
+\subsubsection{Plattformunabhängigkeit}
+
+Die Plattformunabhängigkeit wird durch die Verwendung von standardisierten Protokollen wie IP, UDP und ICE gewährleistet. Somit kann das entwickelte Protokoll auf allen Plattformen eingesetzt werden, die diese Protokolle unterstützen. Die Anforderung wird deshalb als erfüllt angesehen.
+
+
+\subsubsection{Fehlerbehandlung und Wiederholungsmechanismen}
+
+Die Anforderung an die Fehlerbehandlung und Wiederholungsmechanismen wird durch das entwickelte Protokoll nicht erfüllt. Durch die Verwendung von UDP als Transportprotokoll wird die Fehlerbehandlung nicht durch das Protokoll selbst übernommen, sondern müsste durch die Anwendung, die das Protokoll implementiert, übernommen werden. Einen Wiederholungsmechanismen, um verlorene Nachrichten erneut zu senden, fehlt ebenfalls. Die Anforderung wird deshalb als nicht erfüllt angesehen.
+
+
+
+\subsection{Nicht-funktionale Anforderungen}
+\label{subsec:nicht_funktionale_anforderungen}
+
+Die nicht-funktionalen Anforderungen beziehen sich auf die Eigenschaften des Protokolls und werden im Folgenden betrachtet.
+
+
+\subsubsection{Performanz}
+
+Die Anforderung an die Leistungsfähigkeit des Protokolls wird durch das entwickelte Protokoll erfüllt. Die Nachrichten werden durch das Transportprotokoll UDP schnell übertragen und die Verwendung von Kademlia als Routing-Algorithmus ermöglicht eine schnelle Suche nach Teilnehmern. Die Anforderung wird deshalb als erfüllt angesehen.
+
+
+\subsubsection{Sicherheit}
+
+Durch die Implementierung einer Ende-zu-Ende-Verschlüsselung wird die Vertraulichkeit der Nachrichten gewährleistet. Die in den Anforderungen definierten Sicherheitsziele werden deshalb erfüllt und somit wird die Anforderung an die Sicherheit als erfüllt angesehen.
+
+
+\subsubsection{Zuverlässigkeit}
+
+Die Anforderung an die Zuverlässigkeit wird durch das entwickelte Protokoll nicht erfüllt. Da UDP als Transportprotokoll verwendet wird, werden Nachrichten nicht erneut gesendet und es wird auch nicht geprüft, ob eine Nachricht erfolgreich zugestellt werden konnte. Die Anforderung wird deshalb als nicht erfüllt betrachtet. Durch die Verwendung von TCP als Transportprotokoll könnte die Anforderung erfüllt werden, allerdings würde dies die Performanz des Protokolls, durch die zusätzlichen Überprüfungen, negativ beeinflussen. 
+
+
+\subsubsection{Kompatibilität}
+
+Die Anforderung an die Kompatibilität wird durch das entwickelte Protokoll erfüllt. Es wurde sich an den RFCs orientiert, die die Protokolle definieren, die verwendet werden. Somit ist das entwickelte Protokoll kompatibel mit den RFCs und kann mit anderen Anwendungen, die diese Protokolle implementieren, kommunizieren. Die Anforderung wird deshalb als erfüllt betrachtet.
+
+
+\subsubsection{Skalierbarkeit}
+
+Was die Skalierbarkeit betrifft, wird die Anforderung durch das entwickelte Protokoll teilweise erfüllt. Durch die Verwendung von Kademlia als Routing-Algorithmus wird die Skalierbarkeit des Netzwerks gewährleistet. Doch durch ICE wird die Skalierbarkeit eingeschränkt, da die Anzahl der Teilnehmer, die sich gleichzeitig mit den ICE-Servern verbinden können, begrenzt ist. Die Anforderung wird deshalb als teilweise erfüllt betrachtet. 
+
+
+
+\subsection{Verbesserungsmöglichkeiten und Kritikpunkte}
+
+In diesem Abschnitt werden Verbesserungsmöglichkeiten und Kritikpunkte für das entwickelte Protokoll aufgezeigt.
+
+\subsubsection{Kosten}
+
+Bei der Registrierung eines Nutzers fallen Kosten an, weil die Benutzerdaten durch die Verwendung eines Smart Contracts in die Blockchain geschrieben werden. Diese Kosten könnten abschreckend sein, da es viele Alternativen gibt, die kostenlos sind und mehr Features bieten. Allerdings bietet die Verwendung der Blockchain den Vorteil, dass keiner zentralen Instanz vertraut werden muss, um die Authentizität der Gesprächspartner sicherzustellen.
+
+
+\subsubsection{Kurze Sitzungslänge}
+
+Eine Sitzung entspricht im definierten Protokoll einer Nachricht, die gesendet werden soll. Das bedeutet, dass für jede Nachricht ein neuer Schlüssel ausgehandelt werden muss. Das erhöht zwar die Sicherheit, ist allerdings auch sehr aufwändig. Eine Möglichkeit, um das zu verbessern, wäre die Definition einer Sitzungslänge, die mehrere Minuten umfasst, in der die gleichen Schlüssel verwendet werden. Erst danach wäre eine Neuaushandlung der Schlüssel notwendig. Dadurch würde die Sicherheit zwar etwas verringert werden, allerdings wäre die Performanz des Protokolls dadurch deutlich besser.
 
