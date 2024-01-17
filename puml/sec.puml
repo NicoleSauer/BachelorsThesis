@@ -41,7 +41,7 @@ group Symmetrische Verschlüsselung
     deactivate Alice
 
     activate Bob
-    Bob -> Bob: Verifiziert Signatur
+    Bob -> Bob: Verifiziert Signatur mittels Blockchain
     Bob -> Bob: Entschlüsselt Nachricht
     deactivate Bob
 end
