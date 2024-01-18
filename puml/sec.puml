@@ -1,4 +1,4 @@
-@startuml
+@startuml encryption
 actor Alice
 actor Bob
 

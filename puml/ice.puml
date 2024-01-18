@@ -1,4 +1,4 @@
-@startuml
+@startuml ice
 actor Alice
 actor SignalingServer
 actor STUNServer

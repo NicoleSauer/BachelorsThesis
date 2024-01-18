@@ -1,4 +1,4 @@
-@startuml
+@startuml signlaing server
 actor Alice
 actor SignalingServer
 actor Bob
