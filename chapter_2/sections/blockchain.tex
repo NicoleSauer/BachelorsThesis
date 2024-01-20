@@ -8,18 +8,16 @@
 Christoph Meinel und Tatiana Gayvoronskaya beschreiben die Blockchain-Technologie in ihrem Buch \textit{Blockchain - Hype oder Innovation?} wie folgt:
 
 \begin{quote}
-    \textit{Die Innovation der Blockchain-Technologie ist weder ein neuer Verschlüsselungsalgorithmus
-    noch eine „Alientechnologie“, sondern eine erfolgreiche Kombination bereits
-    vorhandener technologischen Ansätze wie Kryptografie, dezentrale Netzwerke und Konsensfindungsmodelle.}\parencite[S. 17]{Meinel_BlockchainHypeInnovation}
+    \textit{Die Innovation der Blockchain-Technologie ist weder ein neuer Verschlüsselungsalgorithmus noch eine „Alientechnologie“, sondern eine erfolgreiche Kombination bereits vorhandener technologischen [sic] Ansätze wie Kryptografie, dezentrale Netzwerke und Konsensfindungsmodelle.} \\ \parencite[S. 17]{Meinel_BlockchainHypeInnovation}
 \end{quote}
 
-\noindent Daraus ergibt sich die Frage, was Blockchain eigentlich ist und wie die bereits vorhandenen technologischen Ansätze miteinander vereint werden. Diese Fragen werden in diesem Kapitel beantwortet. Zunächst wird der Begriff Blockchain definiert und anschließend die Funktionsweise erläutert. Daraufhin werden die Konsensmechanismen\textit{Proof-of-Work} und \textit{Proof-of-Stake} vorgestellt. Abschließend wird auf die Sicherheit von Blockchain eingegangen und Angriffe auf Blockchain werden erläutert.
+\noindent Daraus ergibt sich die Frage, welche Technologien die Blockchain-Technologie in sich vereint. Diese Frage wird in diesem Kapitel beantwortet. Zunächst wird der Begriff Blockchain definiert und anschließend die Funktionsweise erläutert. Daraufhin werden die Konsensmechanismen \textit{Proof-of-Work} und \textit{Proof-of-Stake} vorgestellt. Abschließend wird auf die Sicherheit von Blockchains eingegangen und ausgewählte Angriffe auf Blockchains werden erläutert.
 
 
 \subsection{Definition von Blockchain}
 \label{subsec:blockchain_definition}
 
-Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (Block) und \textit{chain} (Kette) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:block} zu sehen ist, beinhaltet ein Block den Block-Header und mehrere Transaktionen. 
+Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (zu Deutsch: \textit{Block}) und \textit{chain} (zu Deutsch: \textit{Kette}) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:block} zu sehen ist, besteht ein Block aus einem \textit{Header} (zu Deutsch: \textit{Kopf}) und einem \textit{Body} (zu Deutsch: \textit{Körper}). Im Kopf des Blocks befinden sich Informationen über den Block und im Körper des Blocks befinden sich die eigentlichen Daten. Diese Daten können beispielsweise Transaktionen sein.
 
 \begin{figure}[H]
     \centering
@@ -29,7 +27,7 @@ Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{b
 \end{figure}
 
 
-\noindent Der Block-Header enthält Informationen über den Block, wie zum Beispiel den Hash des vorherigen Blocks, die Schwierigkeit, den Zeitstempel und die Nonce. Die Schwierigkeit wird durch das \textit{Target}-Feld angegeben und beschreibt, wie schwer es ist, das kryptografische Puzzle zu lösen und damit auch wie schwer es ist, einen neuen Block an die Blockchain anzuhängen. Die Suche nach der Lösung dieses Puzzles wird auch als \textit{Mining} bezeichnet. Der erste, der das Puzzle löst, präsentiert als Beweis dieser Lösung die sogenannte \textit{Nonce}. Nachdem diese neue Version der Blockchain (mit dem neu angehängten Block) an alle anderen Teilnehmer verteilt wurde, kann jeder Teilnehmer überprüfen, ob die Lösung korrekt ist. Die Nonce ist eine zufällige Zahl, die bei der Lösung des Puzzles verwendet wird und aufwändig zu berechnen ist. Durch den Verweis im Block-Header auf den vorherigen Block entsteht eine Kette von Blöcken (siehe Abbildung \ref{fig:chain_of_blocks}), die \textit{Blockchain} genannt wird \parencite[S. 10-12]{Fill_BlockchainGrundlagen}.
+\noindent Der Block-Header enthält Informationen über den Block, wie zum Beispiel den Hash des vorherigen Blocks, die Schwierigkeit, den Zeitstempel und die Nonce. Die Schwierigkeit wird durch das \textit{Target}-Feld angegeben und beschreibt, wie schwer es ist, das kryptografische Puzzle zu lösen und damit auch wie schwer es ist, einen neuen Block an die Blockchain anzuhängen. Die Suche nach der Lösung dieses Puzzles wird auch als \textit{Mining} bezeichnet. Der erste, der das Puzzle löst, präsentiert als Beweis dieser Lösung die sogenannte \textit{Nonce}. Die Nonce ist eine zufällige Zahl, die bei der Lösung des Puzzles verwendet wird und aufwändig zu berechnen ist. Nachdem diese neue Version der Blockchain (mit dem neu angehängten Block) an alle anderen Teilnehmer verteilt wurde, kann jeder Teilnehmer überprüfen, ob die Lösung korrekt ist. Durch den Verweis im Block-Header auf den vorherigen Block entsteht die oben erwähnte Kette von Blöcken - die Blockchain (siehe Abbildung \ref{fig:chain_of_blocks}) \parencite[S. 10-12]{Fill_BlockchainGrundlagen}.
 
 \begin{figure}[H]
     \centering
@@ -39,12 +37,19 @@ Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{b
 \end{figure}
 
 
-\subsection{Kryptografische Grundlagen}
+\subsection{Kombination von technologischen Ansätzen}
 \label{subsec:cryptography_basics}
 
-Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet. Hash-Funktionen können dazu verwendet werden, um die Integrität von Daten zu gewährleisten. Eine Hash-Funktion bildet eine beliebig lange Eingabe auf eine feste Länge ab. Kryptografische Hash-Funktionen sind Hash-Funktionen, die bestimmte Eigenschaften erfüllen müssen. Die beiden wichtigsten Eigenschaften sind die \textit{Einwegfunktion} und die \textit{Kollisionsresistenz}. Eine Hash-Funktion erfüllt die Eigenschaft der Einwegfunktion, wenn es nicht möglich ist, von der Ausgabe auf die Eingabe zu schließen. Das bedeutet, dass es nicht möglich ist, aus dem Hash-Wert die ursprünglichen Daten zu rekonstruieren. Die Eigenschaft der \textit{Kollisionsresistenz} ist erfüllt, wenn es nicht möglich ist, zwei verschiedene Eingaben zu finden, die auf den gleichen Hash-Wert abgebildet werden \parencites[S. 12-13]{Brünnler_BlockchainKurzGut}[S. 6]{Fill_BlockchainGrundlagen}.
+Wie zu Beginn des Abschnitts \ref{sec:blockchain_basics} \textit{\nameref{sec:blockchain_basics}} bereits erwähnt, ist die Blockchain das Resultat der Kombination verschiedener Technologien. Diese Technologien werden in diesem Abschnitt erläutert.
 
-Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut Definition der Einwegfunktion ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencites[S. 6-7]{Fill_BlockchainGrundlagen}[S. 320]{Antonopoulos_MasteringEthereum}.
+
+\subsubsection{Kryptografie}
+
+Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet. 
+
+Hash-Funktionen können dazu verwendet werden, um die Integrität von Daten zu gewährleisten. In der Blockchain werden sie verwendet, um die Integrität der einzelnen Blöcke zu gewährleisten (siehe Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}}).
+
+Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut der Definition einer kryptografischen Hash-Funktion (siehe Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}}) ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencites[S. 6-7]{Fill_BlockchainGrundlagen}[S. 320]{Antonopoulos_MasteringEthereum}.
 
 Ein \textit{Merkle-Baum} ist ein binärer Baum, bei dem jeder Knoten den Hash-Wert seiner Kinder enthält. Der nach seinem Erfinder Ralph Merkle benannten Hash-Baum wird in der Blockchain zum Aufbau von Datenstrukturen verwendet. Der Hash-Wert der Wurzel des Baumes wird auch als \textit{Root-Hash} oder \textit{Merkle-Root} bezeichnet (siehe Abbildung \ref{fig:block}: \textit{Root-Hash}). Wenn sich ein Blatt des Baumes ändert, ändert sich auch der Hash-Wert der Wurzel. Dadurch kann überprüft werden, ob sich die Daten geändert haben. Wenn sich die Daten geändert haben, ändert sich auch der Root-Hash. Wenn sich die Daten nicht geändert haben, bleibt der Root-Hash gleich. Dadurch kann die Integrität der Daten überprüft werden \parencite[S. 7-8]{Fill_BlockchainGrundlagen}. In Abbildung is der Aufbau eines Merkle-Baumes zu sehen, der aus vier Transaktionen besteht.
 
@@ -70,18 +75,15 @@ Die folgende Abbildung zeigt das Zusammenspiel von Blöcken, Transaktionen und M
 \noindent Eine weitere Technologie aus der Kryptografie, die in der Blockchain verwendet wird, sind digitale Signaturen. Digitale Signaturen werden verwendet, um die Authentizität von Daten zu gewährleisten. Wenn zwei Benutzer Alice und Bob miteinander kommunizieren wollen, kann Alice eine Nachricht an Bob senden. Jeder Benutzer hat einen privaten und einen öffentlichen Schlüssel. Der öffentliche Schlüssel darf beliebig verteilt werden, während der private Schlüssel geheim gehalten werden muss. Wenn Alice eine Nachricht an Bob senden möchte, kann sie die Nachricht mit ihrem privaten Schlüssel signieren. Bob kann dann die Signatur mit dem öffentlichen Schlüssel von Alice überprüfen. Wenn die Signatur gültig ist, kann Bob sicher sein, dass die Nachricht von Alice stammt. Wenn die Signatur wiederum ungültig ist, kann Bob sicher sein, dass die Nachricht nicht von Alice stammt \parencite[S. 9-10]{Fill_BlockchainGrundlagen}.
 
 
-\subsection{Dezentrale Netzwerke}
+\subsubsection{Dezentrale Netzwerke}
 
 Blockchains basieren auf einem Peer-to-Peer-Netzwerk. Ein Peer-to-Peer-Netzwerk ist ein Netzwerk, bei dem alle Teilnehmer gleichberechtigt sind. Es gibt keinen zentralen Server, der die Daten verwaltet. Stattdessen werden die Daten auf allen Teilnehmern des Netzwerkes gespeichert. Wenn ein Teilnehmer Daten an das Netzwerk senden möchte, sendet er die Daten an alle anderen Teilnehmer des Netzwerkes. Wenn ein Teilnehmer Daten vom Netzwerk empfangen möchte, empfängt er die Daten von allen anderen Teilnehmern des Netzwerkes. Dadurch ist es nicht möglich, das Netzwerk zu manipulieren, da die Daten auf allen Teilnehmern des Netzwerkes gespeichert sind. Wenn ein Teilnehmer versucht, die Daten zu manipulieren, wird dies von den anderen Teilnehmern bemerkt und die manipulierten Daten werden nicht akzeptiert \parencite[S. 10/31]{Fill_BlockchainGrundlagen}.
 
-\subsection{Konsensmechanismen}
+\subsubsection{Konsensmechanismen}
 
 In einem dezentralen Netzwerk müssen sich die Teilnehmer auf einen gemeinsamen, für alle \textit{richtigen}, Zustand einigen. Dieser Zustand kann beispielsweise die Reihenfolge der getätigten Transaktionen sein. Wenn sich die Teilnehmer nicht auf einen gemeinsamen \textit{Konsens} einigen können, kann das Netzwerk nicht funktionieren. Die Aufgabe der Konsensmechanismen ist es also, einen gemeinsamen Zustand zu finden. Die beiden bekanntesten Konsensmechanismen sind \textit{Proof-of-Work} und \textit{Proof-of-Stake} \parencite[S. 87]{Alam_BlockchainConsensusMechanism}.
 
-\subsubsection{Proof-of-Work vs. Proof-of-Stake}
-
 Der \textit{Proof-of-Work} (PoW) ist der Konsensmechanismus, der in der Bitcoin-Blockchain verwendet wird. Bitcoin wurde 2008 von Satoshi Nakamoto in einem Whitepaper vorgestellt und ist die erste dezentrale Kryptowährung \parencites{Nakamoto_Bitcoin}{Zhang_DoubleSpendingWithASybilAttack}. Der PoW besteht aus dem bereits in Abschnitt \ref{subsec:blockchain_definition} \nameref{subsec:blockchain_definition} beschriebenen kryptografischen Puzzle. Das Lösen des Puzzles durch einen beliebigen Teilnehmer dient als Nachweis für geleistete Rechenarbeit - daher die Bezeichnung \textit{Proof-of-Work} \parencite[S. 27]{Brünnler_BlockchainKurzGut}. Ein großer Nachteil bei Proof-of-Work ist der hohe Energieverbrauch, der dem hohen Rechenaufwand zum Lösen des Puzzles geschuldet ist \parencite{Zhang_EvaluationOfEnergyConsumptionInBlockChains}. Die Website \textit{Digiconomist.net} führt einen Energieindex für Bitcoin, der den Energieverbrauch von Bitcoin in Relation zu verschiedenen Ländern setzt. Aktuell benötigt Bitcoin jährlich rund $144$ TWh, was ungefähr dem Energieverbrauch von Schweden entspricht \parencite{Digiconomist_BitcoinEnergyConsumption}.
-
 
 Der \textit{Proof-of-Stake} (PoS) ist ein alternativer Konsensmechanismus. Im Gegensatz zum PoW wird beim PoS kein kryptografisches Puzzle gelöst. Stattdessen wird ein Teilnehmer ausgewählt, der einen neuen Block an die Blockchain anhängen darf. Die Auswahl erfolgt zufällig, wobei die Wahrscheinlichkeit, ausgewählt zu werden, von der Anzahl der Coins abhängt, die der Teilnehmer besitzt (Stake). Wenn ein Teilnehmer beispielsweise 10\% aller Coins besitzt, hat er eine 10\%ige Chance, ausgewählt zu werden. Der Teilnehmer, der ausgewählt wurde, wird auch als \textit{Validator} bezeichnet. Der Validator kann dann einen neuen Block an die Blockchain anhängen. Wenn der Validator einen Block an die Blockchain anhängt, erhält er eine Belohnung. Wenn er allerdings einen Block an die Blockchain anhängt, der ungültig ist, verliert er einen Teil seiner Coins. Dadurch wird sichergestellt, dass von den Validatoren nur gültige Blöcke an die Blockchain angehängt werden \parencites[S. 96-97]{Kapengut_EthereumTransitionToProofOfStake}[S. 34]{Meinel_BlockchainHypeInnovation}[S. 320-321]{Antonopoulos_MasteringEthereum}.
 
@@ -124,7 +126,7 @@ Smart Contracts sind Programme, die auf der Blockchain ausgeführt werden. Sie w
 
 \subsubsection{Sybil-Angriff}
 
-Wie in Abschnitt \ref{subsubsec:sybil_attack_p2p} \textit{\nameref{subsubsec:sybil_attack_p2p}} bereits ausgeführt, ist ein Sybil-Angriff ein Angriff auf ein Peer-to-Peer-Netzwerk, bei dem ein einzelner Angreifer mehrere Identitäten verwendet, um das Netzwerk zu manipulieren. Da Blockchains auf einem Peer-to-Peer-Netzwerk basieren, sind sie ebenfalls anfällig für Sybil-Angriffe.  
+Wie in Abschnitt \ref{subsubsec:sybil_or_eclipse_attack_p2p} \textit{\nameref{subsubsec:sybil_or_eclipse_attack_p2p}} bereits ausgeführt, ist ein Sybil-Angriff ein Angriff auf ein Peer-to-Peer-Netzwerk, bei dem ein einzelner Angreifer mehrere Identitäten verwendet, um das Netzwerk zu manipulieren. Da Blockchains auf einem Peer-to-Peer-Netzwerk basieren, sind sie ebenfalls anfällig für Sybil-Angriffe.  
 
 \input{chapter_2/sections/subsections/ethereum.tex}
 \input{chapter_2/sections/subsections/smart_contracts.tex}

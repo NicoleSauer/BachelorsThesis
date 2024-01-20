@@ -1,18 +1,20 @@
 \section{Sicherheit}
 \label{sec:sicherheit_basics}
 
-Peer-to-Peer bildet das Overlay-Netzwerk. Darunter liegt das Internet, welches die Infrastruktur für die Kommunikation bereitstellt. Da bei der Übertragung von Nachrichten über das Internet die Gefahr besteht, dass die Nachrichten abgefangen und mitgelesen werden können, ist es wichtig, dass die Kommunikation sicher ist. Die Nachrichten müssen über Verteilerknoten oder Access Points übertragen werden, die nicht vertrauenswürdig sind. Mittels Kryptografie kann die Vertraulichkeit, Integrität und Authentizität der Kommunikation gewährleistet werden \Parencite[S. 7]{Hellmann_IT-Sicherheit}.
+Wie aus der Abbildung in Abschnitt \ref{subsec:overlay_netzwerke} \textit{\nameref{subsec:overlay_netzwerke}} ersichtlich ist, ist das Overlay-Netzwerk die oberste Schicht des Peer-to-Peer-Netzwerks. Es sorgt dafür, dass sich die Teilnehmer des Netzwerks finden können. Die eigentliche Kommunikation, also das Senden und Empfangen von Nachrichten, erfolgt jedoch über das Internet. Da das Internet ein öffentliches Netzwerk ist, besteht die Gefahr, dass die Nachrichten abgefangen und mitgelesen werden können. Die Nachrichten müssen über Verteilerknoten oder Access Points übertragen werden, die nicht vertrauenswürdig sind. Um ein Mitlesen oder Verändern der Nachrichten zu verhindern, muss die Kommunikation abgesichert werden. 
+
+Mittels Kryptografie kann die Vertraulichkeit, Integrität und Authentizität der Kommunikation gewährleistet werden \Parencite[S. 7]{Hellmann_IT-Sicherheit}.
 
 
 \subsection{Vertraulichkeit}
 \label{subsec:vertraulichkeit_basics}
 
-Die Vertraulichkeit der Kommunikation wird durch Verschlüsselung gewährleistet. Man unterschiedet zwei Formen der Kryptografie: \textit{symmetrische} und \textit{asymmetrische} Kryptografie. Bei der \textit{symmetrischen} Kryptografie wird nur ein Schlüssel für die Verschlüsselung und Entschlüsselung verwendet. Der Sender der Nachricht verschlüsselt die Nachricht mit einem Schlüssel und sendet die nun verschlüsselte Nachricht an den Empfänger. Der Empfänger kann die Nachricht mit dem gleichen Schlüssel entschlüsseln. Dadurch kann ein Angreifer, der die Nachricht abfängt, diese nicht entschlüsseln, da er den Schlüssel nicht kennt. Abbildung \ref{fig:symmetrische_verschluesselung} zeigt den Ablauf der symmetrischen Verschlüsselung.
+Die Vertraulichkeit der Kommunikation wird durch Verschlüsselung gewährleistet. Man unterschiedet zwei Formen der Kryptografie: \textit{symmetrische} und \textit{asymmetrische} Kryptografie. Bei der \textit{symmetrischen} Kryptografie wird ein und derselbe Schlüssel zum Verschlüsseln und Entschlüsseln der Nachricht verwendet. Der Sender der Nachricht verschlüsselt die Nachricht mit einem Schlüssel und sendet die nun verschlüsselte Nachricht an den Empfänger. Der Empfänger kann die Nachricht mit dem gleichen Schlüssel entschlüsseln. Dadurch kann ein Angreifer, der die Nachricht abfängt, diese nicht entschlüsseln, da er den Schlüssel nicht kennt. Abbildung \ref{fig:symmetrische_verschluesselung} zeigt den Ablauf der symmetrischen Verschlüsselung.
 
 \begin{center}
     \captionsetup{type=figure}
     \includegraphics[width=1\linewidth]{images/symmetric_encryption.png}
-    \caption{Symmetrische Verschlüsselung, in Anlehnung an \cite{ElektronikKompendium_symmetrischeVerschluesselung}}
+    \caption{Symmetrische Verschlüsselung (in Anlehnung an \cite{ElektronikKompendium_symmetrischeVerschluesselung})}
     \label{fig:symmetrische_verschluesselung}
 \end{center}
 
@@ -23,11 +25,11 @@ In diesem Fall kann eine Schlüsselvereinbarung verwendet werden, um einen gemei
 \begin{center}
     \captionsetup{type=figure}
     \includegraphics[width=0.7\linewidth]{images/key_exchange.png}
-    \caption{Schlüsselvereinbarung, in Anlehnung an \cite[S. 102]{Wong_KryptoPraxis}}
+    \caption{Schlüsselvereinbarung (in Anlehnung an \cite[S. 102]{Wong_KryptoPraxis})}
     \label{fig:schluesselvereinbarung}
 \end{center}
 
-\noindent Beide Teilnehmer generieren einen privaten Schlüssel und einen öffentlichen Schlüssel. Durch die Kombination des öffentlichen Schlüssels des anderen Teilnehmers und des eigenen privaten Schlüssels wird ein gemeinsamer Schlüssel generiert. Dieser gemeinsame Schlüssel kann dann für die symmetrische Verschlüsselung verwendet werden \Parencite[S. 102]{Wong_KryptoPraxis}.
+\noindent Beide Teilnehmer generieren einen privaten Schlüssel und einen öffentlichen Schlüssel. Durch die Kombination des öffentlichen Schlüssels des anderen Teilnehmers und des eigenen privaten Schlüssels wird ein gemeinsames Geheimnis berechnet. Dieses gemeinsame Geheimnis kann dann für die symmetrische Verschlüsselung verwendet werden, da dadurch beide Teilnehmer den gleichen Schlüssel besitzen \Parencite[S. 102]{Wong_KryptoPraxis}.
 
 
 Bei der \textit{asymmetrische} Kryptografie (auch \textit{Public-Key-Kryptografie} genannt) wird anstatt nur eines Schlüssels ein Schlüsselpaar generiert, das aus einem öffentlichen und einem privaten Schlüssel besteht. Der öffentliche Schlüssel des Empfängers wird zum Verschlüsseln der Nachrichten verwendet und zum Entschlüsseln der Nachrichten wird der private Schlüssel des Empfängers verwendet. Der öffentliche Schlüssel des Empfängers kann von jedem verwendet werden, um Nachrichten an den Empfänger zu verschlüsseln. Nur der Empfänger kann die Nachrichten entschlüsseln, da nur er den privaten Schlüssel besitzt. Der Ablauf der asymmetrischen Verschlüsselung ist in Abbildung \ref{fig:asymmetrische_verschluesselung} dargestellt.
@@ -36,28 +38,29 @@ Bei der \textit{asymmetrische} Kryptografie (auch \textit{Public-Key-Kryptografi
 \begin{center}
     \captionsetup{type=figure}
     \includegraphics[width=1\linewidth]{images/asymmetric_encryption.png}
-    \caption{Asymmetrische Verschlüsselung, in Anlehnung an \cite{ElektronikKompendium_asymmetrischeVerschluesselung}}
+    \caption{Asymmetrische Verschlüsselung (in Anlehnung an \cite{ElektronikKompendium_asymmetrischeVerschluesselung})}
     \label{fig:asymmetrische_verschluesselung}
 \end{center}
 
 \noindent Es ist außerdem nicht möglich, Nachrichten, die mit dem öffentlichen Schlüssel verschlüsselt wurden, mit diesem auch wieder zu entschlüsseln \parencite{ElektronikKompendium_asymmetrischeVerschluesselung}. 
 
-Diese beiden Verschlüsselungstechniken können kombiniert werden, um die Vorteile beider Verfahren zu nutzen. Der Schlüsselaustausch wird mit der asymmetrischen Verschlüsselung durchgeführt und die eigentliche Kommunikation wird mit der symmetrischen Verschlüsselung durchgeführt. Dadurch wird die Sicherheit der Kommunikation erhöht, da der Schlüssel nicht über einen unsicheren Kanal übertragen werden muss \Parencite[S. 5-8]{Wong_KryptoPraxis}. 
+Diese kryptografische Verfahren können kombiniert werden, um die Vorteile von diesen zu nutzen. Der Schlüsselaustausch wird mit der asymmetrischen Verschlüsselung durchgeführt und die eigentliche Kommunikation wird mit der symmetrischen Verschlüsselung durchgeführt. Dadurch wird die Sicherheit der Kommunikation erhöht, da der Schlüssel nicht über einen unsicheren Kanal übertragen werden muss \Parencite[S. 5-8]{Wong_KryptoPraxis}.
 
 
 \subsection{Integrität}
 \label{subsec:integritaet_signatur}
 
-Um die Integrität der Kommunikation zu gewährleisten, werden digitale Signaturen verwendet. Um den Hash-Wert zu erhalten, wird die Nachricht mit einer Hashfunktion gehasht. Hashfunktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hashfunktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Einwegfunktion ist eine Funktion, die einfach zu berechnen ist, aber schwierig zu invertieren ist. Das bedeutet, dass es einfach ist, den Hash-Wert einer Nachricht zu berechnen, aber schwierig ist, die Nachricht aus dem Hash-Wert zu berechnen. Kollisionsresistenz bedeutet, dass es schwierig ist, zwei Nachrichten zu finden, die den gleichen Hash-Wert haben \parencite[S. 13-15]{Brünnler_BlockchainKurzGut}. Die folgende Abbildung zeigt, wie eine digitale Signatur funktioniert:
+Um die Integrität der Kommunikation zu gewährleisten, werden digitale Signaturen verwendet. Um den Hash-Wert zu erhalten, wird die Nachricht mit einer Hash-Funktion gehasht. Hash-Funktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hash-Funktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Hash-Funktion erfüllt die Eigenschaft der Einwegfunktion, wenn es nicht möglich ist, von der Ausgabe auf die Eingabe zu schließen. Das bedeutet, dass es nicht möglich ist, aus dem Hash-Wert die ursprünglichen Daten zu rekonstruieren. Die Eigenschaft der Kollisionsresistenz ist erfüllt, wenn es nicht möglich ist, zwei verschiedene Eingaben zu finden, die auf den gleichen Hash-Wert abgebildet werden \parencites[S. 12-13]{Brünnler_BlockchainKurzGut}[S. 6]{Fill_BlockchainGrundlagen}. Abbildung \ref{fig:signatur} zeigt, wie eine digitale Signatur funktioniert:
 
 \begin{center}
     \captionsetup{type=figure}
-    \includegraphics[width=1\linewidth]{images/signatur.png}
-    \caption{Signatur, in Anlehnung an \cite{DocuSign_digitaleSignaturen}}
+    \includegraphics[width=1\linewidth]{images/signatur_2.jpg}
+    \caption{Signieren einer Nachricht (in Anlehnung an \cite{DocuSign_digitaleSignaturen})}
     \label{fig:signatur}
 \end{center}
 
-\noindent Der Sender berechnet den Hash-Wert der Nachricht, verschlüsselt diesen mit seinem privaten Schlüssel und hängt ihn (den Hash-Wert) an die Nachricht an. Der Empfänger entschlüsselt den Hash-Wert mit dem öffentlichen Schlüssel des Senders und berechnet den Hash-Wert der Nachricht selbst. Wenn der berechnete Hash-Wert mit dem entschlüsselten Hash-Wert übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht nicht verändert wurde und somit die Integrität der Nachricht gewährleistet ist. Falls der berechnete Hash-Wert nicht mit dem entschlüsselten Hash-Wert übereinstimmt, wurde die Nachricht verändert und die Integrität der Nachricht ist nicht mehr gewährleistet \Parencite[S. 73-78]{Hellmann_IT-Sicherheit}. 
+% #TODO: Noch erwähnen, dass hier der private schlüssel zum verschlüsseln verwendet wird (anders als bei der asymmetrischen Verschlüsselung)?
+\noindent Der Sender berechnet den Hash-Wert der Nachricht, verschlüsselt diesen mit seinem privaten Schlüssel. Das Ergebnis ist die digitale Signatur, welche an die Nachricht angehängt wird. Der Empfänger entschlüsselt den Hash-Wert mit dem öffentlichen Schlüssel des Senders und berechnet den Hash-Wert der Nachricht selbst. Wenn der berechnete Hash-Wert mit dem entschlüsselten Hash-Wert übereinstimmt, kann der Empfänger sicher sein, dass die Nachricht nicht verändert wurde und somit die Integrität der Nachricht gewährleistet ist. Falls der berechnete Hash-Wert nicht mit dem entschlüsselten Hash-Wert übereinstimmt, wurde die Nachricht verändert und die Integrität der Nachricht ist nicht mehr gewährleistet \Parencite[S. 73-78]{Hellmann_IT-Sicherheit}.
 
 
 \subsection{Authentizität}
@@ -79,4 +82,6 @@ Das Signal-Protokoll nutzt verschiedene fortschrittliche Verschlüsselungstechni
 \end{center}
 
 
-\noindent Nach der Vereinbarung des Root Keys wird dieser genutzt, um einen \textit{Chain Key} zu generieren. Der Chain Key wiederum wird dazu verwendet, einen \textit{Message Key} zu erzeugen, welcher die eigentliche Verschlüsselung der Nachrichten ermöglicht. Das Kernelement dieses Algorithmus ist das \textit{Key Ratcheting}. Der Chain Key wird nach dem Empfang jeder Nachricht aktualisiert, indem er mittels erneutem Diffie-Hellman-Schlüsselaustausch und dem Root Key neu berechnet wird. Gleichzeitig wird der Message Key nach jeder übermittelten Nachricht aktualisiert, indem er durch erneuten Diffie-Hellman-Schlüsselaustausch und unter Einbeziehung des Chain Keys neu generiert wird. Dadurch wird sichergestellt, dass jeder Message Key nur einmal verwendet wird und somit die \textit{Perfekte Zukunftssicherheit} gewährleistet ist. Die \textit{Perfekte Zukunftssicherheit} bedeutet, dass selbst wenn ein Angreifer in der Zukunft den privaten Schlüssel eines Teilnehmers erlangt, er nicht in der Lage ist, die Kommunikation der Vergangenheit zu entschlüsseln \Parencite{Signal_DoubleRatchet}.
+\noindent Nach der Vereinbarung des Root Keys wird dieser genutzt, um einen \textit{Chain Key} zu generieren. Der Chain Key wiederum wird dazu verwendet, einen \textit{Message Key} zu erzeugen, welcher die eigentliche Verschlüsselung der Nachrichten ermöglicht. Das Kernelement dieses Algorithmus ist das \textit{Key Ratcheting}. Der Begriff \textit{Ratchet} (zu Deutsch: \textit{Ratsche}) bezeichnet ein Werkzeug, das nur in eine Richtung gedreht werden kann. Das Key Ratcheting bezeichnet also die Eigenschaft, dass die Schlüssel nur in eine Richtung geändert werden können und es somit unmöglich ist, vorherigen Schlüssel zu berechnen. Der Chain Key wird nach dem Empfang jeder Nachricht aktualisiert, indem er mittels erneutem Diffie-Hellman-Schlüsselaustausch und dem Root Key neu berechnet wird. Gleichzeitig wird der Message Key nach jeder übermittelten Nachricht aktualisiert, indem er durch erneuten Diffie-Hellman-Schlüsselaustausch und unter Einbeziehung des Chain Keys neu generiert wird. Dadurch wird sichergestellt, dass jeder Message Key nur einmal verwendet wird und somit die \textit{Perfect Forward Secrecy} gewährleistet ist \parencite{Signal_DoubleRatchet}. 
+
+Die Perfect Forward Secrecy definiert die Eigenschaft, dass die Parameter während der Kommunikation ständig neu berechnet werden und somit die Sicherheit der Kommunikation auch dann gewährleistet ist, wenn ein Angreifer in der Zukunft den privaten Schlüssel eines Teilnehmers erlangt \parencite{ElektronikKompendium_PFS}.

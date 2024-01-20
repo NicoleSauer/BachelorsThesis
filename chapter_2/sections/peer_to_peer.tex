@@ -50,6 +50,7 @@ Um diese Problematik von Peer-to-Peer-Netzwerken zu lösen, können verschiedene
 
 
 \subsection{Overlay-Netzwerke}
+\label{subsec:overlay_netzwerke}
 
 Peer-to-Peer-Netzwerke können als Overlay-Netzwerke betrachtet werden. Ein Overlay-Netzwerk ist ein virtuelles Netzwerk, das, wie in Abbildung \ref{overlay_network} (\textit{\nameref{overlay_network}}) zu sehen ist, über ein physisches Netzwerk gelegt wird.
 
@@ -82,12 +83,13 @@ Insgesamt bieten alle drei Algorithmen Lösungen für die mögliche Anwendung in
 Peer-to-Peer-Netzwerke sind anfällig für verschiedene Arten von Angriffen. Diese Angriffe können in zwei Kategorien unterteilt werden: \textit{Angriffe auf die Integrität} und \textit{Angriffe auf die Verfügbarkeit}.
 
 \subsubsection{Angriffe auf die Integrität}
-\label{subsubsec:eclipse_attack_p2p}
+\label{subsubsec:sybil_or_eclipse_attack_p2p}
 
 Bei Angriffen auf die Integrität geht es darum, die Integrität der Daten zu gefährden, die im Netzwerk gespeichert sind. Ein Beispiel für einen solchen Angriff ist der \textit{Sybil-Angriff}. Bei diesem Angriff erstellt ein einzelner Angreifer mehrere Identitäten, um die Kontrolle über das Netzwerk zu erlangen \parencite[S. 251]{Douceur_SybilAttack}. Nach einer erfolgreichen Übernahme von Teilen des Netzwerks, besteht die Möglichkeit der Durchführung eines \textit{Eclipse}-Angriffs \parencite[S. 13-15]{Baptiste_AttacksOnP2PNetworks}. Bei einem \textit{Eclipse}-Angriff wird versucht, einen Peer von allen anderen Peers im Netzwerk zu isolieren. Dies wird erreicht, indem bereits durch den vorhergegangenen Sybil-Angriff die Mehrheit der Peers kontrolliert wird. Der Angreifer kann dann die Verbindungen des Opfers zu anderen Peers im Netzwerk verhindern, indem er die Verbindungen zu anderen Peers kontrolliert \Parencite[S. 14]{Baptiste_AttacksOnP2PNetworks}. 
 
 
 \subsubsection{Angriffe auf die Verfügbarkeit}
+\label{subsubsec:denial_of_service_attack_p2p}
 
 Bei Angriffen auf die Verfügbarkeit geht es darum, die Verfügbarkeit des Netzwerks zu gefährden. Ein Beispiel für einen solchen Angriff ist der \textit{Denial-of-Service-Angriff}. Mit einem \textit{Denial-of-Service}-Angriff (kurz: \textit{DoS-Angriff}) wird versucht, die Verfügbarkeit eines Dienstes zu beeinträchtigen, indem die Ressourcen des Dienstes erschöpft werden, sodass diese ausfallen \parencite{Bicakci_DoSAttacks}. In einem Peer-to-Peer-Netzwerk kann ein DoS-Angriff auf verschiedene Arten durchgeführt werden. Eine Möglichkeit ist es, einen Peer mit Anfragen zu überfluten, um ihn zu überlasten. Eine andere Möglichkeit ist es, einen Peer mit gefälschten Informationen zu überfluten, um ihn zu täuschen. Beide Methoden führen dazu, dass der Peer nicht mehr in der Lage ist, seine Aufgaben zu erfüllen, was zu einem Ausfall des Dienstes führt. Dieser Angriff wird noch effektiver, wenn er von mehreren Angreifern gleichzeitig durchgeführt wird. Dies wird als \textit{Distributed Denial-of-Service}-Angriff (kurz: \textit{DDoS-Angriff}) bezeichnet. Bei einem DDoS-Angriff können mehrere Peers gleichzeitig mit Anfragen überflutet werden, was es schwieriger macht, den Angriff zu stoppen \Parencite[S. 6]{Baptiste_AttacksOnP2PNetworks}. Aber auch ein erfolgreicher Sybil-Angriff kann dazu führen, dass die Verfügbarkeit des Netzwerks gefährdet wird. Wenn ein Angreifer die Mehrheit der Peers kontrolliert, kann er die Verbindungen zu anderen Peers kontrollieren. Die Kommunikation zwischen den Peers kann dann durch falsches Routing verlangsamt oder auch ganz verhindert werden \parencite[S. 13]{Baptiste_AttacksOnP2PNetworks}.
 
