@@ -1,8 +1,12 @@
 \section{Vertrauliche Kommunikation}
 \label{subsec:vertrauliche_kommunikation}
 % #TODO: Erklären, dass zwei ratchet steps nicht nötig sind, da die Kommunikation (in der Regel) nicht über einen Server läuft
+% # TODO: Unterschied zwischen Forward Secrecy und Perfect Forward Secrecy erklären; was verwende ich?
 
-Die Kommunikation zwischen den Teilnehmern soll vertraulich sein. Das bedeutet, dass die Nachrichten nur von den Teilnehmern gelesen werden können, die an der Kommunikation beteiligt sind. Um dies gewährleisten zu können, wird eine Ende-zu-Ende-Verschlüsselung verwendet. Ende-zu-Ende-Verschlüsselung ist ein Konzept, das besagt, dass die Nachrichten vom Sender verschlüsselt und erst beim Empfänger wieder entschlüsselt werden \parencite[S. 233-260]{Wong_KryptoPraxis}. Als Referenz für die Implementierung einer solchen Verschlüsselung wurde das Signal-Protokoll (siehe \ref{subsec:signal_protokoll_basics} \textit{\nameref{subsec:signal_protokoll_basics}}) herangezogen. Allerdings wurde versucht, die Komplexität zu verringern, damit das Ausmaß diese Arbeit nicht übersteigt. Die folgende Abbildung \ref{fig:ende_zu_ende} zeigt den Ablauf der entwickelten Ende-zu-Ende-Verschlüsselung.
+Die Kommunikation zwischen den Teilnehmern soll vertraulich sein. Das bedeutet, dass die Nachrichten nur von den Teilnehmern gelesen werden können, die an der Kommunikation beteiligt sind. Um dies gewährleisten zu können, wird eine Ende-zu-Ende-Verschlüsselung verwendet. Ende-zu-Ende-Verschlüsselung ist ein Konzept, das besagt, dass die Nachrichten vom Sender verschlüsselt und erst beim Empfänger wieder entschlüsselt werden \parencite[S. 233-260]{Wong_KryptoPraxis}. Als Referenz für die Implementierung einer solchen Verschlüsselung wurde das Signal-Protokoll (siehe \ref{subsec:signal_protokoll_basics} \textit{\nameref{subsec:signal_protokoll_basics}}) herangezogen. Allerdings kann die Komplexität reduziert werden, da die Kommunikation nicht wie bei Signal über einen Server läuft, dem nicht vertraut werden kann. Deshalb wird auf die \textit{Double Ratchet} (siehe \ref{subsec:signal_protokoll_basics} \textit{\nameref{subsec:signal_protokoll_basics}}) verzichtet.
+
+
+Allerdings wurde versucht, die Komplexität zu verringern, damit das Ausmaß diese Arbeit nicht übersteigt. Die folgende Abbildung \ref{fig:ende_zu_ende} zeigt den Ablauf der entwickelten Ende-zu-Ende-Verschlüsselung.
 
 
 \begin{figure}[H]

@@ -22,7 +22,7 @@ SignalingServer --> Alice: Antwort mit Kandidatenadressen von Bob
 deactivate SignalingServer
 activate Alice
 Alice -> Alice: Erstellt Kandidatenpaare
-Alice -> Alice: ERstellt Checkliste aus Kandidatenpaaren
+Alice -> Alice: Erstellt Checkliste aus Kandidatenpaaren
 Alice -> Alice: Führt Konnektivitätschecks anhand der Checkliste durch
 Alice -> Alice: Wählt Kandidatenpaar aus
 deactivate Alice
