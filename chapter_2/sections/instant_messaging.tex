@@ -1,22 +1,22 @@
-\section{Instant Messaging}
+\section{Instant-Messaging}
 \label{sec:instant_messaging_basics}
 
-\textit{Instant Messaging}, was übersetzt \textit{sofortige Nachrichtenübermittlung} bedeutet, bezeichnet eine Form der Kommunikation, bei der Nachrichten in Echtzeit zwischen zwei oder mehreren Personen über das Internet ausgetauscht werden können \Parencite[S. 69]{nist_mobileDeviceForensics}. Diese Form der digitalen Kommunikation ermöglicht es Nutzern, sofortige Nachrichten, Bilder und andere Mediendateien auszutauschen. Instant-Messaging-Dienste reichen von plattformübergreifenden Anwendungen wie \textit{WhatsApp}, \textit{Signal} und \textit{Telegram} bis hin zu spezialisierten Unternehmenslösungen wie \textit{Slack} oder \textit{Microsoft Teams} \parencite{Plett_IMDefinition}. Die Vielfalt an Funktionen in Instant-Messaging-Plattformen ist groß. Neben einfachen Textnachrichten können zum Beispiel Benutzer der Anwendung \textit{WhatsApp} Emojis, Aufkleber, GIFs (animierte Bilder) und Sprachnachrichten teilen, was die Kommunikation dynamisch und ausdrucksstark gestaltet \Parencite{whatsapp_funktionen}.
+\textit{Instant-Messaging}, was übersetzt \textit{sofortige Nachrichtenübermittlung} bedeutet, bezeichnet eine Form der Kommunikation, bei der Nachrichten in Echtzeit zwischen zwei oder mehreren Personen über das Internet ausgetauscht werden können \Parencite[S. 69]{nist_mobileDeviceForensics}. Diese Form der digitalen Kommunikation ermöglicht es Nutzern, sofortige Nachrichten, Bilder und andere Mediendateien auszutauschen. Instant-Messaging-Dienste reichen von plattformübergreifenden Anwendungen wie \textit{WhatsApp}, \textit{Signal} und \textit{Telegram} bis hin zu spezialisierten Unternehmenslösungen wie \textit{Slack} oder \textit{Microsoft Teams} \parencite{Plett_IMDefinition}. Die Vielfalt an Funktionen in Instant-Messaging-Plattformen ist groß. Neben einfachen Textnachrichten können zum Beispiel Benutzer der Anwendung \textit{WhatsApp} Emojis, Aufkleber, GIFs (animierte Bilder) und Sprachnachrichten teilen, was die Kommunikation dynamisch und ausdrucksstark gestaltet \Parencite{whatsapp_funktionen}.
 
 Sicherheit und Datenschutz sind in der Welt des Instant Messaging von entscheidender Bedeutung. Verschlüsselungstechnologien werden verwendet, um die Vertraulichkeit der Nachrichten zu gewährleisten und die Privatsphäre der Nutzer zu schützen \parencite[S. 13706]{Wang_IMSecurity}.
 
 
-\subsection{Instant Messaging-Anwendungen und -Protokolle}
-Durch die Verwendung von Instant Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk \Parencite[S. 69]{nist_mobileDeviceForensics}. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant Messaging-Anwendung realisieren \Parencite{Novalnet_Protokoll}. Im Jahr 2023 waren in Deutschland die folgenden Instant Messaging-Anwendungen am beliebtesten: \textit{WhatsApp}, \textit{Facebook Messenger} und \textit{Telegram} \parencite{Statista_MessengerNutzung}. Diese Anwendungen verwenden unterschiedliche Ansätze, um die Kommunikation zu ermöglichen \parencite[S. 103]{Luntovskyy_ModRechnernetze}. 
+\subsection{Instant-Messaging-Anwendungen und -Protokolle}
+Durch die Verwendung von Instant-Messaging-Anwendungen können Benutzer Nachrichten in Echtzeit austauschen. Die Übertragung der Nachrichten erfolgt über ein Netzwerk \Parencite[S. 69]{nist_mobileDeviceForensics}. Um die Kommunikation zu ermöglichen, müssen die Teilnehmer ein gemeinsames Protokoll verwenden. Ein Protokoll besteht aus einer Reihe von Regeln, die die Kommunikation zwischen Geräten (Computer oder auch Smartphones) ermöglichen. Damit beschreibt ein Instant-Messaging-Protokoll eine Reihe von Regeln, die die Kommunikation zwischen Benutzern einer Instant-Messaging-Anwendung erlauben \Parencite{Novalnet_Protokoll}. Im Jahr 2023 waren in Deutschland die folgenden Instant-Messaging-Anwendungen am beliebtesten: \textit{WhatsApp}, \textit{Facebook Messenger} und \textit{Telegram} \parencite{Statista_MessengerNutzung}. Diese Anwendungen verwenden unterschiedliche Ansätze, um die Kommunikation zu ermöglichen \parencite[S. 103]{Luntovskyy_ModRechnernetze}. 
 
 
 \subsection{Architekturmodelle}
 
-Instant Messaging-Anwendungen können unterschiedliche Architekturmodelle verwenden, um die Kommunikation zwischen den Teilnehmern zu ermöglichen. Die beiden gängigsten Modelle sind die Client-Server-Architektur und das Peer-to-Peer-Modell.
+Instant-Messaging-Anwendungen können unterschiedliche Architekturmodelle verwenden, um die Kommunikation zwischen den Teilnehmern zu ermöglichen. Nachfolgend werden die Client-Server-Architektur und das Peer-to-Peer-Modell beschrieben.
 
 \subsubsection{Client-Server-Architektur}
 
-Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet\Parencite[S. 3]{Hanson_ServerManagement}. Einige Beispiele für Instant Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp} \parencite{Vanerio_WhatsAppArchitecture}, \textit{Signal} \parencite{Github_libsignal}, \textit{Telegram} \parencite{Telegram_ServerSourceCode} und \textit{Threema} \parencite{Threema_ServerLocation}.
+Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet\Parencite[S. 3]{Hanson_ServerManagement}. Einige Beispiele für Instant-Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp} \parencite{Vanerio_WhatsAppArchitecture}, \textit{Signal} \parencite{Github_libsignal}, \textit{Telegram} \parencite{Telegram_ServerSourceCode} und \textit{Threema} \parencite{Threema_ServerLocation}.
 
 \subsubsection{Peer-to-Peer-Modell}
 
@@ -25,23 +25,23 @@ Bei dieser Art von Protokoll kommunizieren die Teilnehmer direkt miteinander, oh
 
 \subsection{Diskussion der wichtigsten Protokolle}
 
-Die folgenden Abschnitte beschreiben die wichtigsten Instant Messaging-Protokolle, die für diese Arbeit relevant sind.
+Die folgenden Abschnitte beschreiben die wichtigsten Instant-Messaging-Protokolle, die für diese Arbeit relevant sind.
 
 \subsubsection{Signal}
 \label{subsubsection:signal}
 
-Das Signal-Protokoll ist ein Open-Source-Protokoll, das in der bekannten Signal-App verwendet wird. Es ist ein modernes Protokoll, das einen Fokus auf Sicherheit hat \parencite{Signal_website} und deshalb die Sicherheitsmaßnahmen des in dieser Arbeit entwickelten Protokolls maßgeblich beeinflusst hat. Im Gegensatz dazu verwendet das Signal-Protokoll aber eine Client-Server-Architektur \parencite{Github_libsignal}.
+Das Signal-Protokoll ist ein Open-Source-Protokoll, das in der bekannten Signal-App verwendet wird. Es ist ein modernes Protokoll, das einen Fokus auf Sicherheit hat \parencite{Signal_website} und deshalb die Sicherheitsmaßnahmen des in dieser Arbeit entwickelten Protokolls maßgeblich beeinflusst hat. Allerdings verwendet das Signal-Protokoll eine Client-Server-Architektur, die in dieser Arbeit keine Anwendung findet \parencite{Github_libsignal}.
 
 \subsubsection{Extensible Messaging and Presence Protocol (XMPP)}
 \label{subsubsection:xmpp}
 
-\textit{XMPP} ist ein Open-Source-Protokoll, das für die Echtzeitkommunikation zwischen zwei Teilnehmern entwickelt wurde. Es ist ein dezentrales Protokoll, das auf dem Peer-to-Peer-Modell basiert \parencite{rfc6120_XMPP}. Durch Erweiterung des Protokolls können weitere Funktionen hinzugefügt werden \parencite{xmpp_extensions}. XMPP findet in vielen Instant Messaging-Anwendungen Verwendung, wie zum Beispiel \textit{WhatsApp}, \textit{Zoom} und \textit{Jitsi} \parencite{xmpp_im}. Da aus der Spezifikation hervorgeht, dass die Verwendung von Servern ein fester Bestandteil ist \parencite{rfc6120_XMPP}, wurde XMPP nicht als Referenz für das in dieser Arbeit entwickelte Protokoll verwendet. Der Fokus dieser Arbeit liegt auf einem dezentralen Protokoll, das ohne zentrale Server auskommt.
+\textit{XMPP} ist ein Open-Source-Protokoll, das für die Echtzeitkommunikation zwischen zwei Teilnehmern entwickelt wurde. Es ist ein dezentrales Protokoll, das auf dem Peer-to-Peer-Modell basiert \parencite{rfc6120_XMPP}. Durch Erweiterung des Protokolls, die durch die \textit{XMPP Standards Foundation} zugelassen werden müssen, können weitere Funktionen hinzugefügt werden \parencite{xmpp_extensions}. XMPP findet in vielen Instant-Messaging-Anwendungen Verwendung, wie zum Beispiel \textit{WhatsApp}, \textit{Zoom} und \textit{Jitsi} \parencite{xmpp_im}. Da aus der Spezifikation hervorgeht, dass die Verwendung von Servern ein fester Bestandteil ist \parencite{rfc6120_XMPP}, wurde XMPP nicht als Referenz für das in dieser Arbeit entwickelte Protokoll verwendet. Der Fokus dieser Arbeit liegt auf einem dezentralen Protokoll, das ohne zentrale Server auskommt und nur in Ausnahmefällen auf Server zurückgreift.
 
 
 \subsubsection{Tox}
 \label{subsubsection:tox}
 
-Das Tox-Protokoll ist ebenfalls ein Open-Source-Protokoll, das für die Echtzeitkommunikation zwischen Teilnehmern entwickelt wurde. Es ermöglicht die Kommunikation zwischen zwei oder mehreren Teilnehmern und basiert auf dem Peer-to-Peer-Modell \parencite{Tox_FAQ}. Tox wurde als Reaktion auf die Enthüllungen von Edward Snowden entwickelt, um eine sichere und dezentrale Alternative zu den bestehenden Instant Messaging-Anwendungen zu schaffen \parencite{tox_about}. Da Tox ohne zentrale Server auskommt, wurde es als Referenz für das in dieser Arbeit entwickelte Protokoll verwendet.
+Das Tox-Protokoll ist ebenfalls ein Open-Source-Protokoll, das für die Echtzeitkommunikation zwischen Teilnehmern entwickelt wurde (siehe \ref{chap:einleitung} \textit{\nameref{chap:einleitung}}). Es ermöglicht die Kommunikation zwischen zwei oder mehreren Teilnehmern und basiert auf dem Peer-to-Peer-Modell \parencite{Tox_FAQ}. Tox wurde als Reaktion auf die Enthüllungen von Edward Snowden entwickelt, um eine sichere und dezentrale Alternative zu den bestehenden Instant-Messaging-Anwendungen zu schaffen \parencite{tox_about}. Da Tox hauptsächlich ohne zentrale Server auskommt, wurde es als Referenz für das in dieser Arbeit entwickelte Protokoll verwendet.
 
 
 
