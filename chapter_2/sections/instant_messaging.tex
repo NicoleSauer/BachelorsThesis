@@ -16,7 +16,7 @@ Instant-Messaging-Anwendungen können unterschiedliche Architekturmodelle verwen
 
 \subsubsection{Client-Server-Architektur}
 
-Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet\Parencite[S. 3]{Hanson_ServerManagement}. Einige Beispiele für Instant-Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp} \parencite{Vanerio_WhatsAppArchitecture}, \textit{Signal} \parencite{Github_libsignal}, \textit{Telegram} \parencite{Telegram_ServerSourceCode} und \textit{Threema} \parencite{Threema_ServerLocation}.
+Bei dieser Art von Protokoll wird die Kommunikation über einen zentralen Server ermöglicht. Die Teilnehmer kommunizieren nicht direkt miteinander, sondern senden ihre Nachrichten an den Server, der sie dann an den Empfänger weiterleitet \parencite[S. 3]{Hanson_ServerManagement}. Einige Beispiele für Instant-Messaging-Anwendungen, die ein Protokoll mit zentralem Server verwenden, sind \textit{WhatsApp} \parencite{Vanerio_WhatsAppArchitecture}, \textit{Signal} \parencite{Github_libsignal}, \textit{Telegram} \parencite{Telegram_ServerSourceCode} und \textit{Threema} \parencite{Threema_ServerLocation}.
 
 \subsubsection{Peer-to-Peer-Modell}
 
@@ -30,7 +30,8 @@ Die folgenden Abschnitte beschreiben die wichtigsten Instant-Messaging-Protokoll
 \subsubsection{Signal}
 \label{subsubsection:signal}
 
-Das Signal-Protokoll ist ein Open-Source-Protokoll, das in der bekannten Signal-App verwendet wird. Es ist ein modernes Protokoll, das einen Fokus auf Sicherheit hat \parencite{Signal_website} und deshalb die Sicherheitsmaßnahmen des in dieser Arbeit entwickelten Protokolls maßgeblich beeinflusst hat. Allerdings verwendet das Signal-Protokoll eine Client-Server-Architektur, die in dieser Arbeit keine Anwendung findet \parencite{Github_libsignal}.
+Das Signal-Protokoll ist ein Open-Source-Protokoll, das in der bekannten Signal-App verwendet wird. Es ist ein modernes Protokoll, das einen Fokus auf Sicherheit hat \parencite{Signal_website} und deshalb die Sicherheitsmaßnahmen des in dieser Arbeit entwickelten Protokolls maßgeblich beeinflusst hat. In Abschnitt \ref{subsec:signal_protokoll_basics} \textit{\nameref{subsec:signal_protokoll_basics}} wird der Sicherheitsaspekt des Signal-Protokolls genauer beschrieben. Ein Punkt, in dem sich die beiden Protokolle unterscheiden, ist die Verwendung von zentralen Servern. Das Signal-Protokoll setzt auf eine Client-Server-Architektur \parencite{Github_libsignal}, das Protokoll dieser Arbeit hingegen auf ein Peer-to-Peer-Modell.
+
 
 \subsubsection{Extensible Messaging and Presence Protocol (XMPP)}
 \label{subsubsection:xmpp}
