@@ -16,6 +16,7 @@ Dieser Abschnitt beinhaltet zuerst eine Betrachtung der funktionalen Anforderung
 Die funktionalen Anforderungen beziehen sich auf die Funktionalität des Protokolls und werden im Folgenden betrachtet.
 
 \subsubsection{Peer-Discovery and Routing}
+\label{subsubsec:peer_discovery_and_routing}
 
 Das entwickelte Protokoll bietet die Möglichkeit, dass sich Teilnehmer anhand ihres Benutzernamens finden können. Die Anforderung der Peer-Discovery und des Routings wird deshalb als erfüllt angesehen. Eine Einschränkung ist, dass die Länge des Benutzernamens auf 20 Zeichen begrenzt ist. Das wäre lösbar, indem eine vom Benutzernamen unabhängige ID erzeugt und in der Blockchain abgelegt wird. Dadurch wäre der Benutzername frei wählbar und die ID wäre trotzdem eindeutig. Allerdings würde dies zusätzliche Transaktionen auf der Blockchain erfordern, die Geld kosten. Deshalb wurde diese Lösung nicht implementiert.
 
@@ -87,7 +88,6 @@ In diesem Abschnitt werden Verbesserungsmöglichkeiten und Kritikpunkte für das
 Bei der Registrierung eines Nutzers fallen Kosten an, weil die Benutzerdaten durch die Verwendung eines Smart Contracts in die Blockchain geschrieben werden. Diese Kosten könnten abschreckend sein, da es viele Alternativen gibt, die kostenlos sind und mehr Features bieten. Allerdings bietet die Verwendung der Blockchain den Vorteil, dass keiner zentralen Instanz vertraut werden muss, um die Authentizität der Gesprächspartner sicherzustellen.
 
 
-\subsubsection{Kurze Sitzungslänge}
+\subsubsection{Benutzernamen}
 
-Eine Sitzung entspricht im definierten Protokoll einer Nachricht, die gesendet werden soll. Das bedeutet, dass für jede Nachricht ein neuer Schlüssel ausgehandelt werden muss. Das erhöht zwar die Sicherheit, ist allerdings auch sehr aufwändig. Eine Möglichkeit, um das zu verbessern, wäre die Definition einer Sitzungslänge, die mehrere Minuten umfasst, in der die gleichen Schlüssel verwendet werden. Erst danach wäre eine Neuaushandlung der Schlüssel notwendig. Dadurch würde die Sicherheit zwar etwas verringert werden, allerdings wäre die Performanz des Protokolls dadurch deutlich besser.
-
+Die Länge der Benutzernamen ist auf $20$ Zeichen begrenzt, was für manche Benutzer nicht ausreichend sein könnte. Eine Möglichkeit, diese Einschränkung zu umgehen, wurde in Abschnitt \ref{subsubsec:peer_discovery_and_routing} \textit{\nameref{subsubsec:peer_discovery_and_routing}} aufgezeigt.
