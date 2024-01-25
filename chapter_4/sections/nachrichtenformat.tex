@@ -3,9 +3,25 @@
 
 Jedes Instant-Messaging-Protokoll benötigt die Definition eines Nachrichtenformats, das die Struktur der Nachrichten festlegt, die zwischen den Teilnehmern ausgetauscht werden. Im Folgenden wird das Nachrichtenformat für das Instant-Messaging-Protokoll beschrieben.
 
-Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Die Nachricht wird in binär serialisierter Form übertragen und enthält die folgenden Informationen:
+\subsection{Verbindungsanfrage}
+Um eine Verbindung zwischen zwei Teilnehmern herzustellen, muss zunächst eine Anfrage gesendet werden. Diese Anfrage enthält die folgenden Informationen:
 
 \begin{itemize}
+    \item Nachrichtenformat: immer \textit{0x01}
+    \item Benutzername des Senders
+    \item Benutzername des Empfängers
+    \item Timestamp
+    \item Signatur
+\end{itemize}
+
+\noindent Das Nachrichtenformat ist eine binäre Zahl, die angibt, dass es sich um eine Anfrage handelt. Die Benutzernamen erlauben die Zuordnung der Anfrage. Der Timestamp enthält die aktuelle Zeit, zu der die Anfrage gesendet wird. Die Signatur dient der Authentifizierung des Senders (siehe \ref{subsec:vertrauliche_kommunikation} \textit{\nameref{subsec:vertrauliche_kommunikation}}). Aus Sicherheitsgründen wird jede Anfrage signiert.
+
+
+\subsection{Nachrichtenaustausch}
+Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kann die Nachricht vom Sender an den Empfänger gesendet werden. Die Nachricht enthält die folgenden Informationen:
+
+\begin{itemize}
+    \item Nachrichtenformat: immer \textit{0x02}
     \item Benutzername des Senders
     \item Benutzername des Empfängers
     \item Timestamp
@@ -16,4 +32,4 @@ Nachdem eine Verbindung zwischen zwei Teilnehmern hergestellt werden konnte, kan
 
 \noindent Bei der Erstellung des Nachrichtenformats wurde sich am Vorschlag von Day et al. der Etablierung eines Standards orientiert, der in RFC $2779$ mit dem Titel \textit{Instant Messaging/Presence Protocol Requirements} definiert ist \Parencite[S. 9]{rfc2779_IMPP}. 
 
-Die Benutzernamen erlauben die Zuordnung der Nachricht. Der Timestamp enthält die aktuelle Zeit, zu der die Nachricht gesendet wird und wird für die richtige Sortierung der Nachrichten verwendet. Die Signatur dient der Authentifizierung des Senders (siehe \ref{subsec:vertrauliche_kommunikation} \textit{\nameref{subsec:vertrauliche_kommunikation}}). Aus Sicherheitsgründen wird jede Nachricht signiert. Die Nachrichtenlänge gibt die Länge des Nachrichteninhalts an und der Nachrichteninhalt enthält die eigentliche Nachricht, die vom Sender an den Empfänger gesendet werden soll.
+Die ersten fünf Felder sind identisch mit denen der Verbindungsanfrage. Hinzu kommt die Nachrichtenlänge, die die Länge des eigentlichen Nachrichteninhalts angibt und der Nachrichteninhalt, der die eigentliche Nachricht enthält, die vom Sender an den Empfänger gesendet werden soll.
