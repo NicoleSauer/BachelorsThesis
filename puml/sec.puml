@@ -18,32 +18,9 @@ group Authentifizierter Diffie-Hellman-Schlüsselaustausch
     deactivate Bob
 end
 
-group Berechnung des gemeinsamen Schlüssels
-    
-    Alice -> Alice: Berenchnet gemeinsames Geheimnis
-    activate Alice
-    Alice -> Alice: Berechnet gemeinsamen Schlüssel
-    deactivate Alice
-
-    
-    Bob -> Bob: Berechnet gemeinsames Geheimnis
-    activate Bob
-    Bob -> Bob: Berechnet gemeinsamen Schlüssel
-    deactivate Bob
-end
-
-group Symmetrische Verschlüsselung
-    
-    Alice -> Alice: Verschlüsselt Nachricht
-    Alice -> Alice: Signiert Nachricht
-    activate Alice
-    Alice -> Bob: Sendet verschlüsselte und signierte Nachricht
-    deactivate Alice
-
-    activate Bob
-    Bob -> Bob: Verifiziert Signatur mittels Blockchain
+group Double Ratchet Algorithmus
+    Alice -> Bob: Sendet verschlüsselte Nachricht
     Bob -> Bob: Entschlüsselt Nachricht
-    deactivate Bob
 end
 
 @enduml
