@@ -1,7 +1,6 @@
  \section{Peer-Discovery und Routing}
 \label{subsec:identifikation_von_teilnehmern}
 
-% #TODO: Nochmal wegen hashing nachschauen (Paper von Kademlia vs. Chord)
 Da es in Peer-to-Peer-Netzwerken keinen zentralen Server gibt, der unter anderem zur Auffindung und Identifikation anderer Teilnehmer verwendet werden kann, müssen die Teilnehmer auf andere Weise identifiziert werden. Da sich im vorangegangenen Abschnitt für die Implementierung von Kademlia entschieden wurde, wird in diesem Abschnitt beschrieben, wie die Teilnehmer identifiziert werden. Um einen Teilnehmer zu identifizieren, wird eine ID benötigt. Hierfür wird der Benutzername des Teilnehmers verwendet, welchen er bei der Registrierung frei wählen kann. 
 
 % Die Anzahl der in den Buckets gespeicherten Knoten muss zu Beginn festgelegt werden. In dieser Arbeit wird festgelegt, dass jeder Bucket 10 Knoten speichern kann. Die Anzahl der Buckets selbst, wird nicht festgelegt, da diese dynamisch ist und von Kademlia übernommen wird. Auch wird festgelegt, dass als Kademlia-ID der Benutzername des Teilnehmers verwendet wird. Anhand dieser ID können Teilnehmerinformationen, wie IP-Adresse und Port, im Netzwerk gesucht werden.

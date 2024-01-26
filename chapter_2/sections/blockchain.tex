@@ -1,6 +1,6 @@
 \section{Blockchain-Technologie}
 \label{sec:blockchain_basics}
-% #TODO: Distributed Ledger?
+
 %Als Grundlage für Blockchains dient die \textit{Distributed Ledger Technology} (DLT). Was alle DLTs gemeinsam haben, ist, dass die Daten auf allen Teilnehmern des Netzwerkes gespeichert werden und die Verwendung von kryptografischen Technologien, wie Hash-Funktionen und Konsensmechanismen \parencite{Ioini_DLTReview}.
 
 %Bei der DLT handelt es sich um eine Technologie, die es ermöglicht, Daten in einem dezentralen Netzwerk zu speichern. Die Daten werden dabei auf allen Teilnehmern des Netzwerkes gespeichert. Dadurch ist es nicht möglich, die Daten zu manipulieren, da die Daten auf allen Teilnehmern des Netzwerkes gespeichert sind. Wenn ein Teilnehmer versucht, die Daten zu manipulieren, wird dies von den anderen Teilnehmern bemerkt und die manipulierten Daten werden nicht akzeptiert \parencite[S. 10]{Fill_BlockchainGrundlagen}.
@@ -47,7 +47,7 @@ Wie zu Beginn des Abschnitts \ref{sec:blockchain_basics} \textit{\nameref{sec:bl
 
 Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet. 
 
-Hash-Funktionen gewährleisten die Integrität der Blöcke. Wie dies durch Hash-Funktionen erreicht wird, wurde in Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}} erläutert. 
+Hash-Funktionen gewährleisten die Integrität der Blöcke. Wie dies durch Hashing erreicht wird, wurde in Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}} erläutert. 
 
 Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut der Definition einer kryptografischen Hash-Funktion (siehe Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}}) ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencites[S. 6-7]{Fill_BlockchainGrundlagen}[S. 320]{Antonopoulos_MasteringEthereum}.
 
