@@ -17,7 +17,7 @@ Die bisher beschriebenen Technologien bilden die Grundlage für die sogenannte B
 \subsection{Definition von Blockchain}
 \label{subsec:blockchain_definition}
 
-Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (zu Deutsch: \textit{Block}) und \textit{chain} (zu Deutsch: \textit{Kette}) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:block} zu sehen ist, besteht ein Block aus einem \textit{Header} (zu Deutsch: \textit{Kopf}) und einem \textit{Body} (zu Deutsch: \textit{Körper}). Im Kopf des Blocks befinden sich Informationen über den Block und im Körper des Blocks befinden sich die eigentlichen Daten. Diese Daten können beispielsweise Transaktionen sein.
+Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{block} (zu Deutsch: \textit{Block}) und \textit{chain} (zu Deutsch: \textit{Kette}) zusammen. Eine Blockchain ist also eine Kette von Blöcken. Wie in Abbildung \ref{fig:block} zu sehen ist, besteht ein Block aus einem \textit{Header} (zu Deutsch: \textit{Kopf}) und einem \textit{Body} (zu Deutsch: \textit{Körper}). Im Kopf des Blocks befinden sich Informationen über den Block und im Körper des Blocks befinden sich die eigentlichen Daten. Diese Daten können beispielsweise Transaktionen sein. Das Format dieser Transaktionen kann je nach Blockchain unterschiedlich sein.
 
 \begin{figure}[H]
     \centering
@@ -27,7 +27,7 @@ Der Begriff \textit{Blockchain} setzt sich aus den englischen Wörtern \textit{b
 \end{figure}
 
 
-\noindent Der Block-Header enthält Informationen über den Block, wie zum Beispiel den Hash des vorherigen Blocks, die Schwierigkeit, den Zeitstempel und die Nonce. Die Schwierigkeit wird durch das \textit{Target}-Feld angegeben und beschreibt, wie schwer es ist, das kryptografische Puzzle zu lösen und damit auch wie schwer es ist, einen neuen Block an die Blockchain anzuhängen. Die Suche nach der Lösung dieses Puzzles wird auch als \textit{Mining} bezeichnet. Der erste, der das Puzzle löst, präsentiert als Beweis dieser Lösung die sogenannte \textit{Nonce}. Die Nonce ist eine zufällige Zahl, die bei der Lösung des Puzzles verwendet wird und aufwändig zu berechnen ist. Nachdem diese neue Version der Blockchain (mit dem neu angehängten Block) an alle anderen Teilnehmer verteilt wurde, kann jeder Teilnehmer überprüfen, ob die Lösung korrekt ist. Durch den Verweis im Block-Header auf den vorherigen Block entsteht die oben erwähnte Kette von Blöcken - die Blockchain (siehe Abbildung \ref{fig:chain_of_blocks}) \parencite[S. 10-12]{Fill_BlockchainGrundlagen}.
+\noindent Der Block-Header enthält Informationen, wie zum Beispiel den Hash des vorherigen Blocks, die Schwierigkeit, den Zeitstempel und die Nonce. Die Schwierigkeit wird durch das \textit{Target}-Feld angegeben und beschreibt, wie schwer es ist, das kryptografische Puzzle zu lösen und damit auch wie schwer es ist, einen neuen Block an die Blockchain anzuhängen. Die Suche nach der Lösung dieses Puzzles wird auch als \textit{Mining} bezeichnet. Der erste, der das Puzzle löst, präsentiert als Beweis dieser Lösung die sogenannte \textit{Nonce}. Die Nonce ist eine zufällige Zahl, die bei der Lösung des Puzzles verwendet wird und aufwändig zu berechnen ist. Nachdem diese neue Version der Blockchain (mit dem neu angehängten Block) an alle anderen Teilnehmer verteilt wurde, kann jeder Teilnehmer überprüfen, ob die Lösung korrekt ist. Durch den Verweis im Block-Header auf den vorherigen Block entsteht die oben erwähnte Kette von Blöcken - die Blockchain (siehe Abbildung \ref{fig:chain_of_blocks}) \parencite[S. 10-12]{Fill_BlockchainGrundlagen}.
 
 \begin{figure}[H]
     \centering
@@ -47,7 +47,7 @@ Wie zu Beginn des Abschnitts \ref{sec:blockchain_basics} \textit{\nameref{sec:bl
 
 Aus der Kryptografie werden Hash-Funktionen, kryptografische Puzzles, Hash-Bäume und digitale Signaturen verwendet. 
 
-Hash-Funktionen können dazu verwendet werden, um die Integrität von Daten zu gewährleisten. In der Blockchain werden sie verwendet, um die Integrität der einzelnen Blöcke zu gewährleisten (siehe Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}}).
+Hash-Funktionen gewährleisten die Integrität der Blöcke. Wie dies durch Hash-Funktionen erreicht wird, wurde in Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}} erläutert. 
 
 Kryptografische Puzzles werden dazu verwendet, um die Schwierigkeit beim Mining zu erhöhen. Dabei soll mittels Hash-Funktionen ein bestimmter Ausgabewert gefunden werden. Laut der Definition einer kryptografischen Hash-Funktion (siehe Abschnitt \ref{subsec:integritaet_signatur} \textit{\nameref{subsec:integritaet_signatur}}) ist es nicht möglich, von der Ausgabe auf die Eingabe zu schließen. Daher kann die gesuchte Eingabe nur durch Ausprobieren gefunden werden. Die Schwierigkeit kann durch die Anzahl der Nullen, die am Anfang des Hash-Wertes stehen müssen, angegeben werden. Je mehr Nullen am Anfang des Hash-Wertes stehen müssen, desto schwieriger ist es, die Lösung zu finden, da dadurch der Lösungsraum verkleinert wird \parencites[S. 6-7]{Fill_BlockchainGrundlagen}[S. 320]{Antonopoulos_MasteringEthereum}.
 

@@ -1,7 +1,7 @@
 \section{Sicherheit}
 \label{sec:sicherheit_basics}
 
-Wie aus der Abbildung in Abschnitt \ref{subsec:overlay_netzwerke} \textit{\nameref{subsec:overlay_netzwerke}} ersichtlich ist, ist das Overlay-Netzwerk die oberste Schicht des Peer-to-Peer-Netzwerks. Es sorgt dafür, dass sich die Teilnehmer des Netzwerks finden können. Die eigentliche Kommunikation, also das Senden und Empfangen von Nachrichten, erfolgt jedoch über das Internet. Da das Internet ein öffentliches Netzwerk ist, besteht die Gefahr, dass die Nachrichten abgefangen und mitgelesen werden können. Die Nachrichten müssen über Verteilerknoten oder Access Points übertragen werden, die nicht vertrauenswürdig sind. Um ein Mitlesen oder Verändern der Nachrichten zu verhindern, muss die Kommunikation abgesichert werden. 
+Wie aus der Abbildung in Abschnitt \ref{subsec:overlay_netzwerke} \textit{\nameref{subsec:overlay_netzwerke}} ersichtlich ist, ist das Overlay-Netzwerk die oberste Schicht des Peer-to-Peer-Netzwerks. Es sorgt dafür, dass sich die Teilnehmer des Netzwerks finden können. Die eigentliche Kommunikation, also das Senden und Empfangen von Nachrichten, erfolgt jedoch über das Internet. Da das Internet ein öffentliches Netzwerk ist, besteht die Gefahr, dass die Nachrichten abgefangen und mitgelesen werden können. Die Nachrichten müssen über Verteilerknoten oder Access Points übertragen werden, die nicht vertrauenswürdig sind \parencite[S. 235]{Wong_KryptoPraxis}. Um ein Mitlesen oder Verändern der Nachrichten zu verhindern, muss die Kommunikation abgesichert werden. 
 
 Mittels Kryptografie kann die Vertraulichkeit, Integrität und Authentizität der Kommunikation gewährleistet werden \Parencite[S. 7]{Hellmann_IT-Sicherheit}.
 
@@ -52,7 +52,7 @@ Diese kryptografische Verfahren können kombiniert werden, um die Vorteile von d
 
 Um die Integrität der Kommunikation zu gewährleisten, wird Hashing verwendet. Das Hashing von Daten erfordert die Verwendung einer \textit{Hash-Funktion}. Hash-Funktionen sind Funktionen, die eine Eingabe beliebiger Länge in eine Ausgabe fester Länge umwandeln. Dabei ist es wichtig, dass die Hash-Funktion zwei Eigenschaften erfüllt: \textit{Einwegfunktion} und \textit{Kollisionsresistenz}. Eine Hash-Funktion erfüllt die Eigenschaft der Einwegfunktion, wenn es nicht möglich ist, von der Ausgabe auf die Eingabe zu schließen. Das bedeutet, dass es nicht möglich ist, aus dem Hash-Wert die ursprünglichen Daten zu rekonstruieren. Die Eigenschaft der Kollisionsresistenz ist erfüllt, wenn es nicht möglich ist, zwei verschiedene Eingaben zu finden, die auf den gleichen Hash-Wert abgebildet werden \parencites[S. 12-13]{Brünnler_BlockchainKurzGut}[S. 6]{Fill_BlockchainGrundlagen}.
 
-Das Ergebnis der Hash-Funktion ist eine Zeichenkette, die aus einer festen Anzahl an Zeichen besteht und als \textit{Hash-Wert} oder auch nur \textit{Hash} bezeichnet wird. Der Hash-Wert ist ein eindeutiger Fingerabdruck der Daten, die in die Hash-Funktion eingegeben wurden. Sollte sich also der Inhalt der Daten ändern, ändert sich auch der Hash-Wert. 
+Das Ergebnis der Hash-Funktion ist eine Zeichenkette, die aus einer festen Anzahl an Zeichen besteht und als \textit{Hash-Wert} oder auch \textit{Digest} bezeichnet wird. Der Hash-Wert ist ein eindeutiger Fingerabdruck der Daten, die in die Hash-Funktion eingegeben wurden. Sollte sich also der Inhalt der Daten ändern, ändert sich auch der Hash-Wert \parencite[S. 29-32]{Wong_KryptoPraxis}. 
 
 
 \subsection{Authentizität}
